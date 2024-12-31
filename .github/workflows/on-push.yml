@@ -31,3 +31,10 @@ jobs:
       - name: Check out repo
         uses: actions/checkout@v4
       - run: ls -al hack/
+  Check-Docs:
+    runs-on: self-hosted
+    needs: Check-Repo-Root-Structure
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+      - run: ls -al intentionalmistakedoc
