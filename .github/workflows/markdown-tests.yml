@@ -11,6 +11,9 @@ jobs:
       - run: echo "Fake Test, listing stuff"
       - name: Acquire Repository Now
         uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            doc
       - run: ls -al ${{ github.workspace }}/doc
       - run: |-
           echo "Job Status: ${{ job.status }}"
