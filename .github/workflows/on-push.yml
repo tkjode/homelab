@@ -37,4 +37,4 @@ jobs:
     steps:
       - name: Check out repo
         uses: actions/checkout@v4
-      - run: ls -al intentionalmistakedoc
+      - run: ls -al doc
