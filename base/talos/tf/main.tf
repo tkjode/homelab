@@ -96,7 +96,7 @@ resource "proxmox_virtual_environment_vm" "pfSense-GW" {
 
 resource "proxmox_virtual_environment_vm" "masters" {
   count = 3
-  name = "talon-master-${count.index}"
+  node_name = "talon-master-${count.index}"
   tags = [ "kubernetes", "talos" ]
   pool_id = "talon-k8s"
 
@@ -134,7 +134,7 @@ resource "proxmox_virtual_environment_vm" "masters" {
 
 resource "proxmox_virtual_environment_vm" "workers" {
   count = var.workers
-  name = "talon-worker-${count.index}"
+  node_name = "talon-worker-${count.index}"
   startup {
     order = 10
     up_delay = 5
