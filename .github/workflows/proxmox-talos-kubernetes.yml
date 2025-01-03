@@ -20,5 +20,5 @@ jobs:
         with:
           sparse-checkout: |
             base/talos/tf
-      - run: opentofu plan
+      - run: tofu plan
         working-directory: base/talos/tf
