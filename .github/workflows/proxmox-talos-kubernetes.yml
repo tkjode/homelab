@@ -5,7 +5,7 @@ on:
     # paths:
     # - 'base/talos/**'
 jobs:
-  opentofu-version-check:
+  opentofu-init-plan:
     runs-on: self-hosted
     environment: ypres
     container: 
@@ -24,7 +24,5 @@ jobs:
           sparse-checkout: |
             base/talos/tf
       - run: ls -alR        
-      - run: tofu init -from-module=${{ github.workspace }}/base/talos/tf
-        working-directory: /tf
-      - run: tofu plan
-        working-directory: /tf
+      - run: tofu -chdir=/tf init -from-module=base/talos/tf        
+      - run: tofu -chdir=/tf plan       
