@@ -13,7 +13,7 @@ variable "proxmox_endpoint_uri" {
   sensitive = true
   nullable = false
   validation {
-    condition = length(var.proxmox_endpoint_url) > 8 && substr(var.proxmox_endpoint_uri,0,8) == "https://"
+    condition = length(var.proxmox_endpoint_uri) > 8 && substr(var.proxmox_endpoint_uri,0,8) == "https://"
     error_message = "The Proxmox Endpoint URI must start with protocol - https://"
   }
 }
