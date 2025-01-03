@@ -1,0 +1,13 @@
+name: OpenTofu ProxMox Talos Cluster
+run-name: Talos Build
+on:
+  push:
+    # paths:
+    # - 'base/talos/**'
+jobs:
+  opentofu-version-check:
+    runs-on: self-hosted
+    container:
+      image: ghcr.io/opentofu:latest
+      options: --version
+      
