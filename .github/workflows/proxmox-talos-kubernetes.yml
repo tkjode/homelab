@@ -8,7 +8,10 @@ jobs:
   opentofu-version-check:
     runs-on: self-hosted
     environment: ypres
-    container: ghcr.io/opentofu/opentofu:latest      
+    container: 
+      image: ghcr.io/opentofu/opentofu:latest
+      volumes:
+        - tofustate:/tf       
     env:
       TF_VAR_proxmox_endpoint_uri: ${{ vars.PM_ENDPOINT }}
       TF_VAR_proxmox_parallelism: 1
@@ -21,7 +24,7 @@ jobs:
           sparse-checkout: |
             base/talos/tf
       - run: ls -alR        
-      - run: tofu init
+      - run: tofu init -chdir /tf
         working-directory: base/talos/tf
-      - run: tofu plan
+      - run: tofu plan -chdir /tf
         working-directory: base/talos/tf
