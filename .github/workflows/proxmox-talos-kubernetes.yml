@@ -8,21 +8,21 @@ jobs:
   opentofu-init-plan:
     runs-on: self-hosted
     environment: ypres
-    container: 
+    container:
       image: ghcr.io/opentofu/opentofu:latest
       volumes:
-        - tofustate:/tf       
+        - tofustate:/tf
     env:
       TF_VAR_proxmox_endpoint_uri: ${{ vars.PM_ENDPOINT }}
       TF_VAR_proxmox_parallelism: 1
-      PM_API_TOKEN_ID: ${{ secrets.PM_API_TOKEN_ID }}      
+      PM_API_TOKEN_ID: ${{ secrets.PM_API_TOKEN_ID }}
       PM_API_TOKEN_SECRET: ${{ secrets.PM_API_TOKEN_SECRET }}
     steps:
       - name: Checkout Talos TF Content
         uses: actions/checkout@v4
-        with:          
+        with:
           sparse-checkout: |
             base/talos/tf
-      - run: ls -alR        
-      - run: tofu -chdir=/tf init -from-module=base/talos/tf        
-      - run: tofu -chdir=/tf plan       
+      - run: cp base/talos/tf/*.tf /tf
+      - run: tofu -chdir=/tf init
+      - run: tofu -chdir=/tf plan
