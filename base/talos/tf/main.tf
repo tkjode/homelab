@@ -18,11 +18,12 @@ variable "proxmox_endpoint_uri" {
   }
 }
 
-variable "proxmox_parallelism" {
-  type = number
-  description = "How many actions to execute (eg. vm builds) at once"
-  default = 1
-}
+# -- Only used by Telmate provider with pm_parallel=var.x - removed below
+#variable "proxmox_parallelism" {
+#  type = number
+#  description = "How many actions to execute (eg. vm builds) at once"
+#  default = 1
+#}
 
 variable "workers" {
   type = number
@@ -57,7 +58,6 @@ variable "nodesizing" {
 
 provider "proxmox" {
   endpoint = var.proxmox_endpoint_uri
-  pm_parallel = var.proxmox_parallelism
 }
 
 resource "proxmox_virtual_environment_pool" "talon-k8s" {
