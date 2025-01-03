@@ -31,6 +31,16 @@ variable "workers" {
   description = "How many worker nodes to build"
 }
 
+variable "iso_datastore" {
+  type = string
+  default = "local"
+}
+
+variable "target_proxmox_node_name" {
+  type = string
+  default = "proxmox"
+}
+
 variable "nodesizing" {
   type = object({
     master=object({
@@ -46,11 +56,11 @@ variable "nodesizing" {
   default = {
     master = {
       vcpu = 4
-      mem = 8
+      mem = 8192
     }
     worker = {
       vcpu = 4
-      mem = 8
+      mem = 8192
     }
   }
 
@@ -63,4 +73,96 @@ provider "proxmox" {
 resource "proxmox_virtual_environment_pool" "talon-k8s" {
   pool_id = "talon-k8s"
   comment = "TALON: Kubernetes with Talos VM"
+}
+
+resource "proxmox_virtual_environment_download_file" "talos-metal-image" {
+  content_type = "iso"
+  datastore_id = var.iso_datastore
+  node_name = var.target_proxmox_node_name
+  url = "https://github.com/siderolabs/talos/releases/download/v1.9.1/metal-amd64.iso"
+}
+
+resource "proxmox_virtual_environment_vlan" "snurt" {
+
+}
+
+resource "proxmox_virtual_environment_bridge" "sneep" {
+
+}
+
+resource "proxmox_virtual_environment_vm" "pfSense-GW" {
+
+}
+
+resource "proxmox_virtual_environment_vm" "masters" {
+  count = 3
+  name = "talon-master-${count.index}"
+  tags = [ "kubernetes", "talos" ]
+  pool_id = "talon-k8s"
+
+  startup {
+    order=5
+    up_delay=15
+    down_delay=15
+  }
+
+  agent {
+    enabled = false
+  }
+
+  cpu {
+    cores = var.nodesizing.master.vcpu
+    type = "x86-64-v2-AES"
+  }
+
+  memory {
+    dedicated = var.nodesizing.master.memory
+    floating = var.nodesizing.master.memory
+  }
+
+  disk {
+    datastore_id = "SSD"
+    interface = "sata"
+    size = 40
+    ssd = "true"
+  }
+
+#  initialization {
+#
+#  }
+}
+
+resource "proxmox_virtual_environment_vm" "workers" {
+  count = var.workers
+  name = "talon-worker-${count.index}"
+  startup {
+    order = 10
+    up_delay = 5
+    down_delay = 5
+  }
+  agent {
+    enabled=false
+  }
+
+  cpu {
+    cores = var.nodesizing.worker.vcpu
+    type = "x86-64-v2-AES"
+  }
+
+  memory {
+    dedicated = var.nodesizing.worker.memory
+    floating = var.nodesizing.worker.memory
+  }
+
+  disk {
+    datastore_id = "SSD"
+    interface = "sata"
+    size = 40
+    ssd = true
+  }
+
+# initialization {
+#
+#  }
+
 }
