@@ -24,7 +24,7 @@ jobs:
           sparse-checkout: |
             base/talos/tf
       - run: ls -alR        
-      - run: tofu -chdir /tf init
+      - run: tofu -chdir=/tf init
         working-directory: base/talos/tf
-      - run: tofu -chdir /tf plan
+      - run: tofu -chdir=/tf plan
         working-directory: base/talos/tf
