@@ -116,8 +116,8 @@ resource "proxmox_virtual_environment_vm" "masters" {
   }
 
   memory {
-    dedicated = var.nodesizing.master.memory
-    floating = var.nodesizing.master.memory
+    dedicated = var.nodesizing.master.mem
+    floating = var.nodesizing.master.mem
   }
 
   disk {
@@ -150,8 +150,8 @@ resource "proxmox_virtual_environment_vm" "workers" {
   }
 
   memory {
-    dedicated = var.nodesizing.worker.memory
-    floating = var.nodesizing.worker.memory
+    dedicated = var.nodesizing.worker.mem
+    floating = var.nodesizing.worker.mem
   }
 
   disk {
