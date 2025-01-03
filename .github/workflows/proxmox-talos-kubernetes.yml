@@ -2,8 +2,8 @@ name: OpenTofu ProxMox Talos Cluster
 run-name: ${{ github.actor }} changed Talos Kubernetes Build
 on:
   push:
-    # paths:
-    # - 'base/talos/**'
+    paths:
+    - 'base/talos/tf/**'
 jobs:
   opentofu-init-plan:
     runs-on: self-hosted
@@ -23,6 +23,6 @@ jobs:
         with:
           sparse-checkout: |
             base/talos/tf
-      - run: cp base/talos/tf/*.tf /tf
+      - run: cp -R base/talos/tf/* /tf
       - run: tofu -chdir=/tf init
       - run: tofu -chdir=/tf plan

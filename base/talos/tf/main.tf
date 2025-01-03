@@ -28,3 +28,8 @@ provider "proxmox" {
   pm_api_url = var.proxmox_endpoint_uri
   pm_parallel = var.proxmox_parallelism
 }
+
+resource "proxmox_pool" "talon-k8s" {
+  poolid = "talon-k8s"
+  comment = "TALON: Kubernetes with Talos VM"
+}
