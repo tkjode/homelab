@@ -1,8 +1,8 @@
 terraform {
   required_providers {
     proxmox={
-      source="Telmate/proxmox"
-      version="3.0.1-rc4"
+      source="bpg/proxmox"
+      version="0.69.0"
     }
   }
 }
@@ -24,12 +24,43 @@ variable "proxmox_parallelism" {
   default = 1
 }
 
+variable "workers" {
+  type = number
+  default = 3
+  description = "How many worker nodes to build"
+}
+
+variable "nodesizing" {
+  type = object({
+    master=object({
+      vcpu=number
+      mem=number
+      })
+    worker=object({
+      vcpu=number
+      mem=number
+    })
+  })
+
+  default = {
+    master = {
+      vcpu = 4
+      mem = 8
+    }
+    worker = {
+      vcpu = 4
+      mem = 8
+    }
+  }
+
+}
+
 provider "proxmox" {
-  pm_api_url = var.proxmox_endpoint_uri
+  endpoint = var.proxmox_endpoint_uri
   pm_parallel = var.proxmox_parallelism
 }
 
-resource "proxmox_pool" "talon-k8s" {
-  poolid = "talon-k8s"
+resource "proxmox_virtual_environment_pool" "talon-k8s" {
+  pool_id = "talon-k8s"
   comment = "TALON: Kubernetes with Talos VM"
 }

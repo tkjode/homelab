@@ -15,8 +15,11 @@ jobs:
     env:
       TF_VAR_proxmox_endpoint_uri: ${{ vars.PM_ENDPOINT }}
       TF_VAR_proxmox_parallelism: 1
-      PM_API_TOKEN_ID: ${{ secrets.PM_API_TOKEN_ID }}
-      PM_API_TOKEN_SECRET: ${{ secrets.PM_API_TOKEN_SECRET }}
+      PROXMOX_VE_API_TOKEN: ${{ secrets.PM_API_TOKEN_ID }}=${{ secrets.PM_API_TOKEN_SECRET }}
+      PROXMOX_VE_INSECURE: true
+
+      #PM_API_TOKEN_ID: ${{ secrets.PM_API_TOKEN_ID }}
+      #PM_API_TOKEN_SECRET: ${{ secrets.PM_API_TOKEN_SECRET }}
     steps:
       - name: Checkout Talos TF Content
         uses: actions/checkout@v4
