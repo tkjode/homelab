@@ -7,6 +7,6 @@ on:
 jobs:
   opentofu-version-check:
     runs-on: self-hosted
-    container: ghcr.io/opentofu:latest      
+    container: ghcr.io/opentofu/opentofu:latest      
     steps:
       - run: (ls /.dockerenv && check FOUND dockerenv) || (echo No dockerenv)
