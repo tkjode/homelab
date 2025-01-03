@@ -8,6 +8,7 @@ jobs:
   opentofu-version-check:
     runs-on: self-hosted
     container:
-      image: ghcr.io/opentofu:latest
-      options: --version
-      
+      image: ghcr.io/opentofu:latest      
+    steps:
+      - name: OpenTofu Version Check
+        run: (ls /.dockerenv && check FOUND dockerenv) || (echo No dockerenv)
