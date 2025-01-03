@@ -1,5 +1,5 @@
 name: OpenTofu ProxMox Talos Cluster
-run-name: Talos Build
+run-name: ${{ github.actor }} changed Talos Kubernetes Build
 on:
   push:
     # paths:
@@ -7,6 +7,18 @@ on:
 jobs:
   opentofu-version-check:
     runs-on: self-hosted
+    environment: ypres
     container: ghcr.io/opentofu/opentofu:latest      
+    env:
+      TF_VAR_proxmox_endpoint_uri: ${{ vars.PM_ENDPOINT }}
+      TF_VAR_proxmox_parallelism: 1
+      PM_API_TOKEN_ID: ${{ secrets.PM_API_TOKEN_ID }}      
+      PM_API_TOKEN_SECRET: ${{ secrets.PM_API_TOKEN_SECRET }}
     steps:
-      - run: (ls /.dockerenv && check FOUND dockerenv) || (echo No dockerenv)
+      - name: Checkout Talos TF Content
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            base/talos/tf
+      - run: opentofu plan
+        working-directory: base/talos/tf
