@@ -21,10 +21,11 @@ jobs:
       - name: Checkout Talos TF Content
         uses: actions/checkout@v4
         with:
+          path: /tf
           sparse-checkout: |
             base/talos/tf
       - run: ls -alR        
-      - run: tofu -chdir=/tf init
-        working-directory: base/talos/tf
-      - run: tofu -chdir=/tf plan
-        working-directory: base/talos/tf
+      - run: tofu init
+        working-directory: /tf/base/talos/tf
+      - run: tofu plan
+        working-directory: /tf/base/talos/tf
