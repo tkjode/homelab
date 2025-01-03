@@ -20,12 +20,11 @@ jobs:
     steps:
       - name: Checkout Talos TF Content
         uses: actions/checkout@v4
-        with:
-          path: /tf
+        with:          
           sparse-checkout: |
             base/talos/tf
       - run: ls -alR        
-      - run: tofu init
-        working-directory: /tf/base/talos/tf
+      - run: tofu init -from-module=${{ github.workspace }}/base/talos/tf
+        working-directory: /tf
       - run: tofu plan
-        working-directory: /tf/base/talos/tf
+        working-directory: /tf
