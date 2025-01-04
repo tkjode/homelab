@@ -8,12 +8,18 @@ on:
 jobs:
   opentofu-init-plan:
     runs-on: self-hosted
-    environment: ypres
+    strategy:
+      matrix:
+        environment: [ ypres ]
+    environment: ${{ matrix.environment }}
     container:
       image: ghcr.io/opentofu/opentofu:latest
       volumes:
         - tofustate:/tf
     env:
+      TF_DATA_DIR: "/tf"
+      TF_IN_AUTOMATION: "true"
+      TF_WORKSPACE: ${{ matrix.environment }}
       TF_VAR_proxmox_endpoint_uri: ${{ vars.PM_ENDPOINT }}      
       TF_VAR_target_proxmox_node_name: ${{ vars.PM_NODE_NAME }}
       TF_VAR_workers: ${{ vars.TALOS_WORKERS }}
@@ -24,7 +30,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           sparse-checkout: |
-            base/talos/tf
-      - run: cp -R base/talos/tf/* /tf
-      - run: tofu -var-file=/tf/ypres.tfvars -chdir=/tf init
-      - run: tofu -var-file=/tf/ypres.tfvars -chdir=/tf plan
+            base/talos/tf      
+      - run: tofu init -var-file=${{ matrix.environment }}.tfvars
+        working-directory: base/talos/tf
+      - run: tofu plan -var-file=${{ matrix.environment }}.tfvars
+        working-directory: base/talos/tf
