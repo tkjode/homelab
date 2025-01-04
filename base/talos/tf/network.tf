@@ -1,8 +1,9 @@
 ## Networking Resources
 
-resource "proxmox_virtual_environment_network_linux_vlan" "vlan100" {
+resource "proxmox_virtual_environment_network_linux_vlan" "talos-vlan" {
   node_name = var.target_proxmox_node_name
-  name = "${ var.cluster }-k8s-100"
+  name = "eno2.${var.vlan_number}"
+  comment = "VLAN 100 for ${var.cluster}"
   interface = "eno2"
   vlan = 100
 }

@@ -28,6 +28,16 @@ variable "iso_datastore" {
   default = "local"
 }
 
+variable "vlan_number" {
+  type = number
+  nullable = false
+  description = "VLAN number for the private cluster network"
+  validation {
+    condition = var.vlan_number > 1 && var.vlan_number < 1024
+    error_message = "VLANs must be between 2 and 1023 (inclusive)"
+  }
+}
+
 variable "cluster" {
   type=string
   description="A short name for the cluster to use to append and differentiate resources"
