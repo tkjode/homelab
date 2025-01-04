@@ -17,6 +17,7 @@ jobs:
       volumes:
         - tofustate:/tf
     env:
+      TF_INPUT: 0
       TF_DATA_DIR: "/tf"
       TF_PLUGIN_CACHE_DIR: "/tf/.tfplugincache"
       TF_IN_AUTOMATION: "true"
@@ -36,5 +37,5 @@ jobs:
         working-directory: base/talos/tf
       - run: tofu plan -var-file=${{ matrix.environment }}.tfvars
         working-directory: base/talos/tf
-      - run: tofu apply -var-file=${{ matrix.environment }}.tfvars
+      - run: tofu apply -force -var-file=${{ matrix.environment }}.tfvars
         working-directory: base/talos/tf
