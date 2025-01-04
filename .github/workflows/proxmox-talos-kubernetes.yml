@@ -2,6 +2,7 @@ name: Talos Cluster Deployment and Management
 run-name: ${{ github.actor }} changed Talos Kubernetes Build
 on:
   push:
+    branches: [ "main" ]
     paths:
     - 'base/talos/tf/**'
     - '.github/workflows/proxmox-talos-kubernetes.yml'

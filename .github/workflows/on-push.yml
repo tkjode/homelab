@@ -1,8 +1,10 @@
 name: on-push
 run-name: ${{ github.actor }} pushed to branch ${{ github.ref }} in ${{ github.repository }}
-on: [push]
+on:
+  push:
+    branches-ignore: main
 jobs:
-  Check-Repo-Root-Structure:    
+  Check-Repo-Root-Structure:
     runs-on: self-hosted
     container: 
       image: alpine:latest

@@ -11,7 +11,7 @@ resource "proxmox_virtual_environment_network_linux_vlan" "talos-vlan" {
 resource "proxmox_virtual_environment_network_linux_bridge" "vmbr1" {
   node_name = var.target_proxmox_node_name
   name = "vmbr1"
-  depends_on = [ 
+  depends_on = [
     proxmox_virtual_environment_network_linux_vlan.talos-vlan
   ]
 }
@@ -22,12 +22,12 @@ resource "proxmox_virtual_environment_vm" "gw-opnsense" {
   name = "gw-opnsense-${var.cluster}"
 
   tags = [ "gateway", "talos", var.cluster ]
-  
+
   startup {
     order=2
     up_delay=15
   }
-  
+
   cpu {
     cores = 2
     type = "x86-64-v2-AES"
@@ -40,8 +40,8 @@ resource "proxmox_virtual_environment_vm" "gw-opnsense" {
 
   disk {
     datastore_id = var.iso_datastore
+    file_id = "local:iso/OPNSense.vga.iso"
     interface = "scsi0"
-
   }
 
   disk {
