@@ -3,7 +3,7 @@ resource "proxmox_virtual_environment_vm" "masters" {
   count = 3
   node_name = "${var.cluster}-master-${count.index}"
   tags = [ "kubernetes", "master", "talos", "${var.cluster}" ]
-  pool_id = proxmox_virtual_environment_pool.talon-k8s.id
+  pool_id = proxmox_virtual_environment_pool.cluster-nodes-pool.id
   stop_on_destroy = true
 
   startup {
@@ -57,7 +57,7 @@ resource "proxmox_virtual_environment_vm" "workers" {
   count = var.worker_count
   node_name = "${var.cluster}-worker-${count.index}"
   tags = [ "kubernetes", "worker", "talos", "${var.cluster}" ]
-  pool_id = proxmox_virtual_environment_pool.talon-k8s.id
+  pool_id = proxmox_virtual_environment_pool.cluster-nodes-pool.id
 
   stop_on_destroy = true
 
