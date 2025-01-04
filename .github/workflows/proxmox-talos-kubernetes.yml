@@ -6,7 +6,7 @@ on:
     - 'base/talos/tf/**'
     - '.github/workflows/proxmox-talos-kubernetes.yml'
 jobs:
-  opentofu-init-plan:
+  opentofu-talos-build:
     runs-on: self-hosted
     strategy:
       matrix:

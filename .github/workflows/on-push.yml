@@ -2,8 +2,10 @@ name: on-push
 run-name: ${{ github.actor }} pushed to branch ${{ github.ref }} in ${{ github.repository }}
 on: [push]
 jobs:
-  Check-Repo-Root-Structure:
+  Check-Repo-Root-Structure:    
     runs-on: self-hosted
+    container: 
+      image: alpine:latest
     steps:
       - name: Check out repo
         uses: actions/checkout@v4
@@ -14,6 +16,8 @@ jobs:
   Check-Bases:
     runs-on: self-hosted
     needs: Check-Repo-Root-Structure
+    container: 
+      image: alpine:latest
     steps:
       - name: Check out repo
         uses: actions/checkout@v4
@@ -27,12 +31,16 @@ jobs:
   Check-Hacks:
     runs-on: self-hosted
     needs: Check-Repo-Root-Structure
+    container: 
+      image: alpine:latest
     steps:
       - name: Check out repo
         uses: actions/checkout@v4
       - run: ls -al hack/
   Check-Docs:
     runs-on: self-hosted
+    container:
+      image: alpine:latest
     needs: Check-Repo-Root-Structure
     steps:
       - name: Check out repo
