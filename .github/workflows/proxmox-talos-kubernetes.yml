@@ -29,5 +29,5 @@ jobs:
           sparse-checkout: |
             base/talos/tf
       - run: cp -R base/talos/tf/* /tf
-      - run: tofu -chdir=/tf init
-      - run: tofu -chdir=/tf plan
+      - run: tofu -var-file=/tf/ypres.tfvars -chdir=/tf init
+      - run: tofu -var-file=/tf/ypres.tfvars -chdir=/tf plan
