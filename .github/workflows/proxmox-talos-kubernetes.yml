@@ -22,7 +22,7 @@ jobs:
       TF_PLUGIN_CACHE_DIR: "/tf/.tfplugincache"
       TF_IN_AUTOMATION: "true"
       TF_WORKSPACE: ${{ matrix.environment }}
-      TF_VAR_proxmox_endpoint_uri: ${{ vars.PM_ENDPOINT }}      
+      TF_VAR_proxmox_endpoint_uri: ${{ vars.PM_ENDPOINT }}
       TF_VAR_target_proxmox_node_name: ${{ vars.PM_NODE_NAME }}
       TF_VAR_workers: ${{ vars.TALOS_WORKERS }}
       PROXMOX_VE_API_TOKEN: ${{ secrets.PM_API_TOKEN_ID }}=${{ secrets.PM_API_TOKEN_SECRET }}
@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           sparse-checkout: |
-            base/talos/tf      
+            base/talos/tf
       - run: tofu init -var-file=${{ matrix.environment }}.tfvars
         working-directory: base/talos/tf
       - run: tofu plan -var-file=${{ matrix.environment }}.tfvars

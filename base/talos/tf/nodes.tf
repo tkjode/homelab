@@ -35,7 +35,7 @@ resource "proxmox_virtual_environment_vm" "masters" {
 
   disk {
     datastore_id = var.iso_datastore
-    file_id = proxmox_virtual_environment_download_file.talos-metal-image.id
+    file_name = "talos-metal-amd64-v1.9.1.iso"
     interface = "scsi0"
   }
 
@@ -90,7 +90,7 @@ resource "proxmox_virtual_environment_vm" "workers" {
 
   disk {
     datastore_id = "local-lvm"
-    file_id = proxmox_virtual_environment_download_file.talos-metal-image.id
+    file_name = "talos-metal-amd64-v1.9.1.iso"
     interface = "scsi0"
   }
 
