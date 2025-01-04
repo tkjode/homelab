@@ -5,4 +5,8 @@ terraform {
       version="0.69.0"
     }
   }
+
+  backend "local" {
+    path = "/tf/.terraform"
+  }
 }

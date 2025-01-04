@@ -18,6 +18,7 @@ jobs:
         - tofustate:/tf
     env:
       TF_DATA_DIR: "/tf"
+      TF_PLUGIN_CACHE_DIR: "/tf/.tfplugincache"
       TF_IN_AUTOMATION: "true"
       TF_WORKSPACE: ${{ matrix.environment }}
       TF_VAR_proxmox_endpoint_uri: ${{ vars.PM_ENDPOINT }}      
