@@ -16,6 +16,12 @@ variable "proxmox_endpoint_uri" {
 #  default = 1
 #}
 
+variable "talos_version" {
+  type = string
+  default = "v1.9.1"
+  description = "Talos ISO Download Path version - will save as a unique filename in proxmox as well"
+}
+
 variable "worker_count" {
   type = number
   default = 3
