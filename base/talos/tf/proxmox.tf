@@ -17,6 +17,7 @@ resource "proxmox_virtual_environment_download_file" "opnsense-vga-image" {
   datastore_id = var.iso_datastore
   node_name = var.target_proxmox_node_name
   url = "https://mirror.wdc1.us.leaseweb.net/opnsense/releases/24.7/OPNsense-24.7-dvd-amd64.iso.bz2"
+  file_name = "OPNSense.vga.iso"
   decompression_algorithm = "bz2"
   overwrite_unmanaged = true
 }
