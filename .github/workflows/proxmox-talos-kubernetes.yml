@@ -6,22 +6,8 @@ on:
     - 'base/talos/tf/**'
     - '.github/workflows/proxmox-talos-kubernetes.yml'
 jobs:
-  prep-sparse-workspace:
+  tofu-talos-clusters:
     runs-on: self-hosted
-    container:
-      image: ghcr.io/opentofu/opentofu:latest
-      volumes:
-        - tofustate:/tf
-    steps:
-      - name: Checkout Talos TF Content
-        uses: actions/checkout@v4
-        with:
-          sparse-checkout: |
-            base/talos/tf
-  talos-clusters-init-and-plan:
-    runs-on: self-hosted
-    needs:
-      - prep-sparse-workspace
     strategy:
       matrix:
         environment: [ ypres ]
@@ -40,33 +26,15 @@ jobs:
       TF_VAR_workers: ${{ vars.TALOS_WORKERS }}
       PROXMOX_VE_API_TOKEN: ${{ secrets.PM_API_TOKEN_ID }}=${{ secrets.PM_API_TOKEN_SECRET }}
       PROXMOX_VE_INSECURE: true
-    steps:  
+    steps:
+      - name: Checkout Talos TF Content
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            base/talos/tf      
       - run: tofu init -var-file=${{ matrix.environment }}.tfvars
         working-directory: base/talos/tf
       - run: tofu plan -var-file=${{ matrix.environment }}.tfvars
         working-directory: base/talos/tf
-  talos-clusters-apply-build:
-    runs-on: self-hosted
-    strategy:
-      matrix:
-        environment: [ ypres ]
-    environment: ${{ matrix.environment }}
-    needs:
-      - talos-clusters-init-and-plan
-    container:
-      image: ghcr.io/opentofu/opentofu:latest
-      volumes:
-        - tofustate:/tf    
-    env:
-      TF_DATA_DIR: "/tf"
-      TF_PLUGIN_CACHE_DIR: "/tf/.tfplugincache"
-      TF_IN_AUTOMATION: "true"
-      TF_WORKSPACE: ${{ matrix.environment }}
-      TF_VAR_proxmox_endpoint_uri: ${{ vars.PM_ENDPOINT }}      
-      TF_VAR_target_proxmox_node_name: ${{ vars.PM_NODE_NAME }}
-      TF_VAR_workers: ${{ vars.TALOS_WORKERS }}
-      PROXMOX_VE_API_TOKEN: ${{ secrets.PM_API_TOKEN_ID }}=${{ secrets.PM_API_TOKEN_SECRET }}
-      PROXMOX_VE_INSECURE: true
-    steps:
       - run: tofu apply -var-file=${{ matrix.environment }}.tfvars
-        working-directory: base/talos/tf      
+        working-directory: base/talos/tf
