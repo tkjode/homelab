@@ -1,11 +1,15 @@
+## Networking Resources
+
 resource "proxmox_virtual_environment_network_linux_vlan" "vlan100" {
-  node_name = "proxmox"
-  name = "talon-k8s-100"
-  interface = "eno0"
+  node_name = node_name = var.target_proxmox_node_name
+  name = "${ var.cluster }-k8s-100"
+  interface = "eno2"
   vlan = 100
 }
 
 resource "proxmox_virtual_environment_network_linux_bridge" "vmbr1" {
+  node_name = var.target_proxmox_node_name
+  name = "vmbr1"
   depends_on = [ 
     proxmox_virtual_environment_network_linux_vlan.vlan100
   ]
@@ -16,7 +20,7 @@ resource "proxmox_virtual_environment_vm" "gw-opnsense" {
 
   name = "gw-opnsense-${var.cluster}"
 
-  tags = ["gateway", "talos"]
+  tags = [ "gateway", "talos", var.cluster ]
   
   startup {
     order=2

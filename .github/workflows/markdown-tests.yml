@@ -16,6 +16,6 @@ jobs:
         with:
           sparse-checkout: |
             doc
-      - run: ls -al ${{ github.workspace }}/doc
+      - run: ls -al doc
       - run: |-
           echo "Job Status: ${{ job.status }}"
