@@ -37,5 +37,5 @@ jobs:
         working-directory: base/talos/tf
       - run: tofu plan -var-file=${{ matrix.environment }}.tfvars
         working-directory: base/talos/tf
-      - run: tofu apply -force -var-file=${{ matrix.environment }}.tfvars
+      - run: tofu apply -auto-approve -parallelism=1  -var-file=${{ matrix.environment }}.tfvars
         working-directory: base/talos/tf
