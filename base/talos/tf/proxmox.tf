@@ -1,6 +1,6 @@
-resource "proxmox_virtual_environment_pool" "talon-k8s" {
-  pool_id = "talon-k8s"
-  comment = "TALON: Kubernetes with Talos VM"
+resource "proxmox_virtual_environment_pool" "cluster-nodes-pool" {
+  pool_id = "${ var.cluster }-k8s"
+  comment = "${ var.cluster } resource operatons pool"
 }
 
 resource "proxmox_virtual_environment_download_file" "talos-metal-image" {
