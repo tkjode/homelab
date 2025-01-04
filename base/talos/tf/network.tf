@@ -1,7 +1,7 @@
 ## Networking Resources
 
 resource "proxmox_virtual_environment_network_linux_vlan" "vlan100" {
-  node_name = node_name = var.target_proxmox_node_name
+  node_name = var.target_proxmox_node_name
   name = "${ var.cluster }-k8s-100"
   interface = "eno2"
   vlan = 100
