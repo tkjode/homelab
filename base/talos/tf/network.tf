@@ -2,15 +2,15 @@
 
 resource "proxmox_virtual_environment_network_linux_vlan" "talos-vlan" {
   node_name   = var.target_proxmox_node_name
-  name        = "eno2.${var.vlan_number}"
-  comment     = "VLAN ${var.vlan_number} for ${var.cluster}"
+  name        = "eno2.${ var.vlan_number }"
+  comment     = "VLAN ${ var.vlan_number } for ${ var.cluster }"
   interface   = "eno2"
   vlan        = var.vlan_number
 }
 
-resource "proxmox_virtual_environment_network_linux_bridge" "vmbr1" {
+resource "proxmox_virtual_environment_network_linux_bridge" "cluster-private-bridge" {
   node_name   = var.target_proxmox_node_name
-  name        = "vmbr1"
+  name        = "vmbr${ var.vlan_number }"
 
   depends_on = [
     proxmox_virtual_environment_network_linux_vlan.talos-vlan
@@ -19,7 +19,7 @@ resource "proxmox_virtual_environment_network_linux_bridge" "vmbr1" {
 
 resource "proxmox_virtual_environment_vm" "gw-opnsense" {
   node_name   = "proxmox"
-  name        = "gw-opnsense-${var.cluster}"
+  name        = "gw-opnsense-${ var.cluster }"
   tags        = [ "gateway", "talos", var.cluster ]
 
   startup {
@@ -39,8 +39,7 @@ resource "proxmox_virtual_environment_vm" "gw-opnsense" {
 
   cdrom {
     enabled       = true
-    datastore_id  = var.iso_datastore
-    file_id       = "local:iso/OPNSense.vga.iso"
+    file_id       = "${ var.iso_datastore }:iso/OPNSense.vga.iso"
   }
 
   disk {
@@ -64,6 +63,6 @@ resource "proxmox_virtual_environment_vm" "gw-opnsense" {
   }
 
   network_device {
-    bridge = proxmox_virtual_environment_network_linux_bridge.vmbr1.name
+    bridge = proxmox_virtual_environment_network_linux_bridge.cluster-private-bridge.name
   }
 }

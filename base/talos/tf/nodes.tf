@@ -1,8 +1,8 @@
 
 resource "proxmox_virtual_environment_vm" "masters" {
   count           = 3
-  node_name       = "${var.cluster}-master-${count.index}"
-  tags            = [ "kubernetes", "master", "talos", "${var.cluster}" ]
+  node_name       = "${ var.cluster }-master-${ count.index }"
+  tags            = [ "kubernetes", "master", "talos", "${ var.cluster }" ]
   pool_id         = proxmox_virtual_environment_pool.cluster-nodes-pool.id
   stop_on_destroy = true
 
@@ -35,28 +35,27 @@ resource "proxmox_virtual_environment_vm" "masters" {
 
   cdrom {
     enabled       = true
-    datastore_id  = var.iso_datastore
-    file_id       = "local:iso/talos-metal-amd64-v1.9.1.iso"
+    file_id       = "${ var.iso_datastore }:iso/talos-metal-amd64-v1.9.1.iso"
   }
 
   initialization {
     ip_config {
       ipv4 {
-        address = "172.16.1.${count.index+4}/24"
+        address = "172.16.1.${ count.index+4 }/24"
         gateway = "172.16.1.1"
       }
     }
   }
 
   network_device {
-    bridge = proxmox_virtual_environment_network_linux_bridge.vmbr1.id
+    bridge = proxmox_virtual_environment_network_linux_bridge.cluster-private-bridge.name
   }
 }
 
 resource "proxmox_virtual_environment_vm" "workers" {
   count           = var.worker_count
-  node_name       = "${var.cluster}-worker-${count.index}"
-  tags            = [ "kubernetes", "worker", "talos", "${var.cluster}" ]
+  node_name       = "${ var.cluster }-worker-${ count.index }"
+  tags            = [ "kubernetes", "worker", "talos", "${ var.cluster }" ]
   pool_id         = proxmox_virtual_environment_pool.cluster-nodes-pool.id
   stop_on_destroy = true
 
@@ -89,21 +88,20 @@ resource "proxmox_virtual_environment_vm" "workers" {
 
   cdrom {
     enabled       = true
-    datastore_id  = "local-lvm"
-    file_id       = "local:iso/talos-metal-amd64-v1.9.1.iso"    
+    file_id       = "${ var.iso_datastore }:iso/talos-metal-amd64-v1.9.1.iso"
   }
 
   initialization {
     ip_config {
       ipv4 {
-        address = "172.16.1.${count.index+8}/24"
+        address = "172.16.1.${ count.index+8 }/24"
         gateway = "172.16.1.1"
       }
     }
   }
 
   network_device {
-    bridge = proxmox_virtual_environment_network_linux_bridge.vmbr1.name
+    bridge = proxmox_virtual_environment_network_linux_bridge.cluster-private-bridge.name
   }
 
 }
