@@ -41,14 +41,14 @@ resource "proxmox_virtual_environment_vm" "gw-opnsense" {
   disk {
     datastore_id = var.iso_datastore
     file_id = "local:iso/OPNSense.vga.iso"
-    interface = "scsi0"
+    interface = "ide2"
   }
 
   disk {
-    datastore_id = "SSD"
-    interface = "sata"
-    size = 10
-    ssd = "true"
+    datastore_id  = "SSD"
+    interface     = "scsi0"
+    size          = 10
+    ssd           = "true"
   }
 
   initialization {

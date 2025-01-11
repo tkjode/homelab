@@ -83,7 +83,7 @@ resource "proxmox_virtual_environment_vm" "workers" {
 
   disk {
     datastore_id = "SSD"
-    interface = "sata"
+    interface = "scsi0"
     size = 40
     ssd = true
   }
@@ -91,7 +91,7 @@ resource "proxmox_virtual_environment_vm" "workers" {
   disk {
     datastore_id = "local-lvm"
     file_id = "local:iso/talos-metal-amd64-v1.9.1.iso"
-    interface = "scsi0"
+    interface = "ide2"
   }
 
   initialization {
