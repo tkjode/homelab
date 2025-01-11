@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         environment: [ ypres ]
-    environment: proxmox-${{ vars.PM_NODE_NAME }}-${{ matrix.environment }}
+    environment: ${{ matrix.environment }}
     container:
       image: hashicorp/terraform:latest
       volumes:
