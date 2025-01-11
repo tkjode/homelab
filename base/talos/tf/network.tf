@@ -20,6 +20,7 @@ resource "proxmox_virtual_environment_network_linux_bridge" "cluster-private-bri
 resource "proxmox_virtual_environment_vm" "gw-opnsense" {
   node_name   = "proxmox"
   name        = "gw-opnsense-${ var.cluster }"
+  pool_id     = proxmox_virtual_environment_pool.cluster-nodes-pool.id
   tags        = [ "gateway", "talos", var.cluster ]
 
   startup {
