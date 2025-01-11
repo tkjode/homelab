@@ -1,5 +1,5 @@
-name: Talos Cluster Deployment and Management
-run-name: ${{ github.actor }} changed Talos Kubernetes Build
+name: tf-talos-cluster
+run-name: Talos Cluster Build
 on:
   push:
     branches: [ "main" ]
@@ -7,16 +7,16 @@ on:
     - 'base/talos/tf/**'
     - '.github/workflows/proxmox-talos-kubernetes.yml'
 jobs:
-  tofu-talos-clusters:
+  terraform-talos-clusters:
     runs-on: self-hosted
     strategy:
       matrix:
         environment: [ ypres ]
-    environment: ${{ matrix.environment }}
+    environment: proxmox-${{ vars.PM_NODE_NAME }}-${{ matrix.environment }}
     container:
-      image: ghcr.io/opentofu/opentofu:latest
+      image: hashicorp/terraform:latest
       volumes:
-        - tfstate-${{matrix.environment}}:/tf
+        - tfstate-${{ matrix.environment }}:/tf
     env:
       TF_INPUT: 0
       TF_DATA_DIR: "/tf"
@@ -33,9 +33,9 @@ jobs:
         with:
           sparse-checkout: |
             base/talos/tf
-      - run: tofu init -var-file=${{ matrix.environment }}.tfvars
+      - run: terraform init -var-file=${{ matrix.environment }}.tfvars
         working-directory: base/talos/tf
-      - run: tofu plan -var-file=${{ matrix.environment }}.tfvars -out=/tf/${{ matrix.environment }}.tfplan
+      - run: terraform plan -var-file=${{ matrix.environment }}.tfvars -out=/tf/${{ matrix.environment }}.tfplan
         working-directory: base/talos/tf
-      - run: tofu apply -auto-approve -parallelism=1 /tf/${{ matrix.environment}}.tfplan
+      - run: terraform apply -auto-approve -parallelism=1 /tf/${{ matrix.environment}}.tfplan
         working-directory: base/talos/tf
