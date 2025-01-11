@@ -39,3 +39,37 @@ jobs:
         working-directory: base/talos/tf
       - run: terraform apply -auto-approve -parallelism=1 /tf/${{ matrix.environment}}.tfplan
         working-directory: base/talos/tf
+  destroy-everything-on-failure:
+    runs-on: self-hosted
+    strategy:
+      matrix:
+        environment: [ ypres ]
+    needs: terraform-talos-clusters
+    if: ${{ always() && contains(needs.*.result, 'failure') }}
+    environment: ${{ matrix.environment }}
+    container:
+      image: hashicorp/terraform:latest
+      volumes:
+        - tfstate-${{ matrix.environment }}:/tf
+    env:
+      TF_INPUT: 0
+      TF_DATA_DIR: "/tf"
+      TF_PLUGIN_CACHE_DIR: "/tf/.tfplugincache"
+      TF_IN_AUTOMATION: "true"
+      TF_VAR_proxmox_endpoint_uri: ${{ vars.PM_ENDPOINT }}
+      TF_VAR_target_proxmox_node_name: ${{ vars.PM_NODE_NAME }}
+      TF_VAR_workers: ${{ vars.TALOS_WORKERS }}
+      PROXMOX_VE_API_TOKEN: ${{ secrets.PM_API_TOKEN_ID }}=${{ secrets.PM_API_TOKEN_SECRET }}
+      PROXMOX_VE_INSECURE: true
+    steps:
+      - name: Checkout Talos TF Content
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            base/talos/tf
+      - run: terraform init -var-file=${{ matrix.environment }}.tfvars
+        working-directory: base/talos/tf
+      - run: terraform plan -destroy -var-file=${{ matrix.environment }}.tfvars -out=/tf/${{ matrix.environment }}.tfplan
+        working-directory: base/talos/tf
+      - run: terraform apply -destroy -auto-approve -parallelism=1 /tf/${{ matrix.environment}}.tfplan
+        working-directory: base/talos/tf
