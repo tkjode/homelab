@@ -43,7 +43,7 @@ resource "proxmox_virtual_environment_vm" "gw-opnsense" {
   }
 
   disk {
-    format        = "raw"
+    file_format   = "raw"
     datastore_id  = "SSD"
     interface     = "scsi0"
     size          = 10

@@ -28,7 +28,7 @@ resource "proxmox_virtual_environment_vm" "masters" {
   }
 
   disk {
-    format        = "raw"
+    file_format   = "raw"
     datastore_id  = "SSD"
     interface     = "scsi0"
     size          = 40
@@ -84,7 +84,7 @@ resource "proxmox_virtual_environment_vm" "workers" {
   }
 
   disk {
-    format        = "raw"
+    file_format   = "raw"
     datastore_id  = "SSD"
     interface     = "scsi0"
     size          = 40
