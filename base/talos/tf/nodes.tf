@@ -39,15 +39,15 @@ resource "proxmox_virtual_environment_vm" "masters" {
     file_id       = "${ var.iso_datastore }:iso/talos-metal-amd64-v1.9.1.iso"
   }
 
-  initialization {
-    datastore_id  = "cloudinit"
-    ip_config {
-      ipv4 {
-        address = "172.16.1.${ count.index+4 }/24"
-        gateway = "172.16.1.1"
-      }
-    }
-  }
+  # initialization {
+  #   datastore_id  = "cloudinit"
+  #   ip_config {
+  #     ipv4 {
+  #       address = "172.16.1.${ count.index+4 }/24"
+  #       gateway = "172.16.1.1"
+  #     }
+  #   }
+  # }
 
   network_device {
     bridge = proxmox_virtual_environment_network_linux_bridge.cluster-private-bridge.name
@@ -94,15 +94,15 @@ resource "proxmox_virtual_environment_vm" "workers" {
     file_id       = "${ var.iso_datastore }:iso/talos-metal-amd64-v1.9.1.iso"
   }
 
-  initialization {
-    datastore_id  = "cloudinit"
-    ip_config {
-      ipv4 {
-        address = "172.16.1.${ count.index+8 }/24"
-        gateway = "172.16.1.1"
-      }
-    }
-  }
+  # initialization {
+  #   datastore_id  = "cloudinit"
+  #   ip_config {
+  #     ipv4 {
+  #       address = "172.16.1.${ count.index+8 }/24"
+  #       gateway = "172.16.1.1"
+  #     }
+  #   }
+  # }
 
   network_device {
     bridge = proxmox_virtual_environment_network_linux_bridge.cluster-private-bridge.name
