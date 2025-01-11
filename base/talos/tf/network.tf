@@ -43,21 +43,22 @@ resource "proxmox_virtual_environment_vm" "gw-opnsense" {
   }
 
   disk {
+    format        = "raw"
     datastore_id  = "SSD"
     interface     = "scsi0"
     size          = 10
     ssd           = "true"
   }
 
-  # initialization {
-  #   datastore_id  = "cloudinit"
-  #   ip_config {
-  #     ipv4 {
-  #       address = "172.16.1.1/24"
-  #       gateway = "172.16.1.1"
-  #     }
-  #   }
-  # }
+  initialization {
+    datastore_id  = "cloudinit"
+    ip_config {
+      ipv4 {
+        address = "172.16.1.1/24"
+        gateway = "172.16.1.1"
+      }
+    }
+  }
 
   network_device {
     bridge = "vmbr0"
