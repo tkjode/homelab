@@ -38,13 +38,5 @@ jobs:
         working-directory: base/talos/tf
       - run: terraform plan -var-file=${{ matrix.environment }}.tfvars -out=/tf/${{ matrix.environment }}.tfplan
         working-directory: base/talos/tf
-      - run: ls -alR
-        working-directory: base/talos/tf
-      - run: ls -alR
-        working-directory: /tf
       - run: terraform apply -auto-approve -parallelism=1 /tf/${{ matrix.environment}}.tfplan
         working-directory: base/talos/tf
-      - run: ls -alR
-        working-directory: base/talos/tf
-      - run: ls -alR
-        working-directory: /tf

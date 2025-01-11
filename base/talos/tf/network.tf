@@ -54,6 +54,12 @@ resource "proxmox_virtual_environment_vm" "gw-opnsense" {
     datastore_id  = "cloudinit"
     ip_config {
       ipv4 {
+        address = "dhcp"
+      }
+    }
+
+    ip_config {
+      ipv4 {
         address = "172.16.1.1/24"
         gateway = "172.16.1.1"
       }
@@ -62,6 +68,7 @@ resource "proxmox_virtual_environment_vm" "gw-opnsense" {
 
   network_device {
     bridge = "vmbr0"
+
   }
 
   network_device {
