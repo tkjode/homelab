@@ -28,7 +28,7 @@ resource "proxmox_virtual_environment_vm" "masters" {
 
   disk {
     datastore_id = "SSD"
-    interface = "sata"
+    interface = "scsi0"
     size = 40
     ssd = "true"
   }
@@ -36,7 +36,7 @@ resource "proxmox_virtual_environment_vm" "masters" {
   disk {
     datastore_id = var.iso_datastore
     file_id = "local:iso/talos-metal-amd64-v1.9.1.iso"
-    interface = "scsi0"
+    interface = "ide2"
   }
 
   initialization {
