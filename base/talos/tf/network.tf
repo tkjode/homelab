@@ -41,7 +41,7 @@ resource "proxmox_virtual_environment_vm" "gw-opnsense" {
   disk {
     datastore_id = var.iso_datastore
     file_id = "local:iso/OPNSense.vga.iso"
-    interface = "ide2"
+    interface = "scsi1"
   }
 
   disk {
