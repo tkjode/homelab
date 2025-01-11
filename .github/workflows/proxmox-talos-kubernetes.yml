@@ -33,12 +33,28 @@ jobs:
         with:
           sparse-checkout: |
             base/talos/tf
+      - run: ls -alR
+        working-directory: base/talos/tf
+      - run: ls -alR
+        working-directory: /tf
       - run: terraform init -var-file=${{ matrix.environment }}.tfvars
         working-directory: base/talos/tf
+      - run: ls -alR
+        working-directory: base/talos/tf
+      - run: ls -alR
+        working-directory: /tf
       - run: terraform plan -var-file=${{ matrix.environment }}.tfvars -out=/tf/${{ matrix.environment }}.tfplan
         working-directory: base/talos/tf
+      - run: ls -alR
+        working-directory: base/talos/tf
+      - run: ls -alR
+        working-directory: /tf
       - run: terraform apply -auto-approve -parallelism=1 /tf/${{ matrix.environment}}.tfplan
         working-directory: base/talos/tf
+      - run: ls -alR
+        working-directory: base/talos/tf
+      - run: ls -alR
+        working-directory: /tf
   destroy-everything-on-failure:
     runs-on: self-hosted
     strategy:
