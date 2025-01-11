@@ -50,6 +50,7 @@ resource "proxmox_virtual_environment_vm" "gw-opnsense" {
   }
 
   initialization {
+    datastore_id  = "cloudinit"
     ip_config {
       ipv4 {
         address = "172.16.1.1/24"

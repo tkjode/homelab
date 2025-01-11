@@ -1,5 +1,6 @@
 
 resource "proxmox_virtual_environment_vm" "masters" {
+  depends_on       = [ proxmox_virtual_environment_vm.gw-opnsense ]
   count           = 3
   node_name       = "${ var.cluster }-master-${ count.index }"
   tags            = [ "kubernetes", "master", "talos", "${ var.cluster }" ]
@@ -39,6 +40,7 @@ resource "proxmox_virtual_environment_vm" "masters" {
   }
 
   initialization {
+    datastore_id  = "cloudinit"
     ip_config {
       ipv4 {
         address = "172.16.1.${ count.index+4 }/24"
@@ -53,6 +55,7 @@ resource "proxmox_virtual_environment_vm" "masters" {
 }
 
 resource "proxmox_virtual_environment_vm" "workers" {
+  depends_on      = [ proxmox_virtual_environment_vm.gw-opnsense ]
   count           = var.worker_count
   node_name       = "${ var.cluster }-worker-${ count.index }"
   tags            = [ "kubernetes", "worker", "talos", "${ var.cluster }" ]
@@ -92,6 +95,7 @@ resource "proxmox_virtual_environment_vm" "workers" {
   }
 
   initialization {
+    datastore_id  = "cloudinit"
     ip_config {
       ipv4 {
         address = "172.16.1.${ count.index+8 }/24"
