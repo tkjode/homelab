@@ -104,7 +104,7 @@ resource "proxmox_virtual_environment_vm" "workers" {
   }
 
   network_device {
-    bridge = proxmox_virtual_environment_network_linux_bridge.vmbr1.id
+    bridge = proxmox_virtual_environment_network_linux_bridge.vmbr1.name
   }
 
 }
