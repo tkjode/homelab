@@ -13,9 +13,9 @@ resource "proxmox_virtual_environment_vm" "masters" {
     down_delay  = 15
   }
 
-  agent {
-    enabled = false
-  }
+  # agent {
+  #   enabled = false
+  # }
 
   cpu {
     cores = var.nodesizing.master.vcpu
@@ -69,9 +69,9 @@ resource "proxmox_virtual_environment_vm" "workers" {
     down_delay  = 5
   }
 
-  agent {
-    enabled = false
-  }
+  # agent {
+  #   enabled = false
+  # }
 
   cpu {
     cores = var.nodesizing.worker.vcpu
