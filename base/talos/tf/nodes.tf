@@ -1,15 +1,15 @@
 
 resource "proxmox_virtual_environment_vm" "masters" {
-  count = 3
-  node_name = "${var.cluster}-master-${count.index}"
-  tags = [ "kubernetes", "master", "talos", "${var.cluster}" ]
-  pool_id = proxmox_virtual_environment_pool.cluster-nodes-pool.id
+  count           = 3
+  node_name       = "${var.cluster}-master-${count.index}"
+  tags            = [ "kubernetes", "master", "talos", "${var.cluster}" ]
+  pool_id         = proxmox_virtual_environment_pool.cluster-nodes-pool.id
   stop_on_destroy = true
 
   startup {
-    order=5
-    up_delay=15
-    down_delay=15
+    order       = 5
+    up_delay    = 15
+    down_delay  = 15
   }
 
   agent {
@@ -18,25 +18,25 @@ resource "proxmox_virtual_environment_vm" "masters" {
 
   cpu {
     cores = var.nodesizing.master.vcpu
-    type = "x86-64-v2-AES"
+    type  = "x86-64-v2-AES"
   }
 
   memory {
     dedicated = var.nodesizing.master.mem
-    floating = var.nodesizing.master.mem
+    floating  = var.nodesizing.master.mem
   }
 
   disk {
-    datastore_id = "SSD"
-    interface = "scsi0"
-    size = 40
-    ssd = "true"
+    datastore_id  = "SSD"
+    interface     = "scsi0"
+    size          = 40
+    ssd           = "true"
   }
 
-  disk {
-    datastore_id = var.iso_datastore
-    file_id = "local:iso/talos-metal-amd64-v1.9.1.iso"
-    interface = "scsi1"
+  cdrom {
+    enabled       = true
+    datastore_id  = var.iso_datastore
+    file_id       = "local:iso/talos-metal-amd64-v1.9.1.iso"
   }
 
   initialization {
@@ -54,17 +54,16 @@ resource "proxmox_virtual_environment_vm" "masters" {
 }
 
 resource "proxmox_virtual_environment_vm" "workers" {
-  count = var.worker_count
-  node_name = "${var.cluster}-worker-${count.index}"
-  tags = [ "kubernetes", "worker", "talos", "${var.cluster}" ]
-  pool_id = proxmox_virtual_environment_pool.cluster-nodes-pool.id
-
+  count           = var.worker_count
+  node_name       = "${var.cluster}-worker-${count.index}"
+  tags            = [ "kubernetes", "worker", "talos", "${var.cluster}" ]
+  pool_id         = proxmox_virtual_environment_pool.cluster-nodes-pool.id
   stop_on_destroy = true
 
   startup {
-    order = 10
-    up_delay = 5
-    down_delay = 5
+    order       = 10
+    up_delay    = 5
+    down_delay  = 5
   }
 
   agent {
@@ -73,25 +72,25 @@ resource "proxmox_virtual_environment_vm" "workers" {
 
   cpu {
     cores = var.nodesizing.worker.vcpu
-    type = "x86-64-v2-AES"
+    type  = "x86-64-v2-AES"
   }
 
   memory {
     dedicated = var.nodesizing.worker.mem
-    floating = var.nodesizing.worker.mem
+    floating  = var.nodesizing.worker.mem
   }
 
   disk {
-    datastore_id = "SSD"
-    interface = "scsi0"
-    size = 40
-    ssd = true
+    datastore_id  = "SSD"
+    interface     = "scsi0"
+    size          = 40
+    ssd           = true
   }
 
-  disk {
-    datastore_id = "local-lvm"
-    file_id = "local:iso/talos-metal-amd64-v1.9.1.iso"
-    interface = "ide2"
+  cdrom {
+    enabled       = true
+    datastore_id  = "local-lvm"
+    file_id       = "local:iso/talos-metal-amd64-v1.9.1.iso"    
   }
 
   initialization {
