@@ -4,7 +4,7 @@ resource "proxmox_virtual_environment_vm" "masters" {
   count           = 3
   node_name       = "${ var.cluster }-master-${ count.index }"
   tags            = [ "kubernetes", "master", "talos", "${ var.cluster }" ]
-  pool_id         = proxmox_virtual_environment_pool.cluster-nodes-pool.id
+  # pool_id         = proxmox_virtual_environment_pool.cluster-nodes-pool.id
   stop_on_destroy = true
 
   startup {
@@ -13,9 +13,9 @@ resource "proxmox_virtual_environment_vm" "masters" {
     down_delay  = 15
   }
 
-  # agent {
-  #   enabled = false
-  # }
+  agent {
+    enabled = false
+  }
 
   cpu {
     cores = var.nodesizing.master.vcpu
@@ -60,7 +60,7 @@ resource "proxmox_virtual_environment_vm" "workers" {
   count           = var.worker_count
   node_name       = "${ var.cluster }-worker-${ count.index }"
   tags            = [ "kubernetes", "worker", "talos", "${ var.cluster }" ]
-  pool_id         = proxmox_virtual_environment_pool.cluster-nodes-pool.id
+  # pool_id         = proxmox_virtual_environment_pool.cluster-nodes-pool.id
   stop_on_destroy = true
 
   startup {
@@ -69,9 +69,9 @@ resource "proxmox_virtual_environment_vm" "workers" {
     down_delay  = 5
   }
 
-  # agent {
-  #   enabled = false
-  # }
+  agent {
+    enabled = false
+  }
 
   cpu {
     cores = var.nodesizing.worker.vcpu

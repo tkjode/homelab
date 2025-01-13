@@ -1,7 +1,7 @@
-resource "proxmox_virtual_environment_pool" "cluster-nodes-pool" {
-  pool_id = "${ var.cluster }-k8s"
-  comment = "${ var.cluster } resource operations pool"
-}
+# resource "proxmox_virtual_environment_pool" "cluster-nodes-pool" {
+#   pool_id = "${ var.cluster }-k8s"
+#   comment = "${ var.cluster } resource operations pool"
+# }
 
 
 # resource "proxmox_virtual_environment_download_file" "talos-metal-image" {
