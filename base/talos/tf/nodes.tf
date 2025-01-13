@@ -1,6 +1,6 @@
 
 resource "proxmox_virtual_environment_vm" "masters" {
-  depends_on       = [ proxmox_virtual_environment_vm.gw-opnsense ]
+  # depends_on       = [ proxmox_virtual_environment_vm.gw-opnsense ]
   count           = 3
   node_name       = "${ var.cluster }-master-${ count.index }"
   tags            = [ "kubernetes", "master", "talos", "${ var.cluster }" ]
@@ -56,7 +56,7 @@ resource "proxmox_virtual_environment_vm" "masters" {
 }
 
 resource "proxmox_virtual_environment_vm" "workers" {
-  depends_on      = [ proxmox_virtual_environment_vm.gw-opnsense ]
+  # depends_on      = [ proxmox_virtual_environment_vm.gw-opnsense ]
   count           = var.worker_count
   node_name       = "${ var.cluster }-worker-${ count.index }"
   tags            = [ "kubernetes", "worker", "talos", "${ var.cluster }" ]
