@@ -36,5 +36,5 @@ jobs:
             base/talos/tf
       - run: terraform init -backend=false -var-file=${{ matrix.environment }}.tfvars
         working-directory: base/talos/tf
-      - run: terraform validate -var-file=${{ matrix.environment }}.tfvars
+      - run: terraform validate
         working-directory: base/talos/tf
