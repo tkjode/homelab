@@ -2,7 +2,8 @@
 resource "proxmox_virtual_environment_vm" "masters" {
   # depends_on       = [ proxmox_virtual_environment_vm.gw-opnsense ]
   count           = 3
-  node_name       = "${ var.cluster }-master-${ count.index }"
+  name            = "${ var.cluster }-master-${ count.index }"
+  node_name       = var.target_proxmox_node_name
   tags            = [ "kubernetes", "master", "talos", "${ var.cluster }" ]
   # pool_id         = proxmox_virtual_environment_pool.cluster-nodes-pool.id
   stop_on_destroy = true
@@ -58,7 +59,8 @@ resource "proxmox_virtual_environment_vm" "masters" {
 resource "proxmox_virtual_environment_vm" "workers" {
   # depends_on      = [ proxmox_virtual_environment_vm.gw-opnsense ]
   count           = var.worker_count
-  node_name       = "${ var.cluster }-worker-${ count.index }"
+  name            = "${ var.cluster }-worker-${ count.index }"
+  node_name       = var.target_proxmox_node_name
   tags            = [ "kubernetes", "worker", "talos", "${ var.cluster }" ]
   # pool_id         = proxmox_virtual_environment_pool.cluster-nodes-pool.id
   stop_on_destroy = true
