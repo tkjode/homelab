@@ -8,8 +8,7 @@ terraform {
 
   backend "s3" {
     bucket = "phalnet-homelab-automation"
-    key = "proxmox/iso/talos"
+    key = "talos/iso"
     region = "ca-central-1"
-
   }
 }
