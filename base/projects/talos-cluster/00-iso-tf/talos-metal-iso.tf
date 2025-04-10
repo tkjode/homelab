@@ -1,13 +1,13 @@
 variable "iso_datastore" {
-  type = "string"
+  type = string
 }
 
 variable "talos_iso_version" {
-  type = "string"
+  type = string
 }
 
 variable "proxmox_node" {
-  type = "string"
+  type = string
 }
 
 resource "proxmox_virtual_environment_download_file" "talos-metal-iso" {
