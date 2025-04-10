@@ -11,4 +11,5 @@ terraform {
     key = "talos/iso"
     region = "ca-central-1"
   }
+
 }

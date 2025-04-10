@@ -1,0 +1,34 @@
+name: tf-talos-cluster-iso-sync
+run-name: Talos Cluster - ISO Images
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+    - 'base/projects/talos-cluster/00-iso-tf/**'    
+jobs:
+  terraform-talos-clusters:
+    runs-on: self-hosted
+    container:
+      image: hashicorp/terraform:latest
+    env:
+      TF_INPUT: 0
+      TF_DATA_DIR: "/tf"
+      TF_PLUGIN_CACHE_DIR: "/tf/.tfplugincache"
+      TF_IN_AUTOMATION: "true"      
+      TF_VAR_proxmox_endpoint_uri: ${{ vars.PM_ENDPOINT }}
+      TF_VAR_target_proxmox_node_name: ${{ vars.PM_NODE_NAME }}
+      TF_VAR_workers: ${{ vars.TALOS_WORKERS }}
+      PROXMOX_VE_API_TOKEN: ${{ vars.PM_API_TOKEN_ID }}=${{ secrets.PM_API_TOKEN_SECRET }}
+      PROXMOX_VE_INSECURE: true
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            base/projects/talos-cluster/00-iso-tf
+      - run: terraform init
+        working-directory: base/projects/talos-cluster/00-iso-tf
+      - run: terraform plan -out=/tf/talos-isos.tfplan
+        working-directory: base/projects/talos-cluster/00-iso-tf
+      - run: terraform apply -auto-approve -parallelism=1 /tf/talos-isos.tfplan
+        working-directory: base/projects/talos-cluster/00-iso-tf
