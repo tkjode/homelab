@@ -10,6 +10,8 @@ jobs:
     runs-on: self-hosted
     container:
       image: hashicorp/terraform:latest
+      volumes:
+        - tfworkdirectory:/tf      
     env:
       TF_INPUT: 0
       TF_DATA_DIR: "/tf"
@@ -20,6 +22,9 @@ jobs:
       TF_VAR_workers: ${{ vars.TALOS_WORKERS }}
       PROXMOX_VE_API_TOKEN: ${{ vars.PM_API_TOKEN_ID }}=${{ secrets.PM_API_TOKEN_SECRET }}
       PROXMOX_VE_INSECURE: true
+      TF_VAR_iso_datastore: ${{ vars.ISO_DATASTORE }}
+      TF_VAR_proxmox_node: ${{ vars.PROXMOX_NODE }}
+      TF_VAR_talos_iso_version: ${{ vars.TALOS_ISO_VERSION }}
     steps:
       - name: Checkout Project
         uses: actions/checkout@v4
