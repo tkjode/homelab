@@ -1,17 +1,18 @@
 name: tf-talos-cluster-iso-sync
 run-name: Talos Cluster - ISO Images
 on:
+  workflow_dispatch:
   push:
     branches: [ "main" ]
     paths:
-    - 'base/projects/talos-cluster/00-iso-tf/**'    
+    - 'base/projects/talos-cluster/00-iso-tf/**'
 jobs:
   terraform-talos-clusters:
     runs-on: self-hosted
     container:
       image: hashicorp/terraform:latest
       volumes:
-        - tfworkdirectory:/tf      
+        - tfworkdirectory:/tf
     env:
       AWS_REGION: "ca-central-1"
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -19,7 +20,7 @@ jobs:
       TF_INPUT: 0
       TF_DATA_DIR: "/tf"
       TF_PLUGIN_CACHE_DIR: "/tf/.tfplugincache"
-      TF_IN_AUTOMATION: "true"      
+      TF_IN_AUTOMATION: "true"
       TF_VAR_proxmox_endpoint_uri: ${{ vars.PM_ENDPOINT }}
       TF_VAR_target_proxmox_node_name: ${{ vars.PM_NODE_NAME }}
       TF_VAR_workers: ${{ vars.TALOS_WORKERS }}
