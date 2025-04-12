@@ -27,7 +27,7 @@ jobs:
       TF_IN_AUTOMATION: "true"
       TF_VAR_proxmox_endpoint_uri: ${{ vars.PM_ENDPOINT }}
       TF_VAR_talos_vlan: ${{ vars.TALOS_VLAN }}
-      TF_VAR_target_proxmox_node_name: ${{ vars.PM_NODE_NAME }}
+      TF_VAR_target_proxmox_node_name: ${{ vars.PROXMOX_NODE }}
       TF_VAR_proxmox_node: ${{ vars.PROXMOX_NODE }}
     steps:
       - name: Checkout Project
