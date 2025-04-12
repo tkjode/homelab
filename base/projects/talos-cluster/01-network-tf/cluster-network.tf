@@ -1,5 +1,5 @@
 resource "proxmox_virtual_environment_network_linux_bridge" "cluster-private-bridge" {
-  node_name   = var.target_proxmox_node_name
+  node_name   = var.proxmox_node
   name        = "vmbr${ var.talos_vlan }"
   comment     = "Talos Cluster Network"
 }

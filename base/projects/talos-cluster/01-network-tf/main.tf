@@ -19,6 +19,6 @@ variable "talos_vlan" {
   type = number
 }
 
-variable "target_proxmox_node_name" {
+variable "proxmox_node" {
   type = string
 }
