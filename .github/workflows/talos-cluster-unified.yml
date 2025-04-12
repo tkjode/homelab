@@ -45,4 +45,4 @@ jobs:
       - name: Terraform Steps
         with:
           module-path: ${{ matrix.module }}
-        uses: ./.github/actions/talos-apply/action.yaml
+        uses: ./.github/actions/talos-apply
