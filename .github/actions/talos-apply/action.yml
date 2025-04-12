@@ -8,11 +8,11 @@ runs:
   using: "composite"
   steps:
   - run: terraform init
-    shell: bash
+    shell: sh
     working-directory: base/projects/talos-cluster/${{ inputs.module-path }}
   - run: terraform plan -out=/tf/talos-${{ inputs.module-path }}.tfplan
-    shell: bash
+    shell: sh
     working-directory: base/projects/talos-cluster/${{ inputs.module-path }}
   - run: terraform apply -auto-approve -parallelism=1 /tf/talos-${{ inputs.module-path }}.tfplan
-    shell: bash
+    shell: sh
     working-directory: base/projects/talos-cluster/${{ inputs.module-path }}
