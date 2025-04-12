@@ -1,14 +1,18 @@
 name: "talos-apply"
 description: "Checkouts the Talos project and runs a standard init, plan and apply on a specific module"
+inputs:
+  module-path:
+    description: "Module that will be applied via terraform"
+    required: true
 runs:
   using: "composite"
   steps:
   - run: terraform init
-    shell: /bin/sh
+    shell: bash
     working-directory: base/projects/talos-cluster/${{ inputs.module-path }}
   - run: terraform plan -out=/tf/talos-${{ inputs.module-path }}.tfplan
-    shell: /bin/sh
+    shell: bash
     working-directory: base/projects/talos-cluster/${{ inputs.module-path }}
   - run: terraform apply -auto-approve -parallelism=1 /tf/talos-${{ inputs.module-path }}.tfplan
-    shell: /bin/sh
+    shell: bash
     working-directory: base/projects/talos-cluster/${{ inputs.module-path }}
