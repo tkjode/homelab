@@ -14,7 +14,7 @@ terraform {
 
 }
 
-variable "openwrt_release_url" {
+variable "openwrt_release" {
   type = string
 }
 
