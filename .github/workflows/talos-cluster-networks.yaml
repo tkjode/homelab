@@ -1,0 +1,43 @@
+name: tf-talos-network-definition
+run-name: Talos Cluster - Network Definition
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+    paths:
+    - 'base/projects/talos-cluster/01-network-tf/**'
+jobs:
+  configure-talos-networking:
+    name: "Talos Network"
+    runs-on: self-hosted
+    container:
+      image: hashicorp/terraform:latest
+      volumes:
+        - tfworkdirectory:/tf
+    env:
+      AWS_REGION: "ca-central-1"
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      PROXMOX_VE_API_TOKEN: ${{ vars.PM_API_TOKEN_ID }}=${{ secrets.PM_API_TOKEN_SECRET }}
+      PROXMOX_VE_ENDPOINT: ${{ vars.PROXMOX_VE_ENDPOINT }}
+      PROXMOX_VE_INSECURE: true
+      TF_INPUT: 0
+      TF_DATA_DIR: "/tf"
+      TF_PLUGIN_CACHE_DIR: "/tf/.tfplugincache"
+      TF_IN_AUTOMATION: "true"
+      TF_VAR_proxmox_endpoint_uri: ${{ vars.PM_ENDPOINT }}
+      TF_VAR_talos_vlan: ${{ vars.TALOS_VLAN }}
+      TF_VAR_target_proxmox_node_name: ${{ vars.PM_NODE_NAME }}
+      TF_VAR_proxmox_node: ${{ vars.PROXMOX_NODE }}
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            base/projects/talos-cluster/01-network-tf
+      - run: terraform init
+        working-directory: base/projects/talos-cluster/01-network-tf
+      - run: terraform plan -out=/tf/talos-network.tfplan
+        working-directory: base/projects/talos-cluster/01-network-tf
+      - run: terraform apply -auto-approve -parallelism=1 /tf/talos-network.tfplan
+        working-directory: base/projects/talos-cluster/01-network-tf
