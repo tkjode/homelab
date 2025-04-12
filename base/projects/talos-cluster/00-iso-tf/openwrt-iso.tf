@@ -7,3 +7,7 @@ resource "proxmox_virtual_environment_download_file" "openwrt-image-gz" {
   node_name               = var.proxmox_node
   url                     = "https://downloads.openwrt.org/releases/${var.openwrt_release}/targets/x86/64/openwrt-${ var.openwrt_release }-x86-64-generic-ext4-combined.img.gz"
 }
+
+output "openwrt-disk-image" {
+  value = proxmox_virtual_environment_download_file.openwrt-image-gz.id
+}
