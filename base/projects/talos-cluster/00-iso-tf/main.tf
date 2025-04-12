@@ -13,3 +13,23 @@ terraform {
   }
 
 }
+
+variable "openwrt_release_url" {
+  type = "string"
+}
+
+variable "image_datastore" {
+  type = "string"
+}
+
+variable "proxmox_node" {
+  type = "string"
+}
+
+variable "iso_datastore" {
+  type = string
+}
+
+variable "talos_iso_version" {
+  type = string
+}
