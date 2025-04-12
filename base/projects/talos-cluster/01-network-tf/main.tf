@@ -10,6 +10,7 @@ terraform {
     bucket = "phalnet-homelab-automation"
     key = "talos/network"
     region = "ca-central-1"
+
   }
 
 }
@@ -18,6 +19,6 @@ variable "talos_vlan" {
   type = number
 }
 
-variable "proxmox_node" {
+variable "target_proxmox_node_name" {
   type = string
 }
