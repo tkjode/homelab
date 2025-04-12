@@ -7,7 +7,8 @@ on:
     paths:
     - 'base/projects/talos-cluster/00-iso-tf/**'
 jobs:
-  terraform-talos-clusters:
+  talos_iso_download:
+    name: "Talos ISO File Download"
     runs-on: self-hosted
     container:
       image: hashicorp/terraform:latest
@@ -26,9 +27,10 @@ jobs:
       TF_IN_AUTOMATION: "true"
       TF_VAR_proxmox_endpoint_uri: ${{ vars.PM_ENDPOINT }}
       TF_VAR_target_proxmox_node_name: ${{ vars.PM_NODE_NAME }}
-      TF_VAR_workers: ${{ vars.TALOS_WORKERS }}
       TF_VAR_iso_datastore: ${{ vars.ISO_DATASTORE }}
+      TF_VAR_image_datastore: ${{ vars.ISO_DATASTORE }}
       TF_VAR_proxmox_node: ${{ vars.PROXMOX_NODE }}
+      TF_VAR_openwrt_release_url: ${{ vars.OPENWRT_IMAGE_URL }}
       TF_VAR_talos_iso_version: ${{ vars.TALOS_ISO_VERSION }}
     steps:
       - name: Checkout Project
