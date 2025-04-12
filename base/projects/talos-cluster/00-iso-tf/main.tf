@@ -15,15 +15,15 @@ terraform {
 }
 
 variable "openwrt_release_url" {
-  type = "string"
+  type = string
 }
 
 variable "image_datastore" {
-  type = "string"
+  type = string
 }
 
 variable "proxmox_node" {
-  type = "string"
+  type = string
 }
 
 variable "iso_datastore" {
