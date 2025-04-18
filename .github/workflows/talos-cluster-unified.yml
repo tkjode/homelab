@@ -10,8 +10,8 @@ env:
   TF_INPUT: 0
   TF_DATA_DIR: "/tf"
   TF_IN_AUTOMATION: "true"
-  TF_VAR_proxmox_endpoint_uri: ${{ vars.PM_ENDPOINT }}
-  TF_VAR_target_proxmox_node_name: ${{ vars.PM_NODE_NAME }}
+  TF_VAR_proxmox_endpoint_uri: ${{ vars.PROXMOX_VE_ENDPOINT }}
+  TF_VAR_target_proxmox_node_name: ${{ vars.PROXMOX_NODE }}
   TF_VAR_talos_vlan: ${{ vars.TALOS_VLAN }}
   TF_VAR_iso_datastore: ${{ vars.ISO_DATASTORE }}
   TF_VAR_image_datastore: ${{ vars.ISO_DATASTORE }}
@@ -36,6 +36,38 @@ jobs:
         - 02-talos-compute-pool-tf
 
     name: "Talos Early Prep"
+    runs-on: self-hosted
+    container:
+      image: hashicorp/terraform:latest
+      volumes:
+        - ${{ matrix.module }}:/tf
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            ./.github
+            base/projects/talos-cluster/${{ matrix.module }}
+      - name: Terraform Steps
+        with:
+          module-path: ${{ matrix.module }}
+        uses: ./.github/actions/talos-apply
+      - name: Notify discord
+        uses: th0th/notify-discord@v0.4.1
+        if: ${{ always() }}
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_JOB_NAME: "${{ matrix.module }}"
+          GITHUB_JOB_STATUS: ${{ job.status }}
+  talos-vm-deploys:
+    strategy:
+      max-parallel: 1
+      matrix:
+        module:
+        - 03-openwrt-router-vm-tf
+    name: "Talos Virtual Machine Deployments"
+    needs: [ "talos-build-prep" ]
     runs-on: self-hosted
     container:
       image: hashicorp/terraform:latest

@@ -7,3 +7,7 @@ resource "proxmox_virtual_environment_network_linux_bridge" "cluster-private-bri
 output "cluster_bridge_name" {
   value = proxmox_virtual_environment_network_linux_bridge.cluster-private-bridge.name
 }
+
+output "cluster_bridge_id" {
+  value = proxmox_virtual_environment_network_linux_Bridge.cluster-private-bridge.id
+}
