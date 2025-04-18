@@ -1,3 +1,5 @@
+### REMOTE DATA >>>>>>>>>>>>>>>>>>>
+
 data "terraform_remote_state" "iso" {
   backend = "s3"
   config = {
@@ -25,11 +27,20 @@ data "terraform_remote_state" "pool" {
   }
 }
 
+### VARIABLES >>>>>>>>>>>>>>>>>>>
+
+variable "proxmox_node" {
+  type = "string"
+}
+
+### RESOURCES >>>>>>>>>>>>>>>>>>>
 
 resource "proxmox_virtual_environment_vm" "gateway" {
   name      = "gateway-openwrt"
   description = "OpenWRT router gateway through bridge networks and DHCP Provider"
   tags        = ["talos", "openwrt"]
+
+  node_name   = var.proxmox_node
 
   cpu {
     cores   = 2
@@ -51,6 +62,5 @@ resource "proxmox_virtual_environment_vm" "gateway" {
       bridge  = data.terraform_remote_state.network.outputs.cluster_bridge_id
   }
 
-
-
 }
+
