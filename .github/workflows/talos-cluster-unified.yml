@@ -58,5 +58,5 @@ jobs:
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           GITHUB_ACTOR: ${{ github.actor }}
-          GITHUB_JOB_NAME: "Talos Build - Early Prep"
+          GITHUB_JOB_NAME: "${{ matrix.module }}"
           GITHUB_JOB_STATUS: ${{ job.status }}
