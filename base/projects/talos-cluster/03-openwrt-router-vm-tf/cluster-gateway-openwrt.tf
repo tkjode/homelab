@@ -59,7 +59,7 @@ resource "proxmox_virtual_environment_vm" "gateway" {
   }
 
   network_device {
-      bridge  = data.terraform_remote_state.network.outputs.cluster_bridge_id
+      bridge  = data.terraform_remote_state.network.outputs.cluster_bridge_name
   }
 
 }
