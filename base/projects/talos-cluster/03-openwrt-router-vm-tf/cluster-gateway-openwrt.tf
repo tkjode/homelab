@@ -30,7 +30,7 @@ data "terraform_remote_state" "pool" {
 ### VARIABLES >>>>>>>>>>>>>>>>>>>
 
 variable "proxmox_node" {
-  type = "string"
+  type = string
 }
 
 ### RESOURCES >>>>>>>>>>>>>>>>>>>
