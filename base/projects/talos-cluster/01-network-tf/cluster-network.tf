@@ -9,5 +9,5 @@ output "cluster_bridge_name" {
 }
 
 output "cluster_bridge_id" {
-  value = proxmox_virtual_environment_network_linux_Bridge.cluster-private-bridge.id
+  value = proxmox_virtual_environment_network_linux_bridge.cluster-private-bridge.id
 }
