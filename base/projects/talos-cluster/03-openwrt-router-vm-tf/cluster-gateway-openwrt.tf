@@ -43,12 +43,12 @@ resource "proxmox_virtual_environment_vm" "gateway" {
 
   disk  {
     datastore_id  = "SSD"
-    file_id       = data.terraform_remote_state.iso.openwrt-disk-image
+    file_id       = data.terraform_remote_state.iso.outputs.openwrt-disk-image
     interface     = "virtio0"
   }
 
   network_device {
-      bridge  = data.terraform_remote_state.network.cluster_bridge_id
+      bridge  = data.terraform_remote_state.network.outputs.cluster_bridge_id
   }
 
 
