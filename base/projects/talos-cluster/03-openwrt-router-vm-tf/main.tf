@@ -15,6 +15,14 @@ terraform {
 
 }
 
+variable "target_proxmox_node_name" {
+  type = string
+}
+
+variable "target_proxmox_node_ipaddr" {
+  type = string
+}
+
 provider "proxmox" {
   ssh {
     node {
