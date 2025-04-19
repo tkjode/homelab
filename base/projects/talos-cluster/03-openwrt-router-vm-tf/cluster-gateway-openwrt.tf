@@ -36,11 +36,12 @@ variable "proxmox_node" {
 ### RESOURCES >>>>>>>>>>>>>>>>>>>
 
 resource "proxmox_virtual_environment_vm" "gateway" {
-  name      = "gateway-openwrt"
-  description = "OpenWRT router gateway through bridge networks and DHCP Provider"
-  tags        = ["talos", "openwrt"]
+  name          = "gateway-openwrt"
+  description   = "OpenWRT router gateway through bridge networks and DHCP Provider"
+  tags          = ["talos", "openwrt"]
 
-  node_name   = var.proxmox_node
+  node_name     = var.proxmox_node
+  scsi_hardware = "virtio-scsi-pci"
 
   cpu {
     cores   = 2
@@ -55,7 +56,11 @@ resource "proxmox_virtual_environment_vm" "gateway" {
   disk  {
     datastore_id  = "SSD"
     file_id       = data.terraform_remote_state.iso.outputs.openwrt-disk-image
-    interface     = "virtio0"
+    interface     = "scsi0"
+  }
+
+  operating_system {
+    type    = "l26"
   }
 
   network_device {
