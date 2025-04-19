@@ -14,3 +14,12 @@ terraform {
   }
 
 }
+
+provider "proxmox" {
+  ssh {
+    node {
+      name    = var.target_proxmox_node_name
+      address = var.target_proxmox_node_ipaddr
+    }
+  }
+}

@@ -6,12 +6,15 @@ env:
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   PROXMOX_VE_API_TOKEN: ${{ vars.PM_API_TOKEN_ID }}=${{ secrets.PM_API_TOKEN_SECRET }}
   PROXMOX_VE_ENDPOINT: ${{ vars.PROXMOX_VE_ENDPOINT }}
+  PROXMOX_VE_SSH_USERNAME: ${{ secrets.PROXMOX_SSH_USERNAME }}
+  PROXMOX_VE_SSH_PASSWORD: ${{ secrets.PROXMOX_SSH_PASSWORD }}
   PROXMOX_VE_INSECURE: true
   TF_INPUT: 0
   TF_DATA_DIR: "/tf"
   TF_IN_AUTOMATION: "true"
   TF_VAR_proxmox_endpoint_uri: ${{ vars.PROXMOX_VE_ENDPOINT }}
   TF_VAR_target_proxmox_node_name: ${{ vars.PROXMOX_NODE }}
+  TF_VAR_target_proxmox_node_ipaddr: ${{ vars.PROXMOX_NODE_IPADDR }}
   TF_VAR_talos_vlan: ${{ vars.TALOS_VLAN }}
   TF_VAR_iso_datastore: ${{ vars.ISO_DATASTORE }}
   TF_VAR_image_datastore: ${{ vars.ISO_DATASTORE }}
