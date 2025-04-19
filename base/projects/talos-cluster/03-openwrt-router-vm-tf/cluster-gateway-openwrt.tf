@@ -43,6 +43,8 @@ resource "proxmox_virtual_environment_vm" "gateway" {
   node_name     = var.proxmox_node
   scsi_hardware = "virtio-scsi-pci"
 
+  boot_order    = [ "scsi0" ]
+
   cpu {
     cores   = 2
     type    = "x86-64-v2-AES"
