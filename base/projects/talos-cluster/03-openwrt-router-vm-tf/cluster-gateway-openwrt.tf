@@ -40,7 +40,7 @@ resource "proxmox_virtual_environment_vm" "gateway" {
   description   = "OpenWRT router gateway through bridge networks and DHCP Provider"
   tags          = ["talos", "openwrt"]
 
-  bios          = "omvf"
+  bios          = "ovmf"
   node_name     = var.proxmox_node
   machine       = "q35"
   boot_order    = [ "scsi0", "scsi1", "net0" ]
