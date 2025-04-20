@@ -40,6 +40,7 @@ resource "proxmox_virtual_environment_vm" "gateway" {
   description   = "OpenWRT router gateway through bridge networks and DHCP Provider"
   tags          = ["talos", "openwrt"]
 
+  bios          = "omvf"
   node_name     = var.proxmox_node
   machine       = "q35"
   boot_order    = [ "scsi0", "scsi1", "net0" ]
@@ -58,12 +59,11 @@ resource "proxmox_virtual_environment_vm" "gateway" {
     datastore_id  = "SSD"
     file_id       = data.terraform_remote_state.iso.outputs.openwrt-disk-image
     interface     = "scsi0"
+    size          = 8
   }
 
-  disk {
-    datastore_id   = "SSD"
-    interface      = "scsi1"
-    size           = 16
+  efi_disk {
+    datastore_id  = "SSD"
   }
 
   operating_system {
