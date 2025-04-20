@@ -42,7 +42,7 @@ resource "proxmox_virtual_environment_vm" "gateway" {
 
   node_name     = var.proxmox_node
   machine       = "q35"
-  boot_order    = [ "scsi0" ]
+  boot_order    = [ "scsi0", "scsi1", "net0" ]
 
   cpu {
     cores   = 2
@@ -58,6 +58,12 @@ resource "proxmox_virtual_environment_vm" "gateway" {
     datastore_id  = "SSD"
     file_id       = data.terraform_remote_state.iso.outputs.openwrt-disk-image
     interface     = "scsi0"
+  }
+
+  disk {
+    datastore_id   = "SSD"
+    interface      = "scsi1"
+    size           = 16
   }
 
   operating_system {
