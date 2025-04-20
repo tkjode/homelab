@@ -41,7 +41,8 @@ resource "proxmox_virtual_environment_vm" "gateway" {
   tags          = ["talos", "openwrt"]
 
   node_name     = var.proxmox_node
-  boot_order    = [ "virtio0" ]
+  machine       = "q35"
+  boot_order    = [ "scsi0" ]
 
   cpu {
     cores   = 2
@@ -56,7 +57,7 @@ resource "proxmox_virtual_environment_vm" "gateway" {
   disk  {
     datastore_id  = "SSD"
     file_id       = data.terraform_remote_state.iso.outputs.openwrt-disk-image
-    interface     = "virtio0"
+    interface     = "scsi0"
   }
 
   operating_system {
