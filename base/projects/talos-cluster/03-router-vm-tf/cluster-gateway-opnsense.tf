@@ -46,13 +46,13 @@ resource "proxmox_virtual_environment_vm" "gateway" {
   boot_order    = [ "virtio0", "ide3", "net0" ]
 
   cpu {
-    cores   = 2
+    cores   = 4
     type    = "x86-64-v2-AES"
   }
 
   memory {
-    dedicated   = 2048
-    floating    = 2048
+    dedicated   = 16384
+    floating    = 16384
   }
 
   cdrom {
@@ -64,7 +64,7 @@ resource "proxmox_virtual_environment_vm" "gateway" {
     datastore_id  = "SSD"
     #file_id       = data.terraform_remote_state.iso.outputs.opnsense-disk-image
     interface     = "virtio0"
-    size          = 8
+    size          = 120
   }
 
   #efi_disk {
