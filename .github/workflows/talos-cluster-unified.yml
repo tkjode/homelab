@@ -31,7 +31,7 @@ on:
 jobs:
   talos-build-prep:
     strategy:
-      max-parallel: 1
+      max-parallel: 3
       matrix:
         module:
         - 00-iso-tf
@@ -68,7 +68,7 @@ jobs:
       max-parallel: 1
       matrix:
         module:
-        - 03-openwrt-router-vm-tf
+        - 03-router-vm-tf
     name: "Talos Virtual Machine Deployments"
     needs: [ "talos-build-prep" ]
     runs-on: self-hosted

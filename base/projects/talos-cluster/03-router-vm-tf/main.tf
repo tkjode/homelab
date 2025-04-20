@@ -8,7 +8,7 @@ terraform {
 
   backend "s3" {
     bucket = "phalnet-homelab-automation"
-    key = "talos/openwrt"
+    key = "talos/router"
     region = "ca-central-1"
 
   }
