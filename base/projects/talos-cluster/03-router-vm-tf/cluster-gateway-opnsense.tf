@@ -40,9 +40,9 @@ resource "proxmox_virtual_environment_vm" "gateway" {
   description   = "OPNSense Network Gateway"
   tags          = ["talos", "opnsense"]
 
-  bios          = "ovmf"
+  #bios          = "ovmf"
   node_name     = var.proxmox_node
-  machine       = "q35"
+  #machine       = "q35"
   boot_order    = [ "virtio0", "net0" ]
 
   cpu {
@@ -62,9 +62,9 @@ resource "proxmox_virtual_environment_vm" "gateway" {
     size          = 8
   }
 
-  efi_disk {
-    datastore_id  = "SSD"
-  }
+  #efi_disk {
+  #  datastore_id  = "SSD"
+  #}
 
   operating_system {
     type    = "l26"
@@ -75,12 +75,3 @@ resource "proxmox_virtual_environment_vm" "gateway" {
   }
 
 }
-
-
-
-
-
-
-
-
-https://mirror.ams1.nl.leaseweb.net/opnsense/releases/25.1/OPNsense-25.1-vga-amd64.img.bz2
