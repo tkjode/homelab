@@ -43,7 +43,7 @@ resource "proxmox_virtual_environment_vm" "gateway" {
   #bios          = "ovmf"
   node_name     = var.proxmox_node
   #machine       = "q35"
-  boot_order    = [ "virtio0", "net0" ]
+  boot_order    = [ "virtio0", "ide3", "net0" ]
 
   cpu {
     cores   = 2
@@ -55,9 +55,14 @@ resource "proxmox_virtual_environment_vm" "gateway" {
     floating    = 2048
   }
 
+  cdrom {
+    file_id     = data.terraform_remote_state.iso.outputs.opnsense-disk-image
+    interface   = "ide3"
+  }
+
   disk  {
     datastore_id  = "SSD"
-    file_id       = data.terraform_remote_state.iso.outputs.opnsense-disk-image
+    #file_id       = data.terraform_remote_state.iso.outputs.opnsense-disk-image
     interface     = "virtio0"
     size          = 8
   }
