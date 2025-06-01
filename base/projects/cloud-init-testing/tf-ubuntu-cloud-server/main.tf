@@ -19,6 +19,6 @@ variable "proxmox_node" {
   type = string
 }
 
-variable "iso-datastore" {
+variable "iso_datastore" {
   type = string
 }
