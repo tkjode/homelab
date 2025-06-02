@@ -39,16 +39,18 @@ resource "proxmox_virtual_environment_vm" "cloud-init-test" {
         address = "10.0.0.253"
         gateway = "10.0.0.1"
       }
-      dns {
-        servers = [ "4.4.4.4", "1.1.1.1" ]
-      }
+    }
 
-      user_account {
-        username = "githublab"
-        keys     = [trimspace(tls_private_key.ubuntu_vm_key.public_key_openssh)]
-        password = random_password.ubuntu_vm_password.result
-      }
+    dns {
+      servers = [ "4.4.4.4", "1.1.1.1" ]
+    }
 
+    user_account {
+      username = "githublab"
+      keys     = [trimspace(tls_private_key.ubuntu_vm_key.public_key_openssh)]
+      password = random_password.ubuntu_vm_password.result
+    }
+  }
 
 }
 
