@@ -49,12 +49,6 @@ resource "proxmox_virtual_environment_vm" "cloud-init-test" {
     }
 
     user_account {
-      username = "githublab"
-      keys     = [trimspace(tls_private_key.ubuntu_vm_key.public_key_openssh)]
-      password = random_password.ubuntu_vm_password.result
-    }
-
-    user_account {
       username = "tkjode"
       keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPwBGT61nrLRlZOE4K1+cTPzc+577uBbdbY3P1BK0Ieg tkjode@ceramo" ]
     }
