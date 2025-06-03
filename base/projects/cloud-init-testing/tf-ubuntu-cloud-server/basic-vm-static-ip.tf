@@ -34,6 +34,8 @@ resource "proxmox_virtual_environment_vm" "cloud-init-test" {
   }
 
   initialization {
+    datastore_id = "cloudinit"
+
     ip_config {
       ipv4 {
         address = "10.0.0.253/24"
