@@ -48,17 +48,14 @@ resource "proxmox_virtual_environment_vm" "cloud-init-test" {
       servers = [ "4.4.4.4", "1.1.1.1" ]
     }
 
-    user_account {
-      username = "tkjode"
-      keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPwBGT61nrLRlZOE4K1+cTPzc+577uBbdbY3P1BK0Ieg tkjode@ceramo" ]
-    }
+    user_data_file_id = proxmox_virtual_environment_file.user_data_cloud_config.id   
   }
 
 }
 
 resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
   content_type = "snippets"
-  datastore_id = "local"
+  datastore_id = "snippets"
   node_name    = "pve"
 
   source_raw {
