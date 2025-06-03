@@ -22,3 +22,7 @@ variable "proxmox_node" {
 variable "iso_datastore" {
   type = string
 }
+
+variable "default_ssh_pub_key" {
+  type = string
+}

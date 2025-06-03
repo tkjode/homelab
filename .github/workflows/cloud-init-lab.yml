@@ -17,6 +17,7 @@ env:
   TF_VAR_target_proxmox_node_ipaddr: ${{ vars.PROXMOX_NODE_IPADDR }}
   TF_VAR_iso_datastore: ${{ vars.ISO_DATASTORE }}
   TF_VAR_proxmox_node: ${{ vars.PROXMOX_NODE }}
+  TF_VAR_default_ssh_pub_key: ${{ secrets.DEFAULT_PUB_KEY }}
 on:
   workflow_dispatch:
   push:

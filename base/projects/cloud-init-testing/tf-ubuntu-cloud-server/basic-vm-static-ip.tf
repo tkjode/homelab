@@ -6,7 +6,7 @@ resource "proxmox_virtual_environment_vm" "cloud-init-test" {
   stop_on_destroy = true
 
   agent {
-    enabled = false
+    enabled = true
   }
 
   cpu {
@@ -56,6 +56,40 @@ resource "proxmox_virtual_environment_vm" "cloud-init-test" {
 
 }
 
+resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
+  content_type = "snippets"
+  datastore_id = "local"
+  node_name    = "pve"
+
+  source_raw {
+    data = <<-EOF
+    #cloud-config
+    hostname: cloud-init-test
+    timezone: America/Toronto
+    users:
+      - default
+      - name: tkjode
+        groups:
+          - sudo
+        shell: /bin/bash
+        ssh_authorized_keys:
+          - ${ trimspace( var.default_ssh_pub_key ) }
+        sudo: ALL=(ALL) NOPASSWD:ALL
+    package_update: true
+    packages:
+      - qemu-guest-agent
+      - net-tools
+      - docker.io
+      - curl
+    runcmd:
+      - systemctl enable qemu-guest-agent
+      - systemctl start qemu-guest-agent
+      - echo "done" > /tmp/cloud-config.done
+    EOF
+
+    file_name = "user-data-cloud-config.yaml"
+  }
+}
 
 resource "random_password" "ubuntu_vm_password" {
   length           = 16
