@@ -56,7 +56,7 @@ resource "proxmox_virtual_environment_vm" "cloud-init-test" {
 resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
   content_type = "snippets"
   datastore_id = "snippets"
-  node_name    = "pve"
+  node_name    = var.proxmox_node
 
   source_raw {
     data = <<-EOF
