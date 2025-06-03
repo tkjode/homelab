@@ -36,7 +36,7 @@ resource "proxmox_virtual_environment_vm" "cloud-init-test" {
   initialization {
     ip_config {
       ipv4 {
-        address = "10.0.0.253"
+        address = "10.0.0.253/24"
         gateway = "10.0.0.1"
       }
     }
