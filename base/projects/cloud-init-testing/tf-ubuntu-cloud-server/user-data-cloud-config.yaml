@@ -7,7 +7,7 @@ users:
     groups:
       - sudo
     shell: /bin/bash
-    ssh_import_keys: ['gh:tkjode']
+    ssh_import_id: ['gh:tkjode']
     sudo: ALL=(ALL) NOPASSWD:ALL
 package_update: true
 packages:
