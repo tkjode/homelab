@@ -1,14 +1,6 @@
 #cloud-config
-hostname: router-test
+hostname: bastion-test
 timezone: America/Toronto
-bootcmd:
-  - sysctl -w net.ipv4.ip_forward=1
-write_files:
-  - path: /etc/sysctl.d/99-ipv.conf
-    content: |
-      net.ipv4.ip_forward = 1
-    owner: 'root:root'
-    permissions: '0644'
 users:
   - default
   - name: tkjode
@@ -21,6 +13,7 @@ package_update: true
 packages:
   - qemu-guest-agent
   - net-tools
+  - docker.io
   - curl
 runcmd:
   - systemctl enable qemu-guest-agent

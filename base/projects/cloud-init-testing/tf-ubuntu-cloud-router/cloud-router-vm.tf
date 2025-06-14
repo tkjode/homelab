@@ -49,11 +49,6 @@ resource "proxmox_virtual_environment_vm" "cloud-init-test" {
 
 }
 
-resource "proxmox_virtual_environment_network_linux_bridge" "vmbr1" {
-  node_name   = var.proxmox_node
-  name        = "vmbr1"
-  comment     = "Private Network Bridge 1"
-}
 
 resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
   content_type  = "snippets"
@@ -73,28 +68,4 @@ resource "proxmox_virtual_environment_file" "network_data_cloud_config" {
   source_file {
     path = "test-router-network-config.yaml"
   }
-}
-resource "random_password" "ubuntu_vm_password" {
-  length           = 16
-  override_special = "_%@"
-  special          = true
-}
-
-resource "tls_private_key" "ubuntu_vm_key" {
-  algorithm = "RSA"
-  rsa_bits  = 2048
-}
-
-output "ubuntu_vm_password" {
-  value     = random_password.ubuntu_vm_password.result
-  sensitive = true
-}
-
-output "ubuntu_vm_private_key" {
-  value     = tls_private_key.ubuntu_vm_key.private_key_pem
-  sensitive = true
-}
-
-output "ubuntu_vm_public_key" {
-  value = tls_private_key.ubuntu_vm_key.public_key_openssh
 }
