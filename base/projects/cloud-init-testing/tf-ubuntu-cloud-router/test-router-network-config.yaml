@@ -4,20 +4,23 @@ network:
   version: 2
   ethernets:
     id0:
+      set-name: eth0
       match:
-        macaddress: 'bC:24:11:d0:6f:75'
-      addreses:
+        macaddress: 'bc:24:11:d0:6f:75'
+      addresses:
         - 10.0.0.252/24
-      gateway4: 10.0.0.1
       nameservers:
         addresses: ['1.1.1.1', '4.4.4.4']
-#      routes:
+      routes:
+        - to: default
+          via: 10.0.0.1
+          metric: 100
 #        - to: 192.168.64.0/24
 #          via: 192.168.64.1
 #          metric: 3
 #    id1:
 #      match:
-#        macaddress: 'BC:24:11:EE:6F:75'
+#        macaddress: 'bc:24:11:ee:6f:75'
 #      dhcp4: no
 #      addresses:
 #        - 192.168.64.1/24
