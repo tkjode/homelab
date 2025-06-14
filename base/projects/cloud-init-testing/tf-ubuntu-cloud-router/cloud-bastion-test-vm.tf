@@ -6,7 +6,7 @@ resource "proxmox_virtual_environment_vm" "bastion-test" {
   stop_on_destroy = true
 
   agent {
-    enabled = true
+    enabled = false
   }
 
   cpu {
