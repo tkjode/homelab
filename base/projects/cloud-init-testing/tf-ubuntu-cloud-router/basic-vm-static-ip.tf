@@ -28,10 +28,12 @@ resource "proxmox_virtual_environment_vm" "cloud-init-test" {
 
   network_device {
     bridge = "vmbr0"   # Go on the default home network
+    mac_address = "BC:24:11:D0:6F:75"
   }
 
   network_device {
     bridge = "vmbr1"
+    mac_address  = "BC:24:11:EE:6F:75"
   }
 
   operating_system {
@@ -44,6 +46,12 @@ resource "proxmox_virtual_environment_vm" "cloud-init-test" {
     user_data_file_id = proxmox_virtual_environment_file.user_data_cloud_config.id
   }
 
+}
+
+resource "proxmox_virtual_environment_network_linux_bridge" "vmbr1" {
+  node_name   = var.proxmox_node
+  name        = "vmbr1"
+  comment     = "Private Network Bridge 1"
 }
 
 resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
