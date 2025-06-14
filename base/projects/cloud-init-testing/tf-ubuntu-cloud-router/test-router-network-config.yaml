@@ -1,11 +1,12 @@
 #cloud-config
+# yaml-language-server: $schema=https://raw.githubusercontent.com/canonical/cloud-init/refs/heads/main/cloudinit/config/schemas/schema-network-config-v2.json
 network:
   version: 2
   ethernets:
     id0:
       match:
         macaddress: 'BC:24:11:D0:6F:75'
-      dhcp4: false
+      dhcp4: no
       addreses:
         - 10.0.0.252/24
       gateway4: 10.0.0.1
@@ -18,7 +19,7 @@ network:
     id1:
       match:
         macaddress: 'BC:24:11:EE:6F:75'
-      dhcp4: false
+      dhcp4: no
       addresses:
         - 192.168.64.1/24
       routes:

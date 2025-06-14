@@ -61,7 +61,7 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
   node_name     = var.proxmox_node
 
   source_file {
-    path = "user-data-cloud-config.yaml"
+    path = "test-router-user-data-cloud-config.yaml"
   }
 }
 
@@ -71,7 +71,7 @@ resource "proxmox_virtual_environment_file" "network_data_cloud_config" {
   node_name       = var.proxmox_node
 
   source_file {
-    path = "network-config.yaml"
+    path = "test-router-network-config.yaml"
   }
 }
 resource "random_password" "ubuntu_vm_password" {
