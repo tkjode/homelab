@@ -31,8 +31,9 @@ jobs:
       max-parallel: 1
       matrix:
         lab:
-          - tf-ubuntu-cloud-server
+          # - tf-ubuntu-cloud-server
           # - tf-alpine-cloud-server - no github import, bleh
+          - tf-ubuntu-cloud-router
     name: "Run Cloud Init Terraform"
     runs-on: self-hosted
     container:
