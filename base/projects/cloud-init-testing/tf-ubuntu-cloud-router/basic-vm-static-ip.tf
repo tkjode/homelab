@@ -44,6 +44,7 @@ resource "proxmox_virtual_environment_vm" "cloud-init-test" {
     datastore_id = "cloudinit"
 
     user_data_file_id = proxmox_virtual_environment_file.user_data_cloud_config.id
+    network_data_file_id = proxmox_virtual_environment_file.network_data_cloud_config.id
   }
 
 }
@@ -62,9 +63,17 @@ resource "proxmox_virtual_environment_file" "user_data_cloud_config" {
   source_file {
     path = "user-data-cloud-config.yaml"
   }
-
 }
 
+resource "proxmox_virtual_environment_file" "network_data_cloud_config" {
+  content_type    = "snippets"
+  datastore_id    = "snippets"
+  node_name       = var.proxmox_node
+
+  source_file {
+    path = "network-config.yaml"
+  }
+}
 resource "random_password" "ubuntu_vm_password" {
   length           = 16
   override_special = "_%@"
