@@ -5,6 +5,8 @@ resource "proxmox_virtual_environment_vm" "bastion-test" {
   node_name   = var.proxmox_node
   stop_on_destroy = true
 
+  depends_on = [ proxmox_virtual_environment_vm.cloud-router-test ]
+
   agent {
     enabled = false
   }
