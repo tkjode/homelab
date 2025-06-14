@@ -28,13 +28,13 @@ resource "proxmox_virtual_environment_vm" "cloud-init-test" {
 
   network_device {
     bridge = "vmbr0"   # Go on the default home network
-    mac_address = "BC:24:11:D0:6F:75"
+    mac_address = "bc:24:11:d0:6f:75"
   }
 
-  #network_device {
-  #  bridge = "vmbr1"
-  #  mac_address  = "BC:24:11:EE:6F:75"
-  #}
+  network_device {
+    bridge = "vmbr1"
+    mac_address  = "bc:24:11:ee:6f:75"
+  }
 
   operating_system {
     type = "l26"
