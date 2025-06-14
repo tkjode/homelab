@@ -1,4 +1,4 @@
-resource "proxmox_virtual_environment_vm" "cloud-init-test" {
+resource "proxmox_virtual_environment_vm" "bastion-test" {
   name        = "bastion-test"
   description = "ProxMox Private Network Routing Test"
   tags        = [ "lab", "cloud-init", "ubuntu" ]
