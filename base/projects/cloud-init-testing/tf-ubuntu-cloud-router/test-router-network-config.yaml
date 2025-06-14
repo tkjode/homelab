@@ -5,24 +5,23 @@ network:
   ethernets:
     id0:
       match:
-        macaddress: 'BC:24:11:D0:6F:75'
-      dhcp4: no
+        macaddress: 'bC:24:11:d0:6f:75'
       addreses:
         - 10.0.0.252/24
       gateway4: 10.0.0.1
       nameservers:
         addresses: ['1.1.1.1', '4.4.4.4']
-      routes:
-        - to: 192.168.64.0/24
-          via: 192.168.64.1
-          metric: 3
-    id1:
-      match:
-        macaddress: 'BC:24:11:EE:6F:75'
-      dhcp4: no
-      addresses:
-        - 192.168.64.1/24
-      routes:
-        - to: 0.0.0.0/0
-          via: 10.0.0.252
-          metric: 1
+#      routes:
+#        - to: 192.168.64.0/24
+#          via: 192.168.64.1
+#          metric: 3
+#    id1:
+#      match:
+#        macaddress: 'BC:24:11:EE:6F:75'
+#      dhcp4: no
+#      addresses:
+#        - 192.168.64.1/24
+#      routes:
+#        - to: 0.0.0.0/0
+#         via: 10.0.0.252
+#          metric: 1

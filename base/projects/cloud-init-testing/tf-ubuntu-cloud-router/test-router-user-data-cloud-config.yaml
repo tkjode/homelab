@@ -11,10 +11,6 @@ write_files:
     permissions: '0644'
 users:
   - default
-  - name: debug
-    passwd: $6$rounds=4096$KnPyuodU8qhAo8IT$jkxhZQAmCtoB0KlRDl.3Mc6Fco3rtb4saHNcH2vveLJAhbYZ.wMVX81Kilbhfy0S/JWKWpXGex/8uqLsXk.W3.
-    shell: /bin/bash
-    sudo: ALL=(ALL) NOPASSWD:ALL
   - name: tkjode
     groups:
       - sudo
