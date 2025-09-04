@@ -16,11 +16,13 @@ See [Journal.md](Journal.md) for progress reports as they happen.
 
 ## Things to figure out
 
+- Kube bootstrap cloud-init machines
+  - [ ] Make master nodes and worker nodes from cloud-init bases 
 - Talos Cluster
   - [ ] Booting & configuring OpenWRT reliably to route traffic
   - [ ] NGINX forwarding from the local network... NAT or DualHomed?
   - [ ] Reliably configure nodes with talosctl after TF spins them up
 
 - [x] ~~Seeding/Updating ISO images into Proxmox Storage~~  Yeah dude we can do ISOs and IMGs and GZIP decompression and everything now.
-- [ ] Making CloudInit VM templates
+- [x] Making CloudInit VM templates
 - [x] ~~Generating K8S clusters into SDNs and creating a firewall+gateway+reverse proxy for accessing them~~ We can do bridges for now.
