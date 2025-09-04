@@ -23,6 +23,7 @@ See [Journal.md](Journal.md) for progress reports as they happen.
   - [ ] NGINX forwarding from the local network... NAT or DualHomed?
   - [ ] Reliably configure nodes with talosctl after TF spins them up
 
+- [x] SSH Sign Commits and Tags
 - [x] ~~Seeding/Updating ISO images into Proxmox Storage~~  Yeah dude we can do ISOs and IMGs and GZIP decompression and everything now.
 - [x] Making CloudInit VM templates
 - [x] ~~Generating K8S clusters into SDNs and creating a firewall+gateway+reverse proxy for accessing them~~ We can do bridges for now.
