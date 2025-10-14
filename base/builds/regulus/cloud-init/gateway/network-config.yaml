@@ -1,0 +1,30 @@
+#cloud-config
+#yaml-language-server: $schema=https://raw.githubusercontent.com/canonical/cloud-init/refs/heads/main/cloudinit/config/schemas/schema-network-config-v2.json
+network:
+  version: 2
+  ethernets:
+    id0:
+      set-name: eth0
+      match:
+        macaddress: 'bc:24:11:d0:6f:75'
+      addresses:
+        - 10.0.0.252/24
+      nameservers:
+        addresses: ['1.1.1.1', '4.4.4.4']
+      routes:
+        - to: default
+          via: 10.0.0.1
+          metric: 100
+        - to: 192.168.64.0/24
+          via: 192.168.64.1
+          metric: 100
+    id1:
+      set-name: eth1
+      match:
+        macaddress: 'bc:24:11:ee:6f:75'
+      addresses:
+        - 192.168.64.1/24
+      routes:
+        - to: 0.0.0.0/0
+          via: 10.0.0.252
+          metric: 100
