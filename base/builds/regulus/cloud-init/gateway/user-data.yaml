@@ -9,6 +9,28 @@ write_files:
       net.ipv4.ip_forward = 1
     owner: 'root:root'
     permissions: '0644'
+  - path: /etc/haproxy/haproxy.config
+    content: |
+      global
+        maxconn 8192
+        log 127.0.0.1 local0
+        user haproxy
+        group haproxy
+        chroot /var/empty
+      defaults
+        mode http
+        balance roundrobin
+      frontend cluster_apps
+        bind :80
+        default_backend default_ingress
+      backend default_ingress
+        server master0 192.168.64.4:80
+        server master1 192.168.64.5:80
+        server master2 192.168.64.6:80
+      backend cluster_api
+        server master0 192.168.64.4:6443
+        server master1 192.168.64.5:6443
+        server master2 192.168.64.6:6443
 users:
   - default
   - name: tkjode
@@ -22,6 +44,7 @@ packages:
   - qemu-guest-agent
   - net-tools
   - curl
+  - haproxy
 runcmd:
   - systemctl enable qemu-guest-agent
   - systemctl start qemu-guest-agent
