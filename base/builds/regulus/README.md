@@ -19,9 +19,10 @@ Most of this project is concerned with build & basic day 2 configuration.  There
 - Ubuntu Cloud Server ISO
 - A separate network for the Kubernetes Cluster
 - A dual-purpose Ingress + Bastion host that bridges both networks
-  - (stretch) Route53 DNS Pointer
+  - (stretch) AWS Entries for Route53 DNS Pointer
 - 3 Master VMs
-- 6 Worker VMs (variable)
+- 6+ Worker VMs (variable)
+
 
 ## Applicable Pipelines
 

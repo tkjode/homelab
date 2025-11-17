@@ -1,0 +1,37 @@
+name: regulus-k8s-homelab
+description: "Builds Regulus Kubernetes Cluster on Proxmox Home Lab"
+env:
+  AWS_REGION: "ca-central-1"
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "build/regulus/**" ]
+    paths:
+      - 'base/builds/regulus/**'
+      - '.github/workflows/regulus.yml'
+jobs:
+  regulus-terraform:
+    name: "Terraform Plan & Apply for Regulus Kubernetes HomeLab"
+    runs-on: self-hosted
+    container:
+      image: hashicorp/terraform:latest
+      volumes:
+        - regulustf:/tf
+    steps:
+      - name: "Checkout Project"
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            ./.github
+            base/builds/regulus
+      - run: terraform init
+        shell: sh
+        working-directory: base/builds/regulus
+      - run: terraform plan -out=/tf/regulus.tfplan
+        shell: sh
+        working-directory: base/builds/regulus
+
+
+  
