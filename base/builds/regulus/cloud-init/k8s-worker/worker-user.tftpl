@@ -1,5 +1,5 @@
 #cloud-config
-hostname: master0
+hostname: ${worker_hostname}
 timezone: America/Toronto
 bootcmd:
   - sysctl -w net.ipv4.ip_forward=1

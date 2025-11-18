@@ -27,12 +27,12 @@ resource "proxmox_virtual_environment_vm" "regulus-gateway" {
   }
 
   network_device {
-    bridge = "vmbr0"   # Go on the default home network
+    bridge = var.home_network_bridge
     mac_address = "bc:24:11:d0:6e:75"
   }
 
   network_device {
-    bridge = "vmbr10"
+    bridge = var.cluster_network_bridge
     mac_address  = "bc:24:11:ee:6e:75"
   }
 

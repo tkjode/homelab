@@ -5,26 +5,11 @@ network:
   ethernets:
     id0:
       set-name: eth0
-      match:
-        macaddress: 'bc:24:11:d0:6e:75'
       addresses:
-        - 10.0.0.10/24
+        - ${node_ip_address}/24
       nameservers:
         addresses: ['1.1.1.1', '4.4.4.4']
       routes:
         - to: default
-          via: 10.0.0.1
-          metric: 100
-        - to: 192.168.64.0/24
           via: 192.168.64.1
-          metric: 100
-    id1:
-      set-name: eth1
-      match:
-        macaddress: 'bc:24:11:ee:6e:75'
-      addresses:
-        - 192.168.64.1/24
-      routes:
-        - to: 0.0.0.0/0
-          via: 10.0.0.10
           metric: 100
