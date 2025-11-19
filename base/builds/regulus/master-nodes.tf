@@ -7,7 +7,7 @@ resource "proxmox_virtual_environment_vm" "masters" {
   stop_on_destroy         = true
 
   agent {
-    enabled               = true
+    enabled               = false
   }
 
   cpu {
