@@ -8,7 +8,7 @@ network:
       match:
         macaddress: '${gw_net_home.mac}'
       addresses:
-        - ${join("/", [gw_net_home.ipaddr, gw_net_home.mask])}
+        - ${join("/", [cidrhost(gw_net_home.network, gw_net_home.cidr), gw_net_home.mask])}
       nameservers:
         ${indent(10, yamlencode({"addresses": [ for nameserver in nameservers : "${nameserver}" ]}))}
       routes:
