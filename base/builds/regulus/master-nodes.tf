@@ -54,7 +54,7 @@ resource "proxmox_virtual_environment_file" "master_user_data_cloud_config" {
     data      = templatefile(
       "cloud-init/k8s-master/master-user-data.yaml.tftpl",
       {
-        hostname   = join("-", "master", count.index)
+        hostname   = join("-", ["master", count.index] )
       }
     )
   }
