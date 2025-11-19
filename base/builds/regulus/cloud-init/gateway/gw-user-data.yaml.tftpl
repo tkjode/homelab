@@ -16,7 +16,7 @@ write_files:
         log 127.0.0.1 local0
         user haproxy
         group haproxy
-        chroot /var/empty
+        chroot /var/lib/haproxy
       defaults
         mode http
         balance roundrobin
