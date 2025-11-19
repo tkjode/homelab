@@ -10,9 +10,9 @@ network:
       addresses:
         - ${gw_net_home.ipaddr}/${gw_net_home.mask}
       nameservers:
-${yamlencode({
+      ${yamlencode({
         "addresses": [ for nameserver in nameservers : "${nameserver}" ],
-})}        
+      })}        
       routes:
         - to: default
           via: ${gw_net_home.gateway}
