@@ -66,8 +66,16 @@ resource "proxmox_virtual_environment_file" "gateway_network_data_cloud_config" 
   datastore_id    = "snippets"
   node_name       = var.proxmox_node
 
-  source_file {
+  source_raw {
     file_name = "regulus-gateway-network-config.yaml"
-    path = "cloud-init/gateway/network-config.yaml"
+    data = templatefile(
+              "cloud-init/gateway/network-config.yaml.tftpl", 
+              { 
+                gw_net_home = var.gw_net_home, 
+                gw_net_cluster = var.gw_net_cluster, 
+                nameservers = var.nameservers 
+              }
+            )
+    
   }
 }
