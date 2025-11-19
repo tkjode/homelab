@@ -21,13 +21,14 @@ env:
 on:
   workflow_dispatch:
   push:
-    branches: [ "build/regulus/**" ]
+    branches: [ "build/regulus/**", "validate/regulus/**" ]
     paths:
       - 'base/builds/regulus/**'
       - '.github/workflows/regulus.yml'
 jobs:
   regulus-terraform:
-    name: "Terraform Plan & Apply for Regulus Kubernetes HomeLab"
+    name: "_Validate_ tf plan"
+    if: contains(github.ref, 'validate/regulus')
     runs-on: self-hosted
     container:
       image: hashicorp/terraform:latest
@@ -44,6 +45,30 @@ jobs:
         shell: sh
         working-directory: base/builds/regulus
       - run: terraform plan -out=/tf/regulus.tfplan
+        shell: sh
+        working-directory: base/builds/regulus
+  regulus-build:
+    name: "_Build_ tf full build"
+    if: contains(github.ref, 'build/regulus')
+    runs-on: self-hosted
+    container:
+      image: hashicorp/terraform:latest
+      volumes:
+        - regulustf:/tf
+    steps:
+      - name: "Checkout Project"
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            ./.github
+            base/builds/regulus
+      - run: terraform init
+        shell: sh
+        working-directory: base/builds/regulus
+      - run: terraform plan -out=/tf/regulus.tfplan
+        shell: sh
+        working-directory: base/builds/regulus
+      - run: terraform apply -auto-approve --parallelism=1 /tf/regulus.tfplan
         shell: sh
         working-directory: base/builds/regulus
 
