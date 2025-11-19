@@ -5,7 +5,7 @@ network:
   ethernets:
     id0:
       addresses:
-        - ${join("/", [ cidrhost(join("/", [gw_net_cluster.network, gw_net_cluster.mask]), gw_net_cluster.cidr), gw_net_cluster.mask ])}
+        - ${join("/", [ cidrhost(join("/", [gw_net_cluster.network, gw_net_cluster.mask]), ip_assignment), gw_net_cluster.mask ])}
       nameservers:
         ${indent(10, yamlencode({"addresses": [ for nameserver in nameservers : "${nameserver}" ]}))}
       routes:
