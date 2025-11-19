@@ -61,6 +61,7 @@ resource "proxmox_virtual_environment_file" "gateway_user_data_cloud_config" {
                     "cloud-init/gateway/user-data.yaml.tftpl",
                     {
                       gw_hostname = var.gw_hostname,
+                      gw_net_cluster = var.gw_net_cluster,
                       master_ip_offset = var.master_ip_offset
                     }
                   )
