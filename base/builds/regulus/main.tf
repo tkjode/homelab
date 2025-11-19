@@ -38,18 +38,18 @@ variable "home_network_bridge" {
 
 variable "nameservers" {
   description   = "Where the router and nodes will be configured to query DNS"
-  type          = map(string)
+  type          = list(string)
   default       = ["1.1.1.1", "4.4.4.4"]
 }
 
 variable "gw_net_home" {
   description   = "How to configure ethernet for home network connection"
-  type          = map(object({                    
+  type          = object({                    
                     ipaddr    = string   # 10.0.0.10
                     mask      = number   # 24
                     gateway   = string   # 10.0.0.1
                     mac       = string   # aa:bb:cc:dd:ee:ff
-                  }))
+                  })
   default       = {
                     ipaddr    = "10.0.0.10"
                     mask      = 24
@@ -60,12 +60,12 @@ variable "gw_net_home" {
 
 variable "gw_net_cluster" {
   description   = "How to configure ethernet for cluster private network connection"
-  type          = map(object({                    
+  type          = object({                    
                     ipaddr    = string   # 192.168.64.1
                     network   = string   # 192.168.64.0
                     mask      = number   # 24                    
                     mac       = string   # aa:bb:cc:dd:ee:ff
-                  })) 
+                  })
   default       = {
                     ipaddr    = "192.168.64.1"
                     network   = "192.168.64.0"
