@@ -15,7 +15,7 @@ network:
         - to: default
           via: ${join("/", [ cidrhost(gw_net_home.network, gw_net_home.gateway), gw_net_home.mask ])}
           metric: 100
-        - to: ${join("/", [ gw_net_cluster.network, gw.net_cluster.mask ])}
+        - to: ${join("/", [ gw_net_cluster.network, gw_net_cluster.mask ])}
           via: ${cidrhost(join("/", [ gw_net_cluster.network, gw_net_cluster.mask ]), gw_net_cluster.cidr)}
           metric: 100
     id1:
