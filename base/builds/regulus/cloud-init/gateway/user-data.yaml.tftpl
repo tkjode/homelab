@@ -28,11 +28,11 @@ write_files:
         default_backend cluster_api
       backend default_ingress
 %{ for instance in range( 0, 2 ) }
-        server master${instance} ${cidrhost(gw_net_cluster, master_ip_offset + instance)}:80
+        server master${instance} ${cidrhost(gw_net_cluster.network, master_ip_offset + instance)}:80
 %{ endfor }
       backend cluster_api
 %{ for instance in range( 0, 2 ) }
-        server master${instance} ${cidrhost(gw_net_cluster, master_ip_offset + instance)}:6443
+        server master${instance} ${cidrhost(gw_net_cluster.network, master_ip_offset + instance)}:6443
 %{ endfor }
 users:
   - default
