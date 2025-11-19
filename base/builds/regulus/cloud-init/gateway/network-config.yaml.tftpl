@@ -13,7 +13,7 @@ network:
         ${indent(10, yamlencode({"addresses": [ for nameserver in nameservers : "${nameserver}" ]}))}
       routes:
         - to: default
-          via: ${cidrhost(join("/", [ gw_net_home.network, gw_net_home.mask ]), gw_net_home.gateway )}
+          via: ${cidrhost(join("/", [gw_net_home.network, gw_net_home.mask]), gw_net_home.gateway)}
           metric: 100
         - to: ${join("/", [ gw_net_cluster.network, gw_net_cluster.mask ])}
           via: ${cidrhost(join("/", [ gw_net_cluster.network, gw_net_cluster.mask ]), gw_net_cluster.cidr)}
@@ -23,7 +23,7 @@ network:
       match:
         macaddress: '${gw_net_cluster.mac}'
       addresses:
-        - ${join("/", [ cidrhost(gw_net_cluster.network, gw_net_cluster.cidr), gw_net_cluster.mask ])}
+        - ${join("/", cidrhost(join("/", [gw_net_cluster.network, gw_net_cluster.mask]), gw_net_cluster.cidr))}
       routes:
         - to: 0.0.0.0/0
           via: ${cidrhost(join("/", [ gw_net_home.network, gw_net_home.mask ]), gw_net_home.cidr)}
