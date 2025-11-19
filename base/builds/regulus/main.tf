@@ -42,6 +42,12 @@ variable "nameservers" {
   default       = ["1.1.1.1", "4.4.4.4"]
 }
 
+variable "gw_hostname" {
+  description   = "VM hostname for the Gateway VM"
+  type          = string
+  default       = "gateway"
+}
+
 variable "gw_net_home" {
   description   = "How to configure ethernet for home network connection"
   type          = object({                    

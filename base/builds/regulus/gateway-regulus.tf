@@ -1,5 +1,5 @@
 resource "proxmox_virtual_environment_vm" "regulus-gateway" {
-  name        = "regulus-gateway"
+  name        = var.gw_hostname
   description = "Regulus Cluster Gateway and NGINX Ingress"
   tags        = [ "regulus", "cloud-init", "ubuntu" ]
   node_name   = var.proxmox_node
@@ -55,9 +55,12 @@ resource "proxmox_virtual_environment_file" "gateway_user_data_cloud_config" {
   datastore_id  = "snippets"
   node_name     = var.proxmox_node
 
-  source_file {
-    file_name = "regulus-gateway-user-data.yaml"
-    path = "cloud-init/gateway/user-data.yaml"
+  source_raw {
+    file_name   = "regulus-gateway-user-data.yaml"
+    data        = templatefile(
+                    "cloud-init/gateway/user-data.yaml.tftpl",
+                    { gw_hostname = var.gw_hostname }
+                  )
   }
 }
 

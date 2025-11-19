@@ -1,5 +1,5 @@
 #cloud-config
-hostname: ${ vm_ci_net.hostname }
+hostname: ${gw_hostname}
 timezone: America/Toronto
 bootcmd:
   - sysctl -w net.ipv4.ip_forward=1
