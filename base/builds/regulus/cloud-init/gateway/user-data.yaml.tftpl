@@ -23,14 +23,17 @@ write_files:
       frontend cluster_apps
         bind :80
         default_backend default_ingress
+      frontend cluster_api
+        bind :6443
+        default_backend cluster_api
       backend default_ingress
-        server master0 192.168.64.4:80
-        server master1 192.168.64.5:80
-        server master2 192.168.64.6:80
+%{ for instance in range( 0, 2 ) }
+        server master${instance} ${cidrhost(gw_net_cluster, master_ip_offset + instance)}:80
+%{ endfor }
       backend cluster_api
-        server master0 192.168.64.4:6443
-        server master1 192.168.64.5:6443
-        server master2 192.168.64.6:6443
+%{ for instance in range( 0, 2 ) }
+        server master${instance} ${cidrhost(gw_net_cluster, master_ip_offset + instance)}:6443
+%{ endfor }
 users:
   - default
   - name: tkjode

@@ -59,7 +59,10 @@ resource "proxmox_virtual_environment_file" "gateway_user_data_cloud_config" {
     file_name   = "regulus-gateway-user-data.yaml"
     data        = templatefile(
                     "cloud-init/gateway/user-data.yaml.tftpl",
-                    { gw_hostname = var.gw_hostname }
+                    {
+                      gw_hostname = var.gw_hostname,
+                      master_ip_offset = var.master_ip_offset
+                    }
                   )
   }
 }
@@ -72,13 +75,13 @@ resource "proxmox_virtual_environment_file" "gateway_network_data_cloud_config" 
   source_raw {
     file_name = "regulus-gateway-network-config.yaml"
     data = templatefile(
-              "cloud-init/gateway/network-config.yaml.tftpl", 
-              { 
-                gw_net_home = var.gw_net_home, 
-                gw_net_cluster = var.gw_net_cluster, 
-                nameservers = var.nameservers 
+              "cloud-init/gateway/network-config.yaml.tftpl",
+              {
+                gw_net_home = var.gw_net_home,
+                gw_net_cluster = var.gw_net_cluster,
+                nameservers = var.nameservers
               }
             )
-    
+
   }
 }

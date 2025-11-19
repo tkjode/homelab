@@ -8,23 +8,23 @@ network:
       match:
         macaddress: '${gw_net_home.mac}'
       addresses:
-        - ${gw_net_home.ipaddr}/${gw_net_home.mask}
+        - ${join("/", [gw_net_home.ipaddr, gw_net_home.mask])}
       nameservers:
         ${indent(10, yamlencode({"addresses": [ for nameserver in nameservers : "${nameserver}" ]}))}
       routes:
         - to: default
-          via: ${gw_net_home.gateway}
+          via: ${join("/", [ cidrhost(gw_net_home.network, gw_net_home.gateway), gw_net_home.mask ])}
           metric: 100
-        - to: ${gw_net_cluster.network}/${gw_net_cluster.mask}
-          via: ${gw_net_cluster.ipaddr}
+        - to: ${join("/", [ gw_net_cluster.network, gw.net_cluster.mask ]}
+          via: ${cidrhost(join("/", [ gw_net_cluster.network, gw_net_cluster.mask ]), gw_net_cluster.cidr)}
           metric: 100
     id1:
       set-name: eth1
       match:
         macaddress: '${gw_net_cluster.mac}'
       addresses:
-        - ${gw_net_cluster.ipaddr}/${gw_net_cluster.mask}
+        - ${join("/", [ cidrhost(gw_net_cluster.network, gw_net_cluster.cidr), gw_net_cluster.mask ])}
       routes:
         - to: 0.0.0.0/0
-          via: ${gw_net_home.ipaddr}
+          via: ${cidrhost(join("/", [ gw_net_home.network, gw_net_home.mask ]), gw_net_home.cidr)}
           metric: 100

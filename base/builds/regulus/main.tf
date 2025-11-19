@@ -50,34 +50,36 @@ variable "gw_hostname" {
 
 variable "gw_net_home" {
   description   = "How to configure ethernet for home network connection"
-  type          = object({                    
-                    ipaddr    = string   # 10.0.0.10
+  type          = object({
+                    network   = string   # 10.0.0.0
                     mask      = number   # 24
-                    gateway   = string   # 10.0.0.1
+                    cidr      = number   # 10   (cidrhost)
+                    gateway   = number   # 1    (cidrhost)
                     mac       = string   # aa:bb:cc:dd:ee:ff
                   })
   default       = {
-                    ipaddr    = "10.0.0.10"
-                    mask      = 24
-                    gateway   = "10.0.0.1"
+                    network   = "10.0.0.0"
+                    mask      = "24"
+                    cidr      = 10
+                    gateway   = 1
                     mac       = "bc:24:11:d0:6e:75"
                   }
-}                  
+}
 
 variable "gw_net_cluster" {
   description   = "How to configure ethernet for cluster private network connection"
-  type          = object({                    
-                    ipaddr    = string   # 192.168.64.1
+  type          = object({
                     network   = string   # 192.168.64.0
-                    mask      = number   # 24                    
+                    mask      = number   # 24
+                    cidr      = number   # 1 (cidrhost)
                     mac       = string   # aa:bb:cc:dd:ee:ff
                   })
   default       = {
-                    ipaddr    = "192.168.64.1"
                     network   = "192.168.64.0"
                     mask      = 24
+                    cidr      = 1
                     mac       = "bc:24:11:ee:6e:75"
-                  } 
+                  }
 }
 
 variable master_ip_offset {
