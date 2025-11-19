@@ -24,7 +24,7 @@ resource "proxmox_virtual_environment_vm" "masters" {
     datastore_id          = "SSD"
     file_id               = proxmox_virtual_environment_download_file.ubuntu-cloud-server-iso.id
     size                  = 10
-    interface             = "scis0"
+    interface             = "scsi0"
   }
 
   network_device {
