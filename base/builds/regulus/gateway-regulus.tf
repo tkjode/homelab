@@ -60,8 +60,8 @@ resource "proxmox_virtual_environment_file" "gateway_user_data_cloud_config" {
     data        = templatefile(
                     "cloud-init/gateway/user-data.yaml.tftpl",
                     {
+                      gw_net_cluster: var.gw_net_cluster,
                       gw_hostname = var.gw_hostname,
-                      gw_net_cluster = var.gw_net_cluster,
                       master_ip_offset = var.master_ip_offset
                     }
                   )
@@ -78,9 +78,9 @@ resource "proxmox_virtual_environment_file" "gateway_network_data_cloud_config" 
     data = templatefile(
               "cloud-init/gateway/network-config.yaml.tftpl",
               {
-                gw_net_home = var.gw_net_home,
-                gw_net_cluster = var.gw_net_cluster,
-                nameservers = var.nameservers
+                gw_net_home: var.gw_net_home,
+                gw_net_cluster: var.gw_net_cluster,
+                nameservers = [var.nameservers]
               }
             )
 
