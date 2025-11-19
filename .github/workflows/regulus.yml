@@ -27,7 +27,7 @@ on:
       - '.github/workflows/regulus.yml'
 jobs:
   regulus-terraform:
-    name: "_Validate_ tf plan"
+    name: "Validate: Regulus"
     if: contains(github.ref, 'validate/regulus')
     runs-on: self-hosted
     container:
@@ -48,7 +48,7 @@ jobs:
         shell: sh
         working-directory: base/builds/regulus
   regulus-build:
-    name: "_Build_ tf full build"
+    name: "Build: Regulus"
     if: contains(github.ref, 'build/regulus')
     runs-on: self-hosted
     container:
