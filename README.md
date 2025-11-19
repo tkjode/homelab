@@ -18,11 +18,16 @@ See [Journal.md](Journal.md) for progress reports as they happen.
 
 - Kube bootstrap cloud-init machines
   - [ ] Make master nodes and worker nodes from cloud-init bases 
-- Talos Cluster
-  - [ ] Booting & configuring OpenWRT reliably to route traffic
-  - [ ] NGINX forwarding from the local network... NAT or DualHomed?
-  - [ ] Reliably configure nodes with talosctl after TF spins them up
-
+  - [ ] Certificate generation (TF generated x509s maybe?) for cluster api+etcd certs
+  - [ ] Seeding hosts file with known static nodes for joining (we have no DHCP in clusternet so should be easy enough)
+  - [ ] Capture kubeconfig on init kubes
+- ~~Talos Cluster~~
+  - [x] Booting & configuring OpenWRT reliably to route traffic
+    - Actually made an ubuntu router VM using cloud-init that works well.
+  - [x] NGINX forwarding from the local network... NAT or DualHomed?
+    - Dropping NGINX for HAProxy
+  - [x] Reliably configure nodes with talosctl after TF spins them up
+    - Not going to use Talos anymore.
 - [x] SSH Sign Commits and Tags
 - [x] ~~Seeding/Updating ISO images into Proxmox Storage~~  Yeah dude we can do ISOs and IMGs and GZIP decompression and everything now.
 - [x] Making CloudInit VM templates

@@ -1,5 +1,13 @@
 # Journal / Changelog
 
+## 2025-11-18
+
+- Reignited work on cloud-init deployment of a cluster on proxmox in the last few days
+- Looking into Terraform file templating to help provide commonly re-used values into the cloud-init user and network sections
+- Quick peek at suppying scripts for various provisioning actions, will need to be able to drop these into new machines and run them on first boot
+  - Downloading kubelet & kubeadm
+  - Maybe posting the initial admin kubeconfig somewhere, or just capturing it as a Terraform file output.
+
 ## 2025-04-12
 
 - A little refactoring on GitHub Workflows and Actions
