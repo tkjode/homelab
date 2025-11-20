@@ -48,13 +48,12 @@ packages:
   - net-tools
   - curl
   - haproxy
+  - iptables-persistent
 runcmd:
   - systemctl enable qemu-guest-agent
   - systemctl start qemu-guest-agent
   - iptables -A FORWARD -i eth1 -o eth0 -j ACCEPT
-  - iptables -A FORWARD -i eth0 -i eth1 -m state --state ESTABLISHED,RELATED -j ACCEPT
+  - iptables -A FORWARD -i eth0 -o eth1 -m state --state ESTABLISHED,RELATED -j ACCEPT
   - iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-  - iptables-save > /etc/network/iptables.rules
-  - echo '/sbin/iptables-restore < /etc/network/iptables.rules' | tee /etc/network/if-up.d/firewall
-  - chown root:root /etc/network/if-up.d/firewall && chmod u+x /etc/network/if-up.d/firewall
+  - iptables-save > /etc/iptables/rules.v4
   - echo "done" > /tmp/cloud-config.done
