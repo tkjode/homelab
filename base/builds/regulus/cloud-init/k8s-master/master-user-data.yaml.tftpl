@@ -25,7 +25,5 @@ packages:
 runcmd:
   - systemctl enable qemu-guest-agent
   - systemctl start qemu-guest-agent
-  - iptables -A FORWARD -i eth1 -o eth0 -j ACCEPT
-  - iptables -A FORWARD -i eth0 -i eth1 -m state --state ESTABLISHED,RELATED -j ACCEPT
-  - iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+  - curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
   - echo "done" > /tmp/cloud-config.done
