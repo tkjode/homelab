@@ -11,6 +11,10 @@ write_files:
     permissions: '0644'
 users:
   - default
+  - name: emergency
+    groups: [sudo]
+    shell: /bin/bash
+    sudo: ALL=(ALL) NOPASSWD:ALL
   - name: tkjode
     groups:
       - sudo
