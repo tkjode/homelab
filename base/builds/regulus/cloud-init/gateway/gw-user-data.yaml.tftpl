@@ -57,3 +57,4 @@ runcmd:
   - iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
   - iptables-save > /etc/iptables/rules.v4
   - echo "done" > /tmp/cloud-config.done
+  - reboot now
