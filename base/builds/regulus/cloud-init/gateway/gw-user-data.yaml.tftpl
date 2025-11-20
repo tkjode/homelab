@@ -54,4 +54,7 @@ runcmd:
   - iptables -A FORWARD -i eth1 -o eth0 -j ACCEPT
   - iptables -A FORWARD -i eth0 -i eth1 -m state --state ESTABLISHED,RELATED -j ACCEPT
   - iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+  - iptables-save > /etc/network/iptables.rules
+  - echo '/sbin/iptables-restore < /etc/iptables.rules' | tee /etc/network/if-up.d/firewall
+  - chown root:root /etc/network/if-up.d/firewall && chmod u+x /etc/network/if-up.d/firewall
   - echo "done" > /tmp/cloud-config.done
