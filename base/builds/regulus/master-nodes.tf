@@ -52,7 +52,7 @@ resource "proxmox_virtual_environment_file" "master_user_data_cloud_config" {
   source_raw {
     file_name = join("-", ["regulus", "master", count.index, "user", "config.yaml"])
     data      = templatefile(
-      "cloud-init/k8s-master/master-user-data.yaml.tftpl",
+      join("",["cloud-init/k8s-master/master-", count.index, "-user-data.yaml.tftpl"]),
       {
         hostname   = join("-", ["master", count.index] )
       }
@@ -69,7 +69,7 @@ resource "proxmox_virtual_environment_file" "master_network_data_cloud_config" {
   source_raw {
     file_name = join("-", ["regulus", "master", count.index, "network", "config.yaml"])
     data       = templatefile(
-      "cloud-init/k8s-master/master-network-config.yaml.tftpl",
+      join("", ["cloud-init/k8s-master/master-", count.index, "-network-config.yaml.tftpl"]),
       {
         ip_assignment   = var.master_ip_offset + count.index
         gw_net_cluster  = var.gw_net_cluster
