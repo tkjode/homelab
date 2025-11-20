@@ -25,6 +25,6 @@ network:
       addresses:
         - ${join("/", [ cidrhost(join("/", [gw_net_cluster.network, gw_net_cluster.mask]), gw_net_cluster.cidr), gw_net_cluster.mask ])}
       routes:
-        - to: 0.0.0.0/0
+        - to: ${join("/", [ gw_net_home.network, gw_net_home.mask ])}
           via: ${cidrhost(join("/", [ gw_net_home.network, gw_net_home.mask ]), gw_net_home.cidr)}
           metric: 100
