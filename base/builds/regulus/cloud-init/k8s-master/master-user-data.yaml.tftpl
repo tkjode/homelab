@@ -16,13 +16,18 @@ users:
       - sudo
     shell: /bin/bash
     sudo: ALL=(ALL) NOPASSWD:ALL
-    plain_text_passwd: ${hostname}
   - name: tkjode
     groups:
       - sudo
     shell: /bin/bash
     ssh_import_id: ['gh:tkjode']
     sudo: ALL=(ALL) NOPASSWD:ALL
+chpasswd:
+  expire: false
+  users:
+    - name: emergency
+      password: ${hostname}
+  
 package_update: true
 packages:
   - qemu-guest-agent
