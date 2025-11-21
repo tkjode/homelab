@@ -6,6 +6,8 @@ resource "proxmox_virtual_environment_vm" "masters" {
   node_name               = var.proxmox_node
   stop_on_destroy         = true
 
+  depends_on              = proxmox_virtual_environment_vm.regulus-gateway
+
   agent {
     enabled               = false
   }

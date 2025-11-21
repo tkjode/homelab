@@ -1,11 +1,11 @@
-resource "proxmox_virtual_environment_vm" "bastion-test" {
+resource "proxmox_virtual_environment_vm" "bastion" {
   name        = "bastion"
   description = "Regulus Bastion Hacking Machine"
   tags        = [ "regulus", "cloud-init", "ubuntu" ]
   node_name   = var.proxmox_node
   stop_on_destroy = true
 
-  depends_on = [ proxmox_virtual_environment_vm.cloud-router-test ]
+  depends_on = [ proxmox_virtual_environment_vm.regulus-gateway ]
 
   agent {
     enabled = false
