@@ -109,6 +109,7 @@ variable pod-network {
 variable service-network {
   description = "CIDR of internal Kubernetes Service network (eg. 172.16.0.0/16)"
   type        = string
+  default     = "172.16.0.0/16"
 }
 
 variable cluster-join-token {
