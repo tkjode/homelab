@@ -66,7 +66,8 @@ resource "proxmox_virtual_environment_file" "master-user-data-cloud-config" {
     data        = templatefile(
                     "cloud-init/k8s-master/master-user-data.yaml.tftpl",
                     {
-                      hostname   = join("-", ["master", count.index] )
+                      hostname   = join("-", ["master", count.index] ),
+                      control-plane-endpoint = cidrhost(join("/", [var.gw_net_cluster.network, var.gw_net_cluster.mask]), var.gw_net_cluster.cidr)
                     }
                   )
   }
