@@ -11,21 +11,12 @@ write_files:
     permissions: '0644'
 users:
   - default
-  - name: emergency
-    groups: [sudo]
-    shell: /bin/bash
-    sudo: ALL=(ALL) NOPASSWD:ALL
   - name: tkjode
     groups:
       - sudo
     shell: /bin/bash
     ssh_import_id: ['gh:tkjode']
     sudo: ALL=(ALL) NOPASSWD:ALL
-chpasswd:
-  expire: false
-  users:
-    - { name: emergency, password: debug, type: text }
-  
 package_update: true
 packages:
   - qemu-guest-agent
