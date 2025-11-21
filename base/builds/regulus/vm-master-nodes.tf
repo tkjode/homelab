@@ -44,8 +44,8 @@ resource "proxmox_virtual_environment_vm" "masters" {
     }
     ip_config {
       ipv4 {
-        address             = join("/", [ cidrhost(join("/", [var.gw_net_cluster.network, var.gw_net_cluster.mask]), var.master_ip_offset + count.index), gw_net_cluster.mask ])
-        gateway             = cidrhost(join("/", [var.gw_net_cluster.network, "24"]), var.gw_net_cluster.cidr)
+        address             = join("/", [ cidrhost(join("/", [var.gw_net_cluster.network, var.gw_net_cluster.mask]), var.master_ip_offset + count.index), var.gw_net_cluster.mask ])
+        gateway             = cidrhost(join("/", [var.gw_net_cluster.network, var.gw_net_cluster.mask]), var.gw_net_cluster.cidr)
       }
     }
 
