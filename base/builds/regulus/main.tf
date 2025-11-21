@@ -76,7 +76,7 @@ variable "gw_net_cluster" {
                   })
   default       = {
                     network   = "192.168.64.0"
-                    mask      = 24
+                    mask      = "24"
                     cidr      = 1
                     mac       = "bc:24:11:ee:6e:75"
                   }

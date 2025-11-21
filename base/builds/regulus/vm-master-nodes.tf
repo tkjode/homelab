@@ -39,9 +39,19 @@ resource "proxmox_virtual_environment_vm" "masters" {
 
   initialization {
     datastore_id          = "cloudinit"
+    dns {
+      servers             = var.nameservers
+    }
+    ip_config {
+      ipv4 {
+        address             = join("/", [ cidrhost(join("/", [var.gw_net_cluster.network, var.gw_net_cluster.mask]), var.master_ip_offset + count.index), gw_net_cluster.mask ])
+        gateway             = cidrhost(join("/", [var.gw_net_cluster.network, "24"]), var.gw_net_cluster.cidr)
+      }
+    }
 
     user_data_file_id     = proxmox_virtual_environment_file.master-user-data-cloud-config[count.index].id
-    network_data_file_id  = proxmox_virtual_environment_file.master-network-data-cloud-config[count.index].id
+    #network_data_file_id  = proxmox_virtual_environment_file.master-network-data-cloud-config[count.index].id
+
   }
 }
 
@@ -62,21 +72,21 @@ resource "proxmox_virtual_environment_file" "master-user-data-cloud-config" {
   }
 }
 
-resource "proxmox_virtual_environment_file" "master-network-data-cloud-config" {
-  count         = 3
-  content_type  = "snippets"
-  datastore_id  = "snippets"
-  node_name     = "proxmox"
+# resource "proxmox_virtual_environment_file" "master-network-data-cloud-config" {
+#   count         = 3
+#   content_type  = "snippets"
+#   datastore_id  = "snippets"
+#   node_name     = "proxmox"
 
-  source_raw {
-    file_name   = join("-", ["regulus", "master", count.index, "network", "config.yaml"])
-    data        = templatefile(
-                    "cloud-init/k8s-master/master-network-config.yaml.tftpl",
-                    {
-                      ip_assignment   = var.master_ip_offset + count.index
-                      gw_net_cluster  = var.gw_net_cluster
-                      nameservers     = var.nameservers
-                    }
-                  )
-  }
-}
+#   source_raw {
+#     file_name   = join("-", ["regulus", "master", count.index, "network", "config.yaml"])
+#     data        = templatefile(
+#                     "cloud-init/k8s-master/master-network-config.yaml.tftpl",
+#                     {
+#                       ip_assignment   = var.master_ip_offset + count.index
+#                       gw_net_cluster  = var.gw_net_cluster
+#                       nameservers     = var.nameservers
+#                     }
+#                   )
+#   }
+# }
