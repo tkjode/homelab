@@ -30,7 +30,7 @@ resource "proxmox_virtual_environment_vm" "masters" {
   }
 
   network_device {
-    bridge                = var.cluster_network_bridge
+    bridge                = proxmox_virtual_environment_network_linux_bridge.cluster_network_bridge.name
   }
 
   operating_system {
