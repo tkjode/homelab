@@ -30,7 +30,7 @@ resource "proxmox_virtual_environment_vm" "masters" {
   }
 
   network_device {
-    bridge                = proxmox_virtual_environment_network_linux_bridge.cluster_network_bridge.name
+    bridge                = proxmox_virtual_environment_network_linux_bridge.proxmox-cluster-bridge.name
   }
 
   operating_system {
@@ -40,12 +40,12 @@ resource "proxmox_virtual_environment_vm" "masters" {
   initialization {
     datastore_id          = "cloudinit"
 
-    user_data_file_id     = proxmox_virtual_environment_file.master_user_data_cloud_config[count.index].id
-    network_data_file_id  = proxmox_virtual_environment_file.master_network_data_cloud_config[count.index].id
+    user_data_file_id     = proxmox_virtual_environment_file.master-user-data-cloud-config[count.index].id
+    network_data_file_id  = proxmox_virtual_environment_file.master-network-data-cloud-config[count.index].id
   }
 }
 
-resource "proxmox_virtual_environment_file" "master_user_data_cloud_config" {
+resource "proxmox_virtual_environment_file" "master-user-data-cloud-config" {
   count         = 3
   content_type  = "snippets"
   datastore_id  = "snippets"
@@ -62,7 +62,7 @@ resource "proxmox_virtual_environment_file" "master_user_data_cloud_config" {
   }
 }
 
-resource "proxmox_virtual_environment_file" "master_network_data_cloud_config" {
+resource "proxmox_virtual_environment_file" "master-network-data-cloud-config" {
   count         = 3
   content_type  = "snippets"
   datastore_id  = "snippets"

@@ -1,4 +1,4 @@
-resource "proxmox_virtual_environment_network_linux_bridge" "proxmox_cluster_bridge" {
+resource "proxmox_virtual_environment_network_linux_bridge" "proxmox-cluster-bridge" {
   node_name   = var.proxmox_node
   name        = var.cluster_network_bridge
   autostart   = true

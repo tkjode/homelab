@@ -32,7 +32,7 @@ resource "proxmox_virtual_environment_vm" "regulus-gateway" {
   }
 
   network_device {
-    bridge = proxmox_virtual_environment_network_linux_bridge.proxmox_cluster_bridge.name
+    bridge = proxmox_virtual_environment_network_linux_bridge.proxmox-cluster-bridge.name
     mac_address  = var.gw_net_cluster.mac
   }
 
@@ -43,14 +43,14 @@ resource "proxmox_virtual_environment_vm" "regulus-gateway" {
   initialization {
     datastore_id = "cloudinit"
 
-    user_data_file_id = proxmox_virtual_environment_file.gateway_user_data_cloud_config.id
-    network_data_file_id = proxmox_virtual_environment_file.gateway_network_data_cloud_config.id
+    user_data_file_id = proxmox_virtual_environment_file.gateway-user-data-cloud-config.id
+    network_data_file_id = proxmox_virtual_environment_file.gateway-network-data-cloud-config.id
   }
 
 }
 
 
-resource "proxmox_virtual_environment_file" "gateway_user_data_cloud_config" {
+resource "proxmox_virtual_environment_file" "gateway-user-data-cloud-config" {
   content_type  = "snippets"
   datastore_id  = "snippets"
   node_name     = var.proxmox_node
@@ -68,7 +68,7 @@ resource "proxmox_virtual_environment_file" "gateway_user_data_cloud_config" {
   }
 }
 
-resource "proxmox_virtual_environment_file" "gateway_network_data_cloud_config" {
+resource "proxmox_virtual_environment_file" "gateway-network-data-cloud-config" {
   content_type    = "snippets"
   datastore_id    = "snippets"
   node_name       = var.proxmox_node

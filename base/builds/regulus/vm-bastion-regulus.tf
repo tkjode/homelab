@@ -29,7 +29,7 @@ resource "proxmox_virtual_environment_vm" "bastion" {
   }
 
   network_device {
-    bridge = "vmbr10"
+    bridge = proxmox_virtual_environment_network_linux_bridge.proxmox-cluster-bridge.name
   }
 
   operating_system {
