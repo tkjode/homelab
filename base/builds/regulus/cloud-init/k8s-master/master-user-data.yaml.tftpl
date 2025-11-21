@@ -23,6 +23,13 @@ write_files:
       networking:
         podSubnet: "172.16.0.0/16"
         serviceSubnet: "10.64.0.0/16"
+      ---
+      apiVersion: kubeadm.k8s.io/v1beta3
+      kind: InitConfiguration
+      bootstrapTokens:
+        - description: Day0 Node Joiner Bootstrap Token
+          token: ${cluster-join-token}
+          ttl: 24h
 users:
   - default
   - name: tkjode
@@ -46,5 +53,5 @@ runcmd:
   - curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.34/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
   - apt update && apt -y install kubelet kubeadm kubectl && apt-mark hold kubelet kubeadm kubectl
   - systemctl enable --now kubelet
-  - kubeadm init --config=/etc/kubeadm.config.yaml --token=abcdef.1234567890abcdef
+  - kubeadm init --config=/etc/kubeadm.config.yaml
   - echo "done" > /tmp/cloud-config.done

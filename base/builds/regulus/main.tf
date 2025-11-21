@@ -99,3 +99,20 @@ variable worker_count {
   type        = number
   default     = 6
 }
+
+variable pod-network {
+  description = "CIDR of internal Kubernetes Pod network (eg. 10.100.0.0/16)"
+  type        = "string"
+  default     = "10.100.0.0/16"
+}
+
+variable service-network {
+  description = "CIDR of internal Kubernetes Service network (eg. 172.16.0.0/16)"
+  type = string
+}
+
+variable cluster-join-token {
+  description = "The token used to join nodes to the cluster"
+  type = string
+  default = "123456.1234567890abcdef"
+}
