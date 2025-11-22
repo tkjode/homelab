@@ -12,13 +12,13 @@ write_files:
   - path: /etc/haproxy/ssl/certs/kube-api-server.pem
     encoding: b64
     content: ${base64encode(k8s-api-pem)}
-    owner: haproxy:haproxy
-    permissions: '0640'
+    owner: root:root
+    permissions: '0644'
   - path: /etc/haproxy/ssl/certs/ingress-public.pem
     encoding: b64
     content: ${base64encode(ingress-pem)}
-    owner: haproxy:haproxy
-    permissions: '0640'
+    owner: root:root
+    permissions: '0644'
   - path: /etc/haproxy/haproxy.cfg
     content: |
       global
