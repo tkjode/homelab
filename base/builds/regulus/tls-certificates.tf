@@ -25,7 +25,7 @@ resource "tls_self_signed_cert" "ingress-certificate" {
 
   dns_names = [ "*.apps.phalnet.com", "apps.phalnet.com" ]
   ip_addresses = [ "10.0.0.10", "192.168.64.1" ]
-  allowed_uses = [ "key_encipherment", "digital_signature", "server_auth" ]
+  allowed_uses = [ "key_encipherment", "digital_signature", "server_auth", "data_encipherment" ]
 }
 
 resource "tls_self_signed_cert" "k8s-api-certificate" {
@@ -47,5 +47,5 @@ resource "tls_self_signed_cert" "k8s-api-certificate" {
 
   dns_names = [ "api.regulus.phalnet.com" ]
   ip_addresses = [ "10.0.0.10", "192.168.64.1" ]
-  allowed_uses = [ "key_encipherment", "digital_signature", "server_auth" ]
+  allowed_uses = [ "key_encipherment", "digital_signature", "server_auth", "data_encipherment" ]
 }
