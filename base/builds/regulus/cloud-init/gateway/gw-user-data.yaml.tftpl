@@ -14,7 +14,7 @@ write_files:
     content: ${base64encode(k8s-api-pem)}
     owner: root:root
     permissions: '0644'
-  - path: /etc/haproxy/ssl/private/kube-api-private-key.pem
+  - path: /etc/haproxy/ssl/private/kube-api-private-key.key
     encoding: b64
     content: ${base64encode(k8s-api-private-key)}
   - path: /etc/haproxy/ssl/certs/ingress-public.pem
@@ -22,7 +22,7 @@ write_files:
     content: ${base64encode(ingress-pem)}
     owner: root:root
     permissions: '0644'
-  - path: /etc/haproxy/ssl/private/ingress-private-key.pem
+  - path: /etc/haproxy/ssl/private/ingress-private-key.key
     encoding: b64
     content: ${base64encode(ingress-private-key)}
     owner: root:root
@@ -39,27 +39,21 @@ write_files:
         ssl-default-bind-options ssl-min-ver TLSv1.2
         ssl-default-bind-ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384
         ssl-default-bind-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
-
-      crt-store kubernetes-certs
-        crt-base /etc/haproxy/ssl/certs
-        key-base /etc/haproxy/ssl/private
-        load crt "kube-api-server.pem" key "kube-api-private-key.pem" alias "api-server"
-        load crt "ingress-public.pem" key "ingress-private-key.pem" alias "ingress-proxy"
       defaults
         mode http
         balance roundrobin
       frontend secure_cluster_apps
         bind :80
-        bind :443 ssl crt @kubernetes-certs/ingress-proxy
+        bind :443 ssl crt /etc/haproxy/ssl/certs/ingress-public.pem key /etc/haproxy/ssl/private/ingress-private-key.key
         mode http
         default_backend default_secure_ingress
       frontend cluster_api
-        bind :6443 ssl crt @kubernetes-certs/api-server
+        bind :6443 ssl crt /etc/haproxy/ssl/certs/kube-api-server.pem key /etc/haproxy/ssl/private/kube-api-private-key.key
         mode http
         default_backend cluster_api
       backend default_secure_ingress
 %{ for instance in range( 0, 3 ) ~}
-        server master${instance} ${cidrhost(join("/", [ gw_net_cluster.network, gw_net_cluster.mask ]), master_ip_offset + instance)}:80
+        server master${instance} ${cidrhost(join("/", [ gw_net_cluster.network, gw_net_cluster.mask ]), master_ip_offset + instance)}:443
 %{ endfor ~}
       backend cluster_api
 %{ for instance in range( 0, 3 ) ~}
