@@ -22,7 +22,7 @@ write_files:
         balance roundrobin
       frontend cluster_apps
         bind :80
-        mode tco
+        mode tcp
         default_backend default_ingress
       frontend secure_cluster_apps
         bind :443
