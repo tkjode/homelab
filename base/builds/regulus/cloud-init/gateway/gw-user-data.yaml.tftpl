@@ -14,7 +14,7 @@ write_files:
     content: ${base64encode(k8s-api-pem)}
     owner: root:root
     permissions: '0644'
-  - path: /etc/haproxy/ssl/certs/kube-api-server.pem.key
+  - path: /etc/haproxy/ssl/certs/kube-api-server.crt.key
     encoding: b64
     content: ${base64encode(k8s-api-private-key)}
   - path: /etc/haproxy/ssl/certs/ingress-public.crt
@@ -22,7 +22,7 @@ write_files:
     content: ${base64encode(ingress-pem)}
     owner: root:root
     permissions: '0644'
-  - path: /etc/haproxy/ssl/certs/ingress-public.pem.key
+  - path: /etc/haproxy/ssl/certs/ingress-public.crt.key
     encoding: b64
     content: ${base64encode(ingress-private-key)}
     owner: root:root
@@ -38,6 +38,9 @@ write_files:
       defaults
         mode http
         balance roundrobin
+        timeout connect 10s
+        timeout client 30s
+        timeout server 30s
       frontend secure_cluster_apps
         bind :443 ssl crt /etc/haproxy/ssl/certs/ingress-public.crt
         mode http
