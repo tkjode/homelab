@@ -63,6 +63,8 @@ resource "proxmox_virtual_environment_file" "gateway-user-data-cloud-config" {
                       gw_net_cluster    = var.gw_net_cluster
                       gw_hostname       = var.gw_hostname
                       master_ip_offset  = var.master_ip_offset
+                      k8s-api-pem       = tls_self_signed_cert.k8s-api-certificate.cert_pem
+                      ingress-pem       = tls_self_signed_cert.ingress-certificate.cert_pem
                     }
                   )
   }
