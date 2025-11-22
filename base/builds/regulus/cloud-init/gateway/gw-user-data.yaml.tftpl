@@ -14,11 +14,20 @@ write_files:
     content: ${base64encode(k8s-api-pem)}
     owner: root:root
     permissions: '0644'
+  - path: /etc/haproxy/ssl/private/kube-api-private-key.pem
+    encoding: b64
+    content: ${base64encode(k8s-api-private-key)}
   - path: /etc/haproxy/ssl/certs/ingress-public.pem
     encoding: b64
     content: ${base64encode(ingress-pem)}
     owner: root:root
     permissions: '0644'
+  - path: /etc/haproxy/ssl/private/ingress-private-key.pem
+    encoding: b64
+    contnet: ${base64encode(ingress-private-key)}
+    owner: root:root
+    permisisons: '0644'
+
   - path: /etc/haproxy/haproxy.cfg
     content: |
       global
@@ -30,8 +39,8 @@ write_files:
       crt-store kubernetes-certs
         crt-base /etc/haproxy/ssl/certs/
         key-base /etc/haproxy/ssl/private/
-        load crt "kube-api-server.pem" alias "api-server"
-        load crt "ingress-public.pem" alias "ingress-proxy"
+        load crt "kube-api-server.pem" key "kube-api-private-key.pem" alias "api-server"
+        load crt "ingress-public.pem" key "ingress-private-key.pem" alias "ingress-proxy"
       defaults
         mode http
         balance roundrobin
