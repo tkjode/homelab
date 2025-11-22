@@ -7,7 +7,6 @@ resource "tls_private_key" "k8s-api-private-key" {
 }
 
 resource "tls_self_signed_cert" "ingress-certificate" {
-  key_algorithm = tls_private_key.ingress-private-key.algorithm
   private_key_pem = tls_private_key.ingress-private-key.private_key_pem
 
   validity_period_hours = 8760
@@ -30,7 +29,6 @@ resource "tls_self_signed_cert" "ingress-certificate" {
 }
 
 resource "tls_self_signed_cert" "k8s-api-certificate" {
-  key_algorithm = tls_private_key.k8s-api-private-key.algorithm
   private_key_pem = tls_private_key.k8s-api-private-key.private_key_pem
 
   validity_period_hours = 8760
