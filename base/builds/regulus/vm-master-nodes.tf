@@ -43,6 +43,7 @@ resource "proxmox_virtual_environment_vm" "masters" {
     datastore_id          = "cloudinit"
     dns {
       servers             = var.nameservers
+      domain              = "apps.phalnet.com"
     }
     ip_config {
       ipv4 {

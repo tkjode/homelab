@@ -6,7 +6,7 @@ resource "proxmox_virtual_environment_vm" "regulus-gateway" {
   stop_on_destroy = true
 
   agent {
-    enabled = false
+    enabled = true
   }
 
   cpu {
