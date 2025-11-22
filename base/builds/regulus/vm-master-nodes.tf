@@ -29,6 +29,8 @@ resource "proxmox_virtual_environment_vm" "masters" {
     interface             = "scsi0"
   }
 
+  serial_device { }
+
   network_device {
     bridge                = proxmox_virtual_environment_network_linux_bridge.proxmox-cluster-bridge.name
   }

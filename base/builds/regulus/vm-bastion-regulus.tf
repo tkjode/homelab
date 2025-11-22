@@ -32,6 +32,8 @@ resource "proxmox_virtual_environment_vm" "bastion" {
     bridge = proxmox_virtual_environment_network_linux_bridge.proxmox-cluster-bridge.name
   }
 
+  serial_device {}
+
   operating_system {
     type = "l26"
   }
