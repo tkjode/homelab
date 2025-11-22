@@ -9,24 +9,6 @@ write_files:
       net.ipv4.ip_forward = 1
     owner: 'root:root'
     permissions: '0644'
-  - path: /etc/haproxy/ssl/certs/kube-api-server.crt
-    encoding: b64
-    content: ${base64encode(k8s-api-pem)}
-    owner: root:root
-    permissions: '0644'
-  - path: /etc/haproxy/ssl/certs/kube-api-server.crt.key
-    encoding: b64
-    content: ${base64encode(k8s-api-private-key)}
-  - path: /etc/haproxy/ssl/certs/ingress-public.crt
-    encoding: b64
-    content: ${base64encode(ingress-pem)}
-    owner: root:root
-    permissions: '0644'
-  - path: /etc/haproxy/ssl/certs/ingress-public.crt.key
-    encoding: b64
-    content: ${base64encode(ingress-private-key)}
-    owner: root:root
-    permissions: '0644'
   - path: /etc/haproxy/haproxy.cfg
     content: |
       global
@@ -36,19 +18,18 @@ write_files:
         group haproxy
         chroot /var/lib/haproxy
       defaults
-        mode http
+        mode tcp
         balance roundrobin
         timeout connect 10s
         timeout client 30s
         timeout server 30s
       frontend secure_cluster_apps
-        bind :443 ssl crt /etc/haproxy/ssl/certs/ingress-public.crt
-        mode http
+        bind :443
+        mode tcp
         default_backend default_secure_ingress
       frontend cluster_api
-        bind :6443 ssl crt /etc/haproxy/ssl/certs/kube-api-server.crt
-        mode http
-        option httplog
+        bind :6443
+        mode tcp
         default_backend cluster_api
       backend default_secure_ingress
 %{ for instance in range( 0, 3 ) ~}
@@ -56,7 +37,7 @@ write_files:
 %{ endfor ~}
       backend cluster_api
 %{ for instance in range( 0, 3 ) ~}
-        server master${instance} ${cidrhost(join("/", [ gw_net_cluster.network, gw_net_cluster.mask ]), master_ip_offset + instance)}:6443 check-ssl ssl verify none
+        server master${instance} ${cidrhost(join("/", [ gw_net_cluster.network, gw_net_cluster.mask ]), master_ip_offset + instance)}:6443
 %{ endfor ~}
 users:
   - default
