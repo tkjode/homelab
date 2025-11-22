@@ -9,7 +9,7 @@ write_files:
       net.ipv4.ip_forward = 1
     owner: 'root:root'
     permissions: '0644'
-  - path: /etc/haproxy/ssl/certs/kube-api-server.pem
+  - path: /etc/haproxy/ssl/certs/kube-api-server.crt
     encoding: b64
     content: ${base64encode(k8s-api-pem)}
     owner: root:root
@@ -17,7 +17,7 @@ write_files:
   - path: /etc/haproxy/ssl/certs/kube-api-server.pem.key
     encoding: b64
     content: ${base64encode(k8s-api-private-key)}
-  - path: /etc/haproxy/ssl/certs/ingress-public.pem
+  - path: /etc/haproxy/ssl/certs/ingress-public.crt
     encoding: b64
     content: ${base64encode(ingress-pem)}
     owner: root:root
@@ -35,21 +35,17 @@ write_files:
         user haproxy
         group haproxy
         chroot /var/lib/haproxy
-        ssl-server-verify none
-        ssl-default-bind-options ssl-min-ver TLSv1.2
-        ssl-default-bind-ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384
-        ssl-default-bind-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
       defaults
         mode http
         balance roundrobin
       frontend secure_cluster_apps
-        bind :80
-        bind :443 ssl crt /etc/haproxy/ssl/certs/ingress-public.pem
+        bind :443 ssl crt /etc/haproxy/ssl/certs/ingress-public.crt
         mode http
         default_backend default_secure_ingress
       frontend cluster_api
-        bind :6443 ssl crt /etc/haproxy/ssl/certs/kube-api-server.pem
+        bind :6443 ssl crt /etc/haproxy/ssl/certs/kube-api-server.crt
         mode http
+        option httplog
         default_backend cluster_api
       backend default_secure_ingress
 %{ for instance in range( 0, 3 ) ~}
