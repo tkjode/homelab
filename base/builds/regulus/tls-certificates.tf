@@ -17,7 +17,7 @@ resource "tls_self_signed_cert" "ingress-certificate" {
     organization = "PhalNet Inc."
     organizational_unit = "HomeLabs"
     email_address = "jody.reid@phalnet.com"
-    street_address = "23 Ypres Rd."
+    street_address = ["23 Ypres Rd."]
     locality    = "York"
     province    = "ON"
     country     = "CA"
@@ -40,7 +40,7 @@ resource "tls_self_signed_cert" "k8s-api-certificate" {
     organization = "PhalNet Inc."
     organizational_unit = "HomeLabs"
     email_address = "jody.reid@phalnet.com"
-    street_address = "23 Ypres Rd."
+    street_address = ["23 Ypres Rd."]
     locality    = "York"
     province    = "ON"
     country     = "CA"
