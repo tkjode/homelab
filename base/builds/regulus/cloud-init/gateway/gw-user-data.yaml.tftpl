@@ -18,15 +18,25 @@ write_files:
         group haproxy
         chroot /var/lib/haproxy
       defaults
-        mode http
+        mode tcp
         balance roundrobin
       frontend cluster_apps
         bind :80
+        mode tco
         default_backend default_ingress
+      frontend secure_cluster_apps
+        bind :443
+        mode tcp
+        default_backend default_secure_ingress
       frontend cluster_api
         bind :6443
+        mode tcp
         default_backend cluster_api
       backend default_ingress
+%{ for instance in range( 0, 3 ) ~}
+        server master${instance} ${cidrhost(join("/", [ gw_net_cluster.network, gw_net_cluster.mask ]), master_ip_offset + instance)}:80
+%{ endfor ~}
+      backend default_secure_ingress
 %{ for instance in range( 0, 3 ) ~}
         server master${instance} ${cidrhost(join("/", [ gw_net_cluster.network, gw_net_cluster.mask ]), master_ip_offset + instance)}:80
 %{ endfor ~}
