@@ -40,13 +40,11 @@ write_files:
         default_backend cluster_api
       backend default_secure_ingress
 %{ for instance in range( 0, 3 ) ~}
-        server master${instance} ${cidrhost(join("/", [ gw_net_cluster.network, gw_net_cluster.mask ]), master_ip_offset + instance)}:443
+        server master-${instance} ${cidrhost(join("/", [ gw_net_cluster.network, gw_net_cluster.mask ]), master_ip_offset + instance)}:443 check
 %{ endfor ~}
       backend cluster_api
-        option httpchk GET /healthz
-        http-check expect string ok
 %{ for instance in range( 0, 3 ) ~}
-        server master${instance} ${cidrhost(join("/", [ gw_net_cluster.network, gw_net_cluster.mask ]), master_ip_offset + instance)}:6443 check
+        server master-${instance} ${cidrhost(join("/", [ gw_net_cluster.network, gw_net_cluster.mask ]), master_ip_offset + instance)}:6443 check
 %{ endfor ~}
 users:
   - default
