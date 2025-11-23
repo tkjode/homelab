@@ -23,6 +23,13 @@ write_files:
         timeout connect 10s
         timeout client 30s
         timeout server 30s
+      frontend stats
+        mode http
+        bind :80
+        stats enable
+        stats refresh 5s
+        stats uri /stats
+        stats show-modules
       frontend secure_cluster_apps
         bind :443
         mode tcp
