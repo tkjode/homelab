@@ -16,11 +16,16 @@ See [Journal.md](Journal.md) for progress reports as they happen.
 
 ## Things to figure out
 
+- [ ] Once the cluster is built and stable, Kick off "Day 2 Ops" ?
+  - [ ] ArgoCD + app of apps boot up helm chart
+- [ ] DNS+Cert Integration - cluster trust fixes /w more DNS+IP SANs on the API Server
+  - [ ] Route53 integration - from within cluster?
+- [ ] HAProxy Ingress Controller (mostly worked out)
 - Kube bootstrap cloud-init machines
-  - [ ] Make master nodes and worker nodes from cloud-init bases 
-  - [ ] Certificate generation (TF generated x509s maybe?) for cluster api+etcd certs
-  - [ ] Seeding hosts file with known static nodes for joining (we have no DHCP in clusternet so should be easy enough)
-  - [ ] Capture kubeconfig on init kubes
+  - [x] Make master nodes and worker nodes from cloud-init bases
+  - [x] Certificate generation (TF generated x509s maybe?) for cluster api+etcd certs
+  - [x] Seeding hosts file with known static nodes for joining (we have no DHCP in clusternet so should be easy enough)
+  - [x] ~~Capture kubeconfig on init kubes~~ too annoying
 - ~~Talos Cluster~~
   - [x] Booting & configuring OpenWRT reliably to route traffic
     - Actually made an ubuntu router VM using cloud-init that works well.
