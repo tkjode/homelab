@@ -64,7 +64,8 @@ resource "proxmox_virtual_environment_file" "bastion-cloud-config" {
   datastore_id  = "snippets"
   node_name     = var.proxmox_node
 
-  source_file {
-    path        = "cloud-init/bastion/bastion-user-data.yaml"
+  source_raw {
+    file_name   = "bastion-user-data.yaml"
+    data        = template_file("cloud-init/bastion/bastion-user-data.yaml", {})
   }
 }
