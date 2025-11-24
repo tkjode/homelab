@@ -25,27 +25,6 @@ on:
       - 'base/builds/regulus/**'
       - '.github/workflows/regulus.yml'
 jobs:
-  regulus-terraform:
-    name: "Validate: Regulus"
-    if: contains(github.ref, 'validate/regulus')
-    runs-on: self-hosted
-    container:
-      image: hashicorp/terraform:latest
-      volumes:
-        - regulustf:/tf
-    steps:
-      - name: "Checkout Project"
-        uses: actions/checkout@v4
-        with:
-          sparse-checkout: |
-            ./.github
-            base/builds/regulus
-      - run: terraform init
-        shell: sh
-        working-directory: base/builds/regulus
-      - run: terraform plan -out=/tf/regulus.tfplan
-        shell: sh
-        working-directory: base/builds/regulus
   regulus-build:
     name: "Build: Regulus"
     if: contains(github.ref, 'build/regulus')
