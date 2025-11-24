@@ -2,6 +2,11 @@
 hostname: bastion
 timezone: America/Toronto
 write_files:
+  - path: /etc/apt/sources.list.d/kubernetes.list
+    content: |
+      deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.34/deb/ /
+    owner: 'root:root'
+    permissions: '0644'
 users:
   - default
   - name: tkjode
