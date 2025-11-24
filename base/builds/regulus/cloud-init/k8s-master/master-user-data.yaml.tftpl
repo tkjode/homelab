@@ -19,11 +19,6 @@ write_files:
       deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.34/deb/ /
     owner: 'root:root'
     permissions: '0644'
-  - path: /etc/kubernetes/pki/sha256-ca-fingerprint.debug
-    content: ${base64encode(kubernetes-ca-sha256)}
-    encoding: b64
-    permissions: '0644'
-    owner: root:root
   - path: /etc/kubernetes/pki/ca.crt
     content: ${base64encode(kubernetes-ca-crt)}
     encoding: b64
@@ -107,6 +102,6 @@ runcmd:
   - kubeadm init --config=/etc/kube-init.config.yaml
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
 %{ else }
-  #- kubeadm join --config=/etc/kube-join.config.yaml
+  - kubeadm join --control-plane --token ${cluster-join-token} ${control-plane-endpoint}:6443 --discovery-token-ca-cert-hash sha256:$(cat /etc/kubernetes/pki/ca.crt | openssl x509 -pubkey | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //')
 %{ endif }
   - echo "done" > /tmp/cloud-config.done
