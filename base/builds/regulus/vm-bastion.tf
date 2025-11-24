@@ -66,6 +66,6 @@ resource "proxmox_virtual_environment_file" "bastion-cloud-config" {
 
   source_raw {
     file_name   = "bastion-user-data.yaml"
-    data        = template_file("cloud-init/bastion/bastion-user-data.yaml", {})
+    data        = templatefile("cloud-init/bastion/bastion-user-data.yaml", {})
   }
 }
