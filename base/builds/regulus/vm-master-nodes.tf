@@ -78,12 +78,14 @@ resource "proxmox_virtual_environment_file" "master-user-data-cloud-config" {
                       service-network         = var.service-network
                       kubernetes-ca-crt       = tls_locally_signed_cert.kubernetes-ca.cert_pem
                       kubernetes-ca-key       =      tls_private_key.kubernetes-ca.private_key_pem
+                      kubernetes-ca-sha256    =      tls_private_key.kubernetes-ca.public_key_fingerprint_sha256
                       front-proxy-ca-crt      = tls_locally_signed_cert.front-proxy-ca.cert_pem
                       front-proxy-ca-key      =      tls_private_key.front-proxy-ca.private_key_pem
                       etcd-ca-crt             = tls_locally_signed_cert.etcd-ca.cert_pem
                       etcd-ca-key             =      tls_private_key.etcd-ca.private_key_pem
                       sa-pub                  = tls_private_key.sa-key.public_key_pem
                       sa-key                  = tls_private_key.sa-key.private_key_pem
+
                     }
                   )
   }

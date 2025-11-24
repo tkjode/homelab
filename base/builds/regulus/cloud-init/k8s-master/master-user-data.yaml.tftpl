@@ -19,6 +19,11 @@ write_files:
       deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.34/deb/ /
     owner: 'root:root'
     permissions: '0644'
+  - path: /etc/kubernetes/pki/sha256-ca-fingerprint.debug
+    content: ${base64encode(kubernetes-ca-sha256)}
+    encoding: b64
+    permissions: '0644'
+    owner: root:root
   - path: /etc/kubernetes/pki/ca.crt
     content: ${base64encode(kubernetes-ca-crt)}
     encoding: b64
