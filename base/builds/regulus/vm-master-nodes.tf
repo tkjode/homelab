@@ -73,6 +73,9 @@ resource "proxmox_virtual_environment_file" "master-user-data-cloud-config" {
                       control-plane-endpoint  = cidrhost(join("/", [var.gw_net_cluster.network, var.gw_net_cluster.mask]), var.gw_net_cluster.cidr),
                       cluster-join-token      = var.cluster-join-token,
                       node-select             = count.index
+                      cluster-name            = var.cluster-name
+                      pod-network             = var.pod-network
+                      service-network         = var.service-network
                     }
                   )
   }

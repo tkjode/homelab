@@ -4,6 +4,11 @@ terraform {
       source    = "bpg/proxmox"
       version   = "0.86.0"
     }
+
+    ssh = {
+      source    = "loafoe/ssh"
+      version   = "2.7.0"
+    }
   }
 
   backend "s3" {
@@ -101,19 +106,31 @@ variable worker_count {
 }
 
 variable pod-network {
-  description = "CIDR of internal Kubernetes Pod network (eg. 10.100.0.0/16)"
+  description = "CIDR of internal Kubernetes Pod network (eg. 10.244.0.0/16) (< flannel default)"
   type        = string
-  default     = "10.100.0.0/16"
+  default     = "10.244.0.0/16"
 }
 
 variable service-network {
-  description = "CIDR of internal Kubernetes Service network (eg. 172.16.0.0/16)"
+  description = "CIDR of internal Kubernetes Service network (eg. 10.96.0.0/16)"
   type        = string
-  default     = "172.16.0.0/16"
+  default     = "10.96.0.0/16"
 }
 
 variable cluster-join-token {
   description = "The token used to join nodes to the cluster"
   type        = string
   default     = "123456.1234567890abcdef"
+}
+
+variable cluster-name {
+  description = "Simple name of the cluster being created (will be appended to some DNS/Certs"
+  type        = "string"
+  default     = "regulus"
+}
+
+variable cluster-domain {
+  description = "DNS Domain Suffix to be applied to cluster identity (not neccessarily the app gateway)"
+  type        = "string"
+  default     = "phalnet.com"
 }
