@@ -81,7 +81,7 @@ resource "tls_cert_request" "etcd-ca" {
 resource "tls_locally_signed_cert" "etcd-ca" {
   ca_private_key_pem    = tls_private_key.regulus-master-key.private_key_pem
   ca_cert_pem           = tls_self_signed_cert.cluster-authority.cert_pem
-  cert_request_pem      = tls_cert_request.etcd-ca.cert_pem
+  cert_request_pem      = tls_cert_request.etcd-ca.cert_request_pem
 
   allowed_uses          = [ "digital_signature", "cert_signing", "key_encipherment", "crl_signing" ]
   is_ca_certificate     = true
@@ -109,7 +109,7 @@ resource "tls_cert_request" "front-proxy-ca" {
 resource "tls_locally_signed_cert" "front-proxy-ca" {
   ca_private_key_pem    = tls_private_key.regulus-master-key.private_key_pem
   ca_cert_pem           = tls_self_signed_cert.cluster-authority.cert_pem
-  cert_request_pem      = tls_cert_request.front-proxy-ca.cert_pem
+  cert_request_pem      = tls_cert_request.front-proxy-ca.cert_request_pem
 
   allowed_uses          = [ "digital_signature", "cert_signing", "key_encipherment", "crl_signing" ]
   is_ca_certificate     = true
