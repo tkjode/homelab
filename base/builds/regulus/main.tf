@@ -4,11 +4,6 @@ terraform {
       source    = "bpg/proxmox"
       version   = "0.86.0"
     }
-
-    ssh = {
-      source    = "loafoe/ssh"
-      version   = "2.7.0"
-    }
   }
 
   backend "s3" {
@@ -29,13 +24,13 @@ variable "iso_datastore" {
   default       = "local"
 }
 
-variable "cluster_network_bridge" {
+variable "cluster-network-bridge" {
   description   = "The bridge interface in Proxmox to house kubernetes node network"
   type          = string
   default       = "vmbr10"
 }
 
-variable "home_network_bridge" {
+variable "home-network-bridge" {
   description   = "The bridge interface in Proxmox that physically binds to the internet-routable home network"
   type          = string
   default       = "vmbr0"
@@ -47,13 +42,13 @@ variable "nameservers" {
   default       = ["1.1.1.1", "4.4.4.4"]
 }
 
-variable "gw_hostname" {
+variable "gw-hostname" {
   description   = "VM hostname for the Gateway VM"
   type          = string
   default       = "gateway"
 }
 
-variable "gw_net_home" {
+variable "gw-net-home" {
   description   = "How to configure ethernet for home network connection"
   type          = object({
                     network   = string   # 10.0.0.0
@@ -71,7 +66,7 @@ variable "gw_net_home" {
                   }
 }
 
-variable "gw_net_cluster" {
+variable "gw-net-cluster" {
   description   = "How to configure ethernet for cluster private network connection"
   type          = object({
                     network   = string   # 192.168.64.0
@@ -87,49 +82,49 @@ variable "gw_net_cluster" {
                   }
 }
 
-variable master_ip_offset {
+variable "master-ip-offset" {
   description = "IP Address Offset to assign 3 Master Nodes on the private network"
   type        = number
   default     = 4    # 192.168.64.4 to 6
 }
 
-variable worker_ip_offset {
+variable "worker-ip-offset" {
   description = "IP Addresses Offset to start assigning Worker nodes on private network"
   type        = number
   default     = 8    # 192.168.64.8 to 14
 }
 
-variable worker_count {
+variable "worker-count" {
   description = "How many worker nodes should be deployed to the private network"
   type        = number
   default     = 6
 }
 
-variable pod-network {
+variable "pod-network" {
   description = "CIDR of internal Kubernetes Pod network (eg. 10.244.0.0/16) (< flannel default)"
   type        = string
   default     = "10.244.0.0/16"
 }
 
-variable service-network {
+variable "service-network" {
   description = "CIDR of internal Kubernetes Service network (eg. 10.96.0.0/16)"
   type        = string
   default     = "10.96.0.0/16"
 }
 
-variable cluster-join-token {
+variable "cluster-join-token" {
   description = "The token used to join nodes to the cluster"
   type        = string
   default     = "123456.1234567890abcdef"
 }
 
-variable cluster-name {
+variable "cluster-name" {
   description = "Simple name of the cluster being created (will be appended to some DNS/Certs"
   type        = string
   default     = "regulus"
 }
 
-variable cluster-domain {
+variable "cluster-domain" {
   description = "DNS Domain Suffix to be applied to cluster identity (not neccessarily the app gateway)"
   type        = string
   default     = "phalnet.com"

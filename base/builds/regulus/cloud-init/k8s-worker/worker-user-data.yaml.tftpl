@@ -1,0 +1,83 @@
+#cloud-config
+hostname: ${hostname}
+timezone: America/Toronto
+bootcmd:
+  - modprobe br_netfilter
+  - sysctl -w net.ipv4.ip_forward=1
+write_files:
+  - path: /etc/modules-load.d/kube-flannel.conf
+    content: br_netfilter
+    owner: root:root
+    permissions: '0644'
+  - path: /etc/sysctl.d/99-ipv.conf
+    content: |
+      net.ipv4.ip_forward = 1
+    owner: 'root:root'
+    permissions: '0644'
+  - path: /etc/apt/sources.list.d/kubernetes.list
+    content: |
+      deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.34/deb/ /
+    owner: 'root:root'
+    permissions: '0644'
+  - path: /etc/kubernetes/pki/ca.crt
+    content: ${base64encode(kubernetes-ca-crt)}
+    encoding: b64
+    permissions: '0644'
+    owner: root:root
+  - path: /etc/kubernetes/pki/ca.key
+    content: ${base64encode(kubernetes-ca-key)}
+    encoding: b64
+    permissions: '0600'
+    owner: root:root
+  - path: /etc/kubernetes/pki/front-proxy-ca.crt
+    content: ${base64encode(front-proxy-ca-crt)}
+    encoding: b64
+    permissions: '0644'
+    owner: root:root
+  - path: /etc/kubernetes/pki/front-proxy-ca.key
+    content: ${base64encode(front-proxy-ca-key)}
+    encoding: b64
+    permissions: '0600'
+    owner: root:root
+  - path: /etc/kubernetes/pki/etcd/ca.crt
+    content: ${base64encode(etcd-ca-crt)}
+    encoding: b64
+    permissions: '0644'
+    owner: root:root
+  - path: /etc/kubernetes/pki/etcd/ca.key
+    content: ${base64encode(etcd-ca-key)}
+    encoding: b64
+    permissions: '0600'
+    owner: root:root
+  - path: /etc/kubernetes/pki/sa.pub
+    encoding: b64
+    content: ${base64encode(sa-pub)}
+    owner: root:root
+    permissions: '0644'
+  - path: /etc/kubernetes/pki/sa.key
+    encoding: b64
+    content: ${base64encode(sa-key)}
+    owner: root:root
+    permissions: '0600'
+users:
+  - default
+  - name: tkjode
+    groups:
+      - sudo
+    shell: /bin/bash
+    ssh_import_id: ['gh:tkjode']
+    sudo: ALL=(ALL) NOPASSWD:ALL
+package_update: true
+packages:
+  - apt-transport-https
+  - ca-certificates
+  - gpg
+  - containerd
+  - net-tools
+  - curl
+runcmd:
+  - curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.34/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+  - apt update && apt -y install kubelet kubeadm kubectl && apt-mark hold kubelet kubeadm kubectl
+  - systemctl enable --now kubelet
+  - kubeadm join --token ${cluster-join-token} ${control-plane-endpoint}:6443 --discovery-token-ca-cert-hash sha256:$(cat /etc/kubernetes/pki/ca.crt | openssl x509 -pubkey | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //')
+  - echo "done" > /tmp/cloud-config.done
