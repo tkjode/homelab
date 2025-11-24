@@ -52,7 +52,7 @@ resource "proxmox_virtual_environment_vm" "workers" {
       }
     }
 
-    user_data_file_id       = proxmox_virtual_environment_file.master-user-data-cloud-config[count.index].id
+    user_data_file_id       = proxmox_virtual_environment_file.worker-user-data-cloud-config[count.index].id
 
   }
 }
