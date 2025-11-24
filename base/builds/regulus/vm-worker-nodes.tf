@@ -9,7 +9,7 @@ resource "proxmox_virtual_environment_vm" "workers" {
   depends_on                = [ proxmox_virtual_environment_vm.regulus-gateway ]
 
   agent {
-    enabled                 = false
+    enabled                 = true
   }
 
   cpu {
