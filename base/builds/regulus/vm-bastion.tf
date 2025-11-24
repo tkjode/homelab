@@ -8,23 +8,23 @@ resource "proxmox_virtual_environment_vm" "bastion" {
   depends_on = [ proxmox_virtual_environment_vm.regulus-gateway ]
 
   agent {
-    enabled = false
+    enabled = true
   }
 
   cpu {
-    cores = 2
+    cores = 4
     type  = "x86-64-v2-AES"
   }
 
   memory {
-    dedicated = 1024
-    floating  = 1024
+    dedicated = 4096
+    floating  = 4096
   }
 
   disk {
     datastore_id  = "SSD"
     file_id       = proxmox_virtual_environment_download_file.ubuntu-cloud-server-iso.id
-    size          = 10
+    size          = 25
     interface     = "scsi0"
   }
 
@@ -42,7 +42,6 @@ resource "proxmox_virtual_environment_vm" "bastion" {
     datastore_id = "cloudinit"
 
     dns {
-      domain = "apps.phalnet.com"
       servers = [ "1.1.1.1", "4.4.4.4" ]
     }
 
@@ -53,11 +52,19 @@ resource "proxmox_virtual_environment_vm" "bastion" {
       }
     }
 
-    user_account {
-      username = "debug"
-      password = "debug"
-    }
+    user_data_file_id = proxmox_virtual_environment_file.bastion-cloud-config.id
+
 
   }
+}
 
+
+resource "proxmox_virtual_environment_file" "bastion-cloud-config" {
+  content_type  = "snippets"
+  datastore_id  = "snippets"
+  node_name     = var.proxmox_node
+
+  source_file {
+    path        = "cloud-init/bastion/bastion-user-data.yaml"
+  }
 }
