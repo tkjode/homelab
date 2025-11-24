@@ -125,12 +125,12 @@ variable cluster-join-token {
 
 variable cluster-name {
   description = "Simple name of the cluster being created (will be appended to some DNS/Certs"
-  type        = "string"
+  type        = string
   default     = "regulus"
 }
 
 variable cluster-domain {
   description = "DNS Domain Suffix to be applied to cluster identity (not neccessarily the app gateway)"
-  type        = "string"
+  type        = string
   default     = "phalnet.com"
 }
