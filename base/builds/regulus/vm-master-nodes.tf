@@ -5,7 +5,7 @@ resource "proxmox_virtual_environment_vm" "masters" {
   tags                      = [var.cluster-name, "master", "kubernetes"]
   node_name                 = var.proxmox_node
   stop_on_destroy           = true
-  vm_id                      = var.proxmox-vmid-offset + var.master-ip-offset + count.index
+  vm_id                     = var.proxmox-vmid-offset + var.master-ip-offset + count.index
   depends_on                = [ proxmox_virtual_environment_vm.regulus-gateway ]
 
   agent {

@@ -63,8 +63,8 @@ resource "tls_locally_signed_cert" "kubernetes-ca" {
 ## etcd-ca
 
 resource "tls_private_key" "etcd-ca" {
-  algorithm = "RSA"
-  rsa_bits = 4096
+  algorithm     = "RSA"
+  rsa_bits      = 4096
 }
 
 resource "tls_cert_request" "etcd-ca" {
@@ -91,8 +91,8 @@ resource "tls_locally_signed_cert" "etcd-ca" {
 ## front-proxy-ca
 
 resource "tls_private_key" "front-proxy-ca" {
-  algorithm   = "RSA"
-  rsa_bits    = 4096
+  algorithm     = "RSA"
+  rsa_bits      = 4096
 }
 
 resource "tls_cert_request" "front-proxy-ca" {
@@ -119,6 +119,6 @@ resource "tls_locally_signed_cert" "front-proxy-ca" {
 ## ServiceAccount (sa.pub+key)
 
 resource "tls_private_key" "sa-key" {
-  algorithm = "RSA"
-  rsa_bits = 4096
+  algorithm     = "RSA"
+  rsa_bits      = 4096
 }

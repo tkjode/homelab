@@ -4,7 +4,7 @@ resource "proxmox_virtual_environment_vm" "bastion" {
   tags                  = [ "regulus", "cloud-init", "ubuntu" ]
   node_name             = var.proxmox_node
   stop_on_destroy       = true
-  vm_id                      = var.proxmox-vmid-offset + 2
+  vm_id                 = var.proxmox-vmid-offset + 2
   depends_on            = [ proxmox_virtual_environment_vm.regulus-gateway ]
 
   agent {
