@@ -4,7 +4,7 @@ resource "proxmox_virtual_environment_vm" "regulus-gateway" {
   tags                      = [ var.cluster-name, "cloud-init", "ubuntu" ]
   node_name                 = var.proxmox_node
   stop_on_destroy           = true
-  vmid                      = var.proxmox-vmid-offset + 1
+  vm_id                      = var.proxmox-vmid-offset + 1
 
   agent {
     enabled                 = true
