@@ -84,6 +84,7 @@ resource "proxmox_virtual_environment_file" "master-user-data-cloud-config" {
                       sa-pub                  = tls_private_key.sa-key.public_key_pem
                       sa-key                  = tls_private_key.sa-key.private_key_pem
                       argocd-ssh-private-key  = var.argocd-ssh-private-key
+                      repository-url          = var.repository-url
                     }
                   )
   }

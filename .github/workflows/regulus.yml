@@ -17,7 +17,7 @@ env:
   TF_VAR_iso_datastore: ${{ vars.ISO_DATASTORE }}
   TF_VAR_proxmox_node: ${{ vars.PROXMOX_NODE }}
   TF_VAR_default_ssh_pub_key: ${{ secrets.DEFAULT_PUB_KEY }}
-  TF_VAR_argocd-ssh-private-key: ${{ secrets.ARGOCD_REGULUS_SSH_PRIVATE_KEY | base64 }}
+  TF_VAR_argocd-ssh-private-key: ${{ secrets.ARGOCD_REGULUS_SSH_PRIVATE_KEY }}
   TF_VAR_repository-url: ssh://git@github.com/${{ github.repository }}
 on:
   workflow_dispatch:
