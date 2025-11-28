@@ -129,3 +129,14 @@ variable "cluster-domain" {
   type        = string
   default     = "phalnet.com"
 }
+
+variable "argocd-ssh-private-key" {
+  description = "Base64 Encoded Secret containing SSH Private Key allowing ArgoCD access to bootstrap repository"
+  type        = "string"
+}
+
+variable "repository-url" {
+  description = "Where ArgoCD will access for bootstrap manifests"
+  type        = "string"
+  default     = "ssh://git@github.com/tkjode/homelab"
+}
