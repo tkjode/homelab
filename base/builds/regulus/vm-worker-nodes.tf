@@ -6,7 +6,10 @@ resource "proxmox_virtual_environment_vm" "workers" {
   node_name                 = var.proxmox_node
   stop_on_destroy           = true
 
-  depends_on                = [ proxmox_virtual_environment_vm.regulus-gateway ]
+  depends_on                = [ proxmox_virtual_environment_vm.regulus-gateway, proxmox_virtual_environment_vm.masters ]
+
+  lifecycle {
+    replace_triggered_by    = [ proxmox_virtual_environment_vm.masters ]
 
   agent {
     enabled                 = true
