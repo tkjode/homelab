@@ -48,7 +48,7 @@ jobs:
       - run: terraform plan -out=/tf/regulus.tfplan
         shell: sh
         working-directory: base/builds/regulus
-      - run: terraform apply -auto-approve --parallelism=1 /tf/regulus.tfplan
+      - run: terraform apply -auto-approve --parallelism=16 /tf/regulus.tfplan
         shell: sh
         working-directory: base/builds/regulus
 
