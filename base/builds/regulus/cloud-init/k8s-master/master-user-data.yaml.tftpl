@@ -99,7 +99,7 @@ write_files:
         type: git
         url: ${repository-url}
         sshPrivateKey: |
-          ${indent(4,base64decode(argocd-ssh-private-key))}
+          ${indent(10,base64decode(argocd-ssh-private-key))}
 users:
   - default
   - name: tkjode
