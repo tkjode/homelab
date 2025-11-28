@@ -10,6 +10,7 @@ resource "proxmox_virtual_environment_vm" "workers" {
 
   lifecycle {
     replace_triggered_by    = [ proxmox_virtual_environment_vm.masters ]
+  }
 
   agent {
     enabled                 = true
