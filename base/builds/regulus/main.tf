@@ -140,3 +140,9 @@ variable "repository-url" {
   type        = string
   default     = "ssh://git@github.com/tkjode/homelab"
 }
+
+variable "proxmox-vmid-offset" {
+  description = "Starting vmid for this cluster (eg. 200)"
+  type        = number
+  default     = 200
+}
