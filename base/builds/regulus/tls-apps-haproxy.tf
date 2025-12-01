@@ -13,7 +13,7 @@ resource "tls_self_signed_cert" "proxy-authority" {
   is_ca_certificate   = true
   allowed_uses    = [ "digital_signature", "cert_signing", "key_encipherment", "crl_signing" ]
 
-  dns_names       = "apps.phalnet.com"
+  dns_names       = ["ca.apps.phalnet.com"]
 
   subject {
     common_name   = "ca.apps.phalnet.com"
