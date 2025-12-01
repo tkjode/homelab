@@ -68,6 +68,7 @@ resource "proxmox_virtual_environment_file" "gateway-user-data-cloud-config" {
                                   master-ip-offset    = var.master-ip-offset
                                   haproxy_tls_cert    = tls_locally_signed_cert.cert-apps-phalnet-com.cert_pem
                                   haproxy_key         = tls_private_key.apps-proxy-master.private_key_pem
+                                  kube_ingress_ca     = tls_locally_signed_cert.front-proxy-ca.cert_pem
                                 }
                               )
   }

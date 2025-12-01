@@ -3,7 +3,6 @@ hostname: ${gw-hostname}
 timezone: America/Toronto
 bootcmd:
   - sysctl -w net.ipv4.ip_forward=1
-  - systemctl disable --now systemd-networkd-wait-online.service
 write_files:
   - path: /etc/sysctl.d/99-ipv.conf
     content: |
@@ -17,6 +16,11 @@ write_files:
     permissions: '0600'
   - path: /etc/haproxy/pki/cluster-apps.pem.key
     content: ${base64encode(haproxy_key)}
+    encoding: b64
+    owner: 'root:root'
+    permissions: '0600'
+  - path: /etc/haproxy/pki/proxy-ca.pem
+    content: ${base64encode(kube_ingress_ca)}
     encoding: b64
     owner: 'root:root'
     permissions: '0600'
@@ -52,7 +56,7 @@ write_files:
       backend default_secure_ingress
         mode http
 %{ for instance in range( 0, 3 ) ~}
-        server master-${instance} ${cidrhost(join("/", [ gw-net-cluster.network, gw-net-cluster.mask ]), master-ip-offset + instance)}:443 ssl check
+        server master-${instance} ${cidrhost(join("/", [ gw-net-cluster.network, gw-net-cluster.mask ]), master-ip-offset + instance)}:443 ssl verify required ca-file /etc/haproxy/pki/proxy-ca.pem check
 %{ endfor ~}
       backend cluster_api
 %{ for instance in range( 0, 3 ) ~}
