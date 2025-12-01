@@ -3,17 +3,11 @@ hostname: ${gw-hostname}
 timezone: America/Toronto
 bootcmd:
   - sysctl -w net.ipv4.ip_forward=1
-  - sysctl -w net.ipv6.conf.all.disable_ipv6 = 1
-  - sysctl -w net.ipv6.conf.default.disable_ipv6 = 1
-  - sysctl -w net.ipv6.conf.lo.disable_ipv6 = 1
   - systemctl disable --now systemd-networkd-wait-online.service
 write_files:
   - path: /etc/sysctl.d/99-ipv.conf
     content: |
       net.ipv4.ip_forward = 1
-      net.ipv6.conf.all.disable_ipv6 = 1
-      net.ipv6.conf.default.disable_ipv6 = 1
-      net.ipv6.conf.lo.disable_ipv6 = 1
     owner: 'root:root'
     permissions: '0644'
   - path: /etc/haproxy/pki/cluster-apps.pem
@@ -56,8 +50,9 @@ write_files:
         mode tcp
         default_backend cluster_api
       backend default_secure_ingress
+        mode http
 %{ for instance in range( 0, 3 ) ~}
-        server master-${instance} ${cidrhost(join("/", [ gw-net-cluster.network, gw-net-cluster.mask ]), master-ip-offset + instance)}:443 check
+        server master-${instance} ${cidrhost(join("/", [ gw-net-cluster.network, gw-net-cluster.mask ]), master-ip-offset + instance)}:443 ssl check
 %{ endfor ~}
       backend cluster_api
 %{ for instance in range( 0, 3 ) ~}
