@@ -84,6 +84,7 @@ resource "proxmox_virtual_environment_file" "gateway-network-data-cloud-config" 
                 gw-net-home       = var.gw-net-home
                 gw-net-cluster    = var.gw-net-cluster
                 nameservers       = var.nameservers
+                app_cert          = tls_locally_signed_cert.cert-apps-phalnet-com.cert_pem
               }
             )
 
