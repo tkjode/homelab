@@ -66,6 +66,7 @@ resource "proxmox_virtual_environment_file" "gateway-user-data-cloud-config" {
                                   gw-net-cluster      = var.gw-net-cluster
                                   gw-hostname         = var.gw-hostname
                                   master-ip-offset    = var.master-ip-offset
+                                  haproxy_tls_cert    = tls_locally_signed_cert.cert-apps-phalnet-com.cert_pem
                                 }
                               )
   }
@@ -84,7 +85,6 @@ resource "proxmox_virtual_environment_file" "gateway-network-data-cloud-config" 
                 gw-net-home       = var.gw-net-home
                 gw-net-cluster    = var.gw-net-cluster
                 nameservers       = var.nameservers
-                haproxy_tls_cert  = tls_locally_signed_cert.cert-apps-phalnet-com.cert_pem
               }
             )
 
