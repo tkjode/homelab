@@ -4,9 +4,6 @@ timezone: America/Toronto
 bootcmd:
   - modprobe br_netfilter
   - sysctl -w net.ipv4.ip_forward=1
-  - sysctl -w net.ipv6.conf.all.disable_ipv6 = 1
-  - sysctl -w net.ipv6.conf.default.disable_ipv6 = 1
-  - sysctl -w net.ipv6.conf.lo.disable_ipv6 = 1
 write_files:
   - path: /etc/modules-load.d/kube-flannel.conf
     content: br_netfilter
@@ -15,14 +12,6 @@ write_files:
   - path: /etc/sysctl.d/99-ipv.conf
     content: |
       net.ipv4.ip_forward = 1
-      net.ipv6.conf.all.disable_ipv6 = 1
-      net.ipv6.conf.default.disable_ipv6 = 1
-      net.ipv6.conf.lo.disable_ipv6 = 1
-    owner: 'root:root'
-    permissions: '0644'
-  - path: /etc/apt/sources.list.d/kubernetes.list
-    content: |
-      deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.34/deb/ /
     owner: 'root:root'
     permissions: '0644'
   - path: /etc/kubernetes/pki/ca.crt
@@ -84,7 +73,7 @@ write_files:
         - description: Day0 Node Joiner Bootstrap Token
           token: ${cluster-join-token}
           ttl: 24h
-  - path: /etc/secret-argocd.yaml
+  - path: /etc/k8s-bootstrap/secret-argocd.yaml
     owner: root:root
     permissions: '0600'
     content: |
@@ -121,6 +110,7 @@ runcmd:
   - systemctl enable qemu-guest-agent
   - systemctl start qemu-guest-agent
   - curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.34/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+  - echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.34/deb/ /" | tee /etc/apt/sources.list.d/kubernetes.list
   - apt update && apt -y install kubelet kubeadm kubectl && apt-mark hold kubelet kubeadm kubectl
   - systemctl enable --now kubelet
 %{ if node-select == 0 }
@@ -128,7 +118,7 @@ runcmd:
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create namespace argocd
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-  - KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply -n argocd -f /etc/argocd-secret.yaml
+  - KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply -n argocd -f /etc/k8s-bootstrap/secret-argocd.yaml
 %{ else }
   - kubeadm join --control-plane --token ${cluster-join-token} ${control-plane-endpoint}:6443 --discovery-token-ca-cert-hash sha256:$(cat /etc/kubernetes/pki/ca.crt | openssl x509 -pubkey | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //')
 %{ endif }

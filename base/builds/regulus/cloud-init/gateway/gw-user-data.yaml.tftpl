@@ -46,7 +46,7 @@ write_files:
         stats uri /stats
         stats show-modules
       frontend secure_cluster_apps
-        bind :443 ssl crt /etc/haproxy/pki/cluster-apps.pem alpn h2,http/1.1 ssl-min-ver TLSv1.2
+        bind :443 ssl crt /etc/haproxy/pki/cluster-apps.pem
         mode http
         default_backend default_secure_ingress
       frontend cluster_api
