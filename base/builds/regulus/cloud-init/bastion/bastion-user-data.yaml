@@ -2,11 +2,7 @@
 hostname: bastion
 timezone: America/Toronto
 write_files:
-  - path: /etc/apt/sources.list.d/kubernetes.list
-    content: |
-      deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.34/deb/ /
-    owner: 'root:root'
-    permissions: '0644'
+  - path: 
 users:
   - default
   - name: tkjode
@@ -26,9 +22,8 @@ packages:
 runcmd:
   - systemctl enable qemu-guest-agent
   - systemctl start qemu-guest-agent
+  - apt update && apt -y dist-upgrade && apt -y autoremove 
+  - echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.34/deb/ /" | tee /etc/apt/sources.list.d/kubernetes.list
   - curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.34/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
   - apt update && apt -y install kubectl && apt-mark hold kubectl
-  - apt -y dist-upgrade
-  - apt -y autoremove
-  - snap refresh
   - echo "done" > /tmp/cloud-config.done

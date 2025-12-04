@@ -68,3 +68,12 @@ resource "proxmox_virtual_environment_file" "bastion-cloud-config" {
     data        = templatefile("cloud-init/bastion/bastion-user-data.yaml", {})
   }
 }
+
+resource "tls_private_key" "bastion-rsa" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+resource "tls_private_key" "bastion-ecdsa" {
+  algorithm = "ECDSA"
+}

@@ -84,6 +84,5 @@ runcmd:
   - iptables -A FORWARD -i eth0 -o eth1 -m state --state ESTABLISHED,RELATED -j ACCEPT
   - iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
   - iptables-save > /etc/iptables/rules.v4
-  - /usr/bin/unattended-upgrade
+  - apt update && apt -y dist-upgrade && apt -y autoremove
   - echo "done" > /tmp/cloud-config.done
-  - systemctl reboot
