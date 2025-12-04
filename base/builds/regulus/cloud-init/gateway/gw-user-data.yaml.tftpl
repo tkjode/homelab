@@ -9,6 +9,16 @@ write_files:
       net.ipv4.ip_forward = 1
     owner: 'root:root'
     permissions: '0644'
+  - path: /etc/ssh/ssh_host_ecdsa_key
+    encoding: b64
+    content: ${base64encode(gateway-ecdsa-key)}
+    owner: 'root:root'
+    permissions: '0600'
+  - path: /etc/ssh/ssh_host_rsa_key
+    encoding: b64
+    content: ${base64encode(gateway-rsa-key)}
+    owner: 'root:root'
+    permissions: '0600'
   - path: /etc/haproxy/pki/cluster-apps.pem
     content: ${base64encode(haproxy_tls_cert)}
     encoding: b64
