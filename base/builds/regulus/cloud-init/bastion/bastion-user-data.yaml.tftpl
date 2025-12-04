@@ -5,9 +5,9 @@ ssh_genkeytypes: []
 ssh_quiet_keygen: true
 ssh_keys:
   rsa_private: |
-${indent(4, bastion-rsa)}
+    ${indent(4, bastion-rsa)}
   ecdsa_private: |
-${indent(4, bastion-ecdsa)}
+    ${indent(4, bastion-ecdsa)}
 users:
   - default
   - name: tkjode
