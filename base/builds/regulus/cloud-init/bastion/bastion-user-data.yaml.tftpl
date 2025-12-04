@@ -1,17 +1,13 @@
 #cloud-config
 hostname: bastion
 timezone: America/Toronto
-write_files:
-  - path: /etc/ssh/ssh_host_ecdsa_key
-    encoding: b64
-    content: ${base64encode(bastion-ecdsa)}
-    owner: 'root:root'
-    permissions: '0600'
-  - path: /etc/ssh/ssh_host_rsa_key
-    encoding: b64
-    content: ${base64encode(bastion-rsa)}
-    owner: 'root:root'
-    permissions: '0600'
+ssh_genkeytypes: []
+ssh_quiet_keygen: true
+ssh_keys:
+  rsa_private: |
+${indent(4, bastion-rsa)}
+  ecdsa_private: |
+${indent(4, bastion-ecdsa)}
 users:
   - default
   - name: tkjode

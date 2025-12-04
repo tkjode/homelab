@@ -9,16 +9,6 @@ write_files:
       net.ipv4.ip_forward = 1
     owner: 'root:root'
     permissions: '0644'
-  - path: /etc/ssh/ssh_host_ecdsa_key
-    encoding: b64
-    content: ${base64encode(gateway-ecdsa)}
-    owner: 'root:root'
-    permissions: '0600'
-  - path: /etc/ssh/ssh_host_rsa_key
-    encoding: b64
-    content: ${base64encode(gateway-rsa)}
-    owner: 'root:root'
-    permissions: '0600'
   - path: /etc/haproxy/pki/cluster-apps.pem
     content: ${base64encode(haproxy_tls_cert)}
     encoding: b64
@@ -72,6 +62,13 @@ write_files:
 %{ for instance in range( 0, 3 ) ~}
         server master-${instance} ${cidrhost(join("/", [ gw-net-cluster.network, gw-net-cluster.mask ]), master-ip-offset + instance)}:6443 check
 %{ endfor ~}
+ssh_genkeytypes: []
+ssh_quiet_keygen: true
+ssh_keys:
+  rsa_private: |
+${indent(4, gateway-rsa)}
+  ecdsa_private: |
+${indent(4, gateway-ecdsa)}
 users:
   - default
   - name: tkjode
