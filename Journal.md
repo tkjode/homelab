@@ -1,5 +1,21 @@
 # Journal / Changelog
 
+## 2025-12-10
+
+- Have a fairly reliable cluster build that has strong durability with generated CAs, keys and configurations.
+- We can reboot the entire cluster stack from the hypervisor and it comes back like nothing happened.
+- Have enabled `unattended-upgrades` operating semi-staggered (love that 4am chaos) and will see how that pans out
+  - Fully expect to wake up at some point with a a dead cluster but whatever.
+- Outstanding things to consider include:
+  - To what should I connect my storage and how should it be hosted?
+    - Still absolutely need SMB/NFS/FTP access on the network - I need Kubernetes to utilize it vs. host it
+    - So it should be a resilient and stable service on the home network - K8S can reach out and get access to NFS paths no problem.
+      - Will gateway ipv4.forwarding in-kernel be saturated by stuff like high-bandwidth media pulls if I run Jellyfish streams between networks?
+      - Or should I expose the storage DIRECTLY into the cluster private network to avoid dog-legged traffic?
+        - *Dual Homed*, *Direct-Connect-Storage* to Proxmox appears to be the least network traversal required.
+  - ArgoCD bootstrapping - App of Apps, or App of Argo of Apps?
+    - Let's start with App of Apps first b/c bootstrapping that has to happen anyway - only then once that's locked down should I look at App of Argos on top of it, then offload.
+
 ## 2025-11-18
 
 - Reignited work on cloud-init deployment of a cluster on proxmox in the last few days

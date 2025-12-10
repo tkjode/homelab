@@ -20,7 +20,8 @@ See [Journal.md](Journal.md) for progress reports as they happen.
   - [ ] ArgoCD + app of apps boot up helm chart
 - [ ] DNS+Cert Integration - cluster trust fixes /w more DNS+IP SANs on the API Server
   - [ ] Route53 integration - from within cluster?
-- [ ] HAProxy Ingress Controller (mostly worked out)
+- [ ] HAProxy Ingress Controller (~~mostly worked out~~TLS is killing me)
+  - [ ] Gateway API + Envoy looks like the next iteration on the Ingress paradigm for kubernetes, do that!
 - Kube bootstrap cloud-init machines
   - [x] Make master nodes and worker nodes from cloud-init bases
   - [x] Certificate generation (TF generated x509s maybe?) for cluster api+etcd certs
@@ -37,3 +38,13 @@ See [Journal.md](Journal.md) for progress reports as they happen.
 - [x] ~~Seeding/Updating ISO images into Proxmox Storage~~  Yeah dude we can do ISOs and IMGs and GZIP decompression and everything now.
 - [x] Making CloudInit VM templates
 - [x] ~~Generating K8S clusters into SDNs and creating a firewall+gateway+reverse proxy for accessing them~~ We can do bridges for now.
+
+## ArgoCD Cluster Bootstrap
+
+- `BIOS`
+  - [ ] Gateway API
+  - [ ] Ingress Controller
+  - [ ] External Secrets Operator
+- `COMMAND.COM`
+  - [ ] Cert Manager
+  - [ ] And more...
