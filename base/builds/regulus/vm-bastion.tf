@@ -54,7 +54,6 @@ resource "proxmox_virtual_environment_vm" "bastion" {
 
     user_data_file_id   = proxmox_virtual_environment_file.bastion-cloud-config.id
 
-
   }
 }
 
