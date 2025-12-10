@@ -69,6 +69,8 @@ resource "proxmox_virtual_environment_file" "gateway-user-data-cloud-config" {
                                   haproxy_tls_cert    = tls_locally_signed_cert.cert-apps-phalnet-com.cert_pem
                                   haproxy_key         = tls_private_key.apps-proxy-master.private_key_pem
                                   kube_ingress_ca     = tls_locally_signed_cert.front-proxy-ca.cert_pem
+                                    gateway-rsa       = tls_private_key.gateway-rsa.private_key_pem
+                                    gateway-ecdsa     = tls_private_key.gateway-ecdsa.private_key_pem
                                 }
                               )
   }
@@ -87,8 +89,6 @@ resource "proxmox_virtual_environment_file" "gateway-network-data-cloud-config" 
                 gw-net-home       = var.gw-net-home
                 gw-net-cluster    = var.gw-net-cluster
                 nameservers       = var.nameservers
-                gateway-rsa       = tls_private_key.gateway-rsa.private_key_pem
-                gateway-ecdsa     = tls_private_key.gateway-ecdsa.private_key_pem
               }
             )
   }
@@ -99,6 +99,6 @@ resource "tls_private_key" "gateway-rsa" {
   rsa_bits  = 4096
 }
 
-resource "tls_private_key" "gateway-ecdsa" { 
+resource "tls_private_key" "gateway-ecdsa" {
   algorithm = "ECDSA"
 }

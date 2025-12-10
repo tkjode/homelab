@@ -64,7 +64,13 @@ resource "proxmox_virtual_environment_file" "bastion-cloud-config" {
 
   source_raw {
     file_name   = "bastion-user-data.yaml"
-    data        = templatefile("cloud-init/bastion/bastion-user-data.yaml", {})
+    data        = templatefile(
+                    "cloud-init/bastion/bastion-user-data.yaml.tftpl",
+                    {
+                      bastion-rsa     = tls_private_key.bastion-rsa.private_key_pem
+                      bastion-ecdsa   = tls_private_key.bastion-ecdsa.private_key_pem
+                    }
+                  )
   }
 }
 
