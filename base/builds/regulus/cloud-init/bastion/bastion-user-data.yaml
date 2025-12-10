@@ -2,7 +2,33 @@
 hostname: bastion
 timezone: America/Toronto
 write_files:
-  - path: 
+  - path: /etc/apt/apt.conf.d/10periodic
+    content: |
+      APT::Periodic::Update-Package-Lists "1";
+      APT::Periodic::Download-Upgradeable-Packages "1";
+      APT::Periodic::AutocleanInterval "7";
+    owner: root:root
+    permissions: '0644'
+  - path: /etc/apt/apt.conf.d/50unattended-upgrades
+    content: |
+      Unattended-Upgrade::Allowed-Origins {
+        "${distro_id}:${distro_codename}";
+        "${distro_id}:${distro_codename}-security";
+        "${distro_id}ESMApps:${distro_codename}-apps-security";
+        "${distro_id}ESM:${distro_codename}-infra-security";
+        "${distro_id}:${distro_codename}-updates";
+        "${distro_id}:${distro_codename}-proposed";
+        "${distro_id}:${distro_codename}-backports";
+      };
+      Unattended-Upgrade::DevRelease "auto";
+      Unattended-Upgrade::AutoFixInterruptedDpkg "true";
+      Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";
+      Unattended-Upgrade::Remove-New-Unused-Dependencies "true";
+      Unattended-Upgrade::Remove-Unused-Dependencies "true";
+      Unattended-Upgrade::Automatic-Reboot "true";
+      Unattended-Upgrade::Automatic-Reboot-Time "04:00";
+    owner: root:root
+    permissions: '0644'
 users:
   - default
   - name: tkjode
@@ -20,8 +46,8 @@ packages:
   - kustomize
   - iptables-persistent
 runcmd:
-  - systemctl enable qemu-guest-agent
-  - systemctl start qemu-guest-agent
+  - systemctl enable qemu-guest-agent && systemctl start qemu-guest-agent
+  - systemctl enable unattended-upgrades && systemctl start unattended-upgrades
   - apt update && apt -y dist-upgrade && apt -y autoremove 
   - echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.34/deb/ /" | tee /etc/apt/sources.list.d/kubernetes.list
   - curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.34/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
