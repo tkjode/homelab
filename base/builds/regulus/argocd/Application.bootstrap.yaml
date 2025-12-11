@@ -7,7 +7,8 @@ spec:
   project: default
   source:
     repoURL: ssh://git@github.com/tkjode/homelab
-    directory: base/builds/regulus/argocd/bootstrap/bios
+    targetRevision: HEAD
+    path: base/builds/regulus/argocd/bootstrap/bios
   destination:
     namespace: default
     server: https://kubernetes.default.svc
