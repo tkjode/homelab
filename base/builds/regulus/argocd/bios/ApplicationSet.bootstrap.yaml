@@ -23,3 +23,12 @@ spec:
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{ .folder }}'
+      syncPolicy:
+        automated:
+          enabled: true
+          prune: false
+          selfHeal: true
+          allowEmpty: true
+        syncOptions:
+          - ApplyOutOfSyncOnly=true
+          - CreateNamespace=true
