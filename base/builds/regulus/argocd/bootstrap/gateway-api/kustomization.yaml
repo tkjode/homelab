@@ -3,4 +3,4 @@ kind: Kustomization
 metadata:
   name: k8s-gateway-api-crds
 resources:
-  - Application.gateway-api.yaml
+  - https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.4.1/standard-install.yaml
