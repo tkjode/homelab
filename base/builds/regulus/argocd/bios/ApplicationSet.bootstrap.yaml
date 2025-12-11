@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: bootstrap
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - list:
+      elements:
+      - folder: gateway-api
+      - folder: envoy-gateway
+  template:
+    metadata:
+      name: 'boot-{{.folder}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://git@github.com/tkjode/homelab.git
+        targetRevision: HEAD
+        path: base/builds/regulus/argocd/bootstrap/{{.folder}}
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{ .folder }}'

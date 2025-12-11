@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bootstrap-appset
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: ssh://git@github.com/tkjode/homelab
+    directory: base/builds/regulus/argocd/bootstrap/bios
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+    automated:
+      prune: true
+      selfHeal: true
