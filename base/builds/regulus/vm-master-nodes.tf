@@ -57,6 +57,10 @@ resource "proxmox_virtual_environment_vm" "masters" {
   }
 }
 
+locals {
+  argocd-application-bootstrap = file("argocd/Application.bootstrap.yaml")
+}
+
 resource "proxmox_virtual_environment_file" "master-user-data-cloud-config" {
   count         = 3
   content_type  = "snippets"
@@ -85,6 +89,7 @@ resource "proxmox_virtual_environment_file" "master-user-data-cloud-config" {
                       sa-key                  = tls_private_key.sa-key.private_key_pem
                       argocd-ssh-private-key  = var.argocd-ssh-private-key
                       repository-url          = var.repository-url
+                      bootstrap-application   = local.argocd-application-bootstrap
                     }
                   )
   }

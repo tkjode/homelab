@@ -116,6 +116,11 @@ write_files:
         url: ${repository-url}
         sshPrivateKey: |
           ${indent(10,base64decode(argocd-ssh-private-key))}
+  - path: /etc/k8s-bootstrap/Application.bootstrap.yaml
+    owner: root:root
+    permissions: '0600'
+    encoding: b64
+    content: ${base64encode(bootstrap-application)}
 users:
   - default
   - name: tkjode
@@ -147,6 +152,7 @@ runcmd:
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create namespace argocd
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply -n argocd -f /etc/k8s-bootstrap/secret-argocd.yaml
+  - KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply -n argocd -f /etc/k8s-bootstrap/Application.bootstrap.yaml
 %{ else }
   - kubeadm join --control-plane --token ${cluster-join-token} ${control-plane-endpoint}:6443 --discovery-token-ca-cert-hash sha256:$(cat /etc/kubernetes/pki/ca.crt | openssl x509 -pubkey | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //')
 %{ endif }
