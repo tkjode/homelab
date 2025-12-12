@@ -10,7 +10,7 @@ spec:
   - list:
       elements:
       - folder: argoproject-networking
-      - folder: gateway-api
+      #- folder: gateway-api    # Envoy *should* install the appropriate gateway-api for us, avoid collisions
       - folder: envoy-gateway
   template:
     metadata:
