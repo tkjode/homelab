@@ -9,6 +9,7 @@ spec:
   generators:
   - list:
       elements:
+      - folder: argoproject-networking
       - folder: gateway-api
       - folder: envoy-gateway
   template:
