@@ -11,6 +11,6 @@ spec:
   - allowedRoutes:
       namespaces:
         from: All
-    name: http
-    protocol: HTTP
+    name: https
+    protocol: HTTPS
     port: 9080
