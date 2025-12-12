@@ -12,6 +12,7 @@ spec:
       - folder: argoproject-networking
       #- folder: gateway-api    # Envoy *should* install the appropriate gateway-api for us, avoid collisions
       - folder: envoy-gateway
+      - folder: cluster-access-gw
   template:
     metadata:
       name: 'boot-{{.folder}}'
