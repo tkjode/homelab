@@ -4,7 +4,8 @@
 # Will need to support LetsEncrypt CertBot later
 
 resource "tls_private_key" "apps-proxy-master" {
-  algorithm = "ECDSA"
+  algorithm = "RSA"
+  rsa_bits = 4096
 }
 
 resource "tls_self_signed_cert" "proxy-authority" {

@@ -75,16 +75,14 @@ write_files:
       frontend secure_cluster_apps
         bind :443 ssl crt /etc/haproxy/pki/cluster-apps.pem
         mode http
-        default_backend default_secure_ingress
+        default_backend cluster-default-gateway
       frontend cluster_api
         bind :6443
         mode tcp
         default_backend cluster_api
-      backend default_secure_ingress
+      backend cluster-default-gateway
         mode http
-%{ for instance in range( 0, 3 ) ~}
-        server master-${instance} ${cidrhost(join("/", [ gw-net-cluster.network, gw-net-cluster.mask ]), master-ip-offset + instance)}:443 ssl verify none check
-%{ endfor ~}
+        server global-envoy ${cidrhost(join("/", [ gw-net-cluster.network, gw-net-cluster.mask ]), 244)}:443 ssl verify none check
       backend cluster_api
 %{ for instance in range( 0, 3 ) ~}
         server master-${instance} ${cidrhost(join("/", [ gw-net-cluster.network, gw-net-cluster.mask ]), master-ip-offset + instance)}:6443 check
