@@ -14,6 +14,7 @@ spec:
       - folder: envoy-gateway
       - folder: cluster-access-gw
       - folder: metal-lb
+      - folder: argo-httproute   # Bit of a test, should be packaged with argocd but let's try it
   template:
     metadata:
       name: 'boot-{{.folder}}'
