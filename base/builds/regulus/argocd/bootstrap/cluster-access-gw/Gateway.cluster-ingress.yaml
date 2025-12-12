@@ -11,12 +11,6 @@ spec:
   - allowedRoutes:
       namespaces:
         from: All
-    name: https
-    protocol: HTTPS
-    port: 443
-    tls:
-      mode: Passthrough
-      certificateRefs:
-      - kind: Secret
-        group: ''
-        name: cluster-ingress-cert
+    name: http
+    protocol: HTTP
+    port: 9080
