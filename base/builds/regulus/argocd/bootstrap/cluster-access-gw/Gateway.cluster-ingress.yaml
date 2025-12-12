@@ -14,3 +14,9 @@ spec:
     name: https
     protocol: HTTPS
     port: 9080
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        group: ''
+        name: cluster-ingress-cert
