@@ -15,7 +15,7 @@ spec:
     protocol: HTTPS
     port: 443
     tls:
-      mode: Terminate
+      mode: Passthrough
       certificateRefs:
       - kind: Secret
         group: ''
