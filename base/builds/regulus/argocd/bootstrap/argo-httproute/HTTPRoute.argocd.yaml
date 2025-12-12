@@ -8,6 +8,5 @@ spec:
   - "argocd.apps.phalnet.com"
   parentRefs:
   - kind: Gateway
-    namespace: cluster-access-gateway
+    namespace: cluster-access-gw
     name: cluster-ingress
-    
