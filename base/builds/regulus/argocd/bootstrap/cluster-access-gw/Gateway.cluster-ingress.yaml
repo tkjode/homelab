@@ -5,7 +5,7 @@ metadata:
 spec:
   addresses:
   - type: "IPAddress"
-    value: "192.168.64.244/24"
+    value: "192.168.64.244"
   gatewayClassName: cluster-gateway
   listeners:
   - allowedRoutes:
