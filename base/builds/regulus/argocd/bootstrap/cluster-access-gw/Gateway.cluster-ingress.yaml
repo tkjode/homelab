@@ -5,7 +5,7 @@ metadata:
 spec:
   addresses:
   - type: "IPAddress"
-    value: "192.168.64.244"
+    value: "192.168.64.254"
   gatewayClassName: cluster-gateway
   listeners:
   - allowedRoutes:
@@ -13,7 +13,7 @@ spec:
         from: All
     name: https
     protocol: HTTPS
-    port: 9080
+    port: 443
     tls:
       mode: Terminate
       certificateRefs:
