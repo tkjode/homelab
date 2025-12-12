@@ -5,6 +5,9 @@ metadata:
 spec:
   gatewayClassName: cluster-gateway
   listeners:
-  - name: https
-    protocol: HTTPS
-    port: 443
+  - allowedRoutes:
+      namespaces:
+        from: All
+    name: http
+    protocol: HTTP
+    port: 9080
