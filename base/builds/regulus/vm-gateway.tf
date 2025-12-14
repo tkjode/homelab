@@ -102,3 +102,19 @@ resource "tls_private_key" "gateway-rsa" {
 resource "tls_private_key" "gateway-ecdsa" {
   algorithm = "ECDSA"
 }
+
+resource "proxmox_virtual_environment_firewall_options" "gateway-fw" {
+  node_name   = var.proxmox_node
+  vm_id       = proxmox_virtual_environment_vm.regulus-gateway.vm_id
+
+  dhcp          = false
+  enabled       = false
+  ipfilter      = false
+  log_level_in  = "nolog"
+  log_level_out = "nolog"
+  macfilter     = false
+  ndp           = true
+  input_policy  = "ACCEPT"
+  output_policy = "ACCEPT"
+  radv          = false
+}
