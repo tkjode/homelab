@@ -3,9 +3,9 @@ kind: Gateway
 metadata:
   name: cluster-ingress
 spec:
-  addresses:
-  - type: "IPAddress"
-    value: "192.168.64.248"
+#  addresses:
+#  - type: "IPAddress"
+#    value: "192.168.64.248"
   gatewayClassName: cluster-gateway
   listeners:
   - allowedRoutes:
