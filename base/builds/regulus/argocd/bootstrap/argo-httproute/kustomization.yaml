@@ -3,4 +3,4 @@ kind: Kustomization
 metadata:
   name: argocd-httproute
 resources:
-  - TLSRoute.argocd.yaml
+  - HTTPRoute.argocd.yaml
