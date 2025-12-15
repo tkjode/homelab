@@ -84,3 +84,20 @@ resource "proxmox_virtual_environment_file" "worker-user-data-cloud-config" {
                   )
   }
 }
+
+resource "proxmox_virtual_environment_firewall_options" "worker-fw" {
+  count       = var.worker-count
+  node_name   = var.proxmox_node
+  vm_id       = proxmox_virtual_environment_vm.workers[count.index].vm_id
+
+  dhcp          = false
+  enabled       = false
+  ipfilter      = false
+  log_level_in  = "nolog"
+  log_level_out = "nolog"
+  macfilter     = false
+  ndp           = true
+  input_policy  = "ACCEPT"
+  output_policy = "ACCEPT"
+  radv          = false
+}

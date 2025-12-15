@@ -82,7 +82,7 @@ write_files:
         default_backend cluster_api
       backend cluster-default-gateway
         mode http
-        server global-envoy ${cidrhost(join("/", [ gw-net-cluster.network, gw-net-cluster.mask ]), 254)}:9080 check
+        server global-envoy ${cidrhost(join("/", [ gw-net-cluster.network, gw-net-cluster.mask ]), 248)}:9080 check
       backend cluster_api
 %{ for instance in range( 0, 3 ) ~}
         server master-${instance} ${cidrhost(join("/", [ gw-net-cluster.network, gw-net-cluster.mask ]), master-ip-offset + instance)}:6443 check

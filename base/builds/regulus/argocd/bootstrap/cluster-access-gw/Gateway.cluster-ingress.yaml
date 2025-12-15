@@ -4,9 +4,9 @@ metadata:
   name: cluster-ingress
   namespace: default
 spec:
-  addresses:
-  - type: "IPAddress"
-    value: "192.168.64.254"
+#  addresses:
+#  - type: "IPAddress"
+#    value: "192.168.64.248"
   gatewayClassName: cluster-gateway
   listeners:
   - allowedRoutes:
