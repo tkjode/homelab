@@ -26,7 +26,7 @@ spec:
         path: base/builds/regulus/argocd/bootstrap/{{.folder}}
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{ .folder }}'
+        namespace: 'bios'
       syncPolicy:
         automated:
           enabled: true
