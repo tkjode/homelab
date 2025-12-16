@@ -11,4 +11,9 @@ spec:
     namespace: argocd
     sectionName: https
   validation:
+    caCertificateRefs:
+    - name: kube-root-ca.crt
+      namespace: argocd
+      group: ''
+      kind: ConfigMap
     hostname: argocd.apps.phalnet.com
