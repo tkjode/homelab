@@ -4,3 +4,4 @@ metadata:
   name: argocd-httproute
 resources:
   - HTTPRoute.argocd.yaml
+  - TLSBackendPolicy.argocd-tls.yaml
