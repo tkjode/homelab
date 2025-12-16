@@ -15,6 +15,7 @@ spec:
       - folder: cluster-access-gw
       - folder: metal-lb
       - folder: argo-httproute   # Bit of a test, should be packaged with argocd but let's try it
+      - folder: cert-manager     # Needs configuration after static apply
   template:
     metadata:
       name: 'boot-{{.folder}}'
