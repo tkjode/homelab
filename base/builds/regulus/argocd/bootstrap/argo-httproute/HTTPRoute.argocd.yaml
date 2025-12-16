@@ -16,5 +16,5 @@ spec:
       kind: Service
       name: argocd-server
       namespace: argocd
-      port: 80
+      port: 443
       weight: 1
