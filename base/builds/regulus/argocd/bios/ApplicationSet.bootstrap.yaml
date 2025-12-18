@@ -9,18 +9,23 @@ spec:
   generators:
   - list:
       elements:
-      - folder: argoproject-networking
-      #- folder: gateway-api    # Envoy *should* install the appropriate gateway-api for us, avoid collisions
+      - folder: bios-projects
+        project: bios
       - folder: envoy-gateway
+        project: networking
       - folder: cluster-access-gw
+        project: networking
       - folder: metal-lb
+        project: networking
       - folder: argo-httproute   # Bit of a test, should be packaged with argocd but let's try it
+        project: networking
       - folder: cert-manager     # Needs configuration after static apply
+        project: trusted-platform
   template:
     metadata:
       name: 'boot-{{.folder}}'
     spec:
-      project: default
+      project: {{ .project }}
       source:
         repoURL: ssh://git@github.com/tkjode/homelab
         targetRevision: HEAD
