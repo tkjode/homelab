@@ -25,7 +25,7 @@ spec:
     metadata:
       name: 'boot-{{.folder}}'
     spec:
-      project: {{ .project }}
+      project: '{{.project}}'
       source:
         repoURL: ssh://git@github.com/tkjode/homelab
         targetRevision: HEAD
