@@ -3,4 +3,6 @@ kind: Kustomization
 metadata:
   name: bios
 resources:
+  - AppProject.networking.yaml
+  - AppProject.trusted-platform.yaml
   - ApplicationSet.bootstrap.yaml
