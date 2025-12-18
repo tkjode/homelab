@@ -9,8 +9,6 @@ spec:
   generators:
   - list:
       elements:
-      - folder: bios-projects
-        project: bios
       - folder: envoy-gateway
         project: networking
       - folder: cluster-access-gw
@@ -32,7 +30,7 @@ spec:
         path: base/builds/regulus/argocd/bootstrap/{{.folder}}
       destination:
         server: https://kubernetes.default.svc
-        namespace: 'bios'
+        namespace: 'argocd'
       syncPolicy:
         automated:
           enabled: true
