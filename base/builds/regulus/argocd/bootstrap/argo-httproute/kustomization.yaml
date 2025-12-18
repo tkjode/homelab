@@ -5,3 +5,4 @@ metadata:
 resources:
   - HTTPRoute.argocd.yaml
   - TLSBackendPolicy.argocd-tls.yaml
+  - Certificate.argocd-tls.yaml

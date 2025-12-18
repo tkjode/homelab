@@ -1,0 +1,25 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: argocd-tls
+  namespace: argocd
+spec:
+  secretName: argocd-server-tls
+  privateKey:
+    algorithm: RSA
+    size: 4096
+  duration: 87600h
+  renewBefore: 32700h
+  usages:
+    - server auth
+    - client auth
+    - key encipherment
+    - data encipherment
+  subject:
+    organizations: ["ArgoCD"]
+  commonName: argocd-server
+  dnsNames: ["argocd-server", "argocd-server.argocd", "argocd-server.argocd.kubernetes.svc", "argocd.apps.phalnet.com"]
+  issuerRef:
+    name: labs-ca
+    kind: ClusterIssuer
+    group: cert-manager.io
