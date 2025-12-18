@@ -121,6 +121,16 @@ write_files:
     permissions: '0600'
     encoding: b64
     content: ${base64encode(bootstrap-application)}
+  - path: /etc/k8s-bootstrap/labs-ca.crt
+    owner: root:root
+    permissions: '0600'
+    encoding: b64
+    content: ${base64encode(labs-ca-crt)}
+  - path: /etc/k8s-bootstrap/labs-ca.key
+    owner: root:root 
+    permissions: '0600'
+    encoding: b64
+    content: ${base64encode(labs-ca-key)}
 users:
   - default
   - name: tkjode
@@ -141,13 +151,16 @@ packages:
 runcmd:
   - systemctl enable qemu-guest-agent
   - systemctl start qemu-guest-agent
-  - apt update && apt -y dist-upgrade && apt -y autoremove
+  # Start relying on unattended-upgrades and speed up deploy process
+  #- apt update && apt -y dist-upgrade && apt -y autoremove
   - curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.34/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
   - echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.34/deb/ /" | tee /etc/apt/sources.list.d/kubernetes.list
   - apt update && apt -y install kubelet kubeadm kubectl && apt-mark hold kubelet kubeadm kubectl
   - systemctl enable --now kubelet
 %{ if node-select == 0 }
   - kubeadm init --config=/etc/kube-init.config.yaml
+  - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create secret tls labs-ca -n default --cert=/etc/k8s-bootstrap/labs-ca.crt --key=/etc/k8s-bootstrap/labs-ca.key
+
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create namespace argocd
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
@@ -156,4 +169,4 @@ runcmd:
 %{ else }
   - kubeadm join --control-plane --token ${cluster-join-token} ${control-plane-endpoint}:6443 --discovery-token-ca-cert-hash sha256:$(cat /etc/kubernetes/pki/ca.crt | openssl x509 -pubkey | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //')
 %{ endif }
-  - echo "done" > /tmp/cloud-config.done
+  - echo "done" > /tmp/cloud-config.doneTrust

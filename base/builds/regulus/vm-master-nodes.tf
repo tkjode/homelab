@@ -90,6 +90,8 @@ resource "proxmox_virtual_environment_file" "master-user-data-cloud-config" {
                       argocd-ssh-private-key  = var.argocd-ssh-private-key
                       repository-url          = var.repository-url
                       bootstrap-application   = local.argocd-application-bootstrap
+                      labs-ca-crt             = tls_self_signed_cert.labs-ca.cert_pem
+                      labs-ca-key             =      tls_private_key.labs-ca.private_key_pem
                     }
                   )
   }
