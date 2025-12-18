@@ -18,7 +18,7 @@ spec:
   subject:
     organizations: ["ArgoCD"]
   commonName: argocd-server
-  dnsNames: ["argocd-server", "argocd-server.argocd", "argocd-server.argocd.kubernetes.svc", "argocd.apps.phalnet.com"]
+  dnsNames: ["localhost", "argocd-server", "argocd-server.argocd", "argocd-server.argocd.svc", "argocd-server.argocd.svc.cluster.local", "argocd.apps.phalnet.com"]
   issuerRef:
     name: labs-ca
     kind: ClusterIssuer
