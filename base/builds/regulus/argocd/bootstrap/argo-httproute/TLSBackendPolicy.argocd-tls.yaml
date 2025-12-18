@@ -11,7 +11,7 @@ spec:
     sectionName: https
   validation:
     caCertificateRefs:
-    - name: kube-root-ca.crt
+    - name: argocd-server-tls
       group: ''
-      kind: ConfigMap
+      kind: Secret
     hostname: argocd.apps.phalnet.com
