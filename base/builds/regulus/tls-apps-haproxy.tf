@@ -54,7 +54,7 @@ resource "tls_locally_signed_cert" "cert-apps-phalnet-com" {
 # and other TLSBackends can leverage to trust
 
 resource "tls_private_key" "labs-ca" {
-  algorithm = RSA
+  algorithm = "RSA"
   rsa_bits = 4096
 }
 
