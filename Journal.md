@@ -1,5 +1,26 @@
 # Journal / Changelog
 
+## 2025-12-18
+
+- Cluster build remains quite reliable and have sped it up a bit by removing the apt upgrade cycle at boot time, and just rely on `unattended-upgrades` to create chaos at 4:00am
+- Used terraform to initialize a separate Certificate Authority - this is currently used to explicitly trust pods that serve HTTPS.  
+  - [ ] TODO: Noted that ArgoCD "hot reload" doesn't work if the `Secret` doesn't exist at startup - will need to do kustomization/helm hacks to ensure it's created early to allow hot-reload to recycle the pod.
+- Certificate popualtion with `cert-manager` is working well.  A `ClusterIssuer` is now deployed by ArgoCD, leveraging the kube-injected CA.
+- Moved some ArgoCD projects around and gave the ApplicationSet the ability to define a project for each component.  They must be explicitly defined alongside the ApplicationSet creation otherwise the projects will not kick off.  Also removed the concept of a 'bios' namespace and cleaned up auto-creation of unneccessary namespaces.  The cluster bootstrap is now very low-cruft.
+- Settled on Envoy Gateway Proxy, while a little complicated, it does grant a lot of power to configure things just right. 
+- Retired the `Talos` projects and archived the `cloud-init-testing` projects for reference.
+- Going to start working on post-boot k8s charts & features to deploy into the cluster, in no particular order:
+  - HTPC Stack
+    - Plex and/or Jellyfin
+    - Sabnzbd
+    - Sonarr/Radarr
+  - Self-Hosted Development
+    - gitea
+    - code-server
+    - kubernetes hosted runners for gitea
+  - And more...
+
+
 ## 2025-12-10
 
 - Have a fairly reliable cluster build that has strong durability with generated CAs, keys and configurations.
