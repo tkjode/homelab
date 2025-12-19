@@ -9,6 +9,7 @@ Underneath `/base`, there are folders pertaining to particular automation topics
 - A GitHub Actions runner localized inside the target environment (eg. my home network)
 - Proxmox API Key + Secret
 - Sufficient CPU+Memory on the target compute node to run all the intended workloads
+- A hosted zone in AWS and a Route53 enabled user/role to do DNS-01 challenges for LetsEncrypt/certbot. 
 
 ## Journal
 
@@ -16,12 +17,12 @@ See [Journal.md](Journal.md) for progress reports as they happen.
 
 ## Things to figure out
 
-- [ ] Once the cluster is built and stable, Kick off "Day 2 Ops" ?
-  - [ ] ArgoCD + app of apps boot up helm chart
-- [ ] DNS+Cert Integration - cluster trust fixes /w more DNS+IP SANs on the API Server
-  - [ ] Route53 integration - from within cluster?
-- [ ] HAProxy Ingress Controller (~~mostly worked out~~TLS is killing me)
-  - [ ] Gateway API + Envoy looks like the next iteration on the Ingress paradigm for kubernetes, do that!
+- [x] Once the cluster is built and stable, Kick off "Day 2 Ops" ?
+  - [x] ArgoCD + app of apps boot up helm chart
+- [x] DNS+Cert Integration - cluster trust fixes /w more DNS+IP SANs on the API Server
+  - [x] Route53 integration - ~~from within cluster?~~ Cluster has a CA and Cert-Manager for internal, external TLS trust is handled by certbot on haproxy gw. 
+- [x] HAProxy Ingress Controller (~~mostly worked out~~ ~~TLS is killing me~~ TLS has been pwned)
+  - [x] Gateway API + Envoy looks like the next iteration on the Ingress paradigm for kubernetes, do that!
 - Kube bootstrap cloud-init machines
   - [x] Make master nodes and worker nodes from cloud-init bases
   - [x] Certificate generation (TF generated x509s maybe?) for cluster api+etcd certs
@@ -31,8 +32,8 @@ See [Journal.md](Journal.md) for progress reports as they happen.
   - [x] Booting & configuring OpenWRT reliably to route traffic
     - Actually made an ubuntu router VM using cloud-init that works well.
   - [x] NGINX forwarding from the local network... NAT or DualHomed?
-    - Dropping NGINX for HAProxy
-  - [x] Reliably configure nodes with talosctl after TF spins them up
+    - Dropping ~~NGINX~~ for *HAProxy*
+  - [x] Reliably configure nodes with `talosctl` after TF spins them up
     - Not going to use Talos anymore.
 - [x] SSH Sign Commits and Tags
 - [x] ~~Seeding/Updating ISO images into Proxmox Storage~~  Yeah dude we can do ISOs and IMGs and GZIP decompression and everything now.
@@ -42,9 +43,9 @@ See [Journal.md](Journal.md) for progress reports as they happen.
 ## ArgoCD Cluster Bootstrap
 
 - `BIOS`
-  - [ ] Gateway API
-  - [ ] Ingress Controller
-  - [ ] External Secrets Operator
+  - [x] Gateway API
+  - [x] Ingress Controller
+  - [x] External Secrets Operator
 - `COMMAND.COM`
-  - [ ] Cert Manager
-  - [ ] And more...
+  - [x] Cert Manager
+  - [x] And more...
