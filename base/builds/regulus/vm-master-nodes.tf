@@ -7,6 +7,7 @@ resource "proxmox_virtual_environment_vm" "masters" {
   stop_on_destroy           = true
   vm_id                     = var.proxmox-vmid-offset + var.master-ip-offset + count.index
   depends_on                = [ proxmox_virtual_environment_vm.regulus-gateway ]
+  pool_id                   = proxmox_virtual_environment_pool.cluster.pool_id
 
   agent {
     enabled                 = true

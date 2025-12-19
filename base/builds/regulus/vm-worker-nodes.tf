@@ -7,6 +7,7 @@ resource "proxmox_virtual_environment_vm" "workers" {
   stop_on_destroy           = true
   vm_id                     = var.proxmox-vmid-offset + var.worker-ip-offset + count.index
   depends_on                = [ proxmox_virtual_environment_vm.regulus-gateway, proxmox_virtual_environment_vm.masters ]
+  pool_id                   = proxmox_virtual_environment_pool.cluster.pool_id
 
   lifecycle {
     replace_triggered_by    = [ proxmox_virtual_environment_vm.masters ]

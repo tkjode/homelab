@@ -5,6 +5,7 @@ resource "proxmox_virtual_environment_vm" "regulus-gateway" {
   node_name                 = var.proxmox_node
   stop_on_destroy           = true
   vm_id                     = var.proxmox-vmid-offset + 1
+  pool_id                   = proxmox_virtual_environment_pool.cluster.pool_id
 
   agent {
     enabled                 = true
@@ -74,8 +75,8 @@ resource "proxmox_virtual_environment_file" "gateway-user-data-cloud-config" {
                                   certbot_aws_access_key  = var.certbot_aws_access_key
                                   certbot_aws_secret_key  = var.certbot_aws_secret_key
                                   certbot_contact_email   = var.certbot_contact_email
-                                  cluster_domain  = var.cluster-domain
-                                  cluster_name    = var.cluster-name
+                                  cluster_domain          = var.cluster-domain
+                                  cluster_name            = var.cluster-name
                                 }
                               )
   }
