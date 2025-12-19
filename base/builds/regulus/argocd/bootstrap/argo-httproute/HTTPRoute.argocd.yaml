@@ -1,11 +1,11 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: argocd.apps.phalnet.com
+  name: argocd.regulus.phalnet.com
   namespace: argocd
 spec:
   hostnames:
-  - "argocd.apps.phalnet.com"
+  - "argocd.regulus.phalnet.com"
   parentRefs:
   - kind: Gateway
     namespace: default
