@@ -1,10 +1,17 @@
 # Journal / Changelog
 
+## 2025-12-19
+
+- Certbot installed and configured to serve LetsEncrypt certificates
+  - [ ] TODO: Need to enable haproxy admin socket and implement an HAProxy cert injector post-update hook when certbot does its renewal.
+- *Milestone:* Basic App Hosting Readiness upon bootstrap achieved.
+
 ## 2025-12-18
 
 - Cluster build remains quite reliable and have sped it up a bit by removing the apt upgrade cycle at boot time, and just rely on `unattended-upgrades` to create chaos at 4:00am
 - Used terraform to initialize a separate Certificate Authority - this is currently used to explicitly trust pods that serve HTTPS.  
-  - [ ] TODO: Noted that ArgoCD "hot reload" doesn't work if the `Secret` doesn't exist at startup - will need to do kustomization/helm hacks to ensure it's created early to allow hot-reload to recycle the pod.
+  - [x] TODO: Noted that ArgoCD "hot reload" doesn't work if the `Secret` doesn't exist at startup - will need to do kustomization/helm hacks to ensure it's created early to allow hot-reload to recycle the pod.
+    - Apparently not required, the last rebuild works through the envoy ingress using just the updated `TLSBackendPolicy` and cert trusts configured.
 - Certificate popualtion with `cert-manager` is working well.  A `ClusterIssuer` is now deployed by ArgoCD, leveraging the kube-injected CA.
 - Moved some ArgoCD projects around and gave the ApplicationSet the ability to define a project for each component.  They must be explicitly defined alongside the ApplicationSet creation otherwise the projects will not kick off.  Also removed the concept of a 'bios' namespace and cleaned up auto-creation of unneccessary namespaces.  The cluster bootstrap is now very low-cruft.
 - Settled on Envoy Gateway Proxy, while a little complicated, it does grant a lot of power to configure things just right. 
