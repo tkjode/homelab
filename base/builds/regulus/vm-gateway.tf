@@ -63,14 +63,19 @@ resource "proxmox_virtual_environment_file" "gateway-user-data-cloud-config" {
     data                    = templatefile(
                                 "cloud-init/gateway/gw-user-data.yaml.tftpl",
                                 {
-                                  gw-net-cluster      = var.gw-net-cluster
-                                  gw-hostname         = var.gw-hostname
-                                  master-ip-offset    = var.master-ip-offset
-                                  haproxy_tls_cert    = tls_locally_signed_cert.cert-apps-phalnet-com.cert_pem
-                                  haproxy_key         = tls_private_key.apps-proxy-master.private_key_pem
-                                  kube_ingress_ca     = tls_locally_signed_cert.front-proxy-ca.cert_pem
-                                    gateway-rsa       = tls_private_key.gateway-rsa.private_key_pem
-                                    gateway-ecdsa     = tls_private_key.gateway-ecdsa.private_key_pem
+                                  gw-net-cluster          = var.gw-net-cluster
+                                  gw-hostname             = var.gw-hostname
+                                  master-ip-offset        = var.master-ip-offset
+                                  haproxy_tls_cert        = tls_locally_signed_cert.cert-apps-phalnet-com.cert_pem
+                                  haproxy_key             = tls_private_key.apps-proxy-master.private_key_pem
+                                  kube_ingress_ca         = tls_locally_signed_cert.front-proxy-ca.cert_pem
+                                    gateway-rsa           = tls_private_key.gateway-rsa.private_key_pem
+                                    gateway-ecdsa         = tls_private_key.gateway-ecdsa.private_key_pem
+                                  certbot_aws_access_key  = var.certbot_aws_access_key
+                                  certbot_aws_secret_key  = var.certbot_aws_secret_key
+                                  certbot_contact_email   = var.certbot_contact_email
+                                  cluster_domain  = var.cluster-domain
+                                  cluster_name    = var.cluster-name
                                 }
                               )
   }

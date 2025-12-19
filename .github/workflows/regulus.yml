@@ -19,6 +19,10 @@ env:
   TF_VAR_default_ssh_pub_key: ${{ secrets.DEFAULT_PUB_KEY }}
   TF_VAR_argocd-ssh-private-key: ${{ secrets.ARGOCD_REGULUS_SSH_PRIVATE_KEY }}
   TF_VAR_repository-url: ssh://git@github.com/${{ github.repository }}
+  TF_VAR_certbot_aws_access_key: ${{ secrets.CERTBOT_AWS_ACCESS_KEY }}
+  TF_VAR_certbot_aws_secret_key: ${{ secrets.CERTBOT_AWS_SECRET_KEY }}
+  TF_VAR_certbot_contact_email: ${{ vars.CERTBOT_CONTACT_EMAIL }}
+  TF_VAR_cluster-domain: ${{ vars.DNS_ZONE }}
 on:
   workflow_dispatch:
   push:

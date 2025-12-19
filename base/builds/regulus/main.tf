@@ -13,6 +13,21 @@ terraform {
   }
 }
 
+variable "certbot_aws_access_key" {
+  description   = "AWS Access Key ID to be used by CERTBOT, ideally should have a Route53 management-only role for the zone in use"
+  type          = "string"
+}
+
+variable "certbot_aws_secret_key" {
+  description   = "AWS Secret Key to be used by CERTBOT, associated with the Certbot AWS Access Key"
+  type          = "string"
+}
+
+variable "certbot_contact_email" { 
+  description   = "E-Mail to use when registering ACME/EFF Account"
+  type          = "string"
+}
+
 variable "proxmox_node" {
   description   = "The node name of the physical Proxmox host on which kubernetes VMs and networks will be deployed"
   type          = string
@@ -127,7 +142,7 @@ variable "cluster-name" {
 variable "cluster-domain" {
   description = "DNS Domain Suffix to be applied to cluster identity (not neccessarily the app gateway)"
   type        = string
-  default     = "phalnet.com"
+  default     = "_local"
 }
 
 variable "argocd-ssh-private-key" {

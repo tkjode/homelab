@@ -14,11 +14,12 @@ resource "tls_self_signed_cert" "proxy-authority" {
   is_ca_certificate   = true
   allowed_uses    = [ "digital_signature", "cert_signing", "key_encipherment", "crl_signing" ]
 
-  dns_names       = ["ca.apps.phalnet.com"]
+  dns_names       = [ join(".", ["ca", var.cluster-name, var.cluster-domain ]) ]
 
   subject {
-    common_name   = "ca.apps.phalnet.com"
+    common_name   = join(".", ["ca", var.cluster-name, var.cluster-domain ])
     organization  = "PhalNet Inc. HomeLabs"
+    organizational_unit = "Certificate Authority"
   }
 }
 
@@ -26,13 +27,18 @@ resource "tls_self_signed_cert" "proxy-authority" {
 
 resource "tls_cert_request" "req-apps-phalnet-com" {
   private_key_pem = tls_private_key.apps-proxy-master.private_key_pem
-  dns_names       = [ "apps.phalnet.com", "*.apps.phalnet.com" ]
-  ip_addresses    = [ "10.0.0.10", "192.168.64.1" ]
+  dns_names       = [ join(".", [ var.cluster-name, var.cluster-domain ]), join(".", ["*", var.cluster-name, var.cluster-domain]) ]
+  #ip_addresses    = [ "10.0.0.10", "192.168.64.1" ]
+
+  ip_addresses    = [
+                      cidrhost( join("/", [ var.gw-net-home.network, var.gw-net-home.mask]), var.gw-net-home.cidr ),
+                      cidrhost( join("/", [ var.gw-net-cluster.network, var.gw-net-cluster.mask]), var.gw-net-cluster.cidr )
+                    ]  
 
   subject {
-    common_name   = "apps.phalnet.com"
-    organization  = "PhalNet Labs HAProxy"
-    organizational_unit = "Regulus"
+    common_name   = join(".", [ var.cluster-name, var.cluster-domain ])
+    organization  = "PhalNet Labs Inc. HomeLabs"
+    organizational_unit = join(" ", ["HAProxy for ", var.cluster-name])
   }
 }
 
@@ -64,10 +70,10 @@ resource "tls_self_signed_cert" "labs-ca" {
   is_ca_certificate   = true
   allowed_uses    = [ "digital_signature", "cert_signing", "key_encipherment", "crl_signing" ]
 
-  dns_names       = ["labs-ca.internal"]
+  dns_names       = [ join(".", [var.cluster-name, "internal"]) ]
 
   subject {
-    common_name   = "labs-ca.internal"
+    common_name   = join(".", [var.cluster-name, "internal"])
     organization  = "HomeLab Internal TLS Backend Signatory"
   }
 }

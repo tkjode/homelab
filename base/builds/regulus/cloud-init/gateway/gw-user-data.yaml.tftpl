@@ -36,21 +36,28 @@ write_files:
       Unattended-Upgrade::Automatic-Reboot-Time "04:00";
     owner: root:root
     permissions: '0644'
-  - path: /etc/haproxy/pki/cluster-apps.pem
-    content: ${base64encode(haproxy_tls_cert)}
-    encoding: b64
-    owner: 'root:root'
-    permissions: '0600'
-  - path: /etc/haproxy/pki/cluster-apps.pem.key
-    content: ${base64encode(haproxy_key)}
-    encoding: b64
-    owner: 'root:root'
-    permissions: '0600'
-  - path: /etc/haproxy/pki/proxy-ca.pem
-    content: ${base64encode(kube_ingress_ca)}
-    encoding: b64
-    owner: 'root:root'
-    permissions: '0600'
+  #======= Start using LetsEncrypt instead of Self-Signed ========
+  #- path: /etc/haproxy/pki/cluster-apps.pem
+  #  content: ${base64encode(haproxy_tls_cert)}
+  #  encoding: b64
+  #  owner: 'root:root'
+  #  permissions: '0600'
+  #- path: /etc/haproxy/pki/cluster-apps.pem.key
+  #  content: ${base64encode(haproxy_key)}
+  #  encoding: b64
+  #  owner: 'root:root'
+  #  permissions: '0600'
+  #- path: /etc/haproxy/pki/proxy-ca.pem
+  #  content: ${base64encode(kube_ingress_ca)}
+  #  encoding: b64
+  #  owner: 'root:root'
+  #  permissions: '0600'
+  #===============================
+  - path: /root/.aws/credentials
+    content: |
+      [default]
+      aws_access_key_id=${certbot_aws_access_key}
+      aws_secret_access_key=${certbot_aws_secret_key}
   - path: /etc/haproxy/haproxy.cfg
     content: |
       global
@@ -65,6 +72,10 @@ write_files:
         timeout connect 10s
         timeout client 30s
         timeout server 30s
+      crt-store gateway
+        crt-base /etc/letsencrypt/live/${join(".", [cluster_name, cluster_domain])}
+        key-base /etc/letsencrypt/live/${join(".", [cluster_name, cluster_domain])}
+        load crt "fullchain.pem" key "privkey.pem"
       frontend stats
         mode http
         bind :80
@@ -73,7 +84,7 @@ write_files:
         stats uri /stats
         stats show-modules
       frontend secure_cluster_apps
-        bind :443 ssl crt /etc/haproxy/pki/cluster-apps.pem
+        bind :443 ssl crt "@gateway/fullchain.pem"
         mode http
         default_backend cluster-default-gateway
       frontend cluster_api
@@ -107,7 +118,6 @@ packages:
   - qemu-guest-agent
   - net-tools
   - curl
-  - haproxy
   - iptables-persistent
 runcmd:
   - systemctl enable qemu-guest-agent
@@ -116,5 +126,9 @@ runcmd:
   - iptables -A FORWARD -i eth0 -o eth1 -m state --state ESTABLISHED,RELATED -j ACCEPT
   - iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
   - iptables-save > /etc/iptables/rules.v4
-  - apt update && apt -y dist-upgrade && apt -y autoremove
+  - snap install --classic certbot
+  - snap set certbot trust-plugin-with-root=ok
+  - snap install certbot-dns-route53
+  - certbot certonly -n -vv -m tkjode@gmail.com -d ${join(".", [cluster_name, cluster_domain])} -d ${join(".", ["*", cluster_name, cluster_domain]_} --dns-route53 --agree-tos
+  - apt -y install haproxy
   - echo "done" > /tmp/cloud-config.done
