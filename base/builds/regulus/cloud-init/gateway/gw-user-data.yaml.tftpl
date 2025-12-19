@@ -129,6 +129,6 @@ runcmd:
   - snap install --classic certbot
   - snap set certbot trust-plugin-with-root=ok
   - snap install certbot-dns-route53
-  - certbot certonly -n -vv -m tkjode@gmail.com -d ${join(".", [cluster_name, cluster_domain])} -d ${join(".", ["*", cluster_name, cluster_domain]_} --dns-route53 --agree-tos
+  - certbot certonly -n -vv -m tkjode@gmail.com -d ${join(".", [cluster_name, cluster_domain])} -d ${join(".", ["*", cluster_name, cluster_domain])} --dns-route53 --agree-tos
   - apt -y install haproxy
   - echo "done" > /tmp/cloud-config.done
