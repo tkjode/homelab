@@ -23,7 +23,7 @@ variable "certbot_aws_secret_key" {
   type          = string
 }
 
-variable "certbot_contact_email" { 
+variable "certbot_contact_email" {
   description   = "E-Mail to use when registering ACME/EFF Account"
   type          = string
 }
@@ -153,7 +153,7 @@ variable "argocd-ssh-private-key" {
 variable "repository-url" {
   description = "Where ArgoCD will access for bootstrap manifests"
   type        = string
-  default     = "ssh://git@github.com/tkjode/homelab"
+  default     = "ssh://git@github.com./tkjode/homelab"
 }
 
 variable "proxmox-vmid-offset" {
