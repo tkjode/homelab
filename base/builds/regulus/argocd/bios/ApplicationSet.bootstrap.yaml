@@ -25,7 +25,7 @@ spec:
     spec:
       project: '{{.project}}'
       source:
-        repoURL: ssh://git@github.com./tkjode/homelab
+        repoURL: ssh://git@github.com/tkjode/homelab
         targetRevision: HEAD
         path: base/builds/regulus/argocd/bootstrap/{{.folder}}
       destination:

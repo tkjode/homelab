@@ -153,7 +153,7 @@ variable "argocd-ssh-private-key" {
 variable "repository-url" {
   description = "Where ArgoCD will access for bootstrap manifests"
   type        = string
-  default     = "ssh://git@github.com./tkjode/homelab"
+  default     = "ssh://git@github.com/tkjode/homelab"
 }
 
 variable "proxmox-vmid-offset" {
