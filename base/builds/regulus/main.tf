@@ -139,6 +139,12 @@ variable "cluster-name" {
   default     = "regulus"
 }
 
+variable "default-ingress-prefix" {
+  description = "The Wildcard + Ingress Prefix to register with Certbot and expose in Envoy (eg. *.apps.domain.com)"
+  type        = string
+  default     = "apps"
+}
+
 variable "cluster-domain" {
   description = "DNS Domain Suffix to be applied to cluster identity (not neccessarily the app gateway)"
   type        = string

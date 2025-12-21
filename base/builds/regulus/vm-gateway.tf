@@ -77,6 +77,7 @@ resource "proxmox_virtual_environment_file" "gateway-user-data-cloud-config" {
                                   certbot_contact_email   = var.certbot_contact_email
                                   cluster_domain          = var.cluster-domain
                                   cluster_name            = var.cluster-name
+                                  ingress_prefix          = var.default-ingress-prefix
                                 }
                               )
   }

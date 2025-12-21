@@ -1,3 +1,4 @@
+# --------------------------------------
 # Cluster HAProxy Front-End Certificates
 # --------------------------------------
 # This will just be for testing PKI on HAProxy
@@ -23,20 +24,22 @@ resource "tls_self_signed_cert" "proxy-authority" {
   }
 }
 
-# HAProxy CSR/CRT/KEY for tcp/443
+# ---------------------------------------------
+# Envoy Backend CSR/CRT/KEY for tcp/443 Ingress
+# ---------------------------------------------
+# Uses the Default Ingress Prefix (eg. apps), not the cluster name, to avoid ndots:5 search path dns breaking prefixing
 
-resource "tls_cert_request" "req-apps-phalnet-com" {
+resource "tls_cert_request" "default-ingress" {
   private_key_pem = tls_private_key.apps-proxy-master.private_key_pem
-  dns_names       = [ join(".", [ var.cluster-name, var.cluster-domain ]), join(".", ["*", var.cluster-name, var.cluster-domain]) ]
-  #ip_addresses    = [ "10.0.0.10", "192.168.64.1" ]
+  dns_names       = [ join(".", [ var.default-ingress-prefix, var.cluster-domain ]), join(".", ["*", var.default-ingress-prefix, var.cluster-domain]) ]
 
   ip_addresses    = [
                       cidrhost( join("/", [ var.gw-net-home.network, var.gw-net-home.mask]), var.gw-net-home.cidr ),
                       cidrhost( join("/", [ var.gw-net-cluster.network, var.gw-net-cluster.mask]), var.gw-net-cluster.cidr )
-                    ]  
+                    ]
 
   subject {
-    common_name   = join(".", [ var.cluster-name, var.cluster-domain ])
+    common_name   = join(".", [ var.default-ingress-prefix, var.cluster-domain ])
     organization  = "PhalNet Labs Inc. HomeLabs"
     organizational_unit = join(" ", ["HAProxy for ", var.cluster-name])
   }
@@ -45,16 +48,16 @@ resource "tls_cert_request" "req-apps-phalnet-com" {
 resource "tls_locally_signed_cert" "cert-apps-phalnet-com" {
   ca_private_key_pem = tls_private_key.apps-proxy-master.private_key_pem
   ca_cert_pem        = tls_self_signed_cert.proxy-authority.cert_pem
-  cert_request_pem   = tls_cert_request.req-apps-phalnet-com.cert_request_pem
+  cert_request_pem   = tls_cert_request.default-ingress.cert_request_pem
 
   allowed_uses      = [ "digital_signature", "key_encipherment", "data_encipherment" ]
   validity_period_hours = 87600
 }
 
 # ---------------------------------------------
-# ClusterIssuer CA for Internally Signed Certs 
+# ClusterIssuer CA for Internally Signed Certs
 # ---------------------------------------------
-# 
+#
 # This CA will be injected on initialization to
 # give cert-manager an Internal CA that Envoy
 # and other TLSBackends can leverage to trust

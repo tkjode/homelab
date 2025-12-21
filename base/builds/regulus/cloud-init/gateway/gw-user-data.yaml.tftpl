@@ -73,8 +73,8 @@ write_files:
         timeout client 30s
         timeout server 30s
       crt-store gateway
-        crt-base /etc/letsencrypt/live/${join(".", [cluster_name, cluster_domain])}
-        key-base /etc/letsencrypt/live/${join(".", [cluster_name, cluster_domain])}
+        crt-base /etc/letsencrypt/live/${join(".", [ingress_prefix, cluster_domain])}
+        key-base /etc/letsencrypt/live/${join(".", [ingress_prefix, cluster_domain])}
         load crt "fullchain.pem" key "privkey.pem"
       frontend stats
         mode http
@@ -130,6 +130,6 @@ runcmd:
   - snap install --classic certbot
   - snap set certbot trust-plugin-with-root=ok
   - snap install certbot-dns-route53
-  - certbot certonly -n -vv -m tkjode@gmail.com -d ${join(".", [cluster_name, cluster_domain])} -d ${join(".", ["*", cluster_name, cluster_domain])} --dns-route53 --agree-tos
+  - certbot certonly -n -vv -m tkjode@gmail.com -d ${join(".", [ingress_prefix, cluster_domain])} -d ${join(".", ["*", ingress_prefix, cluster_domain])} --dns-route53 --agree-tos
   - systemctl restart haproxy
   - echo "done" > /tmp/cloud-config.done
