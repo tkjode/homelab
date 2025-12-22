@@ -7,6 +7,8 @@ metadata:
   name: nfs-durable
 allowVolumeExpansion: false
 mountOptions:
+- rsize=8192
+- wsize=8192
 - timeo=30
 - nosuid
 - soft
