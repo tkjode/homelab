@@ -5,4 +5,5 @@ metadata:
 resources:
   - AppProject.networking.yaml
   - AppProject.trusted-platform.yaml
+  - AppProject.storage.yaml
   - ApplicationSet.bootstrap.yaml

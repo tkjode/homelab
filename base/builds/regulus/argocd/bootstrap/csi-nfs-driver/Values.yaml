@@ -1,0 +1,3 @@
+csi-driver-nfs:
+  driver:
+    mountPermissions: "0777"

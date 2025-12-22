@@ -19,6 +19,8 @@ spec:
         project: networking
       - folder: cert-manager     # Needs configuration after static apply
         project: trusted-platform
+      - folder: csi-nfs-driver
+        project: storage
   template:
     metadata:
       name: 'boot-{{.folder}}'
