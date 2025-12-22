@@ -1,0 +1,19 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  annotations:
+    usage: "Stateful and Durable PVCs"
+    argocd.argoproj.io/sync-options: "Replace=true"
+  name: nfs-durable
+allowVolumeExpansion: false
+mountOptions:
+- timeo=30
+- nosuid
+- soft
+parameters:
+  server: 10.0.0.5
+  share: /srv/regulus/stateful
+  subDir: ${pvc.metadata.namespace}#${pvc.metadata.name}
+provisioner: nfs.csi.k8s.io
+reclaimPolicy: Retain
+volumeBindingMode: Immediate

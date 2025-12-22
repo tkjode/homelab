@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: flexo-nfs-storageclass
+resources:
+  - StorageClass.nfs-bind.yaml
+  - StorageClass.nfs-durable.yaml
+  - StorageClass.nfs-pvc.yaml

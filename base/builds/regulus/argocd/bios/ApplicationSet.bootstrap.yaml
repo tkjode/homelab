@@ -21,6 +21,8 @@ spec:
         project: trusted-platform
       - folder: csi-nfs-driver
         project: storage
+      - folder: nfs-storage
+        project: storage
   template:
     metadata:
       name: 'boot-{{.folder}}'
