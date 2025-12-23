@@ -23,6 +23,8 @@ spec:
         project: storage
       - folder: nfs-storage
         project: storage
+      - folder: metrics-server
+        project: telemetry
   template:
     metadata:
       name: 'boot-{{.folder}}'
