@@ -4,3 +4,9 @@ metadata:
   name: metrics-server
 resources:
   - https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+patches:
+  - target:
+      group: v1
+      kind: Deployment
+      name: metrics-server
+    path: patch/add-flag-allow-insecure.yaml
