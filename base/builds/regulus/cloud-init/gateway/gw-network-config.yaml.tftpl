@@ -10,8 +10,8 @@ network:
       addresses:
         - ${join("/", [cidrhost(join("/", [gw-net-home.network, gw-net-home.mask]), gw-net-home.cidr), gw-net-home.mask])}
       nameservers:
-        - "1.1.1.1"
-        - "4.4.4.4"
+        addresses: ["1.1.1.1", "4.4.4.4"]
+        search: ["regulus.phalnet.com"]
       routes:
         - to: default
           via: ${cidrhost(join("/", [gw-net-home.network, gw-net-home.mask]), gw-net-home.gateway)}
