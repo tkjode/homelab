@@ -44,6 +44,7 @@ resource "proxmox_virtual_environment_vm" "bastion" {
 
     dns {
       servers           = [ "192.168.64.1" ]
+      domain            = join(".", [ var.cluster-name, var.cluster-domain ])
     }
 
     ip_config {
