@@ -58,6 +58,32 @@ write_files:
       [default]
       aws_access_key_id=${certbot_aws_access_key}
       aws_secret_access_key=${certbot_aws_secret_key}
+  - path: /etc/bind/named.conf.options
+    content: |
+      options {
+        directory "/var/cache/bind";
+        listen-on { any; };
+        listen-on-ipv6 { any; };
+        recursion  yes;
+        allow-query { 10.0.0.0/24; 192.168.64.0/24; localhost };
+        allow-recursion { 10.0.0.0/24; 192.168.64.0/24; localhost };
+        forwarders { 1.1.1.1; 4.4.4.4; };
+        dnssec-validation auto;
+        auth-nxdomain no;
+        minimal-responses yes;
+      } 
+  - path: /etc/bind/named.conf.local
+    content: |
+      zone "regulus.phalnet.com" IN {
+        type master;
+        file "/etc/bind/db.regulus.phalnet.com";
+      };
+
+      zone "64.168.192.in-addr.arpa" IN {
+        type master;
+        file "/etc/bind/db.192.168.64.0_24";
+      }
+
   - path: /etc/haproxy/haproxy.cfg
     content: |
       global
@@ -120,9 +146,13 @@ packages:
   - haproxy
   - curl
   - iptables-persistent
+  - bind9
+  - bind9-utils
+  - dnsutils
 runcmd:
   - systemctl enable qemu-guest-agent
   - systemctl start qemu-guest-agent
+  - systemctl enable --now bind9
   - iptables -A FORWARD -i eth1 -o eth0 -j ACCEPT
   - iptables -A FORWARD -i eth0 -o eth1 -m state --state ESTABLISHED,RELATED -j ACCEPT
   - iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE

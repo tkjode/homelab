@@ -17,6 +17,14 @@ See [Journal.md](Journal.md) for progress reports as they happen.
 
 ## Things to figure out
 
+#### TODO/WIP
+
+- [ ] Make Gateway do some basic IPAM for the cluster.  There are a lot of DNS queries firing out to the internet needlessly.
+  - [ ] Full IPAM DHCP for Private Network?
+
+
+#### Done
+
 - [x] Once the cluster is built and stable, Kick off "Day 2 Ops" ?
   - [x] ArgoCD + app of apps boot up helm chart
 - [x] DNS+Cert Integration - cluster trust fixes /w more DNS+IP SANs on the API Server
