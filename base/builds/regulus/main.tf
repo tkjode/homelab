@@ -52,7 +52,7 @@ variable "home-network-bridge" {
 }
 
 variable "nameservers" {
-  description   = "Where the router and nodes will be configured to query DNS"
+  description   = "Where the nodes will be configured to query DNS"
   type          = list(string)
   default       = ["192.168.64.1"]
 }
