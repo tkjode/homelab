@@ -54,7 +54,7 @@ variable "home-network-bridge" {
 variable "nameservers" {
   description   = "Where the router and nodes will be configured to query DNS"
   type          = list(string)
-  default       = ["1.1.1.1", "4.4.4.4"]
+  default       = ["192.168.64.1"]
 }
 
 variable "gw-hostname" {

@@ -43,7 +43,7 @@ resource "proxmox_virtual_environment_vm" "bastion" {
     datastore_id        = "cloudinit"
 
     dns {
-      servers           = [ "1.1.1.1", "4.4.4.4" ]
+      servers           = [ "192.168.64.1" ]
     }
 
     ip_config {
