@@ -63,15 +63,17 @@ write_files:
       options {
         directory "/var/cache/bind";
         listen-on { any; };
-        listen-on-ipv6 { any; };
+        listen-on-v6 { any; };
         recursion  yes;
-        allow-query { 10.0.0.0/24; 192.168.64.0/24; localhost };
-        allow-recursion { 10.0.0.0/24; 192.168.64.0/24; localhost };
+        allow-query { 10.0.0.0/24; 192.168.64.0/24; localhost; };
+        allow-recursion { 10.0.0.0/24; 192.168.64.0/24; localhost; };
         forwarders { 1.1.1.1; 4.4.4.4; };
         dnssec-validation auto;
         auth-nxdomain no;
         minimal-responses yes;
-      } 
+      };
+      
+      include "/etc/named.rfc1912.zones";
   - path: /etc/bind/named.conf.local
     content: |
       zone "regulus.phalnet.com" IN {
@@ -82,8 +84,48 @@ write_files:
       zone "64.168.192.in-addr.arpa" IN {
         type master;
         file "/etc/bind/db.192.168.64.0_24";
-      }
-
+      };
+  - path: /etc/bind/db.regulus.phalnet.com
+    content: |
+      $TTL 300
+      @   IN SOA ns1.regulus.phalnet.com. admin.regulus.phalnet.com. (
+            2026010101 ; Serial (YYYYMMDDNN)
+            3600       ; Refresh
+            900        ; Retry
+            1209600    ; Expire
+            300 )      ; Negative Cache TTL
+      @   IN NS ns1.regulus.phalnet.com.
+      ns1        IN A 192.168.64.1   ; Self-Pointer
+      @          IN A 192.168.64.1   ; Default to HAProxy LB
+      gateway    IN A 192.168.64.1   ; Me
+      bastion    IN A 192.168.64.2   ; K8s Troubleshooter VM
+      master-0   IN A 192.168.64.4   ; etcd / api
+      master-1   IN A 192.168.64.5   ; etcd / api
+      master-2   IN A 192.168.64.6   ; etcd / api
+      worker-0   IN A 192.168.64.8   ; workers
+      worker-1   IN A 192.168.64.9
+      worker-2   IN A 192.168.64.10
+      worker-3   IN A 192.168.64.11
+      worker-4   IN A 192.168.64.12
+      worker-5   IN A 192.168.64.13
+      cluster-ingress IN A 192.168.64.248   ; Metal LB endpoint for HAProxy
+  - path: /etc/bind/db.192.168.64.0_24
+    content: |
+      $TTL 300
+      @   IN SOA ns1.regulus.phalnet.com. admin.regulus.phalnet.com. (
+            2026010101
+            3600
+            900
+            1209600
+            300 )
+          IN NS ns1.regulus.phalnet.com.
+      1   IN PTR gateway.regulus.phalnet.com.
+      2   IN PTR bastion.regulus.phalnet.com.
+      4   IN PTR master-0.regulus.phalnet.com.
+      5   IN PTR master-1.regulus.phalnet.com.
+      6   IN PTR master-2.regulus.phalnet.com.
+      ; Skipping Workers, want this in DHCP-managed IPAM eventually
+      248 IN PTR cluster-ingress.regulus.phalnet.com.
   - path: /etc/haproxy/haproxy.cfg
     content: |
       global
