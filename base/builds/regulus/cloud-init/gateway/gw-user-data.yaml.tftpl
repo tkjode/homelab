@@ -73,7 +73,7 @@ write_files:
         minimal-responses yes;
       };
       
-      include "/etc/named.rfc1912.zones";
+      include "/etc/bind/named.conf.default-zones";
   - path: /etc/bind/named.conf.local
     content: |
       zone "regulus.phalnet.com" IN {
