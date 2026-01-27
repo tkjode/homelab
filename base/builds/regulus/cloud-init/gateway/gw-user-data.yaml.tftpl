@@ -2,7 +2,6 @@
 hostname: ${gw-hostname}
 timezone: America/Toronto
 bootcmd:
-  - systemctl disable --now systemd-network-wait-online.service
   - sysctl -w net.ipv4.ip_forward=1
 write_files:
   - path: /etc/sysctl.d/99-ipv.conf
@@ -208,4 +207,5 @@ runcmd:
   - snap set certbot trust-plugin-with-root=ok
   - snap install certbot-dns-route53
   - certbot certonly -n -v -m tkjode@gmail.com -d ${join(".", [cluster_name, cluster_domain])} -d ${join(".", ["*", ingress_prefix, cluster_domain])} --dns-route53 --agree-tos
+  - systemctl restart haproxy
   - echo "done" > /tmp/cloud-config.done

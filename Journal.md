@@ -6,6 +6,9 @@
   - LetsEncrypt rate limits after 5 certificate requests in a 24 hour period, forcing a 24 hour wait time to cool down, I guess I'm borked for now.
   - This neccessitates externalizing the certificate store so that the gateway can be rebuilt but retain the certificates.
     - S3 plugins suck, going to create an NFS bind to a letsencrypt folder for the gateway to use as persistent storage. 
+  - __Update:__ The NAS build has been sorted after some drama around `no_root_squash`, but there was trouble caused by certbot using a new folder when changing the order the certificates were raised in.
+    - Updated the path but now haproxy still refuses to start up a boot time.
+    - Attempts to crush network-wait-online do not appear to work, the command when run manually still hangs even though all networks are online and even with -i and --ignore options.
 
 ## 2026-01-26
 
