@@ -173,3 +173,23 @@ variable "kubernetes-version" {
   type        = string
   default     = "v1.35"
 }
+
+variable "letsencrypt-storage" {
+  description = "Object containing the NFS Mount Data for the LetsEncrypt folder"
+  type        = object({
+                  fs_spec     = string
+                  fs_file     = string
+                  fs_vfstype  = string
+                  fs_mntopts  = string
+                  fs_freq     = string
+                  fs_passno   = string
+                })
+  default     = {
+                  fs_spec     = "10.0.0.5:/srv/nas/gateway/letsencrypt"
+                  fs_file     = "/etc/letsencrypt"
+                  fs_vfstype  = "nfs"
+                  fs_mntopts  = "defaults,_netdev"
+                  fs_freq     = "0"
+                  fs_passno   = "0"
+                }
+}

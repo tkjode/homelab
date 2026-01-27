@@ -1,5 +1,12 @@
 # Journal / Changelog
 
+## 2026-01-27
+
+- __LetsEncrypt__
+  - LetsEncrypt rate limits after 5 certificate requests in a 24 hour period, forcing a 24 hour wait time to cool down, I guess I'm borked for now.
+  - This neccessitates externalizing the certificate store so that the gateway can be rebuilt but retain the certificates.
+    - S3 plugins suck, going to create an NFS bind to a letsencrypt folder for the gateway to use as persistent storage. 
+
 ## 2026-01-26
 
 - __DNS__

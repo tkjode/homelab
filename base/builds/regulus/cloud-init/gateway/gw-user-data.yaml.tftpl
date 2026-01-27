@@ -166,6 +166,8 @@ write_files:
 %{ for instance in range( 0, 3 ) ~}
         server master-${instance} ${cidrhost(join("/", [ gw-net-cluster.network, gw-net-cluster.mask ]), master-ip-offset + instance)}:6443 check
 %{ endfor ~}
+mounts:
+  - [ "${letsencrypt_storage.fs_spec}", "${letsencrypt_storage.fs_file}", "${letsencrypt_stroage.fs_vfstype}", "${letsencrypt_storage.fs_mntopts}", "${letsencrypt_storage.fs_freq}", "${letsencrypt_storage.fs_passno}" ]
 ssh_quiet_keygen: true
 ssh_keys:
   rsa_private: |
@@ -201,6 +203,6 @@ runcmd:
   - snap install --classic certbot
   - snap set certbot trust-plugin-with-root=ok
   - snap install certbot-dns-route53
-  - certbot certonly -n -vv -m tkjode@gmail.com -d ${join(".", [ingress_prefix, cluster_domain])} -d ${join(".", ["*", ingress_prefix, cluster_domain])} --dns-route53 --agree-tos
+  # - certbot certonly -n -vv -m tkjode@gmail.com -d ${join(".", [ingress_prefix, cluster_domain])} -d ${join(".", ["*", ingress_prefix, cluster_domain])} --dns-route53 --agree-tos
   - systemctl restart haproxy
   - echo "done" > /tmp/cloud-config.done

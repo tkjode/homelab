@@ -78,6 +78,7 @@ resource "proxmox_virtual_environment_file" "gateway-user-data-cloud-config" {
                                   cluster_domain          = var.cluster-domain
                                   cluster_name            = var.cluster-name
                                   ingress_prefix          = var.default-ingress-prefix
+                                  letsencrypt_storage     = var.letsencrypt-storage
                                 }
                               )
   }
