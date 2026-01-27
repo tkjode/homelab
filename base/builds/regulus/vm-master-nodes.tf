@@ -80,6 +80,7 @@ resource "proxmox_virtual_environment_file" "master-user-data-cloud-config" {
                       cluster-name            = var.cluster-name
                       pod-network             = var.pod-network
                       service-network         = var.service-network
+                      kubernetes-version      = var.kubernetes-version
                       kubernetes-ca-crt       = tls_locally_signed_cert.kubernetes-ca.cert_pem
                       kubernetes-ca-key       =         tls_private_key.kubernetes-ca.private_key_pem
                       front-proxy-ca-crt      = tls_locally_signed_cert.front-proxy-ca.cert_pem

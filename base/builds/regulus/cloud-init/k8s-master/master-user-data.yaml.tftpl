@@ -88,7 +88,7 @@ write_files:
       apiVersion: kubeadm.k8s.io/v1beta4
       kind: ClusterConfiguration
       clusterName: ${cluster-name}
-      kubernetesVersion: 1.34.0
+      kubernetesVersion: ${kubernetes-version}.0
       controlPlaneEndpoint: ${control-plane-endpoint}
       networking:
         podSubnet: ${pod-network}
@@ -153,8 +153,8 @@ runcmd:
   - systemctl start qemu-guest-agent
   # Start relying on unattended-upgrades and speed up deploy process
   #- apt update && apt -y dist-upgrade && apt -y autoremove
-  - curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.34/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-  - echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.34/deb/ /" | tee /etc/apt/sources.list.d/kubernetes.list
+  - curl -fsSL https://pkgs.k8s.io/core:/stable:/${kubernetes-version}/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+  - echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/${kubernetes-version}/deb/ /" | tee /etc/apt/sources.list.d/kubernetes.list
   - apt update && apt -y install kubelet kubeadm kubectl && apt-mark hold kubelet kubeadm kubectl
   - systemctl enable --now kubelet
 %{ if node-select == 0 }

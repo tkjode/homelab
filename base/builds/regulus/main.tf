@@ -167,3 +167,9 @@ variable "proxmox-vmid-offset" {
   type        = number
   default     = 200
 }
+
+variable "kubernetes-version" {
+  description = "Value from https://dl.k8s.io/release/stable.txt"
+  type        = string
+  default     = "v1.35"
+}

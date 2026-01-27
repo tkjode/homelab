@@ -80,6 +80,7 @@ resource "proxmox_virtual_environment_file" "worker-user-data-cloud-config" {
                       cluster-name            = var.cluster-name
                       pod-network             = var.pod-network
                       service-network         = var.service-network
+                      kubernetes-version      = var.kubernetes-version
                       kubernetes-ca-crt       = tls_locally_signed_cert.kubernetes-ca.cert_pem
                     }
                   )
