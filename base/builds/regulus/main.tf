@@ -188,7 +188,7 @@ variable "letsencrypt-storage" {
                   fs_spec     = "10.0.0.5:/srv/nas/gateway/letsencrypt"
                   fs_file     = "/etc/letsencrypt"
                   fs_vfstype  = "nfs"
-                  fs_mntopts  = "defaults,_netdev"
+                  fs_mntopts  = "defaults,rw,rsize=8192,wsize=8192,_netdev"
                   fs_freq     = "0"
                   fs_passno   = "0"
                 }
