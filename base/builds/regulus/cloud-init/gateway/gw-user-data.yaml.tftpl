@@ -166,7 +166,6 @@ write_files:
 %{ for instance in range( 0, 3 ) ~}
         server master-${instance} ${cidrhost(join("/", [ gw-net-cluster.network, gw-net-cluster.mask ]), master-ip-offset + instance)}:6443 check
 %{ endfor ~}
-ssh_genkeytypes: []
 ssh_quiet_keygen: true
 ssh_keys:
   rsa_private: |
