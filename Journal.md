@@ -1,5 +1,16 @@
 # Journal / Changelog
 
+## 2026-01-26
+
+- __DNS__
+  - Took a look at the tcpdump on the gateway eth0 to see what traffic was being emitted while the cluster was idle and noticed a LOT of DNS requests were firing out to external DNS, so I decided to enable a caching/authoritative DNS server for the lab
+  - bind9 + zone files created.  It would be great if this could also do DHCP IPAM so I can just get rid of the damn static IP addresses and let haproxy resolve stuff by name.
+  - the outbound interface is much quieter now, no DNS exits the gateway hosts for the upstream unless it's looking for github, and even then b/c of caching it's rather rare.
+- __Cluster Rebuild__
+  - On rebuild I noticed the cluster workers did not all register with the new masters, only 1 managed to kubeadm join.
+  - I was able to re-run cloud-init on each worker with `cloud-init clean && cloud-init --all-stages` and that got them joined up
+  - I believe before workers can be joined, there should be a terraform check to validate that the masters are all checking in according to haproxy (eg. `curl -ks https://gateway:6443`) -- a valid response from the API means the worker builds should be OK to start.
+
 ## 2025-12-19
 
 - Certbot installed and configured to serve LetsEncrypt certificates
