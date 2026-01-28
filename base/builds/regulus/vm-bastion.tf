@@ -6,7 +6,7 @@ resource "proxmox_virtual_environment_vm" "bastion" {
   stop_on_destroy       = true
   vm_id                 = var.proxmox-vmid-offset + 2
   pool_id               = proxmox_virtual_environment_pool.cluster.pool_id
-  depends_on            = [ null_resource.wait-for-haproxy-response ]
+#  depends_on            = [ null_resource.wait-for-haproxy-response ]
 
   agent {
     enabled             = true
