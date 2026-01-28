@@ -50,7 +50,7 @@ resource "proxmox_virtual_environment_vm" "bastion" {
     ip_config {
       ipv4 {
         address         = join("/", [ cidrhost(join("/", [var.gw-net-cluster.network, var.gw-net-cluster.mask]), var.bastion-ip-offset), var.gw-net-cluster.mask ])
-        gateway         = cidrhost(join("/", [ var.gw-net-home.network, var.gw-net-cluster.mask ]), var.gw-net-cluster.cidr)
+        gateway         = cidrhost(join("/", [ var.gw-net-cluster.network, var.gw-net-cluster.mask ]), var.gw-net-cluster.cidr)
       }
     }
 
