@@ -6,7 +6,7 @@ resource "proxmox_virtual_environment_vm" "masters" {
   node_name                 = var.proxmox_node
   stop_on_destroy           = true
   vm_id                     = var.proxmox-vmid-offset + var.master-ip-offset + count.index
-  depends_on                = [ proxmox_virtual_environment_vm.regulus-gateway, null_resource.wait-for-haproxy-response ]
+  depends_on                = [ null_resource.wait-for-haproxy-response ]
   pool_id                   = proxmox_virtual_environment_pool.cluster.pool_id
 
   agent {
