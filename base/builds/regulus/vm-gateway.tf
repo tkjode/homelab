@@ -120,7 +120,7 @@ resource "null_resource" "wait-for-haproxy-response" {
   }
 
   triggers = {
-    instance_id = proxmox_virtual_environment_vm.gateway.id
+    instance_id = proxmox_virtual_environment_vm.regulus-gateway.id
   }
 
 }
