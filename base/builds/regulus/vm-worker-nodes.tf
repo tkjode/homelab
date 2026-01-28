@@ -6,7 +6,7 @@ resource "proxmox_virtual_environment_vm" "workers" {
   node_name                 = var.proxmox_node
   stop_on_destroy           = true
   vm_id                     = var.proxmox-vmid-offset + var.worker-ip-offset + count.index
-  depends_on                = [ proxmox_virtual_environment_vm.regulus-gateway, proxmox_virtual_environment_vm.masters, proxmox_virtual_environment_vm.bastion ]
+  depends_on                = [ proxmox_virtual_environment_vm.regulus-gateway, null_resource.wait-for-kubernetes-api ]
   pool_id                   = proxmox_virtual_environment_pool.cluster.pool_id
 
   lifecycle {
