@@ -43,14 +43,14 @@ resource "proxmox_virtual_environment_vm" "bastion" {
     datastore_id        = "cloudinit"
 
     dns {
-      servers             = [ cidrhost(join("/", [ var.gw-net-home.cluster, var.gw-net-cluster.mask ]), var.gw-net-cluster.cidr) ]
+      servers             = [ cidrhost(join("/", [ var.gw-net-home.network, var.gw-net-cluster.mask ]), var.gw-net-cluster.cidr) ]
       domain              = join(".", [ var.cluster-name, var.cluster-domain ])
     }
 
     ip_config {
       ipv4 {
         address         = join("/", [ cidrhost(join("/", [var.gw-net-cluster.network, var.gw-net-cluster.mask]), var.bastion-ip-offset), var.gw-net-cluster.mask ])
-        gateway         = cidrhost(join("/", [ var.gw-net-home.cluster, var.gw-net-cluster.mask ]), var.gw-net-cluster.cidr)
+        gateway         = cidrhost(join("/", [ var.gw-net-home.network, var.gw-net-cluster.mask ]), var.gw-net-cluster.cidr)
       }
     }
 

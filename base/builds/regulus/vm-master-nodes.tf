@@ -133,7 +133,7 @@ resource "null_resource" "wait-for-kubernetes-api" {
   }
 
   triggers = {
-    instance_id = proxmox_virtual_environment_vm.masters.id
+    master_instances = proxmox_virtual_environment_vm.masters
   }
 
 }
