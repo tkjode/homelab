@@ -148,9 +148,7 @@ packages:
   - containerd
   - net-tools
   - curl
-runcmd:
-  - systemctl enable qemu-guest-agent
-  - systemctl start qemu-guest-agent
+runcmd:  
   # Start relying on unattended-upgrades and speed up deploy process
   #- apt update && apt -y dist-upgrade && apt -y autoremove
   - curl -fsSL https://pkgs.k8s.io/core:/stable:/${kubernetes-version}/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
@@ -169,4 +167,5 @@ runcmd:
 %{ else }
   - kubeadm join --control-plane --token ${cluster-join-token} ${control-plane-endpoint}:6443 --discovery-token-ca-cert-hash sha256:$(cat /etc/kubernetes/pki/ca.crt | openssl x509 -pubkey | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //')
 %{ endif }
+  - systemctl enable --now qemu-guest-agent
   - echo "done" > /tmp/cloud-config.doneTrust

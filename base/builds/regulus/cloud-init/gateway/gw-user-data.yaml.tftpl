@@ -36,23 +36,6 @@ write_files:
       Unattended-Upgrade::Automatic-Reboot-Time "04:00";
     owner: root:root
     permissions: '0644'
-  #======= Start using LetsEncrypt instead of Self-Signed ========
-  #- path: /etc/haproxy/pki/cluster-apps.pem
-  #  content: ${base64encode(haproxy_tls_cert)}
-  #  encoding: b64
-  #  owner: 'root:root'
-  #  permissions: '0600'
-  #- path: /etc/haproxy/pki/cluster-apps.pem.key
-  #  content: ${base64encode(haproxy_key)}
-  #  encoding: b64
-  #  owner: 'root:root'
-  #  permissions: '0600'
-  #- path: /etc/haproxy/pki/proxy-ca.pem
-  #  content: ${base64encode(kube_ingress_ca)}
-  #  encoding: b64
-  #  owner: 'root:root'
-  #  permissions: '0600'
-  #===============================
   - path: /root/.aws/credentials
     content: |
       [default]
@@ -194,8 +177,6 @@ packages:
 runcmd:
   - mkdir /etc/letsencrypt && chattr +i /etc/letsencrypt
   - mount -a
-  - systemctl enable qemu-guest-agent
-  - systemctl start qemu-guest-agent
   - systemctl enable --now bind9
   - iptables -A FORWARD -i eth1 -o eth0 -j ACCEPT
   - iptables -A FORWARD -i eth0 -o eth1 -m state --state ESTABLISHED,RELATED -j ACCEPT
@@ -206,4 +187,5 @@ runcmd:
   - snap install certbot-dns-route53
   - certbot certonly -n -v -m tkjode@gmail.com -d ${join(".", [cluster_name, cluster_domain])} -d ${join(".", ["*", ingress_prefix, cluster_domain])} --dns-route53 --agree-tos
   - systemctl restart haproxy
+  - systemctl enable --now qemu-guest-agent
   - echo "done" > /tmp/cloud-config.done

@@ -64,8 +64,6 @@ packages:
   - net-tools
   - curl
 runcmd:
-  - systemctl enable qemu-guest-agent
-  - systemctl start qemu-guest-agent
   # Use unattended upgrades to do this later
   #- apt update && apt -y dist-upgrade && apt -y autoremove
   - curl -fsSL https://pkgs.k8s.io/core:/stable:/${kubernetes-version}/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
@@ -73,4 +71,5 @@ runcmd:
   - apt update && apt -y install kubelet kubeadm kubectl && apt-mark hold kubelet kubeadm kubectl
   - systemctl enable --now kubelet
   - kubeadm join --token ${cluster-join-token} ${control-plane-endpoint}:6443 --discovery-token-ca-cert-hash sha256:$(cat /tmp/ca.crt | openssl x509 -pubkey | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //')
+  - systemctl enable --now qemu-guest-agent
   - echo "done" > /tmp/cloud-config.done
