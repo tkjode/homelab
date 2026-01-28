@@ -12,6 +12,8 @@
 - __Null Resource Wait States__
   - Had a cyclical dependency by accidentally needing the bastion to come online before the gateway due to forgetting where I was :|   I'm TIRED
   - Went through and cleaned up some IP address generation.  I really should start using locals to improve readability.  In fact, I'm adding that to the TODOs.
+- __Envoy Proxy__
+  - Upgraded from v1.6.1 to v1.6.3 with no issues via ArgoCD and just changing the version number in the Application.   PRIMO.
 
 ## 2026-01-26
 
