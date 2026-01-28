@@ -111,6 +111,7 @@ resource "null_resource" "wait-for-haproxy-response" {
       EC=$?
       if [ $EC != "0" ]; then
         echo "Waiting for HAProxy to Start.  Attempt $i of 30"
+        sleep 5
       else
         echo "HAProxy responding.  It's Go Time!"
         break

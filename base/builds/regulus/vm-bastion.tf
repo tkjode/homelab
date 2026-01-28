@@ -70,6 +70,7 @@ resource "proxmox_virtual_environment_file" "bastion-cloud-config" {
                     {
                       bastion-rsa     = tls_private_key.bastion-rsa.private_key_pem
                       bastion-ecdsa   = tls_private_key.bastion-ecdsa.private_key_pem
+                      kubernetes-version = var.kubernetes-version
                     }
                   )
   }

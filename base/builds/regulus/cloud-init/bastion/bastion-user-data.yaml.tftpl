@@ -29,7 +29,6 @@ write_files:
       Unattended-Upgrade::Automatic-Reboot-Time "04:00";
     owner: root:root
     permissions: '0644'
-ssh_genkeytypes: []
 ssh_quiet_keygen: true
 ssh_keys:
   rsa_private: |
@@ -53,10 +52,10 @@ packages:
   - kustomize
   - iptables-persistent
 runcmd:
-  - systemctl enable qemu-guest-agent && systemctl start qemu-guest-agent
-  - systemctl enable unattended-upgrades && systemctl start unattended-upgrades
+  - systemctl enable --now qemu-guest-agent
+  - systemctl enable --now unattended-upgrades
   - apt update && apt -y dist-upgrade && apt -y autoremove 
-  - echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.34/deb/ /" | tee /etc/apt/sources.list.d/kubernetes.list
-  - curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.34/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+  - echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/${kubernetes-version}/deb/ /" | tee /etc/apt/sources.list.d/kubernetes.list
+  - curl -fsSL https://pkgs.k8s.io/core:/stable:/${kubernetes-version}/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
   - apt update && apt -y install kubectl && apt-mark hold kubectl
   - echo "done" > /tmp/cloud-config.done

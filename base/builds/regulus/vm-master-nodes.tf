@@ -119,13 +119,15 @@ resource "proxmox_virtual_environment_firewall_options" "master-fw" {
 resource "null_resource" "wait-for-kubernetes-api" {
   provisioner "local-exec" {
     command = <<EOT
+    echo "Waiting for Kubernetes API to respond..."
     for i in $(seq 1 30); do
-      OUTPUT=$(wget -O- -q --no-check-certificate  https://${cidrhost(join("/", [ var.gw-net-home.network, var.gw-net-home.mask ]), var.gw-net-home.cidr)}:6443/livez)
+      OUTPUT=
       EC=$?
-      if [ $OUTPUT != "ok" ]; then
-        echo "Waiting for Kubernetes API to Respond.  Attempt $i of 30"
+      if [ "$(wget -O- -q --no-check-certificate https://${cidrhost(join("/", [ var.gw-net-home.network, var.gw-net-home.mask ]), var.gw-net-home.cidr)}:6443/livez)" == "ok" ]; then
+        echo "Received OK from Kubernetes API /livez endpoint"
       else
-        echo "HAProxy responding.  It's Go Time!"
+        echo "Waiting for Kubernetes API Livez Check: Check $i of 30"
+        sleep 5
         break
       fi
     done
