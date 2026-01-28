@@ -6,11 +6,11 @@ resource "proxmox_virtual_environment_vm" "workers" {
   node_name                 = var.proxmox_node
   stop_on_destroy           = true
   vm_id                     = var.proxmox-vmid-offset + var.worker-ip-offset + count.index
-#  depends_on                = [ null_resource.wait-for-kubernetes-api ]
+  depends_on                = [ null_resource.wait-for-kubernetes-api ]
   pool_id                   = proxmox_virtual_environment_pool.cluster.pool_id
 
   lifecycle {
-    replace_triggered_by    = [ proxmox_virtual_environment_vm.masters, null_resource.wait-for-kubernetes-api ]
+    replace_triggered_by    = [ proxmox_virtual_environment_vm.masters ]
   }
 
   agent {

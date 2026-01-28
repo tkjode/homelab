@@ -107,7 +107,7 @@ resource "null_resource" "wait-for-haproxy-response" {
   provisioner "local-exec" {
     command = <<EOT
     for i in $(seq 1 30); do
-      OUTPUT=$(curl http://${cidrhost(join("/", [ var.gw-net-home.network, var.gw-net-home.mask ]), var.gw-net-home.cidr)}/stats)
+      OUTPUT=$(wget -O- -q http://${cidrhost(join("/", [ var.gw-net-home.network, var.gw-net-home.mask ]), var.gw-net-home.cidr)}/stats)
       EC=$?
       if [ $EC != "0" ]; then
         echo "Waiting for HAProxy to Start.  Attempt $i of 30"
@@ -120,7 +120,7 @@ resource "null_resource" "wait-for-haproxy-response" {
   }
 
   triggers = {
-    instance_id = proxmox_virtual_environment_vm.bastion.id
+    instance_id = proxmox_virtual_environment_vm.gateway.id
   }
 
 }

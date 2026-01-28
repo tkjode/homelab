@@ -9,6 +9,9 @@
   - __Update:__ The NAS build has been sorted after some drama around `no_root_squash`, but there was trouble caused by certbot using a new folder when changing the order the certificates were raised in.
     - Updated the path but now haproxy still refuses to start up a boot time.
     - Attempts to crush network-wait-online do not appear to work, the command when run manually still hangs even though all networks are online and even with -i and --ignore options.
+- __Null Resource Wait States__
+  - Had a cyclical dependency by accidentally needing the bastion to come online before the gateway due to forgetting where I was :|   I'm TIRED
+  - Went through and cleaned up some IP address generation.  I really should start using locals to improve readability.  In fact, I'm adding that to the TODOs.
 
 ## 2026-01-26
 

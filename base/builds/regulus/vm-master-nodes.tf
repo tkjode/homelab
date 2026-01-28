@@ -6,7 +6,7 @@ resource "proxmox_virtual_environment_vm" "masters" {
   node_name                 = var.proxmox_node
   stop_on_destroy           = true
   vm_id                     = var.proxmox-vmid-offset + var.master-ip-offset + count.index
-#  depends_on                = [ null_resource.wait-for-haproxy-response ]
+  depends_on                = [ null_resource.wait-for-haproxy-response ]
   pool_id                   = proxmox_virtual_environment_pool.cluster.pool_id
 
   agent {
@@ -120,7 +120,7 @@ resource "null_resource" "wait-for-kubernetes-api" {
   provisioner "local-exec" {
     command = <<EOT
     for i in $(seq 1 30); do
-      OUTPUT=$(curl -k https://${cidrhost(join("/", [ var.gw-net-home.network, var.gw-net-home.mask ]), var.gw-net-home.cidr)}:6443/livez)
+      OUTPUT=$(wget -O- -q --no-check-certificate  https://${cidrhost(join("/", [ var.gw-net-home.network, var.gw-net-home.mask ]), var.gw-net-home.cidr)}:6443/livez)
       EC=$?
       if [ $OUTPUT != "ok" ]; then
         echo "Waiting for Kubernetes API to Respond.  Attempt $i of 30"

@@ -19,10 +19,10 @@ See [Journal.md](Journal.md) for progress reports as they happen.
 
 #### TODO/WIP
 
-- [x] Make Gateway do some basic IPAM for the cluster.  There are a lot of DNS queries firing out to the internet needlessly.
-  - [ ] Full IPAM DHCP for Private Network?
 - [ ] Worker nodes are being built before the API is up - need to get some sort of blocker in that waits for Cluster API showing active on HAProxy  
-- [ ] Create persistent storage for LetsEncrypt so it doesn't get rate limited on rebuilds
+- [ ] Start using locals for complex variable expressions (eg. all the cidrhosts and masks) - make them simple vars like "gateway-ip-address" and "gateway-full-cidr" or something
+- [x] Create persistent storage for LetsEncrypt so it doesn't get rate limited on rebuild
+- [x] Make Gateway do some basic IPAM for the cluster.  There are a lot of DNS queries firing out to the internet needlessly.
 
 #### Done
 
