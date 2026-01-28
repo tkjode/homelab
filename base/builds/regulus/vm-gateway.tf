@@ -100,6 +100,29 @@ resource "proxmox_virtual_environment_file" "gateway-network-data-cloud-config" 
               }
             )
   }
+
+}
+
+resource "null_resource" "wait-for-haproxy-response" {
+  provisioner "local-exec" {
+    command = <<EOT
+    for i in $(seq 1 30); do
+      OUTPUT=$(curl http://${cidrhost(join("/", [ var.gw-net-home.network, var.gw-net-home.mask ]), var.gw-net-home.cidr)}/stats)
+      EC=$?
+      if [ $EC != "0" ]; then
+        echo "Waiting for HAProxy to Start.  Attempt $i of 30"
+      else
+        echo "HAProxy responding.  It's Go Time!"
+        break
+      fi
+    done
+    EOT
+  }
+
+  triggers = {
+    instance_id = proxmox_virtual_environment_vm.bastion.id
+  }
+
 }
 
 resource "tls_private_key" "gateway-rsa" {

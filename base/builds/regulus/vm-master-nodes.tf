@@ -6,7 +6,7 @@ resource "proxmox_virtual_environment_vm" "masters" {
   node_name                 = var.proxmox_node
   stop_on_destroy           = true
   vm_id                     = var.proxmox-vmid-offset + var.master-ip-offset + count.index
-  depends_on                = [ proxmox_virtual_environment_vm.regulus-gateway ]
+  depends_on                = [ proxmox_virtual_environment_vm.regulus-gateway, null_resource.wait-for-haproxy-response ]
   pool_id                   = proxmox_virtual_environment_pool.cluster.pool_id
 
   agent {
@@ -114,4 +114,26 @@ resource "proxmox_virtual_environment_firewall_options" "master-fw" {
   input_policy  = "ACCEPT"
   output_policy = "ACCEPT"
   radv          = false
+}
+
+resource "null_resource" "wait-for-kubernetes-api" {
+  provisioner "local-exec" {
+    command = <<EOT
+    for i in $(seq 1 30); do
+      OUTPUT=$(curl -k https://${cidrhost(join("/", [ var.gw-net-home.network, var.gw-net-home.mask ]), var.gw-net-home.cidr)}:6443/livez)
+      EC=$?
+      if [ $OUTPUT != "ok" ]; then
+        echo "Waiting for Kubernetes API to Respond.  Attempt $i of 30"
+      else
+        echo "HAProxy responding.  It's Go Time!"
+        break
+      fi
+    done
+    EOT
+  }
+
+  triggers = {
+    instance_id = proxmox_virtual_environment_vm.masters.id
+  }
+
 }

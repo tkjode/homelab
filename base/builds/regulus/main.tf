@@ -103,6 +103,12 @@ variable "master-ip-offset" {
   default     = 4    # 192.168.64.4 to 6
 }
 
+variable "bastion-ip-offset" { 
+  description = "IP Address Offset to assign 1 bastion node on the private network"
+  type        = number
+  default     = 2
+}
+
 variable "worker-ip-offset" {
   description = "IP Addresses Offset to start assigning Worker nodes on private network"
   type        = number
