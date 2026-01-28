@@ -19,7 +19,10 @@ See [Journal.md](Journal.md) for progress reports as they happen.
 
 #### TODO/WIP
 
+- [ ] Keycloak /w persistent durable storage for identity db, and then tie ArgoCD to it with OIDC config.
+  - :chart: __Stonks:__ I'm tired of fetching the admin secret for argo every time I rebuild the cluster :sweat: 
 - [ ] Start using locals for complex variable expressions (eg. all the cidrhosts and masks) - make them simple vars like "gateway-ip-address" and "gateway-full-cidr" or something
+  - :chart: __Stonks:__ cidrhost function ONLY in local declarations.
 - [x] Worker nodes are being built before the API is up - need to get some sort of blocker in that waits for Cluster API showing active on HAProxy  
 - [x] Create persistent storage for LetsEncrypt so it doesn't get rate limited on rebuild
 - [x] Make Gateway do some basic IPAM for the cluster.  There are a lot of DNS queries firing out to the internet needlessly.
