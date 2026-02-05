@@ -12,13 +12,13 @@ resource "proxmox_virtual_environment_vm" "regulus-gateway" {
   }
 
   cpu {
-    cores                   = 2
+    cores                   = 4
     type                    = "x86-64-v2-AES"
   }
 
   memory {
-    dedicated               = 1024
-    floating                = 1024
+    dedicated               = 2048
+    floating                = 2048
   }
 
   disk {
