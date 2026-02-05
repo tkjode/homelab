@@ -162,14 +162,13 @@ runcmd:
   - systemctl enable --now kubelet
 %{ if node-select == 0 }
   - kubeadm init --config=/etc/kube-init.config.yaml
-  - mkdir -p /root/.kube && cp /etc/kubernetes/admin.conf /root/.kube/config
-  - kubectl create namespace cert-manager
-  - kubectl create secret tls labs-ca -n cert-manager --cert=/etc/k8s-bootstrap/labs-ca.crt --key=/etc/k8s-bootstrap/labs-ca.key
-  - kubectl create -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml --dry-run=client -o json | kubectl apply -f -
-  - kubectl create namespace argocd
-  - kubectl create -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml --dry-run=client -o json | kubectl apply -f -
-  - kubectl create -n argocd -f /etc/k8s-bootstrap/secret-argocd.yaml
-  - kubectl create -n argocd -f /etc/k8s-bootstrap/Application.bootstrap.yaml
+  - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create namespace cert-manager
+  - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create secret tls labs-ca -n cert-manager --cert=/etc/k8s-bootstrap/labs-ca.crt --key=/etc/k8s-bootstrap/labs-ca.key
+  - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml --dry-run=client -o json | KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply -f -
+  - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create namespace argocd
+  - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml --dry-run=client -o json | KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply -f -
+  - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create -n argocd -f /etc/k8s-bootstrap/secret-argocd.yaml
+  - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create -n argocd -f /etc/k8s-bootstrap/Application.bootstrap.yaml
 %{ else }
   - kubeadm join --control-plane --token ${cluster-join-token} ${control-plane-endpoint}:6443 --discovery-token-ca-cert-hash sha256:$(cat /etc/kubernetes/pki/ca.crt | openssl x509 -pubkey | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //')
 %{ endif }
