@@ -164,9 +164,9 @@ runcmd:
   - kubeadm init --config=/etc/kube-init.config.yaml
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create namespace cert-manager
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create secret tls labs-ca -n cert-manager --cert=/etc/k8s-bootstrap/labs-ca.crt --key=/etc/k8s-bootstrap/labs-ca.key
-  - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml --dry-run=client -o json | KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply -f -
+  - KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply --server-side -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create namespace argocd
-  - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml --dry-run=client -o json | KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply -f -
+  - KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply --server-side -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create -n argocd -f /etc/k8s-bootstrap/secret-argocd.yaml
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create -n argocd -f /etc/k8s-bootstrap/Application.bootstrap.yaml
 %{ else }
