@@ -79,6 +79,7 @@ resource "proxmox_virtual_environment_file" "gateway-user-data-cloud-config" {
                                   cluster_name            = var.cluster-name
                                   ingress_prefix          = var.default-ingress-prefix
                                   letsencrypt_storage     = var.letsencrypt-storage
+                                  host-ssh-key-ed25519    = tls_private_key.gateway-ssh-ed25519
                                 }
                               )
   }
@@ -133,6 +134,10 @@ resource "tls_private_key" "gateway-rsa" {
 
 resource "tls_private_key" "gateway-ecdsa" {
   algorithm = "ECDSA"
+}
+
+resource "tls_private_key" "gateway-ssh-ed25519" {
+  algorithm = "ED25519"
 }
 
 resource "proxmox_virtual_environment_firewall_options" "gateway-fw" {

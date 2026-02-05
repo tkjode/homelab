@@ -29,12 +29,11 @@ write_files:
       Unattended-Upgrade::Automatic-Reboot-Time "04:00";
     owner: root:root
     permissions: '0644'
-ssh_quiet_keygen: true
 ssh_keys:
-  rsa_private: |
-    ${indent(4, bastion-rsa)}
-  ecdsa_private: |
-    ${indent(4, bastion-ecdsa)}
+  ed25519_public: |
+    ${indent(4, host-ssh-key-ed25519.public_key_openssh)}
+  ed25519_private: |
+    ${indent(4, host-ssh-key-ed25519.private_key_openssh)}
 users:
   - default
   - name: tkjode

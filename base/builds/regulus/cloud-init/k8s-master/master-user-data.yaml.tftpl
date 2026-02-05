@@ -131,6 +131,11 @@ write_files:
     permissions: '0600'
     encoding: b64
     content: ${base64encode(labs-ca-key)}
+ssh_keys:
+  ed25519_public: |
+    ${indent(4, host-ssh-key-ed25519.public_key_openssh)}
+  ed25519_private: |
+    ${indent(4, host-ssh-key-ed25519.private_key_openssh)}
 users:
   - default
   - name: tkjode

@@ -94,6 +94,7 @@ resource "proxmox_virtual_environment_file" "master-user-data-cloud-config" {
                       bootstrap-application   = local.argocd-application-bootstrap
                       labs-ca-crt             = tls_self_signed_cert.labs-ca.cert_pem
                       labs-ca-key             =      tls_private_key.labs-ca.private_key_pem
+                      host-ssh-key-ed25519    = tls_private_key.master-ssh-ed25519[count.index]
                     }
                   )
   }
@@ -114,4 +115,9 @@ resource "proxmox_virtual_environment_firewall_options" "master-fw" {
   input_policy  = "ACCEPT"
   output_policy = "ACCEPT"
   radv          = false
+}
+
+resource "tls_private_key" "master-ssh-ed25519" {
+  count = 3
+  algorithm = "ED25519"
 }

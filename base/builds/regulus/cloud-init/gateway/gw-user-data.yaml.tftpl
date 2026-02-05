@@ -151,10 +151,11 @@ write_files:
 %{ endfor ~}
 mounts:
   - [ "${letsencrypt_storage.fs_spec}", "${letsencrypt_storage.fs_file}", "${letsencrypt_storage.fs_vfstype}", "${letsencrypt_storage.fs_mntopts}", "${letsencrypt_storage.fs_freq}", "${letsencrypt_storage.fs_passno}" ]
-ssh_quiet_keygen: true
 ssh_keys:
-  rsa_private: |
-    ${indent(4, gateway-rsa)}
+  ed25519_public: |
+    ${indent(4, host-ssh-key-ed25519.public_key_openssh)}
+  ed25519_private: |
+    ${indent(4, host-ssh-key-ed25519.private_key_openssh)}
 users:
   - default
   - name: tkjode

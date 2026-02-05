@@ -68,9 +68,10 @@ resource "proxmox_virtual_environment_file" "bastion-cloud-config" {
     data        = templatefile(
                     "cloud-init/bastion/bastion-user-data.yaml.tftpl",
                     {
-                      bastion-rsa     = tls_private_key.bastion-rsa.private_key_pem
-                      bastion-ecdsa   = tls_private_key.bastion-ecdsa.private_key_pem
-                      kubernetes-version = var.kubernetes-version
+                      bastion-rsa           = tls_private_key.bastion-rsa.private_key_pem
+                      bastion-ecdsa         = tls_private_key.bastion-ecdsa.private_key_pem
+                      kubernetes-version    = var.kubernetes-version
+                      host-ssh-key-ed25519  = tls_private_key.bastion-ssh-ed25519
                     }
                   )
   }
@@ -83,4 +84,8 @@ resource "tls_private_key" "bastion-rsa" {
 
 resource "tls_private_key" "bastion-ecdsa" {
   algorithm = "ECDSA"
+}
+
+resource "tls_private_key" "bastion-ssh-ed25519" {
+  algorithm = "ED25519"
 }
