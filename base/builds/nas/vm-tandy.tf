@@ -27,11 +27,8 @@ resource "proxmox_virtual_environment_vm" "tandy" {
     interface           = "scsi0"
   }
 
-  disk {
-    datastore_id        = ""
-    file_format         = "raw"
-    path_in_datastore   = "/dev/disk/by-uuid/ab0a1ecd-17ac-450a-b2e7-45683433c462"
-    interface           = "scsi1"
+  usb {
+    mapping = proxmox.virtual_environment_hardware_mapping_usb.terramaster.id
   }
 
   network_device {
@@ -61,6 +58,17 @@ resource "proxmox_virtual_environment_vm" "tandy" {
     user_data_file_id   = proxmox_virtual_environment_file.nas-user-cloud-config.id
 
   }
+}
+
+resource "proxmox_virtual_environment_hardware_mapping_usb" "terramaster" {
+  comment = "USB3 Direct Attached Storage for NAS VM"
+  name    = "terramaster"
+  map     = [
+              {
+                id = "0480:a006"
+                node = var.proxmox_node
+              }
+            ]
 }
 
 resource "proxmox_virtual_environment_file" "nas-user-cloud-config" {
