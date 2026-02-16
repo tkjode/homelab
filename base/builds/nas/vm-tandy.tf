@@ -6,6 +6,8 @@ resource "proxmox_virtual_environment_vm" "tandy" {
   stop_on_destroy       = true
   vm_id                 = 300
 
+  boot_order            = ["scsi0"]
+
   agent {
     enabled             = true
   }
@@ -29,6 +31,7 @@ resource "proxmox_virtual_environment_vm" "tandy" {
 
   usb {
     mapping = proxmox_virtual_environment_hardware_mapping_usb.terramaster.id
+    USB3    = true
   }
 
   network_device {
