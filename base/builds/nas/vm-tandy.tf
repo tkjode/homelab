@@ -28,7 +28,7 @@ resource "proxmox_virtual_environment_vm" "tandy" {
   }
 
   usb {
-    mapping = proxmox.virtual_environment_hardware_mapping_usb.terramaster.id
+    mapping = proxmox_virtual_environment_hardware_mapping_usb.terramaster.id
   }
 
   network_device {
