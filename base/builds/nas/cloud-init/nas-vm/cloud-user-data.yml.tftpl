@@ -1,0 +1,26 @@
+#cloud-config
+hostname: tandy
+timezone: America/Toronto
+ssh_genkeytypes: []
+ssh_quiet_keygen: true
+ssh_keys:
+  rsa_private: |
+    ${indent(4, bastion-rsa)}
+  ecdsa_private: |
+    ${indent(4, bastion-ecdsa)}
+users:
+  - default
+  - name: tkjode
+    groups:
+      - sudo
+    shell: /bin/bash
+    ssh_import_id: ['gh:tkjode']
+    sudo: ALL=(ALL) NOPASSWD:ALL
+package_update: true
+packages:
+  - qemu-guest-agent
+  - net-tools
+  - curl
+runcmd:
+  - systemctl enable qemu-guest-agent && systemctl start qemu-guest-agent
+  - echo "done" > /tmp/cloud-config.done
