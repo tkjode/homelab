@@ -51,11 +51,19 @@ ssh_keys:
     ${indent(4, nas-rsa)}
   ecdsa_private: |
     ${indent(4, nas-ecdsa)}
+groups: ["xbmc"]
 users:
   - default
   - name: xbmc
     groups:
       - xbmc
+    homedir: /home/xbmc
+    lock_passwd: false
+    hashed_passwd: "$6$rounds=500000$8DA.zINPVsl9t5Cj$P7q2W4zUJu1V3MhlHrPpXQl8kkJhZ.Al183anPnoKfOhcgoy5H26uKIUew6mRjoEtRkSP7EwudsLyp4SoQqKI1"
+    primary_group: xbmc
+    shell: /bin/bash
+    uid: 1000
+
   - name: tkjode
     groups:
       - sudo
@@ -87,6 +95,4 @@ runcmd:
   - systemctl restart smbd
   - systemctl restart wsdd-server
   - showmount -e
-  - mkdir /app
-  - git clone git@github.com:tkjode/homestacks /app/homestacks
   - echo "done" > /tmp/cloud-config.done
