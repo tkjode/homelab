@@ -24,7 +24,7 @@ resource "proxmox_virtual_environment_vm" "tandy" {
 
   disk {
     datastore_id        = "SSD"
-    file_id             = proxmox_virtual_environment_download_file.debian-trixie.id
+    file_id             = proxmox_virtual_environment_download_file.ubuntu-cloud-server-iso.id
     size                = 25
     interface           = "scsi0"
   }
