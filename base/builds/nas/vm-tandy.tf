@@ -69,7 +69,7 @@ resource "proxmox_virtual_environment_file" "nas-user-cloud-config" {
   node_name     = var.proxmox_node
 
   source_raw {
-    file_name   = "bastion-user-data.yaml"
+    file_name   = "tandy-nas-user-data.yaml"
     data        = templatefile(
                     "cloud-init/nas-vm/cloud-user-data.yml.tftpl",
                     {
