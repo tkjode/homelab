@@ -1,6 +1,6 @@
 resource "proxmox_virtual_environment_download_file" "debian-trixie" {
   content_type        = "import"
-  datastore_id        = "SSD"
+  datastore_id        = "local"
   overwrite_unmanaged = true
   file_name           = "debian-trixie.qcow2"
   node_name           = var.proxmox_node
