@@ -71,7 +71,7 @@ resource "proxmox_virtual_environment_file" "nas-user-cloud-config" {
   source_raw {
     file_name   = "bastion-user-data.yaml"
     data        = templatefile(
-                    "cloud-init/nas-vm/cloud-user-data.yaml.tftpl",
+                    "cloud-init/nas-vm/cloud-user-data.yml.tftpl",
                     {
                       nas-rsa     = tls_private_key.nas-rsa.private_key_pem
                       nas-ecdsa   = tls_private_key.nas-ecdsa.private_key_pem
