@@ -1,6 +1,49 @@
 #cloud-config
 hostname: tandy
 timezone: America/Toronto
+write_files:
+  - path: /etc/fstab
+    append: true
+    content: |
+      UUID=ab0a1ecd-17ac-450a-b2e7-45683433c462      /mnt/TERA     ext4     defaults 0 1
+  - path: /etc/default/wsdd
+    content: |
+      WSDD_PARAMS="-w PHALNET"
+  - path: /etc/samba/smb.conf
+    content: |
+      [global]
+        workgroup = PHALNET
+        server string = %h server (Samba, Ubuntu)
+        log file = /var/log/samba/log.%m
+        max log size = 1000
+        logging = file
+        panic action = /sr/share/samba/panic-action %d
+        server role = standalone server
+        obey pam restrictions = yes
+        unix password sync = yes
+        passwd program = /usr/bin/passwd %u
+        pam password change = no
+        map to guest = bad user
+        guest account = xbmc
+        case sensitive = no
+        guest ok = yes
+        invalid users = root
+        usershare allow guests = yes
+        load printers = no
+        local master = yes
+        preferred master = yes
+      [nas]
+        path = /mnt/TERA
+        read_only = no
+        guest_ok = yes
+  - path: /etc/exports
+    content: |
+      /srv/nas    10.0.0.0/24(rw,sync,no_subtree_check) 192.168.64.0/24(rw,sync,no_subtree_check)
+  - path: /root/.ssh/config
+    content: |
+      Host github.com
+      User git
+      IdentityFile /etc/ssh/ssh_host_rsa_key
 ssh_genkeytypes: []
 ssh_quiet_keygen: true
 ssh_keys:
@@ -10,6 +53,9 @@ ssh_keys:
     ${indent(4, nas-ecdsa)}
 users:
   - default
+  - name: xbmc
+    groups:
+      - xbmc
   - name: tkjode
     groups:
       - sudo
@@ -20,7 +66,27 @@ package_update: true
 packages:
   - qemu-guest-agent
   - net-tools
+  - samba
+  - samba-common
+  - winbind
+  - samba-libs
+  - libnss-winbind
+  - libpam-winbind
+  - wsdd
+  - wsdd-server
+  - docker.io
+  - docker-compose-v2
   - curl
+  - nfs-kernel-server
 runcmd:
   - systemctl enable qemu-guest-agent && systemctl start qemu-guest-agent
+  - mkdir /mnt/TERA && chattr +i /mnt/TERA && chown xbmc:xbmc /mnt/TERA
+  - ln -s /mnt/TERA /srv/nas
+  - mount -a
+  - systemctl restart nfs-kernel-server
+  - systemctl restart smbd
+  - systemctl restart wsdd-server
+  - showmount -e
+  - mkdir /app
+  - git clone git@github.com:tkjode/homestacks /app/homestacks
   - echo "done" > /tmp/cloud-config.done

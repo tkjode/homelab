@@ -6,8 +6,6 @@ resource "proxmox_virtual_environment_vm" "tandy" {
   stop_on_destroy       = true
   vm_id                 = 300
 
-  boot_order            = ["scsi0"]
-
   agent {
     enabled             = true
   }
@@ -25,7 +23,7 @@ resource "proxmox_virtual_environment_vm" "tandy" {
   disk {
     datastore_id        = "SSD"
     file_id             = proxmox_virtual_environment_download_file.ubuntu-cloud-server-iso.id
-    size                = 25
+    size                = 1024
     interface           = "scsi0"
   }
 
