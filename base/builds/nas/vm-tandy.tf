@@ -31,7 +31,7 @@ resource "proxmox_virtual_environment_vm" "tandy" {
 
   usb {
     mapping = proxmox_virtual_environment_hardware_mapping_usb.terramaster.id
-    USB3    = true
+    usb3    = true
   }
 
   network_device {
