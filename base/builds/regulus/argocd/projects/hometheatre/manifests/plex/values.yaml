@@ -1,3 +1,7 @@
+extraEnv:
+  HOSTNAME: regulus
+  ALLOWED_NETWORKS: "10.0.0.0/24,192.168.64.0/24"
+
 httpRoute:
   enabled: true
   parentRefs:
@@ -10,7 +14,7 @@ httpRoute:
 pms:
   storageClassName: nfs-durable
   configStorage: 8G
-extraVolumnes:
+extraVolumes:
 - name: plex-tvshows
   persistentVolumeClaim:
     claimName: pvc-plex-tvshows
@@ -20,3 +24,10 @@ extraVolumnes:
 - name: plex-anime
   persistentVolumeClaim:
     claimName: pvc-plex-anime
+extraVolumeMounts:
+- name: plex-tvshows
+  mountPath: /tvshows
+- name: plex-movies
+  mountPath: /movies
+- name: plex-anime
+  mountPath: /anime
