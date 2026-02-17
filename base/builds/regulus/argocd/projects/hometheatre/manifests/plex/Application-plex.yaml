@@ -8,7 +8,7 @@ spec:
   sources:
   - chart: plex/plex-media-server
     repoURL: https://raw.githubusercontent.com/plexinc/pms-docker/gh-pages
-    targetRevision: 1.4.0
+    targetRevision: HEAD
     helm:
       valueFiles:
       - $values/base/builds/regulus/argocd/projects/hometheatre/manifests/plex/values.yaml
