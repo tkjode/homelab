@@ -11,3 +11,4 @@ spec:
     storage: 8Gi
   accessModes:
   - ReadWriteOnce
+  nfs: {}
