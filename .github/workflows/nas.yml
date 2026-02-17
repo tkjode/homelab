@@ -3,7 +3,7 @@ env:
   AWS_REGION: "ca-central-1"
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  PROXMOX_VE_API_TOKEN: ${{ vars.PM_API_TOKEN_ID }}=${{ secrets.PM_API_TOKEN_SECRET }}
+  PROXMOX_VE_API_TOKEN: ${{ vars.PROXMOX_API_ROOT }}=${{ secrets.PROXMOX_API_ROOT_SECRET }}
   PROXMOX_VE_ENDPOINT: ${{ vars.PROXMOX_VE_ENDPOINT }}
   PROXMOX_VE_SSH_USERNAME: ${{ secrets.PROXMOX_SSH_USERNAME }}
   PROXMOX_VE_SSH_PASSWORD: ${{ secrets.PROXMOX_SSH_PASSWORD }}
@@ -19,10 +19,6 @@ env:
   TF_VAR_default_ssh_pub_key: ${{ secrets.DEFAULT_PUB_KEY }}
   TF_VAR_argocd-ssh-private-key: ${{ secrets.ARGOCD_REGULUS_SSH_PRIVATE_KEY }}
   TF_VAR_repository-url: ssh://git@github.com/${{ github.repository }}
-  TF_VAR_certbot_aws_access_key: ${{ secrets.CERTBOT_AWS_ACCESS_KEY }}
-  TF_VAR_certbot_aws_secret_key: ${{ secrets.CERTBOT_AWS_SECRET_KEY }}
-  TF_VAR_certbot_contact_email: ${{ vars.CERTBOT_CONTACT_EMAIL }}
-  TF_VAR_cluster-domain: ${{ vars.DNS_ZONE }}
 on:
   workflow_dispatch:
   push:
@@ -31,14 +27,14 @@ on:
       - 'base/builds/nas/**'
       - '.github/workflows/nas.yml'
 jobs:
-  nas-build:
+  na-build:
     name: "Build: NAS"
     if: contains(github.ref, 'build/nas')
     runs-on: self-hosted
     container:
       image: hashicorp/terraform:latest
       volumes:
-        - nas-tf:/tf
+        - nastf:/tf
     steps:
       - name: "Checkout Project"
         uses: actions/checkout@v4
@@ -48,10 +44,10 @@ jobs:
             base/builds/nas
       - run: terraform init
         shell: sh
-        working-directory: base/build/nas
-      - run: terraform plan -out=/tf/nas.plan
+        working-directory: base/builds/nas
+      - run: terraform plan -out=/tf/nas.tfplan
         shell: sh
         working-directory: base/builds/nas
-      - run: terraform apply -auto-approve -paralellism=1 /tf/nas.plan
+      - run: terraform apply -auto-approve --parallelism=1 /tf/nas.tfplan
         shell: sh
         working-directory: base/builds/nas
