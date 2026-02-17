@@ -6,7 +6,7 @@ metadata:
 spec:
   storageClassName: nfs-bind
   volumeMode: Filesystem
-  reclaimPolicy: Retain
+  persistentVolumeReclaimPolicy: Retain
   capacity: 
     storage: 16Ti
   accessModes:
