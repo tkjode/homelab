@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-plex-tvshows
+  namespace: plex
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 8G
+  storageClassName: nfs-bind
+  volumeMode: Filesystem
+  volumeName: plex-tvshows 
