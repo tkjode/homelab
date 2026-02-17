@@ -107,17 +107,20 @@ resource "proxmox_virtual_environment_file" "gateway-network-data-cloud-config" 
 resource "null_resource" "wait-for-haproxy-response" {
   provisioner "local-exec" {
     command = <<EOT
-    for i in $(seq 1 30); do
-      OUTPUT=$(wget -O- -q http://${cidrhost(join("/", [ var.gw-net-home.network, var.gw-net-home.mask ]), var.gw-net-home.cidr)}/stats)
+    for i in $(seq 1 60); do
+      OUTPUT=$(wget -O- -q http://${cidrhost(join("/", [ var.gw-net-home.network, var.gw-net-home.mask ]), var.gw-net-home.cidr)}:81/stats)
       EC=$?
       if [ $EC != "0" ]; then
-        echo "Waiting for HAProxy to Start.  Attempt $i of 30"
+        echo "Waiting for HAProxy to Start.  Attempt $i of 60"
         sleep 5
+        RV=1
       else
         echo "HAProxy responding.  It's Go Time!"
+        RV=0
         break
       fi
     done
+    exit ${RV}
     EOT
   }
 

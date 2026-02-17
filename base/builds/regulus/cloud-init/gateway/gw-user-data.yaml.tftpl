@@ -129,13 +129,15 @@ write_files:
         load crt "fullchain.pem" key "privkey.pem"
       frontend stats
         mode http
-        bind :80
+        bind :81
         stats enable
-        stats refresh 5s
+        stats refresh 15s
         stats uri /stats
         stats show-modules
       frontend secure_cluster_apps
+        bind :80
         bind :443 ssl crt "@gateway/fullchain.pem"
+        http-request redirect scheme https unless { ssl_fc }
         mode http
         default_backend cluster-default-gateway
       frontend cluster_api
