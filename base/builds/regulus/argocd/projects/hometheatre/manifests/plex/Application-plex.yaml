@@ -6,9 +6,9 @@ metadata:
 spec:
   project: hometheatre
   sources:
-  - chart: plex/plex-media-server
+  - chart: plex-media-server
     repoURL: https://raw.githubusercontent.com/plexinc/pms-docker/gh-pages
-    targetRevision: HEAD
+    targetRevision: 1.42.2
     helm:
       valueFiles:
       - $values/base/builds/regulus/argocd/projects/hometheatre/manifests/plex/values.yaml
