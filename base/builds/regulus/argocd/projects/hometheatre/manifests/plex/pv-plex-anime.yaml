@@ -7,7 +7,8 @@ spec:
   storageClassName: nfs-bind
   volumeMode: Filesystem
   reclaimPolicy: Retain
-  capacity: 16Ti
+  capacity: 
+    storage: 16Ti
   accessModes:
   - ReadWriteMany  
   nfs:
