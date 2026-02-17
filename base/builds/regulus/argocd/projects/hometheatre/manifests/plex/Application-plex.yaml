@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: plex
+  namespace: argocd
+spec:
+  project: hometheatre
+  source:
+    chart: plex/plex-media-server
+    repoURL: https://raw.githubusercontent.com/plexinc/pms-docker/gh-pages
+    targetRevision: 1.4.0
+    helm:
+      valueSources:
+      - configMap:
+          name: plex-helm-values
+          namespace: argocd
+          key: values.yaml
+  destination:
+    namespace: plex
+    server: https://kubernetes.default.svc
+  revisionHistoryLimit: 0
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+    automated:
+      prune: false
+      selfHeal: false

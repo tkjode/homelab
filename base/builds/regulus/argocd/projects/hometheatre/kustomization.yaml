@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: htpc-projects
+resources:
+  - AppProject.hometheatre.yaml                     # Creates the `hometheatre` argocd project
+  - manifests/plex/Application-plex.yaml            # Adds the Helm chart to ArgoCD in the hometheatre project
+  - manifests/plex/ConfigMap-plex.helm.values.yaml  # Holds the values.yaml contents for the Helm chart
+  - manifests/plex/pv-plex-anime.yaml               # Advertises RWX Mount - Anime folder on the NAS over NFS
+  - manifests/plex/pv-plex-movies.yaml              # Advertises RWX Mount - Movies folder on the NAS over NFS
+  - manifests/plex/pv-plex-tvshows.yaml             # Advertises RWX Mount - tvshows folder on the NAS over NFS

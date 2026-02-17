@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: plex-anime
+  namespace: plex
+spec:
+  storageClassName: nfs-bind
+  volumeMode: Filesystem
+  reclaimPolicy: Retain
+  accessModes:
+  - ReadWriteMany  
+  nfs:
+    path: /srv/nas/media/video/Anime
+    server: 10.0.0.5

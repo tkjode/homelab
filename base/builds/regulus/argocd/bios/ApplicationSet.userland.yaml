@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: userland
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - list:
+      elements:
+      - folder: hometheatre
+        project: userland
+  template:
+    metadata:
+      name: 'projects-{{.folder}}'
+    spec:
+      project: '{{.project}}'
+      source:
+        repoURL: ssh://git@github.com/tkjode/homelab
+        targetRevision: HEAD
+        path: base/builds/regulus/argocd/projects/{{.folder}}
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: 'argocd'
+      syncPolicy:
+        automated:
+          enabled: true
+          prune: false
+          selfHeal: true
+          allowEmpty: true
+        syncOptions:
+          - ApplyOutOfSyncOnly=true
+          - CreateNamespace=true

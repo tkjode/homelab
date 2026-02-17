@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: plex-helm-values
+  namespace: argocd
+data:
+  values.yaml: |
+    httpRoute:
+      enabled: true
+      parentRefs:
+      - name: cluster-ingress
+        namespace: default
+        kind: Gateway
+      hostnames:
+      - "plex.apps.phalnet.com"
+    pms:
+      storageClassName: nfs-durable
+      configStorage: 8G
+    extraVolumnes:
+    - name: plex-tvshows
+      persistentVolumeClaim:
+        claimName: pvc-plex-tvshows
+    - name: plex-movies
+      persistentVolumeClaim:
+        claimName: pvc-plex-movies
+    - name: plex-anime
+      persistentVolumeClaim:
+        claimName: pvc-plex-anime

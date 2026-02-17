@@ -7,4 +7,6 @@ resources:
   - AppProject.trusted-platform.yaml
   - AppProject.storage.yaml
   - AppProject.telemetry.yaml
+  - AppProject.userland.yaml
   - ApplicationSet.bootstrap.yaml
+  - ApplicationSet.userland.yaml
