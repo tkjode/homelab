@@ -38,8 +38,8 @@ write_files:
         guest_ok = yes
   - path: /etc/exports
     content: |
-      /srv/nas    10.0.0.0/24(rw,sync,no_subtree_check) 192.168.64.0/24(rw,sync,no_subtree_check,no_root_squash)
-      /srv/regulus 10.0.0.0/24(rw,sync,no_subtree_check) 192.168.64.0/24(rw,sync,no_subtree_check,no_root_squash)
+      /srv/nas    10.0.0.0/24(rw,sync,no_subtree_check,no_root_squash) 192.168.64.0/24(rw,sync,no_subtree_check,no_root_squash)
+      /srv/regulus 10.0.0.0/24(rw,sync,no_subtree_check,no_root_squash) 192.168.64.0/24(rw,sync,no_subtree_check,no_root_squash)
   - path: /root/.ssh/config
     content: |
       Host github.com
