@@ -1,9 +1,10 @@
 httpRoute:
   enabled: true
   parentRefs:
-  - name: cluster-ingress
-    namespace: default
+  - group: gateway.networking.k8s.io
     kind: Gateway
+    name: cluster-ingress
+    namespace: default
   hostnames:
   - "plex.apps.phalnet.com"
 pms:

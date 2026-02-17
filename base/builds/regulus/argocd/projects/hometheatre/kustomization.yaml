@@ -8,3 +8,4 @@ resources:
   - manifests/plex/pv-plex-anime.yaml               # Advertises RWX Mount - Anime folder on the NAS over NFS
   - manifests/plex/pv-plex-movies.yaml              # Advertises RWX Mount - Movies folder on the NAS over NFS
   - manifests/plex/pv-plex-tvshows.yaml             # Advertises RWX Mount - tvshows folder on the NAS over NFS
+  - manifests/plex/pv-plex-config.yaml              # Provisions RWO Stateful Storage for Plex Config storage
