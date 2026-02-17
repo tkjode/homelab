@@ -120,7 +120,7 @@ resource "null_resource" "wait-for-haproxy-response" {
         break
       fi
     done
-    exit ${RV}
+    exit $RV
     EOT
   }
 
