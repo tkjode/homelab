@@ -39,6 +39,7 @@ write_files:
   - path: /etc/exports
     content: |
       /srv/nas    10.0.0.0/24(rw,sync,no_subtree_check) 192.168.64.0/24(rw,sync,no_subtree_check)
+      /srv/regulus 10.0.0.0/24(rw,sync,no_subtree_check) 192.168.64.0/24(rw,sync,no_subtree_check)
   - path: /root/.ssh/config
     content: |
       Host github.com
@@ -89,6 +90,7 @@ runcmd:
   - systemctl enable qemu-guest-agent && systemctl start qemu-guest-agent
   - mkdir /mnt/TERA && chattr +i /mnt/TERA && chown xbmc:xbmc /mnt/TERA
   - ln -s /mnt/TERA /srv/nas
+  - ln -s /mnt/TERA/kubepv/regulus /srv/regulus
   - mount -a
   - systemctl restart nfs-kernel-server
   - systemctl restart smbd
