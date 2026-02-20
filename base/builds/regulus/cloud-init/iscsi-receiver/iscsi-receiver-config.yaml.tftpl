@@ -44,4 +44,5 @@ packages:
 runcmd:
   - systemctl enable --now qemu-guest-agent
   - targetcli /backstores/block create iscsi-lun-regulus /dev/sdb1
+  - targetcli /iscsi create iqn.2026-02.regulus.pv00
   - echo "done" > /tmp/cloud-config.done
