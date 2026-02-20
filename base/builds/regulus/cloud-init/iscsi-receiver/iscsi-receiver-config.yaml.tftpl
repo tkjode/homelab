@@ -1,6 +1,25 @@
 #cloud-config
 hostname: ${hostname}
 timezone: America/Toronto
+ssh_keys:
+  ed25519_public: |
+    ${indent(4, host-ssh-key-ed25519.public_key_openssh)}
+  ed25519_private: |
+    ${indent(4, host-ssh-key-ed25519.private_key_openssh)}
+disk_setup:
+  /dev/sdb:
+    table_type: 'mbr'
+    layout:
+    - 100
+    overwrite: false
+fs_setup:
+  - label: iscsi0
+    filesystem: 'ext4'
+    device: '/dev/sdb1'
+    partition: auto
+    overwrite: false
+mounts:
+- [/dev/sdb1, /srv]
 users:
   - default
   - name: tkjode
