@@ -18,8 +18,8 @@ fs_setup:
     device: '/dev/sdb1'
     partition: auto
     overwrite: false
-mounts:
-- [/dev/sdb1, /srv]
+#mounts:
+#- [/dev/sdb1, /srv]
 users:
   - default
   - name: tkjode
@@ -43,4 +43,5 @@ packages:
   - curl
 runcmd:
   - systemctl enable --now qemu-guest-agent
+  - targetcli /backstores/block create iscsi-lun-regulus /dev/sdb1
   - echo "done" > /tmp/cloud-config.done
