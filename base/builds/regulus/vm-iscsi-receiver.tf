@@ -27,7 +27,7 @@ resource "proxmox_virtual_environment_vm" "iscsi-receiver" {
 
   pool_id                   = proxmox_virtual_environment_pool.cluster.pool_id
 
-  depends_on                = proxmox_virtual_environment_vm.regulus-gateway
+  depends_on                = [proxmox_virtual_environment_vm.regulus-gateway]
 
   agent {
     enabled                 = true
