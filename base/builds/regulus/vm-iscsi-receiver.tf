@@ -51,7 +51,7 @@ resource "proxmox_virtual_environment_vm" "iscsi-receiver" {
 
   # Attached Disk
   dynamic "disk" {
-    for_each                = { for idx, val in proxmox_virtual_environment_vm.iscsi-receiver.disk : idx => val }
+    for_each                = { for idx, val in proxmox_virtual_environment_vm.persistent-disk-stub.disk : idx => val }
     iterator                = data_disk
     content {
         datastore_id        = data_disk.value["datastore_id"]
