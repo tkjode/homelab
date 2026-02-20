@@ -1,0 +1,48 @@
+#cloud-config
+hostname: ${hostname}
+timezone: America/Toronto
+ssh_keys:
+  ed25519_public: |
+    ${indent(4, host-ssh-key-ed25519.public_key_openssh)}
+  ed25519_private: |
+    ${indent(4, host-ssh-key-ed25519.private_key_openssh)}
+disk_setup:
+  /dev/sdb:
+    table_type: 'mbr'
+    layout:
+    - 100
+    overwrite: false
+fs_setup:
+  - label: iscsi0
+    filesystem: 'ext4'
+    device: '/dev/sdb1'
+    partition: auto
+    overwrite: false
+#mounts:
+#- [/dev/sdb1, /srv]
+users:
+  - default
+  - name: tkjode
+    groups:
+      - sudo
+    shell: /bin/bash
+    ssh_import_id: ['gh:tkjode']
+    sudo: ALL=(ALL) NOPASSWD:ALL
+package_update: true
+packages:
+  - qemu-guest-agent
+  - apt-transport-https
+  - ca-certificates
+  - nfs-common
+  - cifs-utils
+  - open-iscsi
+  - targetcli-fb
+  - gpg
+  - containerd
+  - net-tools
+  - curl
+runcmd:
+  - systemctl enable --now qemu-guest-agent
+  - targetcli /backstores/block create iscsi-lun-regulus /dev/sdb1
+  - targetcli /iscsi create iqn.2026-02.regulus.pv00
+  - echo "done" > /tmp/cloud-config.done
