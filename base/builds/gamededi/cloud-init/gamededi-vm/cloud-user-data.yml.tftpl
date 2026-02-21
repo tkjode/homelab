@@ -46,6 +46,6 @@ packages:
   - net-tools
   - curl
 runcmd:
-  - /usr/sbin/mkfs.ext4 /dev/sdb2
+  - mount -a
   - systemctl enable --now qemu-guest-agent
   - echo "done" > /tmp/cloud-config.done
