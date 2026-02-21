@@ -10,7 +10,7 @@ disk_setup:
   /dev/sdb:
     table_type: 'mbr'
     layout:
-    - 100
+    - [1,99]
     overwrite: false
 fs_setup:
   - label: dockervol
@@ -19,7 +19,7 @@ fs_setup:
     partition: auto
     overwrite: false
 mounts:
-- [/dev/sdb1, /app]
+- [/dev/sdb2, /app]
 users:
   - default
   - name: tkjode
