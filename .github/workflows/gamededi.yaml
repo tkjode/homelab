@@ -41,7 +41,7 @@ jobs:
         with:
           sparse-checkout: |
             ./.github
-            base/builds/nas
+            base/builds/gamededi
       - run: terraform init
         shell: sh
         working-directory: base/builds/gamededi
@@ -50,4 +50,4 @@ jobs:
         working-directory: base/builds/gamededi
       - run: terraform apply -auto-approve --parallelism=1 /tf/gamededi.tfplan
         shell: sh
-        working-directory: base/builds/nas
+        working-directory: base/builds/gamededi
