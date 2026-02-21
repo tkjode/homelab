@@ -26,7 +26,7 @@ fs_setup:
     partition: sdb2
     overwrite: false
 mounts:
-- [/dev/sdb2, /app]
+- [/dev/sdb2, /app, ext4, "defaults,discard", "0", "0" ]
 users:
   - default
   - name: tkjode
@@ -46,5 +46,6 @@ packages:
   - net-tools
   - curl
 runcmd:
+  - /usr/sbin/mkfs.ext4 /dev/sdb2
   - systemctl enable --now qemu-guest-agent
   - echo "done" > /tmp/cloud-config.done
