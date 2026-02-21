@@ -15,3 +15,9 @@
 ### TODO
 
 - [ ] Pattern out how to enable docker-compose up's via a systemctl service
+
+## Build Log
+
+|       Date | Comments |
+|      :---: | :------- |
+| 2026-02-21 | Initial build attempt with untested terraform code. |
