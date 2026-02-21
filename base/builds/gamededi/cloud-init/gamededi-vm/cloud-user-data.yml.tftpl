@@ -6,11 +6,13 @@ ssh_keys:
     ${indent(4, host-ssh-key-ed25519.public_key_openssh)}
   ed25519_private: |
     ${indent(4, host-ssh-key-ed25519.private_key_openssh)}
+resize_root_fs: false
 disk_setup:
   /dev/sdb:
     table_type: 'mbr'
     layout:
-    - [1,99]
+    - 1
+    - 99
     overwrite: false
 fs_setup:
   - label: dockervol
