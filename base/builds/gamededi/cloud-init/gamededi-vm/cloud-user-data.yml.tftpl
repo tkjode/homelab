@@ -15,10 +15,15 @@ disk_setup:
     - 99
     overwrite: false
 fs_setup:
-  - label: dockervol
+  - label: extraboot
     filesystem: 'ext4'
     device: '/dev/sdb1'
-    partition: auto
+    partition: sdb1
+    overwrite: true
+  - label: dockervol
+    filesystem: 'ext4'
+    device: '/dev/sdb'
+    partition: sdb2
     overwrite: false
 mounts:
 - [/dev/sdb2, /app]
