@@ -34,8 +34,8 @@ resource "proxmox_virtual_environment_vm" "gamededi" {
   }
 
   memory {
-    dedicated               = 8192
-    floating                = 8192
+    dedicated               = 32768
+    floating                = 32768
   }
 
   # Boot Disk
