@@ -95,7 +95,7 @@ resource "proxmox_virtual_environment_file" "gamededi-cloud-user-data" {
   source_raw {
     file_name   = "gamededi-user-cloud-data.yaml"
     data        = templatefile(
-                    "cloud-init/gamededi-vm/cloud-user-data.yaml.tftpl",
+                    "cloud-init/gamededi-vm/cloud-user-data.yml.tftpl",
                     {
                       hostname = "gamededi",
                       host-ssh-key-ed25519  = tls_private_key.gamededi-ssh-ed25519
