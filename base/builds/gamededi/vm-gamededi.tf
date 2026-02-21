@@ -4,7 +4,7 @@ resource "proxmox_virtual_environment_vm" "persistent-disk-stub" {
   started                   = false
   on_boot                   = false
   vm_id                     = 301
-  description               = "Persistent 256GB Disk Stub"
+  description               = "Persistent 256GB Disk for Gaming Server"
   protection                = true
 
   disk {
@@ -18,7 +18,7 @@ resource "proxmox_virtual_environment_vm" "persistent-disk-stub" {
 
 resource "proxmox_virtual_environment_vm" "gamededi" {
   name                      = "gamededi"
-  description               = "ISCSI Persistent Storage Provider"
+  description               = "Docker Dedicated Gaming VM"
   tags                      = ["gaming", "cloud-init"]
   node_name                 = var.proxmox_node
   stop_on_destroy           = true
@@ -82,12 +82,12 @@ resource "proxmox_virtual_environment_vm" "gamededi" {
       }
     }
 
-    user_data_file_id       = proxmox_virtual_environment_file.iscsi-receiver-user-data-cloud-config.id
+    user_data_file_id       = proxmox_virtual_environment_file.gamededi-cloud-user-data.id
 
   }
 }
 
-resource "proxmox_virtual_environment_file" "iscsi-receiver-user-data-cloud-config" {
+resource "proxmox_virtual_environment_file" "gamededi-cloud-user-data" {
   content_type  = "snippets"
   datastore_id  = "snippets"
   node_name     = var.proxmox_node
@@ -98,7 +98,7 @@ resource "proxmox_virtual_environment_file" "iscsi-receiver-user-data-cloud-conf
                     "cloud-init/gamededi/cloud-user-data.yaml.tftpl",
                     {
                       hostname = "gamededi",
-                      host-ssh-key-ed25519  = tls_private_key.iscsi-ssh-ed25519
+                      host-ssh-key-ed25519  = tls_private_key.gamededi-ssh-ed25519
                     }
                   )
   }
