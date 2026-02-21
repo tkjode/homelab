@@ -73,7 +73,7 @@ resource "proxmox_virtual_environment_vm" "gamededi" {
     datastore_id            = "cloudinit"
     dns {
       servers               = [ "1.1.1.1" ,"4.4.4.4" ]
-      domain                = join(".", [var.cluster-name, var.cluster-domain])
+      domain                = "homenet.phalnet.com"
     }
     ip_config {
       ipv4 {
