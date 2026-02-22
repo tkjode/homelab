@@ -5,4 +5,4 @@ metadata:
 resources:
   - ConfigMap-csi-iscsiadm.yaml
   - CSIDriver-iscsi.yaml
-  - DaemonSEt-csi-iscsi-node.yaml
+  - DaemonSet-csi-iscsi-node.yaml
