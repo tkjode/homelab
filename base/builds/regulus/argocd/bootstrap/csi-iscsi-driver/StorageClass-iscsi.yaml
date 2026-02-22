@@ -7,5 +7,5 @@ metadata:
   name: iscsi
 parameters:
   fsTyle: ext4
-  iqn: iqn.2026-02.regulus.pv00
+  iqn: iqn.2026-02.com.phalnet.regulus:pv00
   portals: 192.168.64.4

@@ -13,7 +13,7 @@ spec:
   - ReadWriteOnce
   iscsi:
     targetPortal: 192.168.64.16:3260
-    iqn: iqn.2026-02.regulus.pv00
+    iqn: iqn.2026-02.com.phalnet.regulus:pv00
     lun: 1
     fsType: ext4
     readOnly: false
