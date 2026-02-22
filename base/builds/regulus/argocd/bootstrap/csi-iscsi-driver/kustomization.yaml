@@ -6,3 +6,4 @@ resources:
   - ConfigMap-csi-iscsiadm.yaml
   - CSIDriver-iscsi.yaml
   - DaemonSet-csi-iscsi-node.yaml
+  - StorageClass-iscsi.yaml

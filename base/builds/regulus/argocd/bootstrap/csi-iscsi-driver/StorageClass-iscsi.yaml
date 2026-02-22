@@ -1,0 +1,11 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+provisioner: iscsi.csi.k8s.io
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
+metadata:
+  name: iscsi
+parameters:
+  fsTyle: ext4
+  iqn: iqn.2026-02.regulus.pv00
+  portals: 192.168.64.4
