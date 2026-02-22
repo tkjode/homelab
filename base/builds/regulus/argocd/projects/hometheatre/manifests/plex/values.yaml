@@ -3,7 +3,7 @@ extraEnv:
   ALLOWED_NETWORKS: "10.0.0.0/8,192.168.64.0/24,172.16.0.0/16"
   ADVERTISE_IP: "https://plex.apps.phalnet.com/"
   TZ: "America/New_York"
-  PLEX_CLAIM: claim-dLExSDsw-1rffjBu4cyf
+  PLEX_CLAIM: claim-w2xjshPmUUnAKK9CSn5e
 httpRoute:
   enabled: true
   parentRefs:
