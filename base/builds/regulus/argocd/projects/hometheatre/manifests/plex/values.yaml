@@ -14,7 +14,7 @@ httpRoute:
   hostnames:
   - "plex.apps.phalnet.com"
 pms:
-  configExistingClaim: pv-plex-config
+  configExistingClaim: pvc-plex-config
 extraVolumes:
 - name: plex-tvshows
   persistentVolumeClaim:
