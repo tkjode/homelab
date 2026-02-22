@@ -12,7 +12,7 @@ spec:
   accessModes:
   - ReadWriteOnce
   iscsi:
-    targetPortal: 192.168.64.16:3260
+    targetPortal: 192.168.64.3:3260
     iqn: iqn.2026-02.com.phalnet.regulus:pv00
     lun: 1
     fsType: ext4

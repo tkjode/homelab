@@ -8,4 +8,4 @@ metadata:
 parameters:
   fsTyle: ext4
   iqn: iqn.2026-02.com.phalnet.regulus:pv00
-  portals: 192.168.64.4
+  portals: 192.168.64.3
