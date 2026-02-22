@@ -109,6 +109,12 @@ variable "bastion-ip-offset" {
   default     = 2
 }
 
+variable "iscsi-ip-offset" {
+  description = "IP Address Offset to assign 1 ISCSI Receiver node on the private network"
+  type        = number
+  default     = 3
+}
+
 variable "worker-ip-offset" {
   description = "IP Addresses Offset to start assigning Worker nodes on private network"
   type        = number

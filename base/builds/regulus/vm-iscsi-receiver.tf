@@ -23,7 +23,7 @@ resource "proxmox_virtual_environment_vm" "iscsi-receiver" {
   tags                      = [var.cluster-name, "storage", "kubernetes"]
   node_name                 = var.proxmox_node
   stop_on_destroy           = true
-  vm_id                     = var.proxmox-vmid-offset + var.worker-ip-offset + var.worker-count + 2
+  vm_id                     = var.proxmox-vmid-offset + var.iscsi-ip-offset
 
   pool_id                   = proxmox_virtual_environment_pool.cluster.pool_id
 
@@ -82,7 +82,7 @@ resource "proxmox_virtual_environment_vm" "iscsi-receiver" {
     }
     ip_config {
       ipv4 {
-        address             = join("/", [ cidrhost(join("/", [var.gw-net-cluster.network, var.gw-net-cluster.mask]), var.worker-ip-offset + var.worker-count + 2), var.gw-net-cluster.mask ])
+        address             = join("/", [ cidrhost(join("/", [var.gw-net-cluster.network, var.gw-net-cluster.mask]), var.iscsi-ip-offset), var.gw-net-cluster.mask ])
         gateway             = cidrhost(join("/", [var.gw-net-cluster.network, var.gw-net-cluster.mask]), var.gw-net-cluster.cidr)
       }
     }

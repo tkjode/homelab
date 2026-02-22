@@ -82,6 +82,7 @@ write_files:
       @          IN A 192.168.64.1   ; Default to HAProxy LB
       gateway    IN A 192.168.64.1   ; Me
       bastion    IN A 192.168.64.2   ; K8s Troubleshooter VM
+      iscsi      IN A 192.168.64.3   ; ISCSI Storage
       master-0   IN A 192.168.64.4   ; etcd / api
       master-1   IN A 192.168.64.5   ; etcd / api
       master-2   IN A 192.168.64.6   ; etcd / api
@@ -104,6 +105,7 @@ write_files:
           IN NS ns1.regulus.phalnet.com.
       1   IN PTR gateway.regulus.phalnet.com.
       2   IN PTR bastion.regulus.phalnet.com.
+      3   IN PTR iscsi.regulus.phalnet.com
       4   IN PTR master-0.regulus.phalnet.com.
       5   IN PTR master-1.regulus.phalnet.com.
       6   IN PTR master-2.regulus.phalnet.com.

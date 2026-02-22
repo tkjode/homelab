@@ -45,4 +45,8 @@ runcmd:
   - systemctl enable --now qemu-guest-agent
   - targetcli /backstores/block create regulus /dev/sdb1
   - targetcli /iscsi create iqn.2026-02.com.phalnet.regulus:pv00
+  - targetcli /iscsi/iqn.2026-02.com.phalnet.regulus:pv00/tpg1/luns create /backstores/block/regulus lun=1
+%{ for instance in range( 0, 6 ) ~}
+  - targetcli /iscsi/iqn.2026-02.com.phalnet.regulus:pv00/tpg1/acls create iqn.2026-02.com.phalnet.regulus:worker-${instance}
+%{ endfor ~}
   - echo "done" > /tmp/cloud-config.done

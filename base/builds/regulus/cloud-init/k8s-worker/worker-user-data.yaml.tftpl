@@ -5,6 +5,9 @@ bootcmd:
   - modprobe br_netfilter
   - sysctl -w net.ipv4.ip_forward=1
 write_files:
+  - path: /etc/iscsi/initiatorname.iscsi
+    content: |
+      InitiatorName=iqn.2026-02.com.phalnet.regulus:${hostname}
   - path: /etc/modules-load.d/kube-flannel.conf
     content: br_netfilter
     owner: root:root
