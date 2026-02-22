@@ -12,3 +12,5 @@ resources:
   - manifests/plex/pvc-plex-anime.yaml              # RWX Claim for plex pod to mount anime
   - manifests/plex/pvc-plex-movies.yaml             # RWX Claim for plex pod to mount movies
   - manifests/plex/pvc-plex-tvshows.yaml            # RWX Claim for plex pod to mount tvshows
+  - manifests/plex/pvc-plex-config.yaml             # RWO Claim for plex configs on block storage
+  
