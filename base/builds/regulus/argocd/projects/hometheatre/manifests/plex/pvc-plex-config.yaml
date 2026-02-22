@@ -8,7 +8,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 16G
+      storage: 8Gi
   storageClassName: iscsi
   volumeMode: Filesystem
   volumeName: plex-config
