@@ -3,7 +3,7 @@ extraEnv:
   ALLOWED_NETWORKS: "10.0.0.0/8,192.168.64.0/24,172.16.0.0/16"
   ADVERTISE_IP: "https://plex.apps.phalnet.com/"
   TZ: "America/New_York"
-  PLEX_CLAIM: "claim-zZGiUma2yQPhuAGuozb6"
+  PLEX_CLAIM: "claim-9FajvE7XCW_a4PVGW5wc"
 httpRoute:
   enabled: true
   parentRefs:
@@ -14,8 +14,7 @@ httpRoute:
   hostnames:
   - "plex.apps.phalnet.com"
 pms:
-  storageClassName: iscsi
-  configStorage: 8G
+  configExistingClaim: pv-plex-config
 extraVolumes:
 - name: plex-tvshows
   persistentVolumeClaim:
