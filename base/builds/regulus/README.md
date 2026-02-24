@@ -20,6 +20,7 @@ Most of this project is concerned with build & basic day 2 configuration.  There
 - A separate network for the Kubernetes Cluster
 - A dual-purpose Ingress + Bastion host that bridges both networks
   - (stretch) AWS Entries for Route53 DNS Pointer
+- An ISCSI Target with some fast SSD mounted on to use as download temp space, caching and persistent storage in Kubernetes
 - 3 Master VMs
 - 6+ Worker VMs (variable)
 
