@@ -103,7 +103,7 @@ variable "master-ip-offset" {
   default     = 4    # 192.168.64.4 to 6
 }
 
-variable "bastion-ip-offset" { 
+variable "bastion-ip-offset" {
   description = "IP Address Offset to assign 1 bastion node on the private network"
   type        = number
   default     = 2
@@ -204,4 +204,23 @@ variable "letsencrypt-storage" {
                   fs_freq     = "0"
                   fs_passno   = "0"
                 }
+}
+
+variable "create-luns" {
+  description = "A list of objects that define what luns to create on the iscsi target"
+  type = list(object({
+                      lun     = number
+                      name    = string
+                      size    = number
+                    }))
+  default     =  [
+                  { lun = 1, name = "plex-config", size=8 },
+                  { lun = 2, name = "sabnzbd-cache", size = 384 },
+                  { lun = 3, name = "ssd-storageclass", size= 512 },
+                  { lun = 4, name = "radarr-config", size = 8 },
+                  { lun = 5, name = "sonarrtv-config", size = 8 },
+                  { lun = 6, name = "sonarranime-config", size = 8 }
+                ]
+  }
+
 }
