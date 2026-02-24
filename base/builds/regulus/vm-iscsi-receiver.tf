@@ -103,10 +103,22 @@ resource "proxmox_virtual_environment_file" "iscsi-receiver-user-data-cloud-conf
                     "cloud-init/iscsi-receiver/iscsi-receiver-config.yaml.tftpl",
                     {
                       hostname = join("-", [var.cluster-name, "iscsi"] ),
-                      host-ssh-key-ed25519  = tls_private_key.iscsi-ssh-ed25519
+                      host-ssh-key-ed25519  = tls_private_key.iscsi-ssh-ed25519,
+                      luns = locals.create_luns
                     }
                   )
   }
+}
+
+locals {
+  create_luns = [
+    { lun = 1, name = "plex-config", size=8 },
+    { lun = 2, name = "sabnzbd-cache", size = 384 },
+    { lun = 3, name = "ssd-storageclass", size= 512 },
+    { lun = 4, name = "radarr-config", size = 8 },
+    { lun = 5, name = "sonarrtv-config", size = 8 },
+    { lun = 6, name = "sonarranime-config", size = 8 }
+  ]
 }
 
 resource "tls_private_key" "iscsi-ssh-ed25519" {
