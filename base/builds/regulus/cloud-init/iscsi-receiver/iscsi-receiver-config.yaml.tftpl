@@ -51,7 +51,7 @@ runcmd:
   #- targetcli /backstores/fileio create sonarranime-config /srv/sonarranime-config.img 8G
 %{ for lun in luns ~}
   - targetcli /backstores/fileio create ${lun.name} /srv/${lun.name}.img ${lun.size}G write_back=false
-  - mkfs.ext4 /srv/${lun.name}
+  - mkfs.ext4 /srv/${lun.name}.img
 %{ endfor ~}
   - targetcli /iscsi create iqn.2026-02.com.phalnet.regulus:pv00
 %{ for lun in luns ~}
