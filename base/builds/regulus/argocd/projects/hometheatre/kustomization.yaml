@@ -13,4 +13,6 @@ resources:
   - manifests/plex/pvc-plex-movies.yaml             # RWX Claim for plex pod to mount movies
   - manifests/plex/pvc-plex-tvshows.yaml            # RWX Claim for plex pod to mount tvshows
   - manifests/plex/pvc-plex-config.yaml             # RWO Claim for plex configs on block storage
-  
+  - manifests/plex/deployment-dblmounttest.yaml     # TESTING - Requesting Mounts from the same LUN - Pod to check with
+  - manifests/plex/pv-dblmounttest-config.yaml      # TESTING - Requesting Mounts from the same LUN - The Volume def
+  - manifests/plex/pvc-dblmounttest-config.yaml     # TESTING - Requesting Mounts from the same LUN - The Claim to that Volume
