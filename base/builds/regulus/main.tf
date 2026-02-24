@@ -221,6 +221,4 @@ variable "create-luns" {
                   { lun = 5, name = "sonarrtv-config", size = 8 },
                   { lun = 6, name = "sonarranime-config", size = 8 }
                 ]
-  }
-
 }
