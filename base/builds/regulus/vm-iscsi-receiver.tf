@@ -104,7 +104,7 @@ resource "proxmox_virtual_environment_file" "iscsi-receiver-user-data-cloud-conf
                     {
                       hostname = join("-", [var.cluster-name, "iscsi"] ),
                       host-ssh-key-ed25519  = tls_private_key.iscsi-ssh-ed25519,
-                      luns = var.create_luns
+                      luns = var.create-luns
                     }
                   )
   }
