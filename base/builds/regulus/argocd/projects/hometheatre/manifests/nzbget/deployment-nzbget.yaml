@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nzbget
+  namespace: nzbget
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: nzbget
+      app.kuberntes.io/name: nzbget
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: nzbget
+        app.kubernetes.io/name: nzbget
+    spec:
+      containers:
+      - name: nzbget
+        image: lscr.io/linuxserver/nzbget:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 100m
+            memory: 4Gi
+          limits:
+            cpu: 4000m
+            memory: 6Gi
+        ports:
+        - containerPort: 6789
+          name: http
+          protocol: TCP
+        securityContext:
+          allowPriviledgeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          privileged: false
+          runAsGroup: 1000
+          runAsNonRoot: true
+          runAsUser: 1000
+          seccompProfile:
+            type: RuntimeDefault
+        volumeMounts:
+        - mountPath: /intermediate
+          name: intermediate
+        - mountPath: /downloads
+          name: downloads
+    volumes:
+    - name: intermediate
+      persistentVolumeClaim: nzbget-intermediate
+    - name: downloads
+      persistentVolumeClaim: downloads
+
+
+
+
+

@@ -10,7 +10,7 @@ spec:
     targetRevision: HEAD
     path: base/builds/regulus/argocd/projects/hometheatre/manifests/nzbget
   destination:
-    namespace: plex
+    namespace: nzbget
     server: https://kubernetes.default.svc
   revisionHistoryLimit: 0
   syncPolicy:
@@ -19,4 +19,4 @@ spec:
     - ServerSideApply=true
     automated:
       prune: false
-      selfHeal: false    
+      selfHeal: false
