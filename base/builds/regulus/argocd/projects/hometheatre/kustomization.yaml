@@ -5,11 +5,4 @@ metadata:
 resources:
   - AppProject.hometheatre.yaml                     # Creates the `hometheatre` argocd project
   - manifests/plex/Application-plex.yaml            # Adds the Helm chart to ArgoCD in the hometheatre project
-#  - manifests/plex/pv-plex-anime.yaml               # Advertises RWX Mount - Anime folder on the NAS over NFS
-#  - manifests/plex/pv-plex-movies.yaml              # Advertises RWX Mount - Movies folder on the NAS over NFS
-#  - manifests/plex/pv-plex-tvshows.yaml             # Advertises RWX Mount - tvshows folder on the NAS over NFS
-#  - manifests/plex/pv-plex-config.yaml              # Provisions RWO Stateful Storage for Plex Config storage
-#  - manifests/plex/pvc-plex-anime.yaml              # RWX Claim for plex pod to mount anime
-#  - manifests/plex/pvc-plex-movies.yaml             # RWX Claim for plex pod to mount movies
-#  - manifests/plex/pvc-plex-tvshows.yaml            # RWX Claim for plex pod to mount tvshows
-#  - manifests/plex/pvc-plex-config.yaml             # RWO Claim for plex configs on block storage
+  - manifests/nzbget/Application-nzbget.yaml        # Build starting

@@ -1,0 +1,11 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nzbget
+  namespace: argocd
+spec:
+  project: hometheatre
+  sources:
+  - repoURL: ssh://git@github.com/tkjode/homelab
+    targetRevision: HEAD
+    path: base/builds/regulus/argocd/projects/hometheatre/manifests/nzbget
