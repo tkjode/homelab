@@ -6,6 +6,9 @@ metadata:
 spec:
   project: hometheatre
   sources:
+  - repoURL: ssh://git@github.com/tkjode/homelab
+    targetRevision: HEAD
+    path: base/builds/regulus/argocd/projects/hometheatre/manifests/plex/volumes
   - chart: plex-media-server
     repoURL: https://raw.githubusercontent.com/plexinc/pms-docker/gh-pages
     targetRevision: 1.4.0

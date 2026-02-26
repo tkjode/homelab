@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: plex-volumes
+resources:
+  - pv-plex-anime.yaml               # Advertises RWX Mount - Anime folder on the NAS over NFS
+  - pv-plex-movies.yaml              # Advertises RWX Mount - Movies folder on the NAS over NFS
+  - pv-plex-tvshows.yaml             # Advertises RWX Mount - tvshows folder on the NAS over NFS
+  - pv-plex-config.yaml              # Provisions RWO Stateful Storage for Plex Config storage
+  - pvc-plex-anime.yaml              # RWX Claim for plex pod to mount anime
+  - pvc-plex-movies.yaml             # RWX Claim for plex pod to mount movies
+  - pvc-plex-tvshows.yaml            # RWX Claim for plex pod to mount tvshows
+  - pvc-plex-config.yaml             # RWO Claim for plex configs on block storage
