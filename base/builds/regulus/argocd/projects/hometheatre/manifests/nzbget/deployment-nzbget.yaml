@@ -46,11 +46,11 @@ spec:
           name: intermediate
         - mountPath: /downloads
           name: downloads
-    volumes:
-    - name: intermediate
-      persistentVolumeClaim: nzbget-intermediate
-    - name: downloads
-      persistentVolumeClaim: downloads
+      volumes:
+      - name: intermediate
+        persistentVolumeClaim: nzbget-intermediate
+      - name: downloads
+        persistentVolumeClaim: downloads
 
 
 
