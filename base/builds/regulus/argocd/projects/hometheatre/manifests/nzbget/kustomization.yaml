@@ -11,4 +11,4 @@ resources:
   - pvc-config.yaml
   - deployment-nzbget.yaml
   - service-nzbget.yaml
-#  - httproute-
+  - HTTPRoute-nzbget.yaml
