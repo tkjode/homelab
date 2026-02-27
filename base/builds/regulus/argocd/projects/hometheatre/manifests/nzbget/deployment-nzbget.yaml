@@ -21,7 +21,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: S6_READ_ONLY_ROOT
-          value: 1
+          value: "1"
         resources:
           requests:
             cpu: 100m
