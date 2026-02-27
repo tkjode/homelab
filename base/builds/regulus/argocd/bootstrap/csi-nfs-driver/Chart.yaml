@@ -1,9 +1,0 @@
-apiVersion: v2
-name: nfs-csi
-version: v1.0.1
-description: CSI Driver nfs.csi.k8s.io Plugin
-
-dependencies:
-- name: csi-driver-nfs
-  version: v4.13.1
-  repository: https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts
