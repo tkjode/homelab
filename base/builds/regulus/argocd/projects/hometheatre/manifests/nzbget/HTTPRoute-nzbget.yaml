@@ -14,7 +14,7 @@ spec:
   rules:
   - backendRefs:
     - group: ""
-      kind: SErvice
+      kind: Service
       name: nzbget
       port: 6789
       weight: 1
