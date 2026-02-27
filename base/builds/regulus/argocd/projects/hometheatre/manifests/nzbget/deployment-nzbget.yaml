@@ -69,7 +69,7 @@ spec:
         persistentVolumeClaim:
           claimName: exports-radarr
       - name: exports-sonarranime
-        persisentVolumeClaim:
+        persistentVolumeClaim:
           claimName: exports-sonarranime
         
 
