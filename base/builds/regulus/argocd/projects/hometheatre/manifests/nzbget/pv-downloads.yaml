@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: downloads
+  namespace: nzbget
+spec:
+  storageClassName: nfs-bind
+  volumeMode: Filesystem
+  persistentVolumeReclaimPolicy: Retain
+  capacity: 
+    storage: 16Ti
+  accessModes:
+  - ReadWriteMany
+  nfs:
+    path: /srv/nas/kubepv/regulus/stateful/nzbget#downloads
+    server: 10.0.0.5

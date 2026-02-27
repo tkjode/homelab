@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/instance: nzbget
-      app.kuberntes.io/name: nzbget
+      app.kubernetes.io/name: nzbget
   template:
     metadata:
       labels:
@@ -49,7 +49,7 @@ spec:
       volumes:
       - name: indetermediate
         persistentVolumeClaim:          
-          claimName: intermediate
+          claimName: cachedir
       - name: downloads
         persistentVolumeClaim: 
           claimName: downloads

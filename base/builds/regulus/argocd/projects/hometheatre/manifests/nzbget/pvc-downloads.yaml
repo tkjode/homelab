@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: cachedir
+  name: downloads
   namespace: nzbget
 spec:
   accessModes:
-  - ReadWriteOnce
+  - ReadWriteMany
   resources:
     requests:
-      storage: 384Gi
-  storageClassName: iscsi
+      storage: 8Gi
+  storageClassName: nfs-bind
   volumeMode: Filesystem
-  volumeName: cachedir
+  volumeName: downloads
