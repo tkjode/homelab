@@ -20,7 +20,8 @@ spec:
         image: lscr.io/linuxserver/nzbget:latest
         imagePullPolicy: Always
         env:
-          - S6_READ_ONLY_ROOT=1
+        - name: S6_READ_ONLY_ROOT
+          value: 1
         resources:
           requests:
             cpu: 100m
