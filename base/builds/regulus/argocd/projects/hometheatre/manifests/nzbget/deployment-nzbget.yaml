@@ -47,7 +47,7 @@ spec:
         - mountPath: /downloads
           name: downloads
       volumes:
-      - name: indetermediate
+      - name: intermediate
         persistentVolumeClaim:          
           claimName: cachedir
       - name: downloads
