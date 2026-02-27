@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: exports-sonarr
+  namespace: nzbget
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 256Mi
+  storageClassName: nfs-bind
+  volumeMode: Filesystem
+  volumeName: exports-sonarr

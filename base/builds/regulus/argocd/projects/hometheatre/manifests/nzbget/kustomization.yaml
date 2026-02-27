@@ -9,6 +9,12 @@ resources:
   - pvc-downloads.yaml
   - pv-config.yaml  
   - pvc-config.yaml
+  - pv-exports-sonarr.yaml
+  - pvc-exports-sonarr.yaml
+  - pv-exports-radarr.yaml
+  - pvc-exports-radarr.yaml
+  - pv-exports-sonarranime.yaml
+  - pvc-exports-sonarranime.yaml
   - deployment-nzbget.yaml
   - service-nzbget.yaml
   - HTTPRoute-nzbget.yaml

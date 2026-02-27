@@ -46,6 +46,12 @@ spec:
           name: downloads
         - mountPath: /config
           name: config
+        - mountPath: /exports/radarr
+          name: exports-radarr
+        - mountPath: /exports/sonarr
+          name: exports-sonarr
+        - mountPath: /exports/sonarr_anime
+          name: exports-sonarranime
       volumes:
       - name: intermediate
         persistentVolumeClaim:          
@@ -56,6 +62,15 @@ spec:
       - name: config
         persistentVolumeClaim:
           claimName: config
+      - name: exports-sonarr
+        persistentVolumeClaim:
+          claimName: exports-sonarr
+      - name: exports-radarr
+        persistentVolumeClaim:
+          claimName: exports-radarr
+      - name: exports-sonarranime
+        persisentVolumeClaim:
+          claimName: exports-sonarranime
         
 
 
