@@ -66,6 +66,7 @@ packages:
   - qemu-guest-agent
   - apt-transport-https
   - ca-certificates
+  - irqbalance
   - nfs-common
   - cifs-utils
   - open-iscsi
@@ -76,19 +77,14 @@ packages:
   - curl
 runcmd:
   - systemctl enable --now qemu-guest-agent
-  #- targetcli /backstores/fileio create plex-config /srv/plex-config.img 8G
-  #- targetcli /backstores/fileio create sabnzbd-cache /srv/sabnzbd-cache.img 384G
-  #- targetcli /backstores/fileio create ssd-storageclass /srv/ssd-storageclass.img 128G
-  #- targetcli /backstores/fileio create radarr-config /srv/radarr-config.img 8G
-  #- targetcli /backstores/fileio create sonarrtv-config /srv/sonarrtv-config.img 8G
-  #- targetcli /backstores/fileio create sonarranime-config /srv/sonarranime-config.img 8G
+  - systemctl enable --now irqbalance
 %{ for lun in luns ~}
   - targetcli /backstores/fileio create ${lun.name} /srv/${lun.name}.img ${lun.size}G write_back=false
 %{ endfor ~}
   - targetcli /iscsi create iqn.2026-02.com.phalnet.regulus:pv00
 %{ for lun in luns ~}
   - targetcli /iscsi/iqn.2026-02.com.phalnet.regulus:pv00/tpg1/luns create /backstores/fileio/${lun.name} lun=${lun.lun}
-%{endfor ~}
+%{ endfor ~ }
 %{ for instance in range( 0, 6 ) ~}
   - targetcli /iscsi/iqn.2026-02.com.phalnet.regulus:pv00/tpg1/acls create iqn.2026-02.com.phalnet.regulus:worker-${instance}
 %{ endfor ~}
