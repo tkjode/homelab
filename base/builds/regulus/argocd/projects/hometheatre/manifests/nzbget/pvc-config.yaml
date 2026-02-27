@@ -9,6 +9,6 @@ spec:
   resources:
     requests:
       storage: 256Mi
-  storageClassName: nfs-durable
+  storageClassName: nfs-bind
   volumeMode: Filesystem
   volumeName: config
