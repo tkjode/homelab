@@ -21,8 +21,8 @@ spec:
         project: trusted-platform
       - folder: csi-nfs-driver
         project: storage
-      - folder: nfs-storage
-        project: storage
+#      - folder: nfs-storage   # Moved to csi-nfs-driver
+#        project: storage
       - folder: csi-iscsi-driver
         project: storage
       - folder: metrics-server
