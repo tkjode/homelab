@@ -16,7 +16,7 @@ spec:
     targetRevision: HEAD
     ref: values
   destination:
-    namespace: kube-csi-nfs
+    namespace: kube-system
     server: https://kubernetes.default.svc
   revisionHistoryLimit: 0
   syncPolicy:
