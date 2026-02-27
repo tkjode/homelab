@@ -22,6 +22,10 @@ spec:
         env:
         - name: S6_READ_ONLY_ROOT
           value: "1"
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
         resources:
           requests:
             cpu: 100m
@@ -33,17 +37,6 @@ spec:
         - containerPort: 6789
           name: http
           protocol: TCP
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-            - ALL
-          privileged: false
-          runAsGroup: 1000
-          runAsNonRoot: true
-          runAsUser: 1000
-          seccompProfile:
-            type: RuntimeDefault
         volumeMounts:
         - mountPath: /intermediate
           name: intermediate
