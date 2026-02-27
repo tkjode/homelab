@@ -16,6 +16,8 @@ parameters:
   server: 10.0.0.5
   share: /srv/regulus/stateful
   subDir: ${pvc.metadata.namespace}#${pvc.metadata.name}
+  onDelete: Retain
+  mountPermissions: "0744"
 provisioner: nfs.csi.k8s.io
 reclaimPolicy: Retain
 volumeBindingMode: Immediate
