@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nzbget
+  namespace: nzbget
+spec:
+  ports:
+  - name: http
+    port: 6789
+    protocol: TCP
+    targetPort: 6789
+  selector:
+    app.kubernetes.io/instance: nzbget
+    app.kubernetes.io/name: nzbget
+  type: ClusterIP

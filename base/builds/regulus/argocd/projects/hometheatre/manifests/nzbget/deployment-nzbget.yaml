@@ -42,6 +42,8 @@ spec:
           name: intermediate
         - mountPath: /downloads
           name: downloads
+        - mountPath: /config
+          name: config
       volumes:
       - name: intermediate
         persistentVolumeClaim:          
@@ -49,6 +51,9 @@ spec:
       - name: downloads
         persistentVolumeClaim: 
           claimName: downloads
+      - name: config
+        persistentVolumeClaim:
+          claimName: config
         
 
 
