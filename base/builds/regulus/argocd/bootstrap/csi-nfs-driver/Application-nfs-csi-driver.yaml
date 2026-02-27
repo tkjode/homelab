@@ -11,7 +11,7 @@ spec:
     targetRevision: v4.13.1
     helm:
       valueFiles:
-      - $values/base/builds/regulus/argocd/bootstrap/nfs-csi-driver/values.yaml
+      - $values/base/builds/regulus/argocd/bootstrap/csi-nfs-driver/values.yaml
   - repoURL: ssh://git@github.com/tkjode/homelab
     targetRevision: HEAD
     ref: values
