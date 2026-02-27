@@ -11,4 +11,4 @@ spec:
       storage: 256Mi
   storageClassName: nfs-durable
   volumeMode: Filesystem
-  volumeName: cachedir
+  volumeName: config
