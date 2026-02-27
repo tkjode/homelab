@@ -3,10 +3,42 @@ hostname: ${gw-hostname}
 timezone: America/Toronto
 bootcmd:
   - sysctl -w net.ipv4.ip_forward=1
+  - echo f > /sys/class/net/eth0/queues/rx-0/rps_cpus
+  - echo f > /sys/class/net/eth1/queues/rx-0/rps_cpus
+  - sysctl net.core.default_qdisc=fq
+  - sysctl net.ipv4.tcp_congestion_control=bbr
+  - sysctl net.ipv4.tcp_mtu_probing=1
+  - sysctl net.ipv4.tcp_fastopen=3
+  - sysctl net.core.rmem_max=33554432
+  - sysctl net.core.wmem_max=33554432
+  - sysctl net.ipv4.tcp_rmem="4096 87380 33554432"
+  - sysctl net.ipv4.tcp_wmem="4096 65536 33554432"
+  - sysctl net.core.netdev_max_backlog=5000
+  - sysctl net.ipv4.tcp_window_scaling=1
+  - sysctl net.ipv4.tcp_sack=1
+  - sysctl net.ipv4.tcp_ecn=1
+  - sysctl net.core.rps_sock_flow_entries=32768
+  - ip link set dev "eth0" txqueuelen 2000
+  - ip link set dev "eth1" txqueuelen 2000
+  - ethtool -K "eth0" tso on gso on gro on
+  - ethtool -K "eth1" tso on gso on gro on
 write_files:
   - path: /etc/sysctl.d/99-ipv.conf
     content: |
       net.ipv4.ip_forward = 1
+      net.core.default_qdisc=fq
+      net.ipv4.tcp_congestion_control=bbr
+      net.ipv4.tcp_mtu_probing=1
+      net.ipv4.tcp_fastopen=3
+      net.core.rmem_max=33554432
+      net.core.wmem_max=33554432
+      net.ipv4.tcp_rmem="4096 87380 33554432"
+      net.ipv4.tcp_wmem="4096 65536 33554432"
+      net.core.netdev_max_backlog=5000
+      net.ipv4.tcp_window_scaling=1
+      net.ipv4.tcp_sack=1
+      net.ipv4.tcp_ecn=1
+      net.core.rps_sock_flow_entries=32768
     owner: 'root:root'
     permissions: '0644'
   - path: /etc/apt/apt.conf.d/10periodic
@@ -171,6 +203,7 @@ users:
 package_update: true
 packages:
   - qemu-guest-agent
+  - irqbalance
   - nfs-common
   - net-tools
   - haproxy
@@ -180,8 +213,7 @@ packages:
   - bind9-utils
   - dnsutils
 runcmd:
-  - mkdir /etc/letsencrypt && chattr +i /etc/letsencrypt
-  - mount -a
+  - systemctl enable --now irqbalance
   - systemctl enable --now bind9
   - iptables -A FORWARD -i eth1 -o eth0 -j ACCEPT
   - iptables -A FORWARD -i eth0 -o eth1 -m state --state ESTABLISHED,RELATED -j ACCEPT
@@ -190,6 +222,7 @@ runcmd:
   - snap install --classic certbot
   - snap set certbot trust-plugin-with-root=ok
   - snap install certbot-dns-route53
+  - mount -a
   - certbot certonly -n -v -m tkjode@gmail.com -d ${join(".", [cluster_name, cluster_domain])} -d ${join(".", ["*", ingress_prefix, cluster_domain])} --dns-route53 --agree-tos
   - systemctl restart haproxy
   - systemctl enable --now qemu-guest-agent
