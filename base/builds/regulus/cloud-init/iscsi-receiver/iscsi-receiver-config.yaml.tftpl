@@ -19,7 +19,7 @@ fs_setup:
     partition: auto
     overwrite: false
 mounts:
-- [/dev/sdb1, /srv]
+- ["LABEL=iscsi0", /srv]
 users:
   - default
   - name: tkjode
