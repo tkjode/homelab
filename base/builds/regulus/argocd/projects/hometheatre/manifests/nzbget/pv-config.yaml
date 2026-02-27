@@ -10,7 +10,7 @@ spec:
   capacity: 
     storage: 256Mi
   accessModes:
-  - ReadWriteMany
+  - ReadWriteOnce
   nfs:
     path: /srv/nas/kubepv/regulus/stateful/nzbget#config
     server: 10.0.0.5
