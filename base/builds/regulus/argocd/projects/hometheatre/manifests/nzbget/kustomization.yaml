@@ -5,6 +5,8 @@ metadata:
 resources:
   - pv-cachedir.yaml
   - pvc-cachedir.yaml
+  - pv-downloads.yaml
+  - pvc-downloads.yaml
   - deployment-nzbget.yaml
 #  - service-
 #  - httproute-
