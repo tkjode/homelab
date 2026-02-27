@@ -84,7 +84,7 @@ runcmd:
   - targetcli /iscsi create iqn.2026-02.com.phalnet.regulus:pv00
 %{ for lun in luns ~}
   - targetcli /iscsi/iqn.2026-02.com.phalnet.regulus:pv00/tpg1/luns create /backstores/fileio/${lun.name} lun=${lun.lun}
-%{ endfor ~ }
+%{ endfor ~}
 %{ for instance in range( 0, 6 ) ~}
   - targetcli /iscsi/iqn.2026-02.com.phalnet.regulus:pv00/tpg1/acls create iqn.2026-02.com.phalnet.regulus:worker-${instance}
 %{ endfor ~}
