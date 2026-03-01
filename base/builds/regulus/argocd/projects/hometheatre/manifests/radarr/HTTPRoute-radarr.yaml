@@ -1,11 +1,11 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: sonarr
-  namespace: sonarr
+  name: radarr
+  namespace: radarr
 spec:
   hostnames:
-  - sonarr.apps.phalnet.com
+  - radarr.apps.phalnet.com
   parentRefs:
   - group: gateway.networking.k8s.io
     kind: Gateway
@@ -15,8 +15,8 @@ spec:
   - backendRefs:
     - group: ""
       kind: Service
-      name: sonarr
-      port: 8989
+      name: radarr
+      port: 7878
       weight: 1
     matches:
     - path:
