@@ -40,10 +40,20 @@ spec:
         volumeMounts:
         - mountPath: /config
           name: config
+        - mountPath: /exports/tvshows
+          name: tvshows-dropzone
+        - mountPath: /imports/tvshows
+          name: tvshows-from-nzbget
       volumes:
       - name: config
         persistentVolumeClaim:
           claimName: sonarr-config
+      - name: tvshows-dropzone
+        persistentVolumeClaim:
+          claimName: sonarr-tvshows
+      - name: tvshows-from-nzbget
+        persistentVolumeClaim:
+          claimName: sonarr-nzbget-tvshows
 
 
 

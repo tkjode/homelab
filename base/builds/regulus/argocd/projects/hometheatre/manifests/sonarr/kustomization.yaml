@@ -6,3 +6,7 @@ resources:
   - Service-sonarr.yaml
   - pv-sonarr-config.yaml
   - pvc-sonarr-config.yaml
+  - pv-sonarr-nzbget-tvshows.yaml
+  - pvc-sonarr-nzbget-tvshows.yaml
+  - pv-sonarr-tvshows.yaml
+  - pvc-sonarr-tvshows.yaml
