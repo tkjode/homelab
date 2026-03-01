@@ -12,5 +12,5 @@ spec:
   accessModes:
   - ReadWriteMany
   nfs:
-    path: /srv/nas/media/video/movies
+    path: /srv/nas/media/video/Movies
     server: 10.0.0.5
