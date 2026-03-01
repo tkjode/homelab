@@ -1,0 +1,12 @@
+metadata:
+  name: sonarr
+resources:
+  - Deployment-sonarranime.yaml
+  - HTTPRoute-sonarr-anime.yaml
+  - Service-sonarranime.yaml
+  - pv-sonarranime-config.yaml
+  - pvc-sonarranime-config.yaml
+  - pv-sonarranime-nzbget-anime.yaml
+  - pvc-sonarranime-nzbget-anime.yaml
+  - pv-sonarranime-anime.yaml
+  - pvc-sonarranime-anime.yaml

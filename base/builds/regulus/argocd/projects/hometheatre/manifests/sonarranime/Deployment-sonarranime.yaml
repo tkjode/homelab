@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarranime
+  namespace: sonarranime
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: sonarranime
+      app.kubernetes.io/name: sonarranime
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: sonarranime
+        app.kubernetes.io/name: sonarranime
+    spec:
+      containers:
+      - name: sonarr
+        image: lscr.io/linuxserver/sonarr:latest
+        imagePullPolicy: Always
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 1Gi
+          limits:
+            cpu: 4000m
+            memory: 2Gi
+        ports:
+        - containerPort: 8989
+          name: http
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /config
+          name: config
+        - mountPath: /exports/anime
+          name: anime-dropzone
+        - mountPath: /imports/anime
+          name: anime-from-nzbget
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: sonarranime-config
+      - name: anime-dropzone
+        persistentVolumeClaim:
+          claimName: sonarranime-anime
+      - name: anime-from-nzbget
+        persistentVolumeClaim:
+          claimName: sonarranime-nzbget-anime
+
+
+
+
+

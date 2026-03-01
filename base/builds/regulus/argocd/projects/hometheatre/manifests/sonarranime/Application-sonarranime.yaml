@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sonarranime
+  namespace: argocd
+spec:
+  project: hometheatre
+  sources:
+  - repoURL: ssh://git@github.com/tkjode/homelab
+    targetRevision: HEAD
+    path: base/builds/regulus/argocd/projects/hometheatre/manifests/sonarranime
+  destination:
+    namespace: sonarranime
+    server: https://kubernetes.default.svc
+  revisionHistoryLimit: 0
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+    automated:
+      prune: false
+      selfHeal: false
