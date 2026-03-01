@@ -4,5 +4,6 @@ metadata:
   name: htpc-projects
 resources:
   - AppProject.hometheatre.yaml                     # Creates the `hometheatre` argocd project
-  - manifests/plex/Application-plex.yaml            # Adds the Helm chart to ArgoCD in the hometheatre project
-  - manifests/nzbget/Application-nzbget.yaml        # Build starting
+  - manifests/plex/Application-plex.yaml            # Build Complete
+  - manifests/nzbget/Application-nzbget.yaml        # Build Complete
+  - manifests/nzbhydra2/Application-nzbhydra2.yaml  # NZBHydra2 - Build Started
