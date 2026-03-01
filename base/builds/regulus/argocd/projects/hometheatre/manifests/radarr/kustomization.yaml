@@ -1,0 +1,12 @@
+metadata:
+  name: sonarr
+resources:
+  - Deployment-radarr.yaml
+  - HTTPRoute-radarr.yaml
+  - Service-radarr.yaml
+  - pv-radarr-config.yaml
+  - pvc-radarr-config.yaml
+  - pv-radarr-nzbget-movies.yaml
+  - pvc-radarr-nzbget-movies.yaml
+  - pv-radarr-movies.yaml
+  - pvc-radarr-movies.yaml

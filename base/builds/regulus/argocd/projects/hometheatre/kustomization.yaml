@@ -8,4 +8,5 @@ resources:
   - manifests/nzbget/Application-nzbget.yaml        # Build Complete
   - manifests/nzbhydra2/Application-nzbhydra2.yaml  # Build Complete
   - manifests/sonarr/Application-sonarr.yaml        # Build Complete
-  - manifests/sonarranime/Application-sonarranime.yaml # Build Started
+  - manifests/sonarranime/Application-sonarranime.yaml # Build Complete
+  - manifests/radarr/Application-radarr.yaml        # Build Started
