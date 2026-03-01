@@ -8,7 +8,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 128Mi
-  storageClassName: nfs-bind
+      storage: 8Gi
+  storageClassName: iscsi
   volumeMode: Filesystem
   volumeName: sonarr-config

@@ -4,13 +4,16 @@ metadata:
   name: sonarr-config
   namespace: sonarr
 spec:
-  storageClassName: nfs-bind
+  storageClassName: iscsi
   volumeMode: Filesystem
   persistentVolumeReclaimPolicy: Retain
   capacity:
-    storage: 128Mi
+    storage: 8Gi
   accessModes:
   - ReadWriteOnce
-  nfs:
-    path: /srv/regulus/stateful/sonarr#config
-    server: 10.0.0.5
+  iscsi:
+    targetPortal: 192.168.64.3:3260
+    iqn: iqn.2026-02.com.phalnet.regulus:pv00
+    lun: 5
+    fsType: ext4
+    readOnly: false
