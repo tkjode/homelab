@@ -1,16 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: sonarr
+  name: radarr
   namespace: argocd
 spec:
   project: hometheatre
   sources:
   - repoURL: ssh://git@github.com/tkjode/homelab
     targetRevision: HEAD
-    path: base/builds/regulus/argocd/projects/hometheatre/manifests/sonarr
+    path: base/builds/regulus/argocd/projects/hometheatre/manifests/radarr
   destination:
-    namespace: sonarr
+    namespace: radarr
     server: https://kubernetes.default.svc
   revisionHistoryLimit: 0
   syncPolicy:
