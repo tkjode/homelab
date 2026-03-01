@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sonarr-config
+  namespace: sonarr
+spec:
+  storageClassName: nfs-bind
+  volumeMode: Filesystem
+  persistentVolumeReclaimPolicy: Retain
+  capacity:
+    storage: 128Mi
+  accessModes:
+  - ReadWriteOnce
+  nfs:
+    path: /srv/regulus/stateful/sonarr#config
+    server: 10.0.0.5

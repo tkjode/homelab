@@ -1,0 +1,8 @@
+metadata:
+  name: sonarr
+resources:
+  - Deployment-sonarr.yaml
+  - HTTPRoute-sonarr.yaml
+  - Service-sonarr.yaml
+  - pv-sonarr-config.yaml
+  - pvc-sonarr-config.yaml

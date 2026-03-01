@@ -6,4 +6,5 @@ resources:
   - AppProject.hometheatre.yaml                     # Creates the `hometheatre` argocd project
   - manifests/plex/Application-plex.yaml            # Build Complete
   - manifests/nzbget/Application-nzbget.yaml        # Build Complete
-  - manifests/nzbhydra2/Application-nzbhydra2.yaml  # NZBHydra2 - Build Started
+  - manifests/nzbhydra2/Application-nzbhydra2.yaml  # Build Complete
+  - manifests/sonarr/Application-sonarr.yaml        # Build Started
