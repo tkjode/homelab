@@ -12,5 +12,5 @@ spec:
   accessModes:
   - ReadWriteOnce
   nfs:
-    path: /srv/regulus/stateful/nzbhydra#config
+    path: /srv/regulus/stateful/nzbhydra2#config
     server: 10.0.0.5
