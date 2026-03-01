@@ -1,0 +1,8 @@
+metadata:
+  name: nzbhydra2
+resources:
+  - Deployment-nzbhydra2.yaml
+  - HTTPRoute-nzbhydra2.yaml
+  - Service-nzbhydra2.yaml
+  - pv-nzbhydra2-config.yaml
+  - pvc-nzbhydra2-config.yaml

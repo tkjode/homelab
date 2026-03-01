@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nzbhydra2
+  namespace: nzbhydra2
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: nzbhydra2
+      app.kubernetes.io/name: nzbhydra2
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: nzbhydra2
+        app.kubernetes.io/name: nzbhydra2
+    spec:
+      containers:
+      - name: nzbhydra2
+        image: ghcr.io/theotherp/hydradocker:latest
+        imagePullPolicy: Always
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 4Gi
+          limits:
+            cpu: 4000m
+            memory: 6Gi
+        ports:
+        - containerPort: 5076
+          name: http
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /config
+          name: config
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: nzbhydra2-config
+
+
+
+
+

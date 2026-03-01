@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nzbhydra2-config
+  namespace: nzbhydra2
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 128Mi
+  storageClassName: nfs-bind
+  volumeMode: Filesystem
+  volumeName: nzbhydra2-config
