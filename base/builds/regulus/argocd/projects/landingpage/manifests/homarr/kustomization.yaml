@@ -5,6 +5,6 @@ metadata:
 resources:
   - Deployment-homarr.yaml
   - HTTPRoute-homarr.yaml
-  - pv-config.yaml
-  - pvc-config.yaml
+  - pv-homarr-config.yaml
+  - pvc-homarr-config.yaml
   - Service-homarr.yaml
