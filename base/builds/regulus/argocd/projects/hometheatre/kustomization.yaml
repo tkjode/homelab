@@ -9,4 +9,4 @@ resources:
   - manifests/nzbhydra2/Application-nzbhydra2.yaml  # Build Complete
   - manifests/sonarr/Application-sonarr.yaml        # Build Complete
   - manifests/sonarranime/Application-sonarranime.yaml # Build Complete
-  - manifests/radarr/Application-radarr.yaml        # Build Started
+  - manifests/radarr/Application-radarr.yaml        # Build Complete

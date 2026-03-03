@@ -11,6 +11,8 @@ spec:
       elements:
       - folder: hometheatre
         project: userland
+      - folder: landingpage
+        project: userland
   template:
     metadata:
       name: 'projects-{{.folder}}'
