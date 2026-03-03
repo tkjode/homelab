@@ -39,11 +39,11 @@ spec:
           protocol: TCP
         volumeMounts:
         - mountPath: /appdata
-          name: config
+          name: homarr-config
       volumes:
-      - name: config
+      - name: homarr-config
         persistentVolumeClaim:
-          claimName: config
+          claimName: homarr-config
 
 
 
