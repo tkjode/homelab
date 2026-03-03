@@ -4,9 +4,9 @@ metadata:
   name: plex-direct
   namespace: default
 spec:
-  addresses:
-  - type: IPAddress
-    value: 192.168.64.249
+  #addresses:
+  #- type: IPAddress
+  #  value: 192.168.64.249
   gatewayClassName: plex-direct
   listeners:
   - allowedRoutes:
