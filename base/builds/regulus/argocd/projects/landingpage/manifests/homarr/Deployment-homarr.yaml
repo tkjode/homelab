@@ -26,6 +26,11 @@ spec:
           value: "1000"
         - name: PGID
           value: "1000"
+        - name: SECRET_ENCRYPTION_KEY
+          valueFrom:
+            secretKeyRef:
+              name: homarr-key
+              key: SECRET_ENCRYPTION_KEY
         resources:
           requests:
             cpu: 100m

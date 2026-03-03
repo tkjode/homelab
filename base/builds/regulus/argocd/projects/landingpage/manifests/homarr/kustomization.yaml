@@ -8,3 +8,4 @@ resources:
   - pv-homarr-config.yaml
   - pvc-homarr-config.yaml
   - Service-homarr.yaml
+  - Secret-homarr-key.yaml
