@@ -11,7 +11,12 @@ spec:
   listeners:
   - allowedRoutes:
       namespaces:
-        from: plex
+        from: Selector
+        selector:
+          matchExpressions:
+          - key: kubernetes.io/metadata.name
+            operator: In
+            values: ["plex"]
     name: http
     protocol: HTTP
     port: 32400
