@@ -7,4 +7,4 @@ resources:
   - IPAddressPool.gateway-pool.yaml
   - IPAddressPool.plex-direct.yaml
   - L2Advertisement.envoy-gateway-l2.yaml
-  - L2Advertisement.plex-direct.yaml
+  - L2Advertisement.envoy-gateway-plex.yaml
