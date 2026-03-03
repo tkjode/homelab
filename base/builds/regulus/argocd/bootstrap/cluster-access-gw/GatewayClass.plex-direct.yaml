@@ -3,4 +3,4 @@ kind: GatewayClass
 metadata:
   name: plex-direct
 spec:
-  controllerName: "gateway.envoyproxy.io/plex-direct-controller"
+  controllerName: "gateway.envoyproxy.io/gatewayclass-controller"
