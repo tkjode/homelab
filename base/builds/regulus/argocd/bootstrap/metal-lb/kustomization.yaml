@@ -5,4 +5,6 @@ metadata:
 resources:
   - https://raw.githubusercontent.com/metallb/metallb/v0.15.3/config/manifests/metallb-native.yaml
   - IPAddressPool.gateway-pool.yaml
+  - IPAddressPool.plex-direct.yaml
   - L2Advertisement.envoy-gateway-l2.yaml
+  - L2Advertisement.plex-direct.yaml

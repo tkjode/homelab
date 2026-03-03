@@ -1,10 +1,10 @@
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
 metadata:
-  name: gateway-pool
+  name: plex-direct
   namespace: metallb-system
 spec:
   addresses:
-  - "192.168.64.248-192.168.64.248"
+  - "192.168.64.249-192.168.64.249"
   autoAssign: false
   avoidBuggyIPs: false

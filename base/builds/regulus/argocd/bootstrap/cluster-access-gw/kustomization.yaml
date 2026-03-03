@@ -5,3 +5,5 @@ metadata:
 resources:
   - GatewayClass.cluster-gateway.yaml
   - Gateway.cluster-ingress.yaml
+  - GatewayClass.plex-direct.yaml
+  - Gateway.plex-direct.yaml
