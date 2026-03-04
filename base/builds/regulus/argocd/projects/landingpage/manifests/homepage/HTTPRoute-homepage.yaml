@@ -15,8 +15,8 @@ spec:
   - backendRefs:
     - group: ""
       kind: Service
-      name: homarr
-      port: 7575
+      name: homepage
+      port: 3000
       weight: 1
     matches:
     - path:
