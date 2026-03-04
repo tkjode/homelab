@@ -8,6 +8,9 @@ metadata:
 data:
   kubernetes.yaml: |
     mode: cluster
+    ingress: false
+    traefik: false
+    gateway: true
   settings.yaml: ""
   custom.css: ""
   custom.js: ""
@@ -16,18 +19,35 @@ data:
         - Github:
             - abbr: GH
               href: https://github.com/
+        - HomeLab:
+            - abbr: HL
+              href: https://github.com/tkjode/homelab
   services.yaml: |
-    - My First Group:
-        - My First Service:
-            href: http://localhost/
-            description: Homepage is awesome
-
-    - My Second Group:
+    - Home Theatre:
+        - Plex:
+            href: https://plex.apps.phalnet.com/
+            description: Enjoy movies, television and anime
+        - nzbget:
+            href: https://nzbget.apps.phalnet.com/
+            description: NNTP Downloading Service for NZB Files
+        - nzbhydra2:
+            href: https://nzbhydra2.apps.phalnet.com/
+            description: NZB Indexer Consolidation
+        - sonarr:
+            href: https://sonarr.apps.phalnet.com/
+            description: Indexer Search for TV Series downloads 
+        - sonarr_anime:
+            href: https://sonarr-anime.apps.phalnet.com/
+            description: Indexer Search for Anime Series downloads
+        - radarr:
+            href: https://radarr.apps.phalnet.com/
+            description: Indexer Search for Movie releases 
+    - Monitoring:
         - My Second Service:
             href: http://localhost/
             description: Homepage is the best
 
-    - My Third Group:
+    - Internal Tools:
         - My Third Service:
             href: http://localhost/
             description: Homepage is 😎
@@ -38,7 +58,7 @@ data:
           cpu: true
           memory: true
           showLabel: true
-          label: "cluster"
+          label: "Regulus"
         nodes:
           show: true
           cpu: true
