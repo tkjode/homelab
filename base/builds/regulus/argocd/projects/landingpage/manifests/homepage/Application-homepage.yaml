@@ -10,7 +10,7 @@ spec:
     targetRevision: HEAD
     path: base/builds/regulus/argocd/projects/landingpage/manifests/homepage
   destination:
-    namespace: homarr
+    namespace: homepage
     server: https://kubernetes.default.svc
   revisionHistoryLimit: 0
   syncPolicy:
