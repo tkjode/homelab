@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: homepage-config
+  namespace: homepage
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 256Mi
+  storageClassName: nfs-bind
+  volumeMode: Filesystem
+  volumeName: homepage-config

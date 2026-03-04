@@ -4,4 +4,5 @@ metadata:
   name: landingpage-projects
 resources:
   - AppProject.landingpage.yaml                     # Creates the `landingpage` ArgoCD Project
-  - manifests/homarr/Application-homarr.yaml        # Build Started
+  # - manifests/homarr/Application-homarr.yaml        # Build Cancelled - Kinda Lame
+  - manifests/homepage/Application-homepage.yaml    # Build Started
