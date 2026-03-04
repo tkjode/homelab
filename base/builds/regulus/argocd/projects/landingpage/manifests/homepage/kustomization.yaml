@@ -10,5 +10,3 @@ resources:
   - ServiceAccount-homepage.yaml
   - Secret-homepage-sa-token.yaml
   - Service-homepage.yaml
-# External Secrets Operator required to add the PVE config file /w token+secret
-# Add Secret Manually otherwise homepage will not start
