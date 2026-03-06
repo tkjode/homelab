@@ -1,0 +1,10 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: rtmp-relay
+  namespace: metallb-system
+spec:
+  addresses:
+  - "192.168.64.250-192.168.64.250"
+  autoAssign: true
+  avoidBuggyIPs: false

@@ -7,3 +7,5 @@ resources:
   - Gateway.cluster-ingress.yaml
   - GatewayClass.plex-direct.yaml
   - Gateway.plex-direct.yaml
+  - GatewayClass.rtmp-relay.yaml
+  - Gateway.rtmp-relay.yaml

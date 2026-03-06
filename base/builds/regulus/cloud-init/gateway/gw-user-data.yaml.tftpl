@@ -182,12 +182,19 @@ write_files:
         bind :32400
         mode http
         default_backend plex_direct_gw
+      frontend rtmp_relay
+        bind :1935
+        mode tcp
+        default_backend rtmp_relay
       backend cluster-default-gateway
         mode http
         server global-envoy ${cidrhost(join("/", [ gw-net-cluster.network, gw-net-cluster.mask ]), 248)}:9080 check
       backend plex_direct_gw
         mode http
-        server plex-direct-l2-vip 192.168.64.249:32400 check  
+        server plex-direct-l2-vip 192.168.64.249:32400 check
+      backend rtmp_relay
+        mode tcp
+        server rtmp-relay-l2-vip 192.168.64.250:1935 check
       backend cluster_api
 %{ for instance in range( 0, 3 ) ~}
         server master-${instance} ${cidrhost(join("/", [ gw-net-cluster.network, gw-net-cluster.mask ]), master-ip-offset + instance)}:6443 check
