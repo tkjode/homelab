@@ -7,78 +7,59 @@
         icon: mdi-link-variant.svg
         href: http://10.0.0.3/login.html
         description: Dell iDRAC Login
-    - Fusion:
+    - Plex:
         icon: si-rss.svg
-        href: # Link
-        description: RSS
-        container: fusion
-    - Jellyfin:
-        icon: si-jellyfin.svg
-        href: # Link
-        description: Stream
-        container: jellyfin
-    - Yamtrack:
-        icon: mdi-alpha-y-box-outline.svg
-        href: # Link
-        description: TV Tracking
-        container: yamtrack
-    - Syncthing:
-        icon: si-syncthing.svg
-        href: # Link
-        description: Syncthing
-        container: syncthing
-    - Radicale:
-        icon: mdi-calendar-account-outline.svg
-        href: # Link
-        description: Calendar
-        container: radicale
-- Bittorrent:
-    - Click:
+        href: https://plex.apps.phalnet.com
+        description: Plex Media Server
+        container: plex
+- NZB:
+    - NZBGet:
         icon: si-qbittorrent.svg
-        href: # Link
-        description: qbittorrent
-        container: qbittorrent
+        href: https://nzbget.apps.phalnet.com
+        description: nzbget
+        container: nzbget
         widget:
-          type: qbittorrent
-          url: # Link
-          username: # Username
-          password: # Password
-          enableLeechProgress: true
-    - Quick Look:
-        id: qbittorrent-widget
-        widget:
-          type: iframe
-          name: qbittorrent iframe
-          src: # Link
+          type: nzbget
+          url: https://nzbget.apps.phalnet.com
+          username: tkjode
+          password: phalnet
 - Media:
     - Trackers:
         - TV:
             icon: si-sonarr.svg
-            href: # Link
+            href: https://sonarr.apps.phalnet.com
             description: Sonarr
             container: sonarr
             widgets:
             - type: sonarr
-              url: # Link
-              key: # API Key
+              url: https://sonarr.apps.phalnet.com
+              key: 9082bd325bd44943aa314acb3d906fb2
+        - Anime:
+            icon: si-sonarr.svg
+            href: https://sonarr-anime.apps.phalnet.com
+            description: Sonarr-Anime
+            container: sonarr-anime
+            widgets:
+            - type: sonarr
+              url: https://sonarr-anime.apps.phalnet.com
+              key: a38c4e3b069541c496f248daaa13ba09
         - Movies:
             icon: si-radarr.svg
-            href: # Link
+            href: https://radarr.apps.phalnet.com
             description: radarr
             container: radarr
             widget:
               type: radarr
-              url: # Link
-              key: # API Key
+              url: https://radarr.apps.phalnet.com
+              key: 47ec1077380446aca0566151582480f0
         - Indexers:
             icon: mdi-database-search-outline.svg
-            href: # Link
-            description: Prowlarr
-            container: prowlarr
+            href: https://nzbhydra2.apps.phalnet.com
+            description: NZBHydra2
+            container: nzbhydra2
             widget:
-              type: prowlarr
-              url: # Link
-              key: # API Key
+              type: customapi
+              url: https://nzbhydra2.apps.phalnet.com/ap/stats?apikey=7G1S5R23U4VHJ7RK459J5MAMTQ
     - Upcoming:
         - Upcoming:
             widget:
@@ -87,16 +68,17 @@
               maxEvents: 12 # optional - defaults to 10
               showTime: true # optional - show time for event happening today - defaults to false
               integrations: # optional
-                - type: sonarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
-                  service_group: Trackers # group name where widget exists
-                  service_name: TV # service name for that widget
-                  baseUrl:  # optional - adds links to sonarr/radarr pages
+                - type: sonarr
+                  service_group: Trackers
+                  service_name: TV
+                - type: sonarr
+                  service_group: Trackers
+                  service_name: Anime
                 - type: radarr
                   service_group: Trackers
                   service_name: Movies
-                  baseURL: # Link
 - Links:
-    - Bearblog:
+    - Kinja:
         - Bearblog Dash:
             icon: mdi-teddy-bear.svg
             href: https://bearblog.dev/dashboard
@@ -106,7 +88,7 @@
         - Fantasy Life i Project:
             icon: mdi-island-variant.svg
             href: https://fli-ginormosia.bearblog.dev
-    - Two:
+    - News:
         - Fusion Blogs:
            icon: si-rss.svg
            href: # Link
@@ -116,7 +98,7 @@
         - TPL:
            icon: mdi-book-open-variant.svg
            href: # Link
-    - Three:
+    - Tech:
         - LibraryThing:
            icon: si-librarything.svg
            href: https://www.librarything.com/home
@@ -126,14 +108,14 @@
         - Amazon Vine:
            icon: si-amazon.svg
            href: # Link
-    - Four:
+    - HomeLab:
         - AO3:
            icon: si-archiveofourown.svg
            href: https://archiveofourown.org/
         - Reddit:
            icon: si-reddit.svg
            href: https://www.reddit.com
-    - FFXIV:
+    - Media:
         - FFXIV Lodestone:
            icon: si-squareenix.svg
            href: https://na.finalfantasyxiv.com/lodestone
@@ -143,7 +125,7 @@
         - Eorzea Collection:
            icon: mdi-mirror-variant.svg
            href: https://ffxiv.eorzeacollection.com/glamours
-    - FFXIV Two:
+    - NZB:
         - Ocean Fishing:
            icon: mdi-sail-boat.svg
            href: https://ffxiv.pf-n.co/ocean-fishing
