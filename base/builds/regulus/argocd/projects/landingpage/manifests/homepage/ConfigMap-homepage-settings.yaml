@@ -8,7 +8,7 @@ metadata:
 data:
   kubernetes.yaml: |
     mode: cluster
-    ingress: false
+    ingress: true
     traefik: false
     gateway: true
   settings.yaml: ""
