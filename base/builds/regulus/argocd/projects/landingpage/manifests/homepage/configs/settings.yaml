@@ -11,7 +11,7 @@ layout:
   Links:
     tab: Start
     style: row
-    columns: 6
+    columns: 8
     header: false
     Kinja:
       header: false
@@ -21,20 +21,20 @@ layout:
       header: false
     Social:
       header: false
-    EliteDangerous:
+    Media:
       header: false
     Comics:
+      header: false
+    Gaming:
       header: false
   HomeLab:
     tab: Start
     style: row
-    columns: 7
+    columns: 8
   Media:
     tab: Start
     style: row
-    columns: 2
-    Trackers:
-      header: false
+    columns: 1
     Upcoming:
       header: false
   NZB:
