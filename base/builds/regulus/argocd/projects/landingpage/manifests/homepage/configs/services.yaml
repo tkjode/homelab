@@ -23,6 +23,23 @@
           url: https://nzbget.apps.phalnet.com
           username: tkjode
           password: phalnet
+    - Upcoming:
+        - Upcoming:
+            widget:
+              type: calendar
+              view: agenda
+              maxEvents: 12 # optional - defaults to 10
+              showTime: true # optional - show time for event happening today - defaults to false
+              integrations: # optional
+                - type: sonarr
+                  service_group: Trackers
+                  service_name: TV
+                - type: sonarr
+                  service_group: Trackers
+                  service_name: Anime
+                - type: radarr
+                  service_group: Trackers
+                  service_name: Movies
 - Media:
     - Trackers:
         - TV:
@@ -59,73 +76,54 @@
             container: nzbhydra2
             widget:
               type: customapi
-              url: https://nzbhydra2.apps.phalnet.com/ap/stats?apikey=7G1S5R23U4VHJ7RK459J5MAMTQ
-    - Upcoming:
-        - Upcoming:
-            widget:
-              type: calendar
-              view: agenda
-              maxEvents: 12 # optional - defaults to 10
-              showTime: true # optional - show time for event happening today - defaults to false
-              integrations: # optional
-                - type: sonarr
-                  service_group: Trackers
-                  service_name: TV
-                - type: sonarr
-                  service_group: Trackers
-                  service_name: Anime
-                - type: radarr
-                  service_group: Trackers
-                  service_name: Movies
+              url: https://nzbhydra2.apps.phalnet.com/api/stats?apikey=7G1S5R23U4VHJ7RK459J5MAMTQ
+              mappings:
+              - field: numberOfConfiguredIndexers
+                label: configured
+                format: number
+              - field: numberOfEnabledIndexers
+                label: enabled
+                format: number
 - Links:
     - Kinja:
-        - Bearblog Dash:
+        - Gizmodo:
             icon: mdi-teddy-bear.svg
-            href: https://bearblog.dev/dashboard
-        - An Archaeopteryx:
+            href: https://gizmodo.com
+        - Jalopnik:
             icon: fossil.svg
-            href: https://anarchaeopteryx.bearblog.dev
-        - Fantasy Life i Project:
-            icon: mdi-island-variant.svg
-            href: https://fli-ginormosia.bearblog.dev
+            href: https://jalopnik.com
     - News:
-        - Fusion Blogs:
+        - Reuters:
            icon: si-rss.svg
-           href: # Link
-        - Tumblr:
+           href: https://www.reuters.com
+        - LegibleNews:
            icon: si-tumblr.svg
-           href: # Link
-        - TPL:
+           href: https://legiblenews.com
+        - SpaceWeater:
            icon: mdi-book-open-variant.svg
-           href: # Link
+           href: https://spaceweather.com
     - Tech:
-        - LibraryThing:
-           icon: si-librarything.svg
-           href: https://www.librarything.com/home
-        - Letterboxd:
-           icon: si-letterboxd.svg
-           href: https://letterboxd.com/
-        - Amazon Vine:
-           icon: si-amazon.svg
-           href: # Link
-    - HomeLab:
-        - AO3:
-           icon: si-archiveofourown.svg
-           href: https://archiveofourown.org/
+        - Slashdot:
+          icon: si-librarything.svg
+          href: https://slashdot.org
+        - The Register:
+          icon: si-librarything.svg
+          href: https://theregister.com
+    - Social:
         - Reddit:
            icon: si-reddit.svg
            href: https://www.reddit.com
+        - VRChat:
+          icon: si-reddit.svg
+          href: https://vrchat.com
     - Media:
-        - FFXIV Lodestone:
-           icon: si-squareenix.svg
-           href: https://na.finalfantasyxiv.com/lodestone
-        - FFXIV Wiki:
-           icon: mdi-gamepad-round.svg
-           href: https://ffxiv.consolegameswiki.com/wiki/FF14_Wiki
-        - Eorzea Collection:
-           icon: mdi-mirror-variant.svg
-           href: https://ffxiv.eorzeacollection.com/glamours
-    - NZB:
-        - Ocean Fishing:
-           icon: mdi-sail-boat.svg
-           href: https://ffxiv.pf-n.co/ocean-fishing
+        - Youtube:
+           icon: si-youtube.svg
+           href: https://youtube.com
+    - Comics:
+      - Crow Time:
+        icon: si-librarything.svg
+        href: https://www.webtoons.com/en/canvas/crow-time/list?title_no=693372
+    - Gaming:
+      - Inara:
+        href: https://inara.cz
