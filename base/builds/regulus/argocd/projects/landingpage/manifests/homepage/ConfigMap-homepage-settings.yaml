@@ -24,7 +24,7 @@ data:
               href: https://github.com/tkjode/homelab
   services.yaml: |
     - Home Theatre:
-        - Plex:
+        - plex:
             href: https://plex.apps.phalnet.com/
             description: Enjoy movies, television and anime
         - nzbget:
@@ -42,14 +42,6 @@ data:
         - radarr:
             href: https://radarr.apps.phalnet.com/
             description: Indexer Search for Movie releases
-    - Systems:
-        - Proxmox:
-            href: http://10.0.0.4:8006/
-            description: HomeLab Virtualization Hypervisor
-    - ThirdGroup:
-       - Hello:
-            href: http://localhost:8080/
-            description: Placeholder
   widgets.yaml: |
     #- kubernetes:
     #    cluster:
