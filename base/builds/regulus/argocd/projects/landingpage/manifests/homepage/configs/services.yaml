@@ -1,114 +1,114 @@
 - HomeLab:
   - Proxmox:
-    icon: si-qnap.svg
-    href: http://10.0.0.4:8006
-    description: Hypervisor Login
+      icon: si-qnap.svg
+      href: http://10.0.0.4:8006
+      description: Hypervisor Login
   - Dell iDRAC:
-    icon: mdi-link-variant.svg
-    href: http://10.0.0.3/login.html
-    description: Dell iDRAC Login
+      icon: mdi-link-variant.svg
+      href: http://10.0.0.3/login.html
+      description: Dell iDRAC Login
   - Plex:
-    icon: si-rss.svg
-    href: https://plex.apps.phalnet.com
-    description: Plex Media Server
-    container: plex
+      icon: si-rss.svg
+      href: https://plex.apps.phalnet.com
+      description: Plex Media Server
+      container: plex
 - NZB:
   - NZBGet:
-    icon: si-qbittorrent.svg
-    href: https://nzbget.apps.phalnet.com
-    description: nzbget
-    container: nzbget
-    widget:
-      type: nzbget
-      url: https://nzbget.apps.phalnet.com
-      username: tkjode
-      password: phalnet
+      icon: si-qbittorrent.svg
+      href: https://nzbget.apps.phalnet.com
+      description: nzbget
+      container: nzbget
+      widget:
+        type: nzbget
+        url: https://nzbget.apps.phalnet.com
+        username: tkjode
+        password: phalnet
   - Upcoming:
     - Upcoming:
-      widget:
-        type: calendar
-        view: agenda
-        maxEvents: 12
-        showTime: true
-        integrations:
-        - type: sonarr
-          service_group: Trackers
-          service_name: TV
-        - type: sonarr
-          service_group: Trackers
-          service_name: Anime
-        - type: radarr
-          service_group: Trackers
-          service_name: Movies
+        widget:
+          type: calendar
+          view: agenda
+          maxEvents: 12
+          showTime: true
+          integrations:
+          - type: sonarr
+            service_group: Trackers
+            service_name: TV
+          - type: sonarr
+            service_group: Trackers
+            service_name: Anime
+          - type: radarr
+            service_group: Trackers
+            service_name: Movies
 - Media:
-    - Trackers:
-        - TV:
-            icon: si-sonarr.svg
-            href: https://sonarr.apps.phalnet.com
-            description: Sonarr
-            container: sonarr
-            widgets:
-            - type: sonarr
-              url: https://sonarr.apps.phalnet.com
-              key: 9082bd325bd44943aa314acb3d906fb2
-        - Anime:
-            icon: si-sonarr.svg
-            href: https://sonarr-anime.apps.phalnet.com
-            description: Sonarr-Anime
-            container: sonarr-anime
-            widgets:
-            - type: sonarr
-              url: https://sonarr-anime.apps.phalnet.com
-              key: a38c4e3b069541c496f248daaa13ba09
-        - Movies:
-            icon: si-radarr.svg
-            href: https://radarr.apps.phalnet.com
-            description: radarr
-            container: radarr
-            widget:
-              type: radarr
-              url: https://radarr.apps.phalnet.com
-              key: 47ec1077380446aca0566151582480f0
+  - Trackers:
+    - TV:
+        icon: si-sonarr.svg
+        href: https://sonarr.apps.phalnet.com
+        description: Sonarr
+        container: sonarr
+        widgets:
+        - type: sonarr
+          url: https://sonarr.apps.phalnet.com
+          key: 9082bd325bd44943aa314acb3d906fb2
+    - Anime:
+        icon: si-sonarr.svg
+        href: https://sonarr-anime.apps.phalnet.com
+        description: Sonarr-Anime
+        container: sonarr-anime
+        widgets:
+        - type: sonarr
+          url: https://sonarr-anime.apps.phalnet.com
+          key: a38c4e3b069541c496f248daaa13ba09
+    - Movies:
+        icon: si-radarr.svg
+        href: https://radarr.apps.phalnet.com
+        description: radarr
+        container: radarr
+        widget:
+          type: radarr
+          url: https://radarr.apps.phalnet.com
+          key: 47ec1077380446aca0566151582480f0
 - Links:
-    - Kinja:
-        - Gizmodo:
-            icon: mdi-teddy-bear.svg
-            href: https://gizmodo.com
-        - Jalopnik:
-            icon: fossil.svg
-            href: https://jalopnik.com
-    - News:
-        - Reuters:
-           icon: si-rss.svg
-           href: https://www.reuters.com
-        - LegibleNews:
-           icon: si-tumblr.svg
-           href: https://legiblenews.com
-        - SpaceWeater:
-           icon: mdi-book-open-variant.svg
-           href: https://spaceweather.com
-    - Tech:
-        - Slashdot:
-          icon: si-librarything.svg
-          href: https://slashdot.org
-        - The Register:
-          icon: si-librarything.svg
-          href: https://theregister.com
-    - Social:
-        - Reddit:
-           icon: si-reddit.svg
-           href: https://www.reddit.com
-        - VRChat:
-          icon: si-reddit.svg
-          href: https://vrchat.com
-    - Media:
-        - Youtube:
-           icon: si-youtube.svg
-           href: https://youtube.com
-    - Comics:
-      - Crow Time:
+  - Kinja:
+    - Gizmodo:
+        icon: mdi-teddy-bear.svg
+        href: https://gizmodo.com
+    - Jalopnik:
+        icon: fossil.svg
+        href: https://jalopnik.com
+  - News:
+    - Reuters:
+        icon: si-rss.svg
+        href: https://www.reuters.com
+    - LegibleNews:
+        icon: si-tumblr.svg
+        href: https://legiblenews.com
+    - SpaceWeater:
+        icon: mdi-book-open-variant.svg
+        href: https://spaceweather.com
+  - Tech:
+    - Slashdot:
+      icon: si-librarything.svg
+      href: https://slashdot.org
+    - The Register:
+      icon: si-librarything.svg
+      href: https://theregister.com
+  - Social:
+    - Reddit:
+        icon: si-reddit.svg
+        href: https://www.reddit.com
+    - VRChat:
+        icon: si-reddit.svg
+        href: https://vrchat.com
+  - Media:
+    - Youtube:
+        icon: si-youtube.svg
+        href: https://youtube.com
+  - Comics:
+    - Crow Time:
         icon: si-librarything.svg
         href: https://www.webtoons.com/en/canvas/crow-time/list?title_no=693372
-    - Gaming:
-      - Inara:
+  - Gaming:
+    - Inara:
         href: https://inara.cz
