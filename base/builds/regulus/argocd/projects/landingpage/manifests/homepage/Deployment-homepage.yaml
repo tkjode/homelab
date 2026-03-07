@@ -24,7 +24,7 @@ spec:
       enableServiceLinks: true
       containers:
       - name: homepage
-        image: ghcr.io/gethomepage/homepage:dev
+        image: ghcr.io/gethomepage/homepage:latest
         imagePullPolicy: Always
         env:
         - name: PUID
@@ -69,18 +69,11 @@ spec:
         - mountPath: /app/config/widgets.yaml
           name: homepage-config
           subPath: widgets.yaml
-        - mountPath: /app/config/proxmox.yaml
-          name: pve-config
-          subPath: proxmox.yaml
         - mountPath: /app/config/logs
           name: logs
       volumes:
       - name: homepage-config
         configMap:
           name: homepage-settings
-      - name: pve-config
-        secret:
-          optional: true
-          secretName: pve-config
       - name: logs
         emptyDir: {}
