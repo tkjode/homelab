@@ -13,19 +13,19 @@ layout:
     style: row
     columns: 6
     header: false
-    Bearblog:
+    Kinja:
       header: false
-    Two:
+    News:
       header: false
-    Three:
+    Tech:
       header: false
-    Four:
+    Social:
       header: false
-    FFXIV:
+    EliteDangerous:
       header: false
-    FFXIV Two:
+    Comics:
       header: false
-  NAS:
+  HomeLab:
     tab: Start
     style: row
     columns: 7
@@ -37,7 +37,7 @@ layout:
       header: false
     Upcoming:
       header: false
-  Bittorrent:
-    tab: Torrents
+  NZB:
+    tab: NZBGet
     style: row
     columns: 1
