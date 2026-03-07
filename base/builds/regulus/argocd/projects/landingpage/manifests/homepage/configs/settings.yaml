@@ -1,13 +1,12 @@
 title: Regulus
 description: HomeLab Media Services
-color: purple
+color: red
 background:
   brightness: 50
   opacity: 20
 headerStyle: clean
 language: en-CA
 statusStyle: dot
-
 layout:
   Links:
     tab: Start

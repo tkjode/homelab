@@ -1,0 +1,150 @@
+- NAS:
+    - QNAP:
+        icon: si-qnap.svg
+        href: # Link
+        description: Server Status
+    - Linkding:
+        icon: mdi-link-variant.svg
+        href: # Link
+        description: Bookmarks
+        container: linkding
+    - Fusion:
+        icon: si-rss.svg
+        href: # Link
+        description: RSS
+        container: fusion
+    - Jellyfin:
+        icon: si-jellyfin.svg
+        href: # Link
+        description: Stream
+        container: jellyfin
+    - Yamtrack:
+        icon: mdi-alpha-y-box-outline.svg
+        href: # Link
+        description: TV Tracking
+        container: yamtrack
+    - Syncthing:
+        icon: si-syncthing.svg
+        href: # Link
+        description: Syncthing
+        container: syncthing
+    - Radicale:
+        icon: mdi-calendar-account-outline.svg
+        href: # Link
+        description: Calendar
+        container: radicale
+- Bittorrent:
+    - Click:
+        icon: si-qbittorrent.svg
+        href: # Link
+        description: qbittorrent
+        container: qbittorrent
+        widget:
+          type: qbittorrent
+          url: # Link
+          username: # Username
+          password: # Password
+          enableLeechProgress: true
+    - Quick Look:
+        id: qbittorrent-widget
+        widget:
+          type: iframe
+          name: qbittorrent iframe
+          src: # Link
+- Media:
+    - Trackers:
+        - TV:
+            icon: si-sonarr.svg
+            href: # Link
+            description: Sonarr
+            container: sonarr
+            widgets:
+            - type: sonarr
+              url: # Link
+              key: # API Key
+        - Movies:
+            icon: si-radarr.svg
+            href: # Link
+            description: radarr
+            container: radarr
+            widget:
+              type: radarr
+              url: # Link
+              key: # API Key
+        - Indexers:
+            icon: mdi-database-search-outline.svg
+            href: # Link
+            description: Prowlarr
+            container: prowlarr
+            widget:
+              type: prowlarr
+              url: # Link
+              key: # API Key
+    - Upcoming:
+        - Upcoming:
+            widget:
+              type: calendar
+              view: agenda
+              maxEvents: 12 # optional - defaults to 10
+              showTime: true # optional - show time for event happening today - defaults to false
+              integrations: # optional
+                - type: sonarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
+                  service_group: Trackers # group name where widget exists
+                  service_name: TV # service name for that widget
+                  baseUrl:  # optional - adds links to sonarr/radarr pages
+                - type: radarr
+                  service_group: Trackers
+                  service_name: Movies
+                  baseURL: # Link
+- Links:
+    - Bearblog:
+        - Bearblog Dash:
+            icon: mdi-teddy-bear.svg
+            href: https://bearblog.dev/dashboard
+        - An Archaeopteryx:
+            icon: fossil.svg
+            href: https://anarchaeopteryx.bearblog.dev
+        - Fantasy Life i Project:
+            icon: mdi-island-variant.svg
+            href: https://fli-ginormosia.bearblog.dev
+    - Two:
+        - Fusion Blogs:
+           icon: si-rss.svg
+           href: # Link
+        - Tumblr:
+           icon: si-tumblr.svg
+           href: # Link
+        - TPL:
+           icon: mdi-book-open-variant.svg
+           href: # Link
+    - Three:
+        - LibraryThing:
+           icon: si-librarything.svg
+           href: https://www.librarything.com/home
+        - Letterboxd:
+           icon: si-letterboxd.svg
+           href: https://letterboxd.com/
+        - Amazon Vine:
+           icon: si-amazon.svg
+           href: # Link
+    - Four:
+        - AO3:
+           icon: si-archiveofourown.svg
+           href: https://archiveofourown.org/
+        - Reddit:
+           icon: si-reddit.svg
+           href: https://www.reddit.com
+    - FFXIV:
+        - FFXIV Lodestone:
+           icon: si-squareenix.svg
+           href: https://na.finalfantasyxiv.com/lodestone
+        - FFXIV Wiki:
+           icon: mdi-gamepad-round.svg
+           href: https://ffxiv.consolegameswiki.com/wiki/FF14_Wiki
+        - Eorzea Collection:
+           icon: mdi-mirror-variant.svg
+           href: https://ffxiv.eorzeacollection.com/glamours
+    - FFXIV Two:
+        - Ocean Fishing:
+           icon: mdi-sail-boat.svg
+           href: https://ffxiv.pf-n.co/ocean-fishing
