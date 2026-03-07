@@ -1,0 +1,44 @@
+title: Regulus
+description: HomeLab Media Services
+color: purple
+background:
+  brightness: 50
+  opacity: 20
+headerStyle: clean
+language: en-CA
+statusStyle: dot
+
+layout:
+  Links:
+    tab: Start
+    style: row
+    columns: 6
+    header: false
+    Bearblog:
+      header: false
+    Two:
+      header: false
+    Three:
+      header: false
+    Four:
+      header: false
+    FFXIV:
+      header: false
+    FFXIV Two:
+      header: false
+  NAS:
+    tab: Start
+    style: row
+    columns: 7
+  Media:
+    tab: Start
+    style: row
+    columns: 2
+    Trackers:
+      header: false
+    Upcoming:
+      header: false
+  Bittorrent:
+    tab: Torrents
+    style: row
+    columns: 1
