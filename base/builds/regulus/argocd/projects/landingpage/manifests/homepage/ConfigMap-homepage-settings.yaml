@@ -7,10 +7,10 @@ metadata:
     app.kubernetes.io/name: homepage
 data:
   kubernetes.yaml: |
-    mode: cluster
-    ingress: true
-    traefik: false
-    gateway: true
+    #mode: cluster
+    #ingress: true
+    #traefik: false
+    #gateway: true
   settings.yaml: ""
   custom.css: ""
   custom.js: ""
