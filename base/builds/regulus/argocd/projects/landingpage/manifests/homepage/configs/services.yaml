@@ -1,45 +1,45 @@
 - HomeLab:
-    - Proxmox:
-        icon: si-qnap.svg
-        href: http://10.0.0.4:8006
-        description: Hypervisor Login
-    - Dell iDRAC:
-        icon: mdi-link-variant.svg
-        href: http://10.0.0.3/login.html
-        description: Dell iDRAC Login
-    - Plex:
-        icon: si-rss.svg
-        href: https://plex.apps.phalnet.com
-        description: Plex Media Server
-        container: plex
+  - Proxmox:
+    icon: si-qnap.svg
+    href: http://10.0.0.4:8006
+    description: Hypervisor Login
+  - Dell iDRAC:
+    icon: mdi-link-variant.svg
+    href: http://10.0.0.3/login.html
+    description: Dell iDRAC Login
+  - Plex:
+    icon: si-rss.svg
+    href: https://plex.apps.phalnet.com
+    description: Plex Media Server
+    container: plex
 - NZB:
-    - NZBGet:
-        icon: si-qbittorrent.svg
-        href: https://nzbget.apps.phalnet.com
-        description: nzbget
-        container: nzbget
-        widget:
-          type: nzbget
-          url: https://nzbget.apps.phalnet.com
-          username: tkjode
-          password: phalnet
+  - NZBGet:
+    icon: si-qbittorrent.svg
+    href: https://nzbget.apps.phalnet.com
+    description: nzbget
+    container: nzbget
+    widget:
+      type: nzbget
+      url: https://nzbget.apps.phalnet.com
+      username: tkjode
+      password: phalnet
+  - Upcoming:
     - Upcoming:
-        - Upcoming:
-            widget:
-              type: calendar
-              view: agenda
-              maxEvents: 12 # optional - defaults to 10
-              showTime: true # optional - show time for event happening today - defaults to false
-              integrations: # optional
-                - type: sonarr
-                  service_group: Trackers
-                  service_name: TV
-                - type: sonarr
-                  service_group: Trackers
-                  service_name: Anime
-                - type: radarr
-                  service_group: Trackers
-                  service_name: Movies
+      widget:
+        type: calendar
+        view: monthly
+        maxEvents: 12
+        #showTime: true
+        integrations:
+        - type: sonarr
+          service_group: Trackers
+          service_name: TV
+        - type: sonarr
+          service_group: Trackers
+          service_name: Anime
+        - type: radarr
+          service_group: Trackers
+          service_name: Movies
 - Media:
     - Trackers:
         - TV:
