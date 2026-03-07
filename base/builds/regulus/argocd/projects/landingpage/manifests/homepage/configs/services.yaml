@@ -27,9 +27,9 @@
     - Upcoming:
       widget:
         type: calendar
-        view: monthly
+        view: agenda
         maxEvents: 12
-        #showTime: true
+        showTime: true
         integrations:
         - type: sonarr
           service_group: Trackers
