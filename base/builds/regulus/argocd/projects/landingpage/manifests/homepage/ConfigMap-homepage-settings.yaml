@@ -7,13 +7,17 @@ metadata:
     app.kubernetes.io/name: homepage
 data:
   kubernetes.yaml: |
-    #mode: cluster
-    #ingress: true
-    #traefik: false
-    #gateway: true
+    mode: cluster
+    ingress: true
+    traefik: false
+    gateway: true
+
   settings.yaml: ""
+
   custom.css: ""
+
   custom.js: ""
+
   bookmarks.yaml: |
     - Developer:
         - Github:
@@ -22,6 +26,7 @@ data:
         - HomeLab:
             - abbr: HL
               href: https://github.com/tkjode/homelab
+
   services.yaml: |
     - Home Theatre:
         - plex:
@@ -42,19 +47,20 @@ data:
         - radarr:
             href: https://radarr.apps.phalnet.com/
             description: Indexer Search for Movie releases
+
   widgets.yaml: |
-    #- kubernetes:
-    #    cluster:
-    #      show: true
-    #      cpu: true
-    #      memory: true
-    #      showLabel: true
-    #      label: "Regulus"
-    #    nodes:
-    #      show: true
-    #      cpu: true
-    #      memory: true
-    #      showLabel: true
+    - kubernetes:
+        cluster:
+          show: true
+          cpu: true
+          memory: true
+          showLabel: true
+          label: "Regulus"
+        nodes:
+          show: true
+          cpu: true
+          memory: true
+          showLabel: true
     - resources:
         backend: resources
         expanded: true
@@ -64,4 +70,5 @@ data:
     - search:
         provider: duckduckgo
         target: _blank
+
   docker.yaml: ""
