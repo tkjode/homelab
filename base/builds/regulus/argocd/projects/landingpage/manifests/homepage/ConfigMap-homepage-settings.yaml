@@ -42,25 +42,10 @@ data:
         - radarr:
             href: https://radarr.apps.phalnet.com/
             description: Indexer Search for Movie releases
-    - Monitoring:
-        - My Second Service:
-            href: http://localhost/
-            description: Homepage is the best
-
-    - Media:
-        - Media Calendar:
-            widget:
-                type: calendar
-                firstDayInWeek: sunday
-                view: monthly
-                maxEvents: 30
-                showTime: true
-                timezone: America/New_York
-                integrations:
-                    - type: sonarr
-                        service_group: Media
-                        service_name: Sonarr
-                        baseUrl: https://sonarr.apps.phalnet.com
+    - Systems:
+        - Proxmox:
+            href: http://10.0.0.4:8006/
+            description: HomeLab Virtualization Hypervisor
 
   widgets.yaml: |
     - kubernetes:
