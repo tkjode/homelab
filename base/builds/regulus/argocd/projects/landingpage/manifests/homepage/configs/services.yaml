@@ -1,13 +1,12 @@
-- NAS:
-    - QNAP:
+- HomeLab:
+    - Proxmox:
         icon: si-qnap.svg
-        href: # Link
-        description: Server Status
-    - Linkding:
+        href: http://10.0.0.4:8006
+        description: Hypervisor Login
+    - Dell iDRAC:
         icon: mdi-link-variant.svg
-        href: # Link
-        description: Bookmarks
-        container: linkding
+        href: http://10.0.0.3/login.html
+        description: Dell iDRAC Login
     - Fusion:
         icon: si-rss.svg
         href: # Link
