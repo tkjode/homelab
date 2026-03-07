@@ -48,18 +48,19 @@ data:
             description: Homepage is the best
 
     - Media:
-        - widget:
-            type: calendar
-            firstDayInWeek: sunday
-            view: monthly
-            maxEvents: 30
-            showTime: true
-            timezone: America/New_York
-            integrations:
-                - type: sonarr
-                    service_group: Media
-                    service_name: Sonarr
-                    baseUrl: https://sonarr.apps.phalnet.com
+        - Media Calendar:
+            widget:
+                type: calendar
+                firstDayInWeek: sunday
+                view: monthly
+                maxEvents: 30
+                showTime: true
+                timezone: America/New_York
+                integrations:
+                    - type: sonarr
+                        service_group: Media
+                        service_name: Sonarr
+                        baseUrl: https://sonarr.apps.phalnet.com
 
   widgets.yaml: |
     - kubernetes:
