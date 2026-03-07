@@ -51,18 +51,18 @@ data:
             href: http://localhost:8080/
             description: Placeholder
   widgets.yaml: |
-    - kubernetes:
-        cluster:
-          show: true
-          cpu: true
-          memory: true
-          showLabel: true
-          label: "Regulus"
-        nodes:
-          show: true
-          cpu: true
-          memory: true
-          showLabel: true
+    #- kubernetes:
+    #    cluster:
+    #      show: true
+    #      cpu: true
+    #      memory: true
+    #      showLabel: true
+    #      label: "Regulus"
+    #    nodes:
+    #      show: true
+    #      cpu: true
+    #      memory: true
+    #      showLabel: true
     - resources:
         backend: resources
         expanded: true
