@@ -35,22 +35,32 @@ data:
             description: NZB Indexer Consolidation
         - sonarr:
             href: https://sonarr.apps.phalnet.com/
-            description: Indexer Search for TV Series downloads 
+            description: Indexer Search for TV Series downloads
         - sonarr_anime:
             href: https://sonarr-anime.apps.phalnet.com/
             description: Indexer Search for Anime Series downloads
         - radarr:
             href: https://radarr.apps.phalnet.com/
-            description: Indexer Search for Movie releases 
+            description: Indexer Search for Movie releases
     - Monitoring:
         - My Second Service:
             href: http://localhost/
             description: Homepage is the best
 
-    - Internal Tools:
-        - My Third Service:
-            href: http://localhost/
-            description: Homepage is 😎
+    - Media:
+        - widget:
+            type: calendar
+            firstDayInWeek: sunday
+            view: monthly
+            maxEvents: 30
+            showTime: true
+            timezone: America/New_York
+            integrations:
+                - type: sonarr
+                    service_group: Media
+                    service_name: Sonarr
+                    baseUrl: https://sonarr.apps.phalnet.com
+
   widgets.yaml: |
     - kubernetes:
         cluster:
