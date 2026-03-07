@@ -69,21 +69,6 @@
               type: radarr
               url: https://radarr.apps.phalnet.com
               key: 47ec1077380446aca0566151582480f0
-        - Indexers:
-            icon: mdi-database-search-outline.svg
-            href: https://nzbhydra2.apps.phalnet.com
-            description: NZBHydra2
-            container: nzbhydra2
-            widget:
-              type: customapi
-              url: https://nzbhydra2.apps.phalnet.com/api/stats?apikey=7G1S5R23U4VHJ7RK459J5MAMTQ
-              mappings:
-              - field: numberOfConfiguredIndexers
-                label: configured
-                format: number
-              - field: numberOfEnabledIndexers
-                label: enabled
-                format: number
 - Links:
     - Kinja:
         - Gizmodo:
