@@ -47,10 +47,10 @@
         href: https://plex.apps.phalnet.com
         description: Plex Media Server
         container: plex
-        widgets:
-        - type: plex
-          url: https://plex.apps.phalnet.com
-          key: sE2hsMwp9CwNhJtngRVB
+#        widgets:
+#        - type: plex
+#          url: https://plex.apps.phalnet.com
+#          key: sE2hsMwp9CwNhJtngRVB
   - Trackers:
     - TV:
         icon: si-sonarr.svg
