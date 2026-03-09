@@ -89,11 +89,11 @@
         href: https://spaceweather.com
   - Tech:
     - Slashdot:
-      icon: si-librarything.svg
-      href: https://slashdot.org
+        icon: si-librarything.svg
+        href: https://slashdot.org
     - The Register:
-      icon: si-librarything.svg
-      href: https://theregister.com
+        icon: si-librarything.svg
+        href: https://theregister.com
   - Social:
     - Reddit:
         icon: si-reddit.svg
