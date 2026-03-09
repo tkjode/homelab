@@ -1,17 +1,21 @@
 - HomeLab:
-  - Proxmox:
-      icon: si-qnap.svg
-      href: http://10.0.0.4:8006
-      description: Hypervisor Login
-  - Dell iDRAC:
-      icon: mdi-link-variant.svg
-      href: http://10.0.0.3/login.html
-      description: Dell iDRAC Login
-  - Plex:
-      icon: si-rss.svg
-      href: https://plex.apps.phalnet.com
-      description: Plex Media Server
-      container: plex
+  - Hardware:
+    - Rogers Gateway:
+        icon: si-router.svg
+        href: http://10.0.0.1/
+        description: Xfinity 1Gbit Wifi 6E DOCSIS 3.0 Router
+    - Proxmox:
+        icon: si-qnap.svg
+        href: http://10.0.0.4:8006
+        description: Hypervisor Login
+    - Dell iDRAC:
+        icon: mdi-link-variant.svg
+        href: http://10.0.0.3/login.html
+        description: Dell iDRAC Login
+    - ArgoCD:
+        icon: si-argocd.svg
+        href: https://argocd.apps.phalnet.com
+        description: Kubernetes Deployer and Orchestration
 - NZB:
   - NZBGet:
       icon: si-qbittorrent.svg
@@ -40,6 +44,11 @@
           - type: radarr
             service_group: Trackers
             service_name: Movies
+  - Indexers:
+    - NZBHydra2:
+        icon: si-nzbhydra.svg
+        href: https://nzbhydra2.apps.phalnet.com
+        description: NZB Indexer Consolidator and Multi-Search Head
 - Media:
   - Streaming:
     - Plex:
