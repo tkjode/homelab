@@ -35,6 +35,8 @@ layout:
     tab: Start
     style: row
     columns: 2
+    Streaming:
+      header: false
     Upcoming:
       header: false
   NZB:
