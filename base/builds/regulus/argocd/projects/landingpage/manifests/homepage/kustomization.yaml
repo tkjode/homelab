@@ -6,11 +6,10 @@ metadata:
 resources:
   - Deployment-homepage.yaml
   - HTTPRoute-homepage.yaml
-#  - ConfigMap-homepage-settings.yaml   # Use Generator
-  - RBAC-homepage.yaml
   - ServiceAccount-homepage.yaml
-  - Secret-homepage-sa-token.yaml
   - Service-homepage.yaml
+  - ClusterRole-homepage.yaml
+  - ClusterRoleBinding-homepage.yaml
 configMapGenerator:
 - name: homepage-settings
   files:
