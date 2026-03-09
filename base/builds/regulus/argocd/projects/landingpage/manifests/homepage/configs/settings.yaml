@@ -34,7 +34,7 @@ layout:
   Media:
     tab: Start
     style: row
-    columns: 1
+    columns: 2
     Upcoming:
       header: false
   NZB:
