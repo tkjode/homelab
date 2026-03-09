@@ -9,7 +9,7 @@ language: en-CA
 statusStyle: dot
 layout:
   Links:
-    #tab: Start
+    tab: Start
     style: row
     columns: 8
     header: false
@@ -32,14 +32,12 @@ layout:
     style: row
     columns: 8
   Media:
-    #tab: Start
+    tab: Start
     style: row
     columns: 1
-    Streaming:
-      header: false
     Upcoming:
       header: false
   NZB:
-    #tab: NZBGet
+    tab: NZBGet
     style: row
     columns: 1
