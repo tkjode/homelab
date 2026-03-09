@@ -41,6 +41,16 @@
             service_group: Trackers
             service_name: Movies
 - Media:
+  - Streaming:
+    - Plex:
+        icon: si-plex.svg
+        href: https://plex.apps.phalnet.com
+        description: Plex Media Server
+        container: plex
+        widgets:
+        - type: plex
+          url: https://plex.apps.phalnet.com
+          key: sE2hsMwp9CwNhJtngRVB
   - Trackers:
     - TV:
         icon: si-sonarr.svg
