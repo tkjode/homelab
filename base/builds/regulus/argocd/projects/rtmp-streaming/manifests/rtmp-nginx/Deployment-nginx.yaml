@@ -31,9 +31,9 @@ spec:
             cpu: 1000m
             memory: 1Gi
         securityContext:
-          runAsNonRoot: true
-          runAsUser: 1001
-          runAsGroup: 1001
+          runAsNonRoot: false
+          runAsUser: 101
+          runAsGroup: 101
         ports:
         - containerPort: 1935
           name: rtmp
