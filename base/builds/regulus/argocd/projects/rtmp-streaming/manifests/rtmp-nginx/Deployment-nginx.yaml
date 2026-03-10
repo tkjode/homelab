@@ -23,6 +23,11 @@ spec:
       - name: nginx
         image: alfg/nginx-rtmp:latest
         imagePullPolicy: Always
+        env:
+        - name: PUID
+          value: "1001"
+        - name: PGID
+          value: "1001"
         resources:
           requests:
             cpu: 100m
@@ -31,7 +36,10 @@ spec:
             cpu: 1000m
             memory: 1Gi
         securityContext:
-          readOnlyRootFilesystem: true
+          fsGroup: 1001
+          fsUser: 1001
+          runAsNonRoot: true
+          runAsUser: 1001
         ports:
         - containerPort: 1935
           name: rtmp
