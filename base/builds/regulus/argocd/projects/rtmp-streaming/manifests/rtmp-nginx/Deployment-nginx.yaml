@@ -47,6 +47,7 @@ spec:
           protocol: TCP
         volumeMounts:
         - mountPath: /etc/nginx/nginx.conf
+          readOnly: false
           name: nginx-config
           subPath: nginx.conf
         - mountPath: /var/www/hls
