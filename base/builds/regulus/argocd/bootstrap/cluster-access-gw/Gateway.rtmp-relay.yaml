@@ -10,10 +10,12 @@ spec:
   gatewayClassName: rtmp-relay
   listeners:
   - allowedRoutes:
+      kinds:
+      - kind: TCPRoute
       namespaces:
         from: All
     name: hls
-    protocol: HTTP
+    protocol: TCP
     port: 1935
   - allowedRoutes:
       namespaces:
