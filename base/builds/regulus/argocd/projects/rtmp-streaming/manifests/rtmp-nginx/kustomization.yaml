@@ -13,4 +13,6 @@ configMapGenerator:
 - name: nginx-conf
   files:
   - nginx-conf/nginx.conf
+- name: nginx-auth-conf
+  files:
   - nginx-conf/nginx-auth.conf

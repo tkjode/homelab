@@ -44,7 +44,7 @@ spec:
       volumes:
       - name: auth-config
         configMap:
-          name: nginx-conf
+          name: nginx-auth-conf
       - name: rtmp-publish-htpasswd
         secret:
           secretName: rtmp-publish-passwd
