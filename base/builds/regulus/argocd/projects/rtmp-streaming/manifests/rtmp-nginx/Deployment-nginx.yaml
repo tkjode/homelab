@@ -50,6 +50,9 @@ spec:
           name: hls
         - mountPath: /tmp
           name: tmp
+          subPath: tmp
+        - mountPath: /run
+          name: tmp
           subPath: run
       volumes:
       - name: nginx-config
