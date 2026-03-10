@@ -46,6 +46,6 @@ spec:
       volumes:
       - name: nginx-config
         configMap:
-          name: nginx-config
+          name: nginx-conf
       - name: hls
         emptyDir: {}
