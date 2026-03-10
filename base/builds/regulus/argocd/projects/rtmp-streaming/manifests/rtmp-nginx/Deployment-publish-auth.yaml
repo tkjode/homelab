@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: publish-auth
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: publish-auth
+      app.kubernetes.io/name: publish-auth
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: publish-auth
+        app.kubernetes.io/name: publish-auth
+    spec:
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      containers:
+      - name: nginx
+        image: alfg/nginx-rtmp:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /etc/nginx/nginx.conf.template
+          name: auth-config
+          subPath: nginx-auth.conf
+        - mountPath: /etc/nginx/.htpasswd
+          name: rtmp-publish-htpasswd
+          subPath: .htpasswd
+      volumes:
+      - name: auth-config
+        configMap:
+          name: nginx-conf
+      - name: rtmp-publish.htpasswd
+        secret:
+          secretName: rtmp-publish-passwd
+          optional: false
