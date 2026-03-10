@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: rtmp-nginx
+  namespace: argocd
+spec:
+  project: rtmp-streaming
+  sources:
+  - repoURL: ssh://git@github.com/tkjode/homelab
+    targetRevision: HEAD
+    path: base/builds/regulus/argocd/projects/rtmp-streaming/manifests/rtmp-nginx
+  destination:
+    namespace: rtmp-nginx
+    server: https://kubernetes.default.svc
+  revisionHistoryLimit: 0
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+    automated:
+      prune: true
+      selfHeal: true

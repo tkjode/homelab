@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: rtmp-nginx
+resources:
+  - ConfigMap-nginx-conf.yaml   # ConfigMap for NGINX Conf
+  - Deployment-nginx.yaml       # NGINX image with RTMP support pre-compiled
+  - HTTPRoute-nginx-hls.yaml    # TCP Out for Stream Viewing    (hls.phalnet.com)
+  - HTTPRoute-nginx-rtmp.yaml   # TCP In for Stream Publishing (rtmp.phalnet.com)
+  - Service-hls.yaml      # TCP/80 HLS Output
+  - Service-rtmp.yaml     # TCP/1935 Stream Ingestion
+  

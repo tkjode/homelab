@@ -13,6 +13,8 @@ spec:
         project: userland
       - folder: landingpage
         project: userland
+      - folder: rtmp-streaming
+        project: userland
   template:
     metadata:
       name: 'projects-{{.folder}}'
