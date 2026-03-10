@@ -26,10 +26,10 @@ spec:
         resources:
           requests:
             cpu: 100m
-            memory: 512Mi
+            memory: 4Gi
           limits:
-            cpu: 1000m
-            memory: 1Gi
+            cpu: 12000m
+            memory: 8Gi
         ports:
         - containerPort: 1935
           name: rtmp
