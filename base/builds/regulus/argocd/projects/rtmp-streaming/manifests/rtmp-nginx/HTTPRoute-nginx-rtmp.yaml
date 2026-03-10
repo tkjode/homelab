@@ -15,7 +15,7 @@ spec:
   - backendRefs:
     - group: ""
       kind: Service
-      name: hls
+      name: rtmp
       port: 1935
       weight: 1
     matches:
