@@ -45,7 +45,7 @@ spec:
       - name: auth-config
         configMap:
           name: nginx-conf
-      - name: rtmp-publish.htpasswd
+      - name: rtmp-publish-htpasswd
         secret:
           secretName: rtmp-publish-passwd
           optional: false
