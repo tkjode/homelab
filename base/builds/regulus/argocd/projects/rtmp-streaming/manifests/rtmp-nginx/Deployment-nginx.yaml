@@ -23,11 +23,6 @@ spec:
       - name: nginx
         image: alfg/nginx-rtmp:latest
         imagePullPolicy: Always
-        env:
-        - name: PUID
-          value: "1001"
-        - name: PGID
-          value: "1001"
         resources:
           requests:
             cpu: 100m
