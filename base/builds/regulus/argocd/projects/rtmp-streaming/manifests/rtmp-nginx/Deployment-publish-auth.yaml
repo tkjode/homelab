@@ -38,6 +38,9 @@ spec:
         - mountPath: /etc/nginx/nginx.conf.template
           name: auth-config
           subPath: nginx-auth.conf
+        - mountPath: /www/static/auth/index.html
+          name: index-html
+          subPath: index.html
         - mountPath: /etc/nginx/.htpasswd
           name: rtmp-publish-htpasswd
           subPath: .htpasswd
@@ -45,6 +48,9 @@ spec:
       - name: auth-config
         configMap:
           name: nginx-auth-conf
+      - name: index-html
+        configMap:
+          name: index-html
       - name: rtmp-publish-htpasswd
         secret:
           secretName: rtmp-publish-passwd
