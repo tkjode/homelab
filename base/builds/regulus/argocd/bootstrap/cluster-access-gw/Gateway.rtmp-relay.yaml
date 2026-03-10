@@ -12,6 +12,12 @@ spec:
   - allowedRoutes:
       namespaces:
         from: All
-    name: http
+    name: hls
     protocol: HTTP
     port: 1935
+  - allowedRoutes:
+      namespaces:
+        from: All
+    name: rtmp
+    protocol: HTTP
+    port: 8080
