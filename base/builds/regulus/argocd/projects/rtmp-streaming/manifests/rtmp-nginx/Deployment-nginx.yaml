@@ -34,7 +34,6 @@ spec:
           runAsNonRoot: true
           runAsUser: 1001
           runAsGroup: 1001
-          fsGroupChangePolicy: "OnRootMismatch"
         ports:
         - containerPort: 1935
           name: rtmp
