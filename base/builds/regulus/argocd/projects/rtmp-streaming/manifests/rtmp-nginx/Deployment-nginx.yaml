@@ -36,8 +36,6 @@ spec:
             cpu: 1000m
             memory: 1Gi
         securityContext:
-          fsGroup: 1001
-          fsUser: 1001
           runAsNonRoot: true
           runAsUser: 1001
         ports:
