@@ -40,9 +40,9 @@ spec:
         volumeMounts:
         - mountPath: /etc/nginx/nginx.conf
           name: nginx-config
-          subPath: nginx.conf          
+          subPath: nginx.conf
         - mountPath: /var/www/hls
-          name: hls          
+          name: hls
       volumes:
       - name: nginx-config
         configMap:

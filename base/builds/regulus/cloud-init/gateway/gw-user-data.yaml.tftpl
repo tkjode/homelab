@@ -87,7 +87,7 @@ write_files:
         auth-nxdomain no;
         minimal-responses yes;
       };
-      
+
       include "/etc/bind/named.conf.default-zones";
   - path: /etc/bind/named.conf.local
     content: |
@@ -186,6 +186,10 @@ write_files:
         bind :1935
         mode tcp
         default_backend rtmp_relay
+      frontend hls
+        bind :8080
+        mode tcp
+        default_backend hls
       backend cluster-default-gateway
         mode http
         server global-envoy ${cidrhost(join("/", [ gw-net-cluster.network, gw-net-cluster.mask ]), 248)}:9080 check
@@ -195,6 +199,9 @@ write_files:
       backend rtmp_relay
         mode tcp
         server rtmp-relay-l2-vip 192.168.64.250:1935 check
+      backend hls
+        mode tcp
+        server rtmp-relay-l2-vip 192.168.64.250:8080 check
       backend cluster_api
 %{ for instance in range( 0, 3 ) ~}
         server master-${instance} ${cidrhost(join("/", [ gw-net-cluster.network, gw-net-cluster.mask ]), master-ip-offset + instance)}:6443 check
