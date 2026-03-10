@@ -201,7 +201,7 @@ write_files:
         server rtmp-relay-l2-vip 192.168.64.250:1935 check
       backend hls
         mode tcp
-        server rtmp-relay-l2-vip 192.168.64.250:8080 check
+        server hls-pull-l2-vip 192.168.64.250:8080 check
       backend cluster_api
 %{ for instance in range( 0, 3 ) ~}
         server master-${instance} ${cidrhost(join("/", [ gw-net-cluster.network, gw-net-cluster.mask ]), master-ip-offset + instance)}:6443 check
