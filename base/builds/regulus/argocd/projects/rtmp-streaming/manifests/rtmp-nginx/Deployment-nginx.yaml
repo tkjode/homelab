@@ -49,9 +49,16 @@ spec:
           subPath: nginx.conf
         - mountPath: /var/www/hls
           name: hls
+        - mountPath: /tmp
+          name: tmp
+          subPath: run
       volumes:
       - name: nginx-config
         configMap:
           name: nginx-conf
       - name: hls
         emptyDir: {}
+      - name: tmp
+        emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
