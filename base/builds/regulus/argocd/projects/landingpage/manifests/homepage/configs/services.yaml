@@ -5,17 +5,22 @@
         href: http://10.0.0.1/
         description: Xfinity 1Gbit Wifi 6E DOCSIS 3.0 Router
     - Proxmox:
-        icon: si-qnap.svg
+        icon: si-proxmox.svg
         href: http://10.0.0.4:8006
         description: Hypervisor Login
     - Dell iDRAC:
-        icon: mdi-link-variant.svg
+        icon: si-dell.svg
         href: http://10.0.0.3/login.html
         description: Dell iDRAC Login
     - ArgoCD:
-        icon: si-argocd.svg
+        icon: si-argo.svg
         href: https://argocd.apps.phalnet.com
         description: Kubernetes Deployer and Orchestration
+  - Services:
+    - TailScale:
+        icon: si-tailscale.svg
+        href: https://login.tailscale.com/admin
+        description: WireGuard VPN for Remote HomeLab and HomeNet Direct Access
 - NZB:
   - NZBGet:
       icon: si-qbittorrent.svg
@@ -108,10 +113,10 @@
         href: https://spaceweather.com
   - Tech:
     - Slashdot:
-        icon: si-librarything.svg
+        icon: si-slashdot.svg
         href: https://slashdot.org
     - The Register:
-        icon: si-librarything.svg
+        icon: si-theregister.svg
         href: https://theregister.com
   - Social:
     - Reddit:
