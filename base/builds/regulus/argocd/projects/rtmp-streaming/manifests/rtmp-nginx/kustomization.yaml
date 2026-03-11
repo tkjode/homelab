@@ -3,14 +3,12 @@ kind: Kustomization
 metadata:
   name: rtmp-nginx
 resources:
-  - Deployment-nginx.yaml       # NGINX image with RTMP support pre-compiled
-  - Deployment-publish-auth.yaml   # NGINX instance that verifies a password on publish (Requires Secret /w conf)
-  - HTTPRoute-nginx-hls.yaml    # TCP Out for Stream Viewing    (hls.phalnet.com)
-  - TCPRoute-nginx-rtmp.yaml   # TCP In for Stream Publishing (rtmp.phalnet.com)
-  - Service-hls.yaml      # TCP/80 HLS Output
-  - Service-rtmp.yaml     # TCP/1935 Stream Ingestion
+  - Deployment-nginx.yaml           # NGINX image with RTMP support pre-compiled
+  - HTTPRoute-nginx-hls.yaml        # TCP Out for Stream Viewing    (hls.phalnet.com)
+  - TCPRoute-nginx-rtmp.yaml        # TCP In for Stream Publishing (rtmp.phalnet.com)
+  - Service-hls.yaml                # TCP/80 HLS Output
+  - Service-rtmp.yaml               # TCP/1935 Stream Ingestion
 configMapGenerator:
 - name: nginx-conf
   files:
   - nginx-conf/nginx.conf
-  - nginx-conf/nginx-auth.conf
