@@ -155,8 +155,15 @@ write_files:
         mode tcp
         balance roundrobin
         timeout connect 10s
-        timeout client 30s
-        timeout server 30s
+        timeout client 1m
+        timeout queue 1m
+        timeout http-request 10s
+        timeout http-keep-alive 10s
+        timeout check 10s
+        timeout server 1m
+        maxconn 3000
+        compression algo gzip
+        compression type text/html tex/plain text/css application/javascript application/json
       crt-store gateway
         crt-base /etc/letsencrypt/live/${join(".", [cluster_name, cluster_domain])}
         key-base /etc/letsencrypt/live/${join(".", [cluster_name, cluster_domain])}
