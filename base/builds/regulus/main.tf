@@ -219,6 +219,9 @@ variable "create-luns" {
                   { lun = 3, name = "ssd-storageclass", size= 512 },
                   { lun = 4, name = "radarr-config", size = 8 },
                   { lun = 5, name = "sonarrtv-config", size = 8 },
-                  { lun = 6, name = "sonarranime-config", size = 8 }
+                  { lun = 6, name = "sonarranime-config", size = 8 },
+                  { lun = 7, name = "plex-tvshows-cache", size = 192 },
+                  { lun = 8, name = "plex-movies-cache", size = 192 },
+                  { lun = 9, name = "plex-anime-cache", size = 64 }
                 ]
 }
