@@ -21,6 +21,7 @@ rules:
       - get
       - list
   - apiGroups:
+      - traefik.containo.us
       - traefik.io
     resources:
       - ingressroutes
@@ -43,3 +44,9 @@ rules:
     verbs:
       - get
       - list
+  - apiGroups:
+      - apiextensions.k8s.io
+    resources:
+      - customresourcedefinitions/status
+    verbs:
+      - get
