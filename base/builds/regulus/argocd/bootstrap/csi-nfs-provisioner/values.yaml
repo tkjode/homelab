@@ -3,5 +3,6 @@ nfs:
   path: /srv/regulus/dynamic
 storageClass:
   name: nfs-dynamic
+  reclaimPolicy: Retain
   defaultClass: false
   accessModes: ReadWriteMany
