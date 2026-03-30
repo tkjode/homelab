@@ -8,6 +8,7 @@ spec:
   sources:
   - chart: nfs-subdir-external-provisioner
     repoURL: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner
+    targetRevision: latest
     helm:
       valueFiles:
       - $values/base/builds/regulus/argocd/bootstrap/csi-nfs-provisioner/values.yaml
