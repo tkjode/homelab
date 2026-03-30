@@ -10,5 +10,5 @@ spec:
   avoidBuggyIPs: false
   serviceAllocation:
     serviceSelectors:
-      matchLabels:
+    - matchLabels:
         pool: plex
