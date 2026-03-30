@@ -2,24 +2,7 @@ csi-driver-nfs:
   driver:
     mountPermissions: "0755"
 
-storageClasses:
-  - name: nfs-durable
-    annotations:
-      storageclass.kubernetes.io/is-default-class: "true"
-    parameters:
-      server: 10.0.0.5
-      share: /srv/regulus/stateful/
-      subDir: ${pvc.metadata.namespace}#${pvc.metadata.name}
-      # mountPermissions: "0"
-      # csi.storage.k8s.io/provisioner-secret is only needed for providing mountOptions in DeleteVolume
-      # csi.storage.k8s.io/provisioner-secret-name: "mount-options"
-      # csi.storage.k8s.io/provisioner-secret-namespace: "default"
-    reclaimPolicy: Retain
-    volumeBindingMode: Immediate
-    mountOptions:
-      - nfsvers=4.1
-      - nosuid
-      - hard      
+storageClasses:   
   - name: nfs-bind
     mountOptions:
       - nosuid
