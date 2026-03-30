@@ -5,4 +5,4 @@ metadata:
 resources:
   - rbac.yaml
   - namespace.yaml
-  - persistentvolume-devpod.yaml
+  #- persistentvolume-devpod.yaml
