@@ -3,6 +3,8 @@ kind: Gateway
 metadata:
   name: plex-direct
   namespace: default
+  labels:
+    pool: plex
 spec:
   #addresses:
   #- type: IPAddress

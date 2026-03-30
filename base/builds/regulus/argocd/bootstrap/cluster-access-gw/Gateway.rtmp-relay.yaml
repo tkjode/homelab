@@ -3,6 +3,8 @@ kind: Gateway
 metadata:
   name: rtmp-relay
   namespace: default
+  labels:
+    pool: rtmp
 spec:
   #addresses:
   #- type: IPAddress
