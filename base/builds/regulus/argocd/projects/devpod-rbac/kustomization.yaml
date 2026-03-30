@@ -4,3 +4,4 @@ metadata:
   name: devpod-rbac
 resources:
   - rbac.yaml
+  - namespace.yaml
