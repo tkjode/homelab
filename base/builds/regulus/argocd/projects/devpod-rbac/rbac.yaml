@@ -1,0 +1,26 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: devpod-role
+  namespace: devpod
+rules:
+- apiGroups: ["", "apps", "batch"]
+  resources: ["pods", "deployments", "services", "configmaps"]
+  verbs: ["get", "list", "create", "update", "delete"]
+- apiGroups: [""]
+  resources: ["pods/log", "pods/exec"]
+  verbs: ["get", "create"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: devpod-rolebinding
+  namespace: devpod
+subjects:
+- kind: User
+  name: tkjode
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: devpod-role
+  apiGroup: rbac.authorization.k8s.io
