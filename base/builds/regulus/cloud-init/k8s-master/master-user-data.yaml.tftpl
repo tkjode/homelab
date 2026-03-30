@@ -90,6 +90,11 @@ write_files:
       clusterName: ${cluster-name}
       kubernetesVersion: ${kubernetes-version}.0
       controlPlaneEndpoint: ${control-plane-endpoint}
+      apiServer:
+        certSANs:
+        - ${cluster-name}
+        - ${cluster-name}.${cluster-public-domain}
+        - ${gateway-ip}
       networking:
         podSubnet: ${pod-network}
         serviceSubnet: ${service-network}

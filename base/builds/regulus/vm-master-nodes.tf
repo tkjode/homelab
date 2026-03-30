@@ -73,11 +73,14 @@ resource "proxmox_virtual_environment_file" "master-user-data-cloud-config" {
     data        = templatefile(
                     "cloud-init/k8s-master/master-user-data.yaml.tftpl",
                     {
-                      hostname                = join("-", ["master", count.index] ),
-                      control-plane-endpoint  = cidrhost(join("/", [var.gw-net-cluster.network, var.gw-net-cluster.mask]), var.gw-net-cluster.cidr),
-                      cluster-join-token      = var.cluster-join-token,
+                      hostname                = join("-", ["master", count.index] )
+                      control-plane-endpoint  = cidrhost(join("/", [var.gw-net-cluster.network, var.gw-net-cluster.mask]), var.gw-net-cluster.cidr)
+                      cluster-join-token      = var.cluster-join-token
                       node-select             = count.index
                       cluster-name            = var.cluster-name
+                      cluster-domain          = var.cluster-domain
+                      cluster-public-domain   = var.cluster-public-domain
+                      gateway-ip              = cidrhost(join("/", [var.gw-net-home.network, var.gw-net-home.mask]), var.gw-net-home.gateway)
                       pod-network             = var.pod-network
                       service-network         = var.service-network
                       kubernetes-version      = var.kubernetes-version

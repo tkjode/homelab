@@ -163,6 +163,12 @@ variable "cluster-domain" {
   default     = "_local"
 }
 
+variable "cluster-public-domain" {
+  description = "The externally accessible DNS suffix for the cluster"
+  type        = string
+  default     = "phalnet.com"
+}
+
 variable "argocd-ssh-private-key" {
   description = "Base64 Encoded Secret containing SSH Private Key allowing ArgoCD access to bootstrap repository"
   type        = string
@@ -183,7 +189,7 @@ variable "proxmox-vmid-offset" {
 variable "kubernetes-version" {
   description = "Value from https://dl.k8s.io/release/stable.txt"
   type        = string
-  default     = "v1.35"
+  default     = "v1.35.3"
 }
 
 variable "letsencrypt-storage" {
