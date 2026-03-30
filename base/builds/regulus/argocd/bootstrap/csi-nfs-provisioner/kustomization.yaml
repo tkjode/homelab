@@ -4,4 +4,4 @@ metadata:
   name: csi-nfs-provisioner
 resources:
   - Application-nfs-provisioner.yaml
-  - storageclass-nfs-dynamic.yaml
+#  - storageclass-nfs-dynamic.yaml
