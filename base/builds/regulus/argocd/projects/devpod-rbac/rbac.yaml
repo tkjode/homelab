@@ -5,7 +5,7 @@ metadata:
   namespace: devpod
 rules:
 - apiGroups: ["", "apps", "batch"]
-  resources: ["pods", "deployments", "services", "configmaps"]
+  resources: ["pods", "deployments", "services", "configmaps", "persistentvolumeclaims", "persistentvolumes"]
   verbs: ["get", "list", "create", "update", "delete"]
 - apiGroups: [""]
   resources: ["pods/log", "pods/exec"]
