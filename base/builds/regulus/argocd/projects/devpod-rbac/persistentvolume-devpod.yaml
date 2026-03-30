@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: devpod
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 10Gi
+  nfs:
+    path: /srv/nas/kubepv/regulus/stateful/devpod#devpod
+    server: 10.0.0.5
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs-durable
+  volumeMode: Filesystem
