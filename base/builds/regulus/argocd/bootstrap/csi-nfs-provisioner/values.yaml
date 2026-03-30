@@ -1,0 +1,7 @@
+nfs:
+  server: 10.0.0.5
+  path: /srv/regulus/dynamic
+storageClass:
+  name: nfs-dynamic
+  defaultClass: false
+  accessModes: ReadWriteMany

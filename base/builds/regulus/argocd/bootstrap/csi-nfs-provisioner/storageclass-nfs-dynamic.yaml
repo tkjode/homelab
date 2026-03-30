@@ -1,0 +1,16 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nfs-dynamic
+provisioner: nfs-provisioner
+parameters:
+  archiveOnDelete: "false"
+  pathPattern: "${.PVC.namespace}#${.PVC.name}"
+reclaimPolicy: Retain
+volumeBindingMode: Immediate
+allowVolumeExpansion: true
+mountOptions:
+- hard
+- nfsvers=4.1
+- noatime
+- nodiratime
