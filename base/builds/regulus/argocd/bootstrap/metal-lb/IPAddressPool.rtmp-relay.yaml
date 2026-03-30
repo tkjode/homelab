@@ -11,4 +11,4 @@ spec:
   serviceAllocation:
     serviceSelectors:
     - matchLabels:
-        pool: rtmp
+        gateway.envoyproxy.io/owning-gateway-name: rtmp-relay

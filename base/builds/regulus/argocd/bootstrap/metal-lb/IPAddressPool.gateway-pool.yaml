@@ -11,4 +11,4 @@ spec:
   serviceAllocation:
     serviceSelectors:
     - matchLabels:
-        pool: ingress
+        gateway.envoyproxy.io/owning-gateway-name: cluster-ingress
