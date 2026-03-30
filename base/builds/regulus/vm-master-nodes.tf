@@ -80,7 +80,7 @@ resource "proxmox_virtual_environment_file" "master-user-data-cloud-config" {
                       cluster-name            = var.cluster-name
                       cluster-domain          = var.cluster-domain
                       cluster-public-domain   = var.cluster-public-domain
-                      gateway-ip              = cidrhost(join("/", [var.gw-net-home.network, var.gw-net-home.mask]), var.gw-net-home.gateway)
+                      gateway-ip              = cidrhost(join("/", [var.gw-net-home.network, var.gw-net-home.mask]), var.gw-net-home.cidr)
                       pod-network             = var.pod-network
                       service-network         = var.service-network
                       kubernetes-version      = var.kubernetes-version
