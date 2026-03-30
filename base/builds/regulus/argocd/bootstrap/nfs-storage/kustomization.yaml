@@ -4,5 +4,5 @@ metadata:
   name: flexo-nfs-storageclass
 resources:
   - StorageClass.nfs-bind.yaml
-  - StorageClass.nfs-durable.yaml
+#  - StorageClass.nfs-durable.yaml
   - StorageClass.nfs-pvc.yaml
