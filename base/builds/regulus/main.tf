@@ -187,9 +187,9 @@ variable "proxmox-vmid-offset" {
 }
 
 variable "kubernetes-version" {
-  description = "Value from https://dl.k8s.io/release/stable.txt"
+  description = "Value from https://dl.k8s.io/release/stable.txt without the build! (eg. v1.35)"
   type        = string
-  default     = "v1.35.3"
+  default     = "v1.35"
 }
 
 variable "letsencrypt-storage" {
