@@ -5,6 +5,17 @@ bootcmd:
   - modprobe br_netfilter
   - sysctl -w net.ipv4.ip_forward=1
 write_files:
+  - path: /root/cilium-values.yaml
+    content: |
+      ipam:
+        operator:
+          clusterPoolIPv4PodCIDRList:
+          - "10.248.0.0/16"
+          - "10.249.0.0/16"
+      envoy:
+        enabled: false
+    owner: 'root:root'
+    permissions: '0644'
   - path: /etc/modules-load.d/kube-flannel.conf
     content: br_netfilter
     owner: root:root
@@ -132,7 +143,7 @@ write_files:
     encoding: b64
     content: ${base64encode(labs-ca-crt)}
   - path: /etc/k8s-bootstrap/labs-ca.key
-    owner: root:root 
+    owner: root:root
     permissions: '0600'
     encoding: b64
     content: ${base64encode(labs-ca-key)}
@@ -158,7 +169,7 @@ packages:
   - containerd
   - net-tools
   - curl
-runcmd:  
+runcmd:
   # Start relying on unattended-upgrades and speed up deploy process
   #- apt update && apt -y dist-upgrade && apt -y autoremove
   - curl -fsSL https://pkgs.k8s.io/core:/stable:/${kubernetes-version}/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
@@ -171,7 +182,7 @@ runcmd:
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create namespace cert-manager
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create secret tls labs-ca -n cert-manager --cert=/etc/k8s-bootstrap/labs-ca.crt --key=/etc/k8s-bootstrap/labs-ca.key
   #- KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply --server-side -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
-  - KUBECONFIG=/etc/kubernetes/admin.conf helm install cilium oci://quay.io/cilium/charts/cilium --version 1.19.2 --namespace kube-system
+  - KUBECONFIG=/etc/kubernetes/admin.conf helm install cilium oci://quay.io/cilium/charts/cilium --version 1.19.2 --namespace kube-system -f /root/cilium-values.yaml
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create namespace argocd
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply --server-side -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create -n argocd -f /etc/k8s-bootstrap/secret-argocd.yaml
