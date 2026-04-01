@@ -17,6 +17,8 @@ spec:
         project: userland
       - folder: devpod-rbac
         project: userland
+      - folder: monitoring
+        project: userland
   template:
     metadata:
       name: 'projects-{{.folder}}'
