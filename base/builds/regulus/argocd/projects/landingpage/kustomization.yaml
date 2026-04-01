@@ -4,4 +4,5 @@ metadata:
   name: landingpage-projects
 resources:
   - AppProject.landingpage.yaml                     # Creates the `landingpage` ArgoCD Project
-  - manifests/homepage/Application-homepage.yaml    # Build Started
+  - manifests/homepage/Application-homepage.yaml    # Build Complete but needs work
+  - manifests/kube-ops-view/Application-kube-ops-view.yaml  # Build Started
