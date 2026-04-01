@@ -17,6 +17,9 @@ spec:
     name: gateway-httproute
     targetRevision: HEAD
     path: base/builds/regulus/argocd/projects/monitoring/manifests/radar
+  - repoURL: ssh://git@github.com/tkjode/homelab
+    ref: values
+    targetRevision: HEAD
   destination:
     namespace: radar
     server: https://kubernetes.default.svc
