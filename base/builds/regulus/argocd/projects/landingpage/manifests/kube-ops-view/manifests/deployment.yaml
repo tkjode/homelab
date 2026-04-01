@@ -37,6 +37,10 @@ spec:
             port: 8080
           initialDelaySeconds: 5
           timeoutSeconds: 1
+        lifecycle:
+          postStart:
+            exec:
+              command: ["update-ca-certificates"]
         livenessProbe:
           httpGet:
             path: /health
@@ -56,3 +60,12 @@ spec:
           readOnlyRootFilesystem: true
           runAsNonRoot: true
           runAsUser: 1000
+        volumeMounts:
+        - name: kube-ca
+          mountPath: /usr/local/share/ca-certificates/kube-api-server-ca.crt
+          subPath: ca.crt
+      volumes:
+        - name: kube-ca
+          configMap:
+            defaultMode: 420
+            name: kube-root-ca.crt
