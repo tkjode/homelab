@@ -28,6 +28,9 @@ spec:
         # example to add external links for nodes and pods
         # - --node-link-url-template=https://kube-web-view.example.org/clusters/{cluster}/nodes/{name}
         # - --pod-link-url-template=https://kube-web-view.example.org/clusters/{cluster}/namespaces/{namespace}/pods/{name}
+        env:
+        - name: CLUSTERS
+          value: https://regulus.phalnet.com:6443
         ports:
         - containerPort: 8080
           protocol: TCP
@@ -37,10 +40,6 @@ spec:
             port: 8080
           initialDelaySeconds: 5
           timeoutSeconds: 1
-        lifecycle:
-          postStart:
-            exec:
-              command: ["update-ca-certificates"]
         livenessProbe:
           httpGet:
             path: /health
@@ -56,16 +55,7 @@ spec:
           requests:
             cpu: 50m
             memory: 50Mi
-        volumeMounts:
-        - name: kube-ca
-          mountPath: /usr/local/share/ca-certificates/kube-api-server-ca.crt
-          subPath: ca.crt
-        - name: tmp
-          mountPath: /tmp
-      volumes:
-        - name: kube-ca
-          configMap:
-            defaultMode: 420
-            name: kube-root-ca.crt
-        - name: tmp
-          emptyDir: {}
+        securityContext:
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
+          runAsUser: 1000
