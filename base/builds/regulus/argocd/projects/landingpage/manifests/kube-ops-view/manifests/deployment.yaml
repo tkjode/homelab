@@ -56,10 +56,6 @@ spec:
           requests:
             cpu: 50m
             memory: 50Mi
-        securityContext:
-          readOnlyRootFilesystem: false
-          runAsNonRoot: true
-          runAsUser: 1000
         volumeMounts:
         - name: kube-ca
           mountPath: /usr/local/share/ca-certificates/kube-api-server-ca.crt
