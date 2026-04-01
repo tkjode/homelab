@@ -64,8 +64,12 @@ spec:
         - name: kube-ca
           mountPath: /usr/local/share/ca-certificates/kube-api-server-ca.crt
           subPath: ca.crt
+        - name: tmp
+          mountPath: /tmp
       volumes:
         - name: kube-ca
           configMap:
             defaultMode: 420
             name: kube-root-ca.crt
+        - name: tmp
+          emptyDir: {}
