@@ -6,8 +6,8 @@ metadata:
 spec:
   project: landingpage
   sources:
-  - chart: skyhook/radar
-    name: radar
+  - chart: radar
+    name: skyhook-radar
     repoURL: https://skyhook-io.github.io/helm-charts
     targetRevision: 1.3.2
     helm:
