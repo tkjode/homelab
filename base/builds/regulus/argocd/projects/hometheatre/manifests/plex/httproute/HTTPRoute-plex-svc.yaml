@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/instance: plex
     app.kubernetes.io/managed-by: ArgoCD
     app.kubernetes.io/name: plex-media-server
-  name: plex-direct
+  name: plex-plex-media-server
   namespace: plex
 spec:
   hostnames:
