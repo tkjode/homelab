@@ -18,6 +18,7 @@ env:
   TF_VAR_proxmox_node: ${{ vars.PROXMOX_NODE }}
   TF_VAR_default_ssh_pub_key: ${{ secrets.DEFAULT_PUB_KEY }}
   TF_VAR_argocd-ssh-private-key: ${{ secrets.ARGOCD_REGULUS_SSH_PRIVATE_KEY }}
+  TF_VAR_argocd-admin-bcrypt-pwd: ${{ secrets.ARGOCD_ADMIN_BCRYPT_PWD }}
   TF_VAR_repository-url: ssh://git@github.com/${{ github.repository }}
   TF_VAR_certbot_aws_access_key: ${{ secrets.CERTBOT_AWS_ACCESS_KEY }}
   TF_VAR_certbot_aws_secret_key: ${{ secrets.CERTBOT_AWS_SECRET_KEY }}

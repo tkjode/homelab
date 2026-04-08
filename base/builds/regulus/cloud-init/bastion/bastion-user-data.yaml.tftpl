@@ -54,7 +54,8 @@ packages:
 runcmd:
   - systemctl enable --now qemu-guest-agent
   - systemctl enable --now unattended-upgrades
-  - apt update && apt -y dist-upgrade && apt -y autoremove 
+  - snap install helm --classic
+  - apt update && apt -y dist-upgrade && apt -y autoremove
   - echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/${kubernetes-version}/deb/ /" | tee /etc/apt/sources.list.d/kubernetes.list
   - curl -fsSL https://pkgs.k8s.io/core:/stable:/${kubernetes-version}/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
   - apt update && apt -y install kubectl && apt-mark hold kubectl

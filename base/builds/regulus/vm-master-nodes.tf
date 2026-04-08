@@ -98,6 +98,7 @@ resource "proxmox_virtual_environment_file" "master-user-data-cloud-config" {
                       labs-ca-crt             = tls_self_signed_cert.labs-ca.cert_pem
                       labs-ca-key             =      tls_private_key.labs-ca.private_key_pem
                       host-ssh-key-ed25519    = tls_private_key.master-ssh-ed25519[count.index]
+                      argocd-admin-bcrypt-pwd = var.argocd-admin-bcrypt-pwd
                     }
                   )
   }

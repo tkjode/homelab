@@ -174,6 +174,12 @@ variable "argocd-ssh-private-key" {
   type        = string
 }
 
+variable "argocd-admin-bcrypt-pwd" {
+  description = "ArgoCD WebUI login Admin password"
+  type        = string
+  sensitive   = true
+}
+
 variable "repository-url" {
   description = "Where ArgoCD will access for bootstrap manifests"
   type        = string
