@@ -208,7 +208,8 @@ runcmd:
   - KUBECONFIG=/etc/kubernetes/admin.conf helm install cilium oci://quay.io/cilium/charts/cilium --version 1.19.2 --namespace kube-system -f /root/cilium-values.yaml
 #  - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create namespace argocd
 #  - KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply --server-side -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-  - KUBECONFIG=/etc/kubernetes/admin.conf helm install argo-cd oci://ghcr.io/argoproj/argo-helm --version 3.3.6 --namespace argocd -f /root/argocd-values.yaml
+  - KUBECONFIG=/etc/kubernetes/admin.conf helm repo add argo https://argoproj.github.io/argo-helm
+  - KUBECONFIG=/etc/kubernetes/admin.conf helm install argocd argo/argo-cd --version 9.4.17 --create-namespace --namespace argocd -f /root/argocd-values.yaml
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create -n argocd -f /etc/k8s-bootstrap/secret-argocd.yaml
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create -n argocd -f /etc/k8s-bootstrap/Application.bootstrap.yaml
 %{ else }
