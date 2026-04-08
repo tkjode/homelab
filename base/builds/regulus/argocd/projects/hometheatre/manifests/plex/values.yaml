@@ -4,15 +4,6 @@ extraEnv:
   ADVERTISE_IP: "https://plex.apps.phalnet.com/"
   TZ: "America/New_York"
   PLEX_CLAIM: claim-xPeE68HcAPCkoLca_rL3
-httpRoute:
-  enabled: true
-  parentRefs:
-  - group: gateway.networking.k8s.io
-    kind: Gateway
-    name: cluster-ingress
-    namespace: default
-  hostnames:
-  - "plex.apps.phalnet.com"
 pms:
   configExistingClaim: pvc-plex-config
 extraVolumes:

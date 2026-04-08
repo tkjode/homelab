@@ -4,3 +4,4 @@ metadata:
   name: plex-httproute
 resources:
   - HTTPRoute-plex-direct.yaml
+  - HTTPRoute-plex-svc.yaml
