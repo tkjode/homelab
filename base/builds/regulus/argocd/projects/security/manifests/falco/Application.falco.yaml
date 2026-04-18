@@ -8,7 +8,7 @@ spec:
   sources:
   - repoURL: ssh://git@github.com/tkjode/homelab
     targetRevision: HEAD
-    path: /base/builds/regulus/argocd/projects/security/manifests/falco
+    path: base/builds/regulus/argocd/projects/security/manifests/falco
   - chart: falco
     repoURL: https://falcosecurity.github.io/charts
     targetRevision: 8.0.2
