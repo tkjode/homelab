@@ -6,9 +6,9 @@ metadata:
 spec:
   project: security
   sources:
-  - chart: falco
+  - chart: falcosecurity/falco
     repoURL: https://falcosecurity.github.io/charts
-    targetRevision: 0.43.1
+    targetRevision: 8.0.2
   destination:
     namespace: falco
     server: https://kubernetes.default.svc
