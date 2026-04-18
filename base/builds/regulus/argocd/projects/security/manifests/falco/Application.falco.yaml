@@ -6,7 +6,7 @@ metadata:
 spec:
   project: security
   sources:
-  - chart: falcosecurity/falco
+  - chart: falco
     repoURL: https://falcosecurity.github.io/charts
     targetRevision: 0.43.1
   destination:
