@@ -3,4 +3,5 @@ kind: Kustomization
 metadata:
   name: security-projects
 resources:
-  - manifests/falco
+  - Application.falco.yaml
+  - HTTPRoute.falco.yaml

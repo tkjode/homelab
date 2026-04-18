@@ -9,6 +9,12 @@ spec:
   - chart: falco
     repoURL: https://falcosecurity.github.io/charts
     targetRevision: 8.0.2
+    helm:
+      valueFiles:
+      - $values/base/builds/regulus/argocd/projects/security/manifests/falco/values.yaml
+  - repoURL: ssh://git@github.com/tkjode/homelab
+    targetRevision: HEAD
+    ref: values
   destination:
     namespace: falco
     server: https://kubernetes.default.svc

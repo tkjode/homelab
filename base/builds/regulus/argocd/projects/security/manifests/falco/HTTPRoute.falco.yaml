@@ -1,0 +1,28 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app: falco
+    app.kubernetes.io/instance: falco-webui
+    app.kubernetes.io/managed-by: ArgoCD
+    app.kubernetes.io/name: falco
+  name: falco
+spec:
+  hostnames:
+  - falco.apps.phalnet.com
+  parentRefs:
+  - group: gateway.networking.k8s.io
+    kind: Gateway
+    name: cluster-ingress
+    namespace: default
+  rules:
+  - backendRefs:
+    - group: ""
+      kind: Service
+      name: falco-falcosidekick-ui
+      port: 2802
+      weight: 1
+    matches:
+    - path:
+        type: PathPrefix
+        value: /
