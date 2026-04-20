@@ -1,0 +1,52 @@
+#cloud-config
+hostname: ${hostname}
+timezone: America/Toronto
+ssh_keys:
+  ed25519_public: |
+    ${indent(4, host-ssh-key-ed25519.public_key_openssh)}
+  ed25519_private: |
+    ${indent(4, host-ssh-key-ed25519.private_key_openssh)}
+resize_root_fs: false
+disk_setup:
+  /dev/sdb:
+    table_type: 'mbr'
+    layout:
+    - 1
+    - 99
+    overwrite: false
+fs_setup:
+  - label: extraboot
+    filesystem: 'ext4'
+    device: '/dev/sdb1'
+    partition: sdb1
+    overwrite: true
+  - label: dockervol
+    filesystem: 'ext4'
+    device: '/dev/sdb'
+    partition: sdb2
+    overwrite: false
+mounts:
+- [/dev/sdb2, /app, ext4, "defaults,discard", "0", "0" ]
+users:
+  - default
+  - name: tkjode
+    groups:
+      - sudo
+      - docker
+    shell: /bin/bash
+    ssh_import_id: ['gh:tkjode']
+    sudo: ALL=(ALL) NOPASSWD:ALL
+package_update: true
+packages:
+  - qemu-guest-agent
+  - apt-transport-https
+  - ca-certificates
+  - gpg
+  - docker.io
+  - docker-compose-v2
+  - net-tools
+  - curl
+runcmd:
+  - mount -a
+  - systemctl enable --now qemu-guest-agent
+  - echo "done" > /tmp/cloud-config.done
