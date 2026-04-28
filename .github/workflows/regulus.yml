@@ -25,6 +25,9 @@ env:
   TF_VAR_certbot_contact_email: ${{ vars.CERTBOT_CONTACT_EMAIL }}
   TF_VAR_cluster-domain: ${{ vars.DNS_ZONE }}
 on:
+  schedule:
+    - cron: '00 14 * * *'
+      timezone: 'America/New_York'
   workflow_dispatch:
   push:
     branches: [ "build/regulus/**", "validate/regulus/**" ]
@@ -32,6 +35,30 @@ on:
       - 'base/builds/regulus/**'
       - '.github/workflows/regulus.yml'
 jobs:
+  drift-check:
+    name: "Drift Detection"
+    if: ${{ github.event.schedule || github.event_name == 'workflow_dispatch' }}
+    runs-on: self-hosted
+    container:
+      image: hashicorp/terraform:latest
+      volumes:
+        - regulustf:/tf
+    steps:
+      - name: "Checkout Project"
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            ./.github
+            base/builds/regulus
+      - run: terraform init
+        shell: sh
+        working-directory: base/builds/regulus
+      - run: terraform refresh
+        shell: sh
+        working-directory: base/builds/regulus
+      - run: terraform plan -detailed-exitcode -compact-warnings -parallelism=1
+        shell: sh
+        working-directory: base/builds/gamededi
   regulus-build:
     name: "Build: Regulus"
     if: contains(github.ref, 'build/regulus')
