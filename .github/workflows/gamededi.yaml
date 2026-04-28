@@ -32,7 +32,7 @@ on:
 jobs:
   drift-check:
     name: "Drift Detection"
-    if: ${{ github.event.schedule }}
+    if: ${{ github.event.schedule ||  github.event_name == 'workflow_dispatch' }}
     runs-on: self-hosted
     container:
       image: hashicorp/terraform:latest
