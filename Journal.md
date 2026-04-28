@@ -1,5 +1,10 @@
 # Journal / Changelog
 
+## 2026-04-28
+
+- Lots of work behind the scenes throwing stuff into ArgoCD, getting the home theatre stack going, added falco as some container behaviour tuning, and updated the Cluster CNI to Cilium which is pretty dope.
+- Updating actions related to terraform to now perform a daily drift check, will look into adding some notifications later if drift is found.
+
 ## 2026-01-27
 
 - __LetsEncrypt__
