@@ -26,7 +26,7 @@ env:
   TF_VAR_cluster-domain: ${{ vars.DNS_ZONE }}
 on:
   schedule:
-    - cron: '00 14 * * *'
+    - cron: '30 14 * * *'
       timezone: 'America/New_York'
   workflow_dispatch:
   push:
