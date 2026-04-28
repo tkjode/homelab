@@ -29,13 +29,15 @@ resource "proxmox_virtual_environment_vm" "gamededi" {
   }
 
   cpu {
-    cores                   = 16
+    cores                   = 4
+    numa                    = true
+    sockets                 = 2
     type                    = "x86-64-v2-AES"
   }
 
   memory {
-    dedicated               = 16384
-    floating                = 16384
+    dedicated               = 8192
+    floating                = 8192
   }
 
   # Boot Disk
