@@ -38,7 +38,7 @@ jobs:
         - nastf:/tf
     steps:
       - name: "Checkout Project"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           sparse-checkout: |
             ./.github

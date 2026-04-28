@@ -8,7 +8,6 @@ env:
   PROXMOX_VE_SSH_USERNAME: ${{ secrets.PROXMOX_SSH_USERNAME }}
   PROXMOX_VE_SSH_PASSWORD: ${{ secrets.PROXMOX_SSH_PASSWORD }}
   PROXMOX_VE_INSECURE: true
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true 
   TF_INPUT: 0
   TF_DATA_DIR: "/tf"
   TF_IN_AUTOMATION: "true"
@@ -43,7 +42,7 @@ jobs:
         - regulustf:/tf
     steps:
       - name: "Checkout Project"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           sparse-checkout: |
             ./.github
