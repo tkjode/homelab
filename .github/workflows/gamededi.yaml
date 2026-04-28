@@ -20,6 +20,9 @@ env:
   TF_VAR_argocd-ssh-private-key: ${{ secrets.ARGOCD_REGULUS_SSH_PRIVATE_KEY }}
   TF_VAR_repository-url: ssh://git@github.com/${{ github.repository }}
 on:
+  schedule:
+    - cron: '00 9 * * *'
+      timezone: 'America/New_York'
   workflow_dispatch:
   push:
     branches: [ "build/gamededi/**" ]
@@ -27,6 +30,30 @@ on:
       - 'base/builds/gamededi/**'
       - '.github/workflows/gamededi.yml'
 jobs:
+  drift-check:
+    name: "Drift Detection"
+    if: ${{ github.event.schedule }}
+    runs-on: self-hosted
+    container:
+      image: hashicorp/terraform:latest
+      volumes:
+      - gamededi:/tf
+    steps:
+      - name: "Checkout Project"
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            ./.github
+            base/builds/gamededi
+      - run: terraform init
+        shell: sh
+        working-directory: base/builds/gamededi
+      - run: terraform refresh
+        shell: sh
+        working-directory: base/builds/gamededi
+      - run: terraform plan -detailed-exitcode -compact-warnings -parallelism=1
+        shell: sh
+        working-directory: base/builds/gamededi
   gamededi-build:
     name: "Build: GameDedi"
     if: contains(github.ref, 'build/gamededi')
