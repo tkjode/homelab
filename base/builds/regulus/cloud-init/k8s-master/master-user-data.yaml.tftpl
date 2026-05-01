@@ -196,7 +196,11 @@ runcmd:
   # Start relying on unattended-upgrades and speed up deploy process
   #- apt update && apt -y dist-upgrade && apt -y autoremove
   - curl -fsSL https://pkgs.k8s.io/core:/stable:/${kubernetes-version}/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-  - snap install --classic helm
+  # Snap Under Attack - 05/01/2026
+  #- snap install --classic helm
+  - mkdir -p /root/helm
+  - curl -fsSL ${helm-binary-url} | tar zx -C /root/helm
+  - cp /root/helm/linux-amd64/helm /usr/local/bin/helm
   - echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/${kubernetes-version}/deb/ /" | tee /etc/apt/sources.list.d/kubernetes.list
   - apt update && apt -y install kubelet kubeadm kubectl && apt-mark hold kubelet kubeadm kubectl
   - systemctl enable --now kubelet
@@ -204,10 +208,7 @@ runcmd:
   - kubeadm init --config=/etc/kube-init.config.yaml
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create namespace cert-manager
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create secret tls labs-ca -n cert-manager --cert=/etc/k8s-bootstrap/labs-ca.crt --key=/etc/k8s-bootstrap/labs-ca.key
-  #- KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply --server-side -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
   - KUBECONFIG=/etc/kubernetes/admin.conf helm install cilium oci://quay.io/cilium/charts/cilium --version ${cilium-chart-version} --namespace kube-system -f /root/cilium-values.yaml
-#  - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create namespace argocd
-#  - KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply --server-side -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
   - KUBECONFIG=/etc/kubernetes/admin.conf helm repo add argo https://argoproj.github.io/argo-helm
   - KUBECONFIG=/etc/kubernetes/admin.conf helm install argocd argo/argo-cd --version ${argocd-chart-version} --create-namespace --namespace argocd -f /root/argocd-values.yaml
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create -n argocd -f /etc/k8s-bootstrap/secret-argocd.yaml

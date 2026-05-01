@@ -198,6 +198,12 @@ variable "kubernetes-version" {
   default     = "v1.36"
 }
 
+variable "helm-binary-url" {
+  description = "Where the master server should download the helm binary"
+  type        = string
+  default     = "https://get.helm.sh/helm-v4.1.4-linux-amd64.tar.gz"
+}
+
 variable "argocd-chart-version" {
   description = "The helm chart semantic version number that installs ArgoCD on the cluster at init time."
   type        = string
