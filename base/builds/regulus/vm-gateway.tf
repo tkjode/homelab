@@ -23,7 +23,7 @@ resource "proxmox_virtual_environment_vm" "regulus-gateway" {
 
   disk {
     datastore_id            = "SSD"
-    file_id                 = proxmox_virtual_environment_download_file.ubuntu-cloud-server-iso.id
+    file_id                 = proxmox_download_file.ubuntu-cloud-server-iso.id
     size                    = 10
     interface               = "scsi0"
   }

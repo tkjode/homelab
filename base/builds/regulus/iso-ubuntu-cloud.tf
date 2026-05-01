@@ -1,4 +1,4 @@
-resource "proxmox_virtual_environment_download_file" "ubuntu-cloud-server-iso" {
+resource "proxmox_download_file" "ubuntu-cloud-server-iso" {
   content_type        = "iso"
   datastore_id        = var.iso_datastore
   overwrite_unmanaged = true
