@@ -2,7 +2,7 @@ terraform {
   required_providers {
     proxmox = {
       source    = "bpg/proxmox"
-      version   = "0.99.0"
+      version   = "0.104.0"
     }
   }
 
@@ -195,7 +195,19 @@ variable "proxmox-vmid-offset" {
 variable "kubernetes-version" {
   description = "Value from https://dl.k8s.io/release/stable.txt without the build! (eg. v1.35)"
   type        = string
-  default     = "v1.35"
+  default     = "v1.36"
+}
+
+variable "argocd-helm-version" {
+  description = "The helm chart semantic version number that installs ArgoCD on the cluster at init time."
+  type        = string
+  default     = "9.5.11"
+}
+
+variable "cilium-helm-version" {
+  description = "The helm chart semantic version number that installs Cilium CNI on the cluster at init time"
+  type        = "string"
+  default     = "1.19.3"
 }
 
 variable "letsencrypt-storage" {
