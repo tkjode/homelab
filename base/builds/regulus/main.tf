@@ -206,7 +206,7 @@ variable "argocd-helm-version" {
 
 variable "cilium-helm-version" {
   description = "The helm chart semantic version number that installs Cilium CNI on the cluster at init time"
-  type        = "string"
+  type        = string
   default     = "1.19.3"
 }
 
