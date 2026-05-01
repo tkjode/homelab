@@ -198,13 +198,13 @@ variable "kubernetes-version" {
   default     = "v1.36"
 }
 
-variable "argocd-helm-version" {
+variable "argocd-chart-version" {
   description = "The helm chart semantic version number that installs ArgoCD on the cluster at init time."
   type        = string
   default     = "9.5.11"
 }
 
-variable "cilium-helm-version" {
+variable "cilium-chart-version" {
   description = "The helm chart semantic version number that installs Cilium CNI on the cluster at init time"
   type        = string
   default     = "1.19.3"
