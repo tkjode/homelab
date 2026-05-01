@@ -30,7 +30,7 @@ resource "proxmox_virtual_environment_vm" "bastion" {
   }
 
   network_device {
-    bridge              = proxmox_virtual_environment_network_linux_bridge.proxmox-cluster-bridge.name
+    bridge              = proxmox_network_linux_bridge.proxmox-cluster-bridge.name
   }
 
   serial_device {}
