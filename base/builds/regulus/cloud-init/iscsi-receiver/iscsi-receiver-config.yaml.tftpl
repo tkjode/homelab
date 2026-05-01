@@ -88,4 +88,5 @@ runcmd:
 %{ for instance in range( 0, 6 ) ~}
   - targetcli /iscsi/iqn.2026-02.com.phalnet.regulus:pv00/tpg1/acls create iqn.2026-02.com.phalnet.regulus:worker-${instance}
 %{ endfor ~}
+  - targetcli saveconfig
   - echo "done" > /tmp/cloud-config.done
