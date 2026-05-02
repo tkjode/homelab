@@ -7,23 +7,22 @@ ssh_keys:
   ed25519_private: |
     ${indent(4, host-ssh-key-ed25519.private_key_openssh)}
 resize_root_fs: false
+device_aliases: { appdisk: /dev/sdb }
 disk_setup:
-  /dev/sdb:
+  appdisk:
     table_type: gpt
     layout:
-    - [50, 82]
-    - [50, 82]
+    - [50, 83]
+    - [50, 83]
     overwrite: false
 fs_setup:
   - label: docker
     filesystem: ext4
-    device: /dev/sdb
-    partition: sdb1
+    device: appdisk.1
     overwrite: false
   - label: app
     filesystem: ext4
-    device: /dev/sdb
-    partition: sdb2
+    device: appdisk.2
     overwrite: false
 mounts:
 - [ "LABEL=docker", "/var/lib/docker", "ext4", "defaults,discard", "0", "0" ]
