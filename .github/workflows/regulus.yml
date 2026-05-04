@@ -32,32 +32,10 @@ on:
       - 'base/builds/regulus/**'
       - '.github/workflows/regulus.yml'
 jobs:
-  drift-check:
-    name: "Drift Detection"
-    continue-on-error: true
-    runs-on: self-hosted
-    container:
-      image: hashicorp/terraform:latest
-      volumes:
-        - regulustf:/tf
-    steps:
-      - name: "Checkout Project"
-        uses: actions/checkout@v6
-        with:
-          sparse-checkout: |
-            ./.github
-            base/builds/regulus
-      - run: terraform init
-        shell: sh
-        working-directory: base/builds/regulus
-      - run: terraform plan -detailed-exitcode -compact-warnings -parallelism=1
-        shell: sh
-        working-directory: base/builds/regulus
   regulus-build:
     name: "Build: Regulus"
     if: contains(github.ref, 'build/regulus')
     runs-on: self-hosted
-    needs: ['drift-check']
     container:
       image: hashicorp/terraform:latest
       volumes:
