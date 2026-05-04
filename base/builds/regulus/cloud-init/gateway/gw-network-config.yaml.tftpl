@@ -21,6 +21,7 @@ network:
           metric: 100
     id1:
       set-name: eth1
+      optional: true
       match:
         macaddress: '${gw-net-cluster.mac}'
       addresses:
