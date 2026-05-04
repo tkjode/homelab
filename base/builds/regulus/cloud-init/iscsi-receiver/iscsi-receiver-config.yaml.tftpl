@@ -7,7 +7,7 @@ apt:
     - arches: [default]
       uri: https://mirror.csclub.uwaterloo.ca/ubuntu/
 bootcmd:
-  - echo f > /sys/class/net/eth0/queues/rx-0/rps_cpus
+  - echo f > /sys/class/net/ens18/queues/rx-0/rps_cpus
   - sysctl net.core.default_qdisc=fq
   - sysctl net.ipv4.tcp_congestion_control=bbr
   - sysctl net.ipv4.tcp_mtu_probing=1
@@ -21,8 +21,8 @@ bootcmd:
   - sysctl net.ipv4.tcp_sack=1
   - sysctl net.ipv4.tcp_ecn=1
   - sysctl net.core.rps_sock_flow_entries=32768
-  - ip link set dev "eth0" txqueuelen 2000
-  - ethtool -K "eth0" tso on gso on gro on
+  - ip link set dev "ens18" txqueuelen 2000
+  - ethtool -K "ens18" tso on gso on gro on
 write_files:
   - path: /etc/sysctl.d/99-ipv.conf
     content: |
