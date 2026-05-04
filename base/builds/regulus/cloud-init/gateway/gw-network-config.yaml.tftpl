@@ -26,6 +26,10 @@ network:
         macaddress: '${gw-net-cluster.mac}'
       addresses:
         - ${join("/", [ cidrhost(join("/", [gw-net-cluster.network, gw-net-cluster.mask]), gw-net-cluster.cidr), gw-net-cluster.mask ])}
+      nameservers:
+        addresses:
+          - ${cidrhost(join("/", [ gw-net-cluster.network, gw-net-cluster.mask ]), gw-net-cluster.cidr)}
+        search: ["regulus.phalnet.com"]
       routes:
         - to: ${join("/", [ gw-net-home.network, gw-net-home.mask ])}
           via: ${cidrhost(join("/", [ gw-net-home.network, gw-net-home.mask ]), gw-net-home.cidr)}
