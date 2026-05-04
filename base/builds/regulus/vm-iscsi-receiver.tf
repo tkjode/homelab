@@ -46,7 +46,7 @@ resource "proxmox_virtual_environment_vm" "iscsi-receiver" {
   # Boot Disk
   disk {
     datastore_id            = "SSD"
-    file_id                 = proxmox_virtual_environment_download_file.ubuntu-cloud-server-iso.id
+    file_id                 = proxmox_download_file.ubuntu-cloud-server-iso.id
     size                    = 25
     interface               = "scsi0"
   }
@@ -67,7 +67,7 @@ resource "proxmox_virtual_environment_vm" "iscsi-receiver" {
   serial_device { }
 
   network_device {
-    bridge                  = proxmox_virtual_environment_network_linux_bridge.proxmox-cluster-bridge.name
+    bridge                  = proxmox_network_linux_bridge.proxmox-cluster-bridge.name
   }
 
   operating_system {
