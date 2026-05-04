@@ -1,6 +1,11 @@
 #cloud-config
 hostname: ${hostname}
 timezone: America/Toronto
+apt:
+  preserve_sources_list: false
+  primary:
+    - arches: [default]
+      uri: https://mirror.csclub.uwaterloo.ca/ubuntu/
 bootcmd:
   - echo f > /sys/class/net/eth0/queues/rx-0/rps_cpus
   - sysctl net.core.default_qdisc=fq
