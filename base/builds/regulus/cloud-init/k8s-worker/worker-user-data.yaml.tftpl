@@ -4,6 +4,11 @@ timezone: America/Toronto
 bootcmd:
   - modprobe br_netfilter
   - sysctl -w net.ipv4.ip_forward=1
+apt:
+  preserve_sources_list: false
+  primary:
+    - arches: [default]
+      uri: https://mirror.csclub.uwaterloo.ca/ubuntu/
 write_files:
   - path: /etc/iscsi/initiatorname.iscsi
     content: |

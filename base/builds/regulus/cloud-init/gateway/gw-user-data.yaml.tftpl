@@ -1,9 +1,14 @@
 #cloud-config
 hostname: ${gw-hostname}
 timezone: America/Toronto
+apt:
+  preserve_sources_list: false
+  primary:
+    - arches: [default]
+      uri: https://mirror.csclub.uwaterloo.ca/ubuntu/
 bootcmd:
   - sysctl -w net.ipv4.ip_forward=1
-  - echo f > /sys/class/net/eth0/queues/rx-0/rps_cpus
+  - echo f > /sys/class/net/ens18/queues/rx-0/rps_cpus
   - echo f > /sys/class/net/eth1/queues/rx-0/rps_cpus
   - sysctl net.core.default_qdisc=fq
   - sysctl net.ipv4.tcp_congestion_control=bbr
@@ -18,9 +23,9 @@ bootcmd:
   - sysctl net.ipv4.tcp_sack=1
   - sysctl net.ipv4.tcp_ecn=1
   - sysctl net.core.rps_sock_flow_entries=32768
-  - ip link set dev "eth0" txqueuelen 2000
+  - ip link set dev "ens18" txqueuelen 2000
   - ip link set dev "eth1" txqueuelen 2000
-  - ethtool -K "eth0" tso on gso on gro on
+  - ethtool -K "ens18" tso on gso on gro on
   - ethtool -K "eth1" tso on gso on gro on
 write_files:
   - path: /etc/sysctl.d/99-ipv.conf
@@ -87,8 +92,6 @@ write_files:
         auth-nxdomain no;
         minimal-responses yes;
       };
-
-      include "/etc/bind/named.conf.default-zones";
   - path: /etc/bind/named.conf.local
     content: |
       zone "regulus.phalnet.com" IN {
@@ -243,9 +246,9 @@ packages:
 runcmd:
   - systemctl enable --now irqbalance
   - systemctl enable --now bind9
-  - iptables -A FORWARD -i eth1 -o eth0 -j ACCEPT
-  - iptables -A FORWARD -i eth0 -o eth1 -m state --state ESTABLISHED,RELATED -j ACCEPT
-  - iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+  - iptables -A FORWARD -i eth1 -o ens18 -j ACCEPT
+  - iptables -A FORWARD -i ens18 -o eth1 -m state --state ESTABLISHED,RELATED -j ACCEPT
+  - iptables -t nat -A POSTROUTING -o ens18 -j MASQUERADE
   - iptables-save > /etc/iptables/rules.v4
   - snap install --classic certbot
   - snap set certbot trust-plugin-with-root=ok

@@ -4,7 +4,7 @@ network:
   version: 2
   ethernets:
     id0:
-      set-name: eth0
+      set-name: ens18
       match:
         macaddress: ${gw-net-home.mac}
       addresses:
@@ -21,10 +21,15 @@ network:
           metric: 100
     id1:
       set-name: eth1
+      optional: true
       match:
         macaddress: '${gw-net-cluster.mac}'
       addresses:
         - ${join("/", [ cidrhost(join("/", [gw-net-cluster.network, gw-net-cluster.mask]), gw-net-cluster.cidr), gw-net-cluster.mask ])}
+      nameservers:
+        addresses:
+          - ${cidrhost(join("/", [ gw-net-cluster.network, gw-net-cluster.mask ]), gw-net-cluster.cidr)}
+        search: ["regulus.phalnet.com"]
       routes:
         - to: ${join("/", [ gw-net-home.network, gw-net-home.mask ])}
           via: ${cidrhost(join("/", [ gw-net-home.network, gw-net-home.mask ]), gw-net-home.cidr)}

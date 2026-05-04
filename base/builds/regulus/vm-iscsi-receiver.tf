@@ -39,8 +39,8 @@ resource "proxmox_virtual_environment_vm" "iscsi-receiver" {
   }
 
   memory {
-    dedicated               = 2048
-    floating                = 2048
+    dedicated               = 32768
+    floating                = 32768
   }
 
   # Boot Disk
