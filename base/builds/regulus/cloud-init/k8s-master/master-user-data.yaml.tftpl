@@ -152,7 +152,6 @@ write_files:
           - key: "node-role.kubernetes.io/control-plane"
             operator: "Exists"
             effect: "NoSchedule"
-            tolerationSeconds: 1800
       configs:
         secret:
           argocdServerAdminPassword: ${argocd-admin-bcrypt-pwd}
