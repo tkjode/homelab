@@ -148,6 +148,11 @@ write_files:
     content: |
       global:
         domain: argocd.apps.phalnet.com
+        tolerations:
+          - key: "node-role.kubernetes.io/control-plane"
+            operator: "Exists"
+            effect: "NoSchedule"
+            tolerationSeconds: 1800
       configs:
         secret:
           argocdServerAdminPassword: ${argocd-admin-bcrypt-pwd}
@@ -214,6 +219,11 @@ runcmd:
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create namespace cert-manager
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create secret tls labs-ca -n cert-manager --cert=/etc/k8s-bootstrap/labs-ca.crt --key=/etc/k8s-bootstrap/labs-ca.key
   - KUBECONFIG=/etc/kubernetes/admin.conf helm install cilium oci://quay.io/cilium/charts/cilium --version ${cilium-chart-version} --namespace kube-system -f /root/cilium-values.yaml
+  - echo Waiting on Cilium Operator to become Ready...
+  - KUBECONFIG=/etc/kubernetes/admin.conf kubectl wait --for=condition=Available -n kube-system deployment/cilium-operator
+  - echo Waiting up to 10 minutes for Cilium Daemonset to become fully rolled out...
+  - KUBECONFIG=/etc/kubernetes/admin.conf kubectl rollout status -n kube-system daemonset/cilium --timeout=600s
+  - echo Booting up ArgoCD
   - KUBECONFIG=/etc/kubernetes/admin.conf helm repo add argo https://argoproj.github.io/argo-helm
   - KUBECONFIG=/etc/kubernetes/admin.conf helm install argocd argo/argo-cd --version ${argocd-chart-version} --create-namespace --namespace argocd -f /root/argocd-values.yaml
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create -n argocd -f /etc/k8s-bootstrap/secret-argocd.yaml
