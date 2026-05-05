@@ -1,2 +1,9 @@
 ingress:
   enabled: false
+rbac:
+  portForward: true
+  traffic: true
+  metrics: true
+  viewRBAC: true
+  crdGroups:
+    all: true
