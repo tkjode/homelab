@@ -12,6 +12,11 @@ apt:
 write_files:
   - path: /root/cilium-values.yaml
     content: |
+      hubble:
+        relay:
+          enabled: true
+        ui:
+          enabled: true
       ipam:
         operator:
           clusterPoolIPv4PodCIDRList:
