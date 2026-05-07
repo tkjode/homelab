@@ -1,3 +1,5 @@
+image:
+  tag: 1.5.10
 ingress:
   enabled: false
 rbac:
