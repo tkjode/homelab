@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: nzbget
-        image: lscr.io/linuxserver/nzbget:latest
+        image: lscr.io/linuxserver/nzbget:amd64-version-v26.1
         imagePullPolicy: Always
         env:
         - name: S6_READ_ONLY_ROOT
