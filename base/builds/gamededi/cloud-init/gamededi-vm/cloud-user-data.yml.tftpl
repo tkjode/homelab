@@ -27,8 +27,14 @@ fs_setup:
 mounts:
 - [ "LABEL=docker", "/var/lib/docker", "ext4", "defaults,discard", "0", "0" ]
 - [ "LABEL=app", "/app", "ext4", "defaults,discard", "0", "0" ]
+groups:
+  - shroud
 users:
   - default
+  - name: shroud
+    primary_group: shroud
+    uid: 10000
+    no_create_home: true
   - name: tkjode
     groups:
       - sudo
@@ -47,6 +53,7 @@ packages:
   - net-tools
   - curl
 runcmd:
+  - groupmod -g 10000 shroud
   - mount -a
   - systemctl enable --now qemu-guest-agent
   - echo "done" > /tmp/cloud-config.done
