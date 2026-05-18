@@ -65,6 +65,7 @@ resource "proxmox_virtual_environment_vm" "gamededi" {
 
   network_device {
     bridge                  = "vmbr0"
+    mac_address             = "bc:24:11:f2:6f:08"
   }
 
   operating_system {
