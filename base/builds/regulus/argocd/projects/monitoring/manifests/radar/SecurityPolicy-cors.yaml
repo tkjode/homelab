@@ -1,0 +1,14 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: radar-cors
+spec:
+  targetRefs:
+  - group: gateway.networkings.k8s.io
+    kind: HTTPRoute
+    name: radar
+  cors:
+    allowOrigins:
+    - "http://*"
+    - "https://*"
+    allowCredentials: true

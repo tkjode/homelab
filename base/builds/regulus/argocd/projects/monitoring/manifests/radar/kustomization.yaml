@@ -5,3 +5,4 @@ metadata:
   namespace: radar
 resources:
   - HTTPRoute-radar.yaml
+  - SecurityPolicy-cors.yaml
