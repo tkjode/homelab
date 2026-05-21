@@ -4,7 +4,7 @@ metadata:
   name: radar-cors
 spec:
   targetRefs:
-  - group: gateway.networkings.k8s.io
+  - group: gateway.networking.k8s.io
     kind: HTTPRoute
     name: radar
   cors:
