@@ -26,6 +26,7 @@ spec:
         allowCredentials: true
         allowMethods:
         - "*"
+        maxAge: 3600
     matches:
     - path:
         type: PathPrefix
