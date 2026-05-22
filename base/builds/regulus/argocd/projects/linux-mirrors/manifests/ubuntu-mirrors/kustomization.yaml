@@ -1,0 +1,4 @@
+resources:
+- cronjob-questing.yaml
+- cronjob-resolute.yaml
+- pvc-ubuntu-base.yaml

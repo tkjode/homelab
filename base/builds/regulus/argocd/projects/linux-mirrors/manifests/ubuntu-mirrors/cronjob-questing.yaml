@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: questing-sync
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 3
+  successfulJobsHistoryLimit: 3
+  schedule: "00 */6 * * *"
+  timeZone: "America/New_York"
+  jobTemplate:
+    metadata:
+      generateName: "questing-"
+      labels:
+        distribution: ubuntu
+        release: questing
+      annotations:
+        releaseName: "Questing Quokka"
+    spec:
