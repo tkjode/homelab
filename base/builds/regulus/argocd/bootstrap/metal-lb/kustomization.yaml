@@ -3,7 +3,7 @@ kind: Kustomization
 metadata:
   name: metallb
 resources:
-  - https://raw.githubusercontent.com/metallb/metallb/v0.16.0/config/manifests/metallb-native-prometheus.yaml
+  - https://raw.githubusercontent.com/metallb/metallb/v0.16.0/config/manifests/metallb-native.yaml
   - IPAddressPool.gateway-pool.yaml
   - IPAddressPool.plex-direct.yaml
   - IPAddressPool.rtmp-relay.yaml
