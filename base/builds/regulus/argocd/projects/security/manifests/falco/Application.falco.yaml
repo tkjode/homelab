@@ -11,7 +11,7 @@ spec:
     path: base/builds/regulus/argocd/projects/security/manifests/falco
   - chart: falco
     repoURL: https://falcosecurity.github.io/charts
-    targetRevision: 8.0.2
+    targetRevision: 9.0.0
     helm:
       valueFiles:
       - $values/base/builds/regulus/argocd/projects/security/manifests/falco/values.yaml
