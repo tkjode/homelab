@@ -8,7 +8,7 @@ spec:
   sources:
   - chart: csi-driver-nfs
     repoURL: https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts
-    targetRevision: v4.13.1
+    targetRevision: v4.13.2
     helm:
       valueFiles:
       - $values/base/builds/regulus/argocd/bootstrap/csi-nfs-driver/values.yaml
