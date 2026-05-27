@@ -165,6 +165,7 @@ write_files:
       controller:
         replicas: 1
       server:
+        name: ${cluster-name}
         autoscaling:
           enabled: true
           minReplicas: 2
