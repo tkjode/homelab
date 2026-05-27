@@ -11,6 +11,9 @@ spec:
   duration: 87600h
   renewBefore: 32700h
   usages:
+    #- server auth
+    #- client auth
+    - key encipherment
     - data encipherment
   subject:
     organizations: ["ArgoCD"]
