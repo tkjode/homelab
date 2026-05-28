@@ -16,5 +16,4 @@ spec:
       kind: Backend
       name: argocd-tls
       namespace: argocd
-      port: 443
       weight: 1
