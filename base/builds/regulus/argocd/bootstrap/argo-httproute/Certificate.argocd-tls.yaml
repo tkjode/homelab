@@ -14,7 +14,7 @@ spec:
     #- server auth
     #- client auth
     - key encipherment
-    - data encipherment
+    - digital signature
   subject:
     organizations: ["ArgoCD"]
   commonName: argocd-server
