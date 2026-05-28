@@ -12,7 +12,7 @@ spec:
     name: cluster-ingress
   rules:
   - backendRefs:
-    - group: gateway.envoyproxy.io/v1alpha1
+    - group: gateway.envoyproxy.io
       kind: Backend
       name: argocd-tls
       namespace: argocd
