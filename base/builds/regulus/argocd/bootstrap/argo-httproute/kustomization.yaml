@@ -3,7 +3,7 @@ kind: Kustomization
 metadata:
   name: argocd-httproute
 resources:
-  - HTTPRoute.argocd.yaml
-  - Backend.argocd-tls.yaml
-  - BackendTLSPolicy.argocd-tls.yaml
+#  - HTTPRoute.argocd.yaml
+#  - Backend.argocd-tls.yaml
+#  - BackendTLSPolicy.argocd-tls.yaml
   - Certificate.argocd-tls.yaml
