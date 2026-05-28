@@ -15,7 +15,6 @@ spec:
   - repoURL: ssh://git@github.com/tkjode/homelab
     targetRevision: HEAD
     ref: values
-  - repo: 
   destination:
     namespace: envoy-gateway-system
     server: https://kubernetes.default.svc
