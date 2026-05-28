@@ -12,9 +12,9 @@ spec:
     name: cluster-ingress
   rules:
   - backendRefs:
-    - group: ''
-      kind: Service
-      name: argocd-server
+    - group: gateway.envoyproxy.io/v1alpha1
+      kind: Backend
+      name: argocd-tls
       namespace: argocd
       port: 443
       weight: 1

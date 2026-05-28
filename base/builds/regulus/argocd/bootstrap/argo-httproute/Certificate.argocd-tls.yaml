@@ -11,11 +11,10 @@ spec:
   duration: 87600h
   renewBefore: 32700h
   usages:
-    #- server auth
-    #- client auth
-    #- key encipherment
-    #- digital signature
-    - any
+    - server auth
+    - client auth
+    - key encipherment
+    - digital signature
   subject:
     organizations: ["ArgoCD"]
   commonName: argocd-server
