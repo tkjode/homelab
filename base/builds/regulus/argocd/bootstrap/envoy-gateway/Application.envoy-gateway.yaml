@@ -8,7 +8,7 @@ spec:
   sources:
   - chart: gateway-helm
     repoURL: docker.io/envoyproxy
-    targetRevision: v1.8.0
+    targetRevision: v0.0.0-latest
     helm:
       valueFiles:
       - $values/base/builds/regulus/argocd/bootstrap/envoy-gateway/values.yaml
