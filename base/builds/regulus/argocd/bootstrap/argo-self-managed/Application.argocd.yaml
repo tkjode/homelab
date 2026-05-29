@@ -8,7 +8,7 @@ spec:
   sources:
   - chart: argocd
     repoURL: argoproj.github.io/argo-helm
-    targetRevision: v9.5.17
+    targetRevision: 9.5.17
     helm:
       valueFiles:
       - $values/base/builds/regulus/argocd/bootstrap/argo-self-managed/values.yaml
