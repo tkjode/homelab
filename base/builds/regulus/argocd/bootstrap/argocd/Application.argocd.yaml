@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argo-self-managed
+  name: argocd
   namespace: argocd
 spec:
   project: trusted-platform
@@ -12,7 +12,7 @@ spec:
     helm:
       releaseName: ''
       valueFiles:
-      - $values/base/builds/regulus/argocd/bootstrap/argo-self-managed/values.yaml
+      - $values/base/builds/regulus/argocd/bootstrap/argocd/values.yaml
   - repoURL: ssh://git@github.com/tkjode/homelab
     targetRevision: HEAD
     ref: values

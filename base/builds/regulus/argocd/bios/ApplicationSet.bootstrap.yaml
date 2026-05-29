@@ -15,7 +15,7 @@ spec:
         project: networking
       - folder: metal-lb
         project: networking
-      - folder: argo-self-managed
+      - folder: argocd
         project: trusted-platform
       - folder: cert-manager
         project: trusted-platform
