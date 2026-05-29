@@ -7,6 +7,9 @@ global:
 certificate:
   enabled: true
 configs:
+  params:
+    server.log.level: debug
+    server.log.format: json
   secret:
     argocdServerAdminPassword: $2a$12$CveqnaGjbvpI/e4/vHbRXOKlCg0SeZNiMSEbEC7yVUhx4jFOBKxnW
 redis-ha:
