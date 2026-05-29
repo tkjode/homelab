@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argo-self-managed
+  namespace: argocd
+spec:
+  project: trusted-platform
+  sources:
+  - chart: argocd
+    repoURL: argoproj.github.io/argo-helm
+    targetRevision: v9.5.17
+    helm:
+      valueFiles:
+      - $values/base/builds/regulus/argocd/bootstrap/argo-self-managed/values.yaml
+  - repoURL: ssh://git@github.com/tkjode/homelab
+    targetRevision: HEAD
+    ref: values
+  destination:
+    namespace: envoy-gateway-system
+    server: https://kubernetes.default.svc
+  revisionHistoryLimit: 0
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+    automated:
+      prune: false
+      selfHeal: false

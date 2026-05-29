@@ -1,0 +1,44 @@
+global:
+  domain: argocd.apps.phalnet.com
+  tolerations:
+    - key: "node-role.kubernetes.io/control-plane"
+      operator: "Exists"
+      effect: "NoSchedule"
+certificate:
+  enabled: true
+configs:
+  secret:
+    argocdServerAdminPassword: $2a$12$CveqnaGjbvpI/e4/vHbRXOKlCg0SeZNiMSEbEC7yVUhx4jFOBKxnW
+redis-ha:
+  enabled: true
+controller:
+  replicas: 1
+server:
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+  httproute:
+    enabled: true
+    hostnames: ["argocd.apps.phalnet.com"]
+    parentRefs:
+      - name: cluster-ingress
+        namespace: default
+  backendTLSPolicy:
+    enabled: true
+    targetRefs:
+      - group: ''
+        kind: Service
+        name: argocd-server
+        sectionName: https
+    validation:
+      hostname: argocd-server.argocd.svc.cluster.local
+      caCertificateRefs:
+        - name: argocd-server-tls
+          group: ''
+          kind: Secret
+repoServer:
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+applicationSet:
+  replicas: 2

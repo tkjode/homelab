@@ -15,9 +15,9 @@ spec:
         project: networking
       - folder: metal-lb
         project: networking
-      - folder: argo-httproute   # Bit of a test, should be packaged with argocd but let's try it
-        project: networking
-      - folder: cert-manager     # Needs configuration after static apply
+      - folder: argo-self-managed
+        project: trusted-platform
+      - folder: cert-manager
         project: trusted-platform
       - folder: csi-nfs-driver
         project: storage
