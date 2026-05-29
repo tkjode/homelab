@@ -6,7 +6,7 @@ metadata:
 spec:
   project: trusted-platform
   sources:
-  - chart: argocd
+  - chart: argo-cd
     repoURL: oci://ghcr.io/argoproj/argo-helm
     targetRevision: 9.5.17
     helm:
