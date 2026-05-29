@@ -10,6 +10,7 @@ spec:
     repoURL: https://argoproj.github.io/argo-helm
     targetRevision: 9.5.17
     helm:
+      releaseName: ''
       valueFiles:
       - $values/base/builds/regulus/argocd/bootstrap/argo-self-managed/values.yaml
   - repoURL: ssh://git@github.com/tkjode/homelab
