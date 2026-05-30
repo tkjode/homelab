@@ -152,11 +152,16 @@ write_files:
     permissions: '0600'
     content: |
       global:
-        domain: argocd.apps.phalnet.com
+        domain: argocd.${cluster-public-domain}
+        logging:
+          level: debug
+          format: json
         tolerations:
           - key: "node-role.kubernetes.io/control-plane"
             operator: "Exists"
             effect: "NoSchedule"
+      certificate:
+        enabled: true
       configs:
         secret:
           argocdServerAdminPassword: ${argocd-admin-bcrypt-pwd}
@@ -165,10 +170,30 @@ write_files:
       controller:
         replicas: 1
       server:
-        name: ${cluster-name}
         autoscaling:
           enabled: true
           minReplicas: 2
+        httproute:
+          enabled: true
+          hostnames: ["argocd.${cluster-public-domain}"]
+          parentRefs:
+            - group: gateway.networking.k8s.io
+              kind: Gateway
+              name: cluster-ingress
+              namespace: default
+        backendTLSPolicy:
+          enabled: true
+          targetRefs:
+            - group: ''
+              kind: Service
+              name: argocd-server
+              sectionName: https
+          validation:
+            hostname: argocd-server.argocd.svc.cluster.local
+            caCertificateRefs:
+              - name: argocd-server-tls
+                group: ''
+                kind: Secret
       repoServer:
         autoscaling:
           enabled: true
@@ -230,7 +255,9 @@ runcmd:
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl rollout status -n kube-system daemonset/cilium --timeout=600s
   - echo Booting up ArgoCD
   - KUBECONFIG=/etc/kubernetes/admin.conf helm repo add argo https://argoproj.github.io/argo-helm
-  - KUBECONFIG=/etc/kubernetes/admin.conf helm install argocd argo/argo-cd --version ${argocd-chart-version} --create-namespace --namespace argocd -f /root/argocd-values.yaml
+  #- KUBECONFIG=/etc/kubernetes/admin.conf helm install argocd argo/argo-cd --version ${argocd-chart-version} --create-namespace --namespace argocd -f /root/argocd-values.yaml
+  - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create namespace argocd
+  - KUBECONFIG=/etc/kubernetes/admin.conf helm template argocd argo/argo-cd --version 9.5.17 --create-namespace --namespace argocd --release-name -f /root/argocd-values.yaml | kubectl create -f -
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create -n argocd -f /etc/k8s-bootstrap/secret-argocd.yaml
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create -n argocd -f /etc/k8s-bootstrap/Application.bootstrap.yaml
 %{ else }

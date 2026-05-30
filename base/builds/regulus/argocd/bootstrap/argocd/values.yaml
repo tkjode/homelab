@@ -24,7 +24,9 @@ server:
     enabled: true
     hostnames: ["argocd.apps.phalnet.com"]
     parentRefs:
-      - name: cluster-ingress
+      - group: gateway.networking.k8s.io
+        kind: Gateway
+        name: cluster-ingress
         namespace: default
   backendTLSPolicy:
     enabled: true
