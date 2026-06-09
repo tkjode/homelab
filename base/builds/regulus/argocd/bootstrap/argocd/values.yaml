@@ -27,7 +27,7 @@ server:
       cpu: 1000m
       memory: 128Mi
     requests:
-      cpu: 10m
+      cpu: 750m
       memory: 64Mi
   httproute:
     enabled: true
