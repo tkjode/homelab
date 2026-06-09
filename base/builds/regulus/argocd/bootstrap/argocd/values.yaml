@@ -16,6 +16,8 @@ redis-ha:
   enabled: true
 controller:
   replicas: 1
+redisSecretInit:
+  enabled: false
 server:
   autoscaling:
     enabled: true
