@@ -13,7 +13,7 @@ resource "proxmox_download_file" "ubuntu-cloud-server-iso" {
   datastore_id        = var.iso_datastore
   overwrite_unmanaged = true
   overwrite           = false
-  file_name           = "regulus-resolute-server-cloudimg-amd64.img"
+  file_name           = "regulus-stonking-server-cloudimg-amd64.img"
   node_name           = var.proxmox_node
-  url                 = "https://cloud-images.ubuntu.com/resolute/20260421/resolute-server-cloudimg-amd64.img"
+  url                 = "https://cloud-images.ubuntu.com/stonking/20260612/stonking-server-cloudimg-amd64.img"
 }
