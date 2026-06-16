@@ -257,7 +257,7 @@ runcmd:
   - KUBECONFIG=/etc/kubernetes/admin.conf helm repo add argo https://argoproj.github.io/argo-helm
   #- KUBECONFIG=/etc/kubernetes/admin.conf helm install argocd argo/argo-cd --version ${argocd-chart-version} --create-namespace --namespace argocd -f /root/argocd-values.yaml
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create namespace argocd
-  - KUBECONFIG=/etc/kubernetes/admin.conf helm template argocd argo/argo-cd --version 9.5.17 --create-namespace --namespace argocd --release-name -f /root/argocd-values.yaml | kubectl create -f -
+  - KUBECONFIG=/etc/kubernetes/admin.conf helm template argocd argo/argo-cd --version 9.5.17 --create-namespace --namespace argocd --release-name -f /root/argocd-values.yaml | KUBECONFIG=/etc/kubernetes/admin.conf kubectl create -f -
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create -n argocd -f /etc/k8s-bootstrap/secret-argocd.yaml
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl create -n argocd -f /etc/k8s-bootstrap/Application.bootstrap.yaml
 %{ else }
