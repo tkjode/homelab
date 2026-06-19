@@ -12,3 +12,8 @@ secretGenerator:
 - name: webui-secret
   literals:
   - secret-key=f042f23f055bd8fc66a795727a642026af3340f042f9bd72de97063ccb230365
+  - admin-default-password=changeme
+configMapGenerator:
+ - name: open-webui-envvars
+   files:
+    - config/open-webui.env

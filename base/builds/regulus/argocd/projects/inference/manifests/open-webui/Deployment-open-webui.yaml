@@ -25,16 +25,20 @@ spec:
         - containerPort: 8080
           name: http
           protocol: TCP
+        envFrom:
+          - configMapRef:
+              name: open-webui-envvars
         env:
-        - name: OPENAI_BASE_URL
-          value: ""
-        - name: OLLAMA_BASE_URL
-          value: "http://10.0.0.15:11434"
         - name: WEBUI_SECRET_KEY
           valueFrom:
             secretKeyRef:
               name: webui-secret
               key: secret-key
+        - name: WEBUI_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: webui-secret
+              key: admin-default-password
         resources:
           requests:
             memory: "2Gi"
