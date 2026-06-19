@@ -51,6 +51,7 @@ spec:
           name: webui-storage
       volumes:
       - name: webui-storage
-        persistentVolumeClaim:
-          claimName: open-webui
+        emptyDir: {}
+        # persistentVolumeClaim:
+        #   claimName: open-webui
 
