@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: open-webui
+  namespace: open-webui
+resources:
+  - Deployment-open-webui.yaml
+  - Service-open-webui.yaml
+  - HTTPRoute-ai.yaml
+secretGenerator:
+- name: webui-secret
+  literals:
+  - secret-key=f042f23f055bd8fc66a795727a642026af3340f042f9bd72de97063ccb230365
