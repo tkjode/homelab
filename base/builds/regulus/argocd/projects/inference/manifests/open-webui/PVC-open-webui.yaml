@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/name: open-webui
     app.kubernetes.io/instance: open-webui
 spec:
-  storageClassName: nfs-dynamic
+  storageClassName: iscsi
   accessModes:
   - ReadWriteOnce
   resources:

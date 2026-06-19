@@ -8,6 +8,7 @@ resources:
   - Service-open-webui.yaml
   - HTTPRoute-ai.yaml
   - PVC-open-webui.yaml
+  - PV-open-webui.yaml
 secretGenerator:
 - name: webui-secret
   literals:
