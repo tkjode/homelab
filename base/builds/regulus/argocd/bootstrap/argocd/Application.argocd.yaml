@@ -9,8 +9,6 @@ spec:
       kind: Secret
       name: argocd-secret
       namespace: argocd
-      jsonPointers:
-        - /data/admin.passwordMtime
   project: trusted-platform
   sources:
   - chart: argo-cd
