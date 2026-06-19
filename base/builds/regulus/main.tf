@@ -115,6 +115,12 @@ variable "iscsi-ip-offset" {
   default     = 3
 }
 
+variable "proxmox-ceph-offset" {
+  description = "IP address of Proxmox Native to extend Ceph Storage into this cluster"
+  type        = number  
+  default     = 7
+}
+
 variable "worker-ip-offset" {
   description = "IP Addresses Offset to start assigning Worker nodes on private network"
   type        = number
