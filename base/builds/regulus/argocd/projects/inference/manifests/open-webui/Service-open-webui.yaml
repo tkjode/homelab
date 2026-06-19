@@ -4,7 +4,8 @@ metadata:
   name: open-webui
 spec:
   selector:
-    kubernetes.io/app: open-webui
+    app.kubernetes.io/name: open-webui
+    app.kubernetes.io/instance: open-webui
   ports:
   - port: 80
     targetPort: 8080
