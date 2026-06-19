@@ -102,10 +102,10 @@ resource "proxmox_virtual_environment_file" "iscsi-receiver-user-data-cloud-conf
     data        = templatefile(
                     "cloud-init/iscsi-receiver/iscsi-receiver-config.yaml.tftpl",
                     {
-                      hostname = join("-", [var.cluster-name, "iscsi"] ),
+                      hostname              = join("-", [var.cluster-name, "iscsi"] ),
                       host-ssh-key-ed25519  = tls_private_key.iscsi-ssh-ed25519,
-                      luns = var.create-luns,
-                      workers = var.worker-count
+                      luns                  = var.create-luns,
+                      workers               = var.worker-count
                     }
                   )
   }
