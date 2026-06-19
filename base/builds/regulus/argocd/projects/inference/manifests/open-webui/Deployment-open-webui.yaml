@@ -26,7 +26,9 @@ spec:
           name: http
           protocol: TCP
         env:
-        - name: OOLAMA_BASE_URL
+        - name: OPENAI_BASE_URL
+          value: ""
+        - name: OLLAMA_BASE_URL
           value: "http://10.0.0.15:11434"
         - name: WEBUI_SECRET_KEY
           valueFrom:
@@ -40,3 +42,11 @@ spec:
           limits:
             memory: "4Gi"
             cpu: "2000m"
+        volumeMounts:
+        - mountPath: /app/backend/data
+          name: webui-storage
+      volumes:
+      - name: webui-storage
+        persistentVolumeClaim:
+          claimName: open-webui
+
