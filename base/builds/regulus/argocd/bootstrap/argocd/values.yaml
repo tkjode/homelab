@@ -15,12 +15,13 @@ configs:
 redis-ha:
   enabled: true
 controller:
-  replicas: 1
+  replicas: 2
 redisSecretInit:
   enabled: false
 server:
+  replicas: 2
   autoscaling:
-    enabled: true
+    enabled: false
     minReplicas: 2
   resources:
     limits:
@@ -51,13 +52,14 @@ server:
           group: ''
           kind: Secret
 repoServer:
+  replicas: 2
   autoscaling:
-    enabled: true
+    enabled: false
     minReplicas: 2
   resources:
     limits:
       cpu: 1000m
-      memory: 256Mi
+      memory: 512Mi
     requests:
       cpu: 250m
       memory: 128Mi
