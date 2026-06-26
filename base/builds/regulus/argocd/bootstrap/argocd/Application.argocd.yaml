@@ -5,10 +5,12 @@ metadata:
   namespace: argocd
 spec:
   ignoreDifferences:
-    - group: v1
+    - group: ""
       kind: Secret
       name: argocd-secret
       namespace: argocd
+      jsonPointers:
+        - /data 
   project: trusted-platform
   sources:
   - chart: argo-cd
