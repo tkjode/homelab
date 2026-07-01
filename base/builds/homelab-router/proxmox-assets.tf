@@ -106,7 +106,7 @@ resource "proxmox_virtual_environment_vm" "router" {
     datastore_id    = "cloudinit"
 
     user_data_file_id     = proxmox_virtual_environment_file.router-user-data-cloud-config.id
-    network_data_file_id  = proxmox_virtual_environment_file.router-network-data-cloud-config.id
+    network_data_file_id  = proxmox_virtual_environment_file.router-network-cloud-config.id
   }
 }
 
