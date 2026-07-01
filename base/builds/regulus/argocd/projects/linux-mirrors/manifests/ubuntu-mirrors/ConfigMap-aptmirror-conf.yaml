@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aptmirror-conf
+data:
+  ubuntu-repos.conf: |-
+    set base_path /out
+    set mirror_path $base_path/mirror
+    set skel_path $base_path/skel
+    set var_path $base_path/var
+    set _tilde 0
+    set nthreads 4
+    set limit_rate 4096k
+
+    deb https://mirror.csclub.uwaterloo.ca/ubuntu resolute main restricted universe multiverse
+    deb https://mirror.csclub.uwaterloo.ca/ubuntu resolute-updates main restricted universe multiverse
+    deb https://mirror.csclub.uwaterloo.ca/ubuntu resolute-backports main restricted universe multiverse
+    deb https://mirror.csclub.uwaterloo.ca/ubuntu resolute-security main restricted universe multiverse
+    deb https://mirror.csclub.uwaterloo.ca/ubuntu questing main restricted universe multiverse
+    deb https://mirror.csclub.uwaterloo.ca/ubuntu questing-updates main restricted universe multiverse
+    deb https://mirror.csclub.uwaterloo.ca/ubuntu questing-backports main restricted universe multiverse
+    deb https://mirror.csclub.uwaterloo.ca/ubuntu questing-security main restricted universe multiverse
+    deb https://mirror.csclub.uwaterloo.ca/ubuntu stonking main restricted universe multiverse
+    deb https://mirror.csclub.uwaterloo.ca/ubuntu stonking-updates main restricted universe multiverse
+    deb https://mirror.csclub.uwaterloo.ca/ubuntu stonking-backports main restricted universe multiverse
+    deb https://mirror.csclub.uwaterloo.ca/ubuntu stonking-security main restricted universe multiverse

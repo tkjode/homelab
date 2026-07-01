@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-ubuntu
+spec:
+  replicas: 3
+  strategy:
+    type: Rolling
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: nginx-ubuntu
+      app.kubernetes.io/name: nginx-ubuntu
+  template:
+    spec:
+      containers:
+      - name: nginx
+        image: nginx/nginx
+        imagePullPolicy: Always
+        env:
+        - name: PUID
+          value: "1000"
+        - name: GUID
+          value: "1000"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 1000m
+            memory: 2Gi
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /web
+          name: web-content
+      volumes:
+      - name: web-contnet
+        persistentVolumeClaim:
+          claimName: ubuntu-mirror-root
+
+
+

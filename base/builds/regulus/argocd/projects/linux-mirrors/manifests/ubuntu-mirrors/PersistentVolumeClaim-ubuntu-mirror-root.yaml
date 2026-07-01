@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ubuntu-mirror-root
+spec:
+  storageClassName: nfs-bind
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 128Gi
+  volumeMode: Filesystem
+  volumeName: ubuntu-mirror-root
