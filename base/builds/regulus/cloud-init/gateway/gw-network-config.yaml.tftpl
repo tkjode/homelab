@@ -5,6 +5,7 @@ network:
   ethernets:
     id0:
       set-name: ens18
+      optional: true
       match:
         macaddress: ${gw-net-home.mac}
       addresses:
