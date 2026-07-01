@@ -4,7 +4,7 @@ locals {
 }
 
 resource "proxmox_network_linux_bridge" "test-bridge" {
-  node_name   = var.node_name
+  node_name   = var.proxmox_node
   name        = local.test_bridge_id
   autostart   = true
   vlan_aware  = false
@@ -37,8 +37,6 @@ resource "proxmox_virtual_environment_file" "router-user-data-cloud-config" {
                     "cloud-init/router/user-data.yaml",
                     {
                       host-ssh-key-ed25519 = tls_private_key.router-ssh-key.private_key_pem
-                      public_mac_addr      = var.router_mac_public
-                      private_mac_addr     = var.router_mac_private
                     }
                   )
   }
@@ -54,6 +52,8 @@ resource "proxmox_virtual_environment_file" "router-network-cloud-config" {
                     "cloud-init/router/network-config.yaml",
                     {
                       host-ssh-key-ed25519 = tls_private_key.router-ssh-key.private_key_pem
+                      public_mac_addr      = var.router_mac_public
+                      private_mac_addr     = var.router_mac_private
                     }
                   )
   }
