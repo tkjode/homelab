@@ -36,7 +36,7 @@ resource "proxmox_virtual_environment_file" "router-user-data-cloud-config" {
     data        = templatefile(
                     "cloud-init/router/user-data.yaml",
                     {
-                      host-ssh-key-ed25519 = tls_private_key.router-ssh-key.private_key_pem
+                      host-ssh-key-ed25519 = tls_private_key.router-ssh-key
                     }
                   )
   }
@@ -51,7 +51,7 @@ resource "proxmox_virtual_environment_file" "router-network-cloud-config" {
     data        = templatefile(
                     "cloud-init/router/network-config.yaml",
                     {
-                      host-ssh-key-ed25519 = tls_private_key.router-ssh-key.private_key_pem
+                      host-ssh-key-ed25519 = tls_private_key.router-ssh-key
                       public_mac_addr      = var.router_mac_public
                       private_mac_addr     = var.router_mac_private
                     }
