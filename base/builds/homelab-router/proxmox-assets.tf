@@ -60,6 +60,7 @@ resource "proxmox_virtual_environment_file" "router-network-cloud-config" {
 
 resource "proxmox_virtual_environment_vm" "router" {
   name              = "homelab-router"
+  vm_id             = 500
   description       = "Test Cloud-Init Router"
   tags              = ["cloud-init", "testing"]
   node_name         = var.proxmox_node
@@ -132,9 +133,11 @@ resource "proxmox_virtual_environment_file" "test-user-data-cloud-config" {
 }
 
 resource "proxmox_virtual_environment_vm" "test-vm" {
-  name              = "homelab-router"
+  name              = "private-net-test"
   description       = "Test Cloud-Init Router"
+  vm_id             = 501
   tags              = ["cloud-init", "testing"]
+  depends_on        = [ proxmox_virtual_environment_vm.router ]
   node_name         = var.proxmox_node
   stop_on_destroy   = true
 
@@ -162,13 +165,7 @@ resource "proxmox_virtual_environment_vm" "test-vm" {
   serial_device { }
 
   network_device {
-    bridge          = local.home_bridge_id
-    mac_address     = var.router_mac_public
-  }
-
-  network_device {
     bridge          = local.test_bridge_id
-    mac_address     = var.router_mac_private
   }
 
   operating_system {
