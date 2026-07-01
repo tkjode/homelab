@@ -68,6 +68,9 @@ resource "proxmox_virtual_environment_vm" "router" {
 
   agent {
     enabled         = true
+    wait_for_ip {
+      disabled      = true
+    }
   }
 
   cpu {
@@ -143,6 +146,9 @@ resource "proxmox_virtual_environment_vm" "test-vm" {
 
   agent {
     enabled         = true
+    wait_for_ip {
+      disabled      = true
+    }
   }
 
   cpu {

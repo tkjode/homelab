@@ -4,6 +4,7 @@ network:
   ethernets:
     id0:
       set-name: ens18
+      optional: true
       match:
         macaddress: ${public_mac_addr}
       addresses:
