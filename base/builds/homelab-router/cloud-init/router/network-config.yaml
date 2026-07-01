@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/canonical/cloud-init/refs/heads/main/cloudinit/config/schemas/schema-network-config-v2.json
+network:
+  version: 2
+  ethernets:
+    id0:
+      set-name: ens18
+      match:
+        macaddress: ${public_mac_addr}
+      addresses:
+        - 10.0.0.16/16
+      nameservers:
+        addresses: ["1.1.1.1", "4.4.4.4"]
+      routes:
+        - to: default
+          via: 10.0.0.1
+          metric: 100
+        - to: 192.168.128.0/24
+          via: 192.168.128.1
+          metric: 100
+    id1:
+      set-name: eth1
+      optional: true
+      match:
+        macaddress: ${private_mac_addr}
+      addresses:
+        - 192.168.128.1/24
+      routes:
+        - to: 10.0.0.0/16
+          via: 10.0.0.16
+          metric: 100

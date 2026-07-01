@@ -1,0 +1,102 @@
+#cloud-config
+hostname: router
+timezone: America/Toronto
+apt:
+  preserve_sources_list: false
+  primary:
+    - arches: [default]
+      uri: https://mirror.csclub.uwaterloo.ca/ubuntu/
+bootcmd:
+  - sysctl -w net.ipv4.ip_forward=1
+  - echo f > /sys/class/net/ens18/queues/rx-0/rps_cpus
+  - echo f > /sys/class/net/eth1/queues/rx-0/rps_cpus
+  - sysctl net.core.default_qdisc=fq
+  - sysctl net.ipv4.tcp_congestion_control=bbr
+  - sysctl net.ipv4.tcp_mtu_probing=1
+  - sysctl net.ipv4.tcp_fastopen=3
+  - sysctl net.core.rmem_max=33554432
+  - sysctl net.core.wmem_max=33554432
+  - sysctl net.ipv4.tcp_rmem="4096 87380 33554432"
+  - sysctl net.ipv4.tcp_wmem="4096 65536 33554432"
+  - sysctl net.core.netdev_max_backlog=5000
+  - sysctl net.ipv4.tcp_window_scaling=1
+  - sysctl net.ipv4.tcp_sack=1
+  - sysctl net.ipv4.tcp_ecn=1
+  - sysctl net.core.rps_sock_flow_entries=32768
+  - ip link set dev "ens18" txqueuelen 2000
+  - ip link set dev "eth1" txqueuelen 2000
+  - ethtool -K "ens18" tso on gso on gro on
+  - ethtool -K "eth1" tso on gso on gro on
+write_files:
+  - path: /etc/sysctl.d/99-ipv.conf
+    content: |
+      net.ipv4.ip_forward = 1
+      net.core.default_qdisc=fq
+      net.ipv4.tcp_congestion_control=bbr
+      net.ipv4.tcp_mtu_probing=1
+      net.ipv4.tcp_fastopen=3
+      net.core.rmem_max=33554432
+      net.core.wmem_max=33554432
+      net.ipv4.tcp_rmem="4096 87380 33554432"
+      net.ipv4.tcp_wmem="4096 65536 33554432"
+      net.core.netdev_max_backlog=5000
+      net.ipv4.tcp_window_scaling=1
+      net.ipv4.tcp_sack=1
+      net.ipv4.tcp_ecn=1
+      net.core.rps_sock_flow_entries=32768
+    owner: 'root:root'
+    permissions: '0644'
+  - path: /etc/apt/apt.conf.d/10periodic
+    content: |
+      APT::Periodic::Update-Package-Lists "1";
+      APT::Periodic::Download-Upgradeable-Packages "1";
+      APT::Periodic::AutocleanInterval "7";
+    owner: root:root
+    permissions: '0644'
+  - path: /etc/apt/apt.conf.d/50unattended-upgrades
+    content: |
+      Unattended-Upgrade::Allowed-Origins {
+        "$${distro_id}:$${distro_codename}";
+        "$${distro_id}:$${distro_codename}-security";
+        "$${distro_id}ESMApps:$${distro_codename}-apps-security";
+        "$${distro_id}ESM:$${distro_codename}-infra-security";
+        "$${distro_id}:$${distro_codename}-updates";
+        "$${distro_id}:$${distro_codename}-proposed";
+        "$${distro_id}:$${distro_codename}-backports";
+      };
+      Unattended-Upgrade::DevRelease "auto";
+      Unattended-Upgrade::AutoFixInterruptedDpkg "true";
+      Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";
+      Unattended-Upgrade::Remove-New-Unused-Dependencies "true";
+      Unattended-Upgrade::Remove-Unused-Dependencies "true";
+      Unattended-Upgrade::Automatic-Reboot "true";
+      Unattended-Upgrade::Automatic-Reboot-Time "04:00";
+    owner: root:root
+    permissions: '0644'
+ssh_keys:
+  ed25519_public: |
+    ${indent(4, host-ssh-key-ed25519.public_key_openssh)}
+  ed25519_private: |
+    ${indent(4, host-ssh-key-ed25519.private_key_openssh)}
+users:
+  - default
+  - name: tkjode
+    groups:
+      - sudo
+    shell: /bin/bash
+    ssh_import_id: ['gh:tkjode']
+    sudo: ALL=(ALL) NOPASSWD:ALL
+package_update: true
+packages:
+  - qemu-guest-agent
+  - irqbalance
+  - net-tools
+  - curl
+  - iptables-persistent
+runcmd:
+  - systemctl enable --now qemu-guest-agent
+  - iptables -A FORWARD -i eth1 -o ens18 -j ACCEPT
+  - iptables -A FORWARD -i ens18 -o eth1 -m state --state ESTABLISHED,RELATED -j ACCEPT
+  - iptables -t nat -A POSTROUTING -o ens18 -j MASQUERADE
+  - iptables-save > /etc/iptables/rules.v4
+  - echo "done" > /tmp/cloud-config.done

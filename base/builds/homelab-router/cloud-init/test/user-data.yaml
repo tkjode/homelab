@@ -1,0 +1,58 @@
+#cloud-config
+hostname: testvm
+timezone: America/Toronto
+apt:
+  preserve_sources_list: false
+  primary:
+    - arches: [default]
+      uri: https://mirror.csclub.uwaterloo.ca/ubuntu/
+write_files:
+  - path: /etc/apt/apt.conf.d/10periodic
+    content: |
+      APT::Periodic::Update-Package-Lists "1";
+      APT::Periodic::Download-Upgradeable-Packages "1";
+      APT::Periodic::AutocleanInterval "7";
+    owner: root:root
+    permissions: '0644'
+  - path: /etc/apt/apt.conf.d/50unattended-upgrades
+    content: |
+      Unattended-Upgrade::Allowed-Origins {
+        "$${distro_id}:$${distro_codename}";
+        "$${distro_id}:$${distro_codename}-security";
+        "$${distro_id}ESMApps:$${distro_codename}-apps-security";
+        "$${distro_id}ESM:$${distro_codename}-infra-security";
+        "$${distro_id}:$${distro_codename}-updates";
+        "$${distro_id}:$${distro_codename}-proposed";
+        "$${distro_id}:$${distro_codename}-backports";
+      };
+      Unattended-Upgrade::DevRelease "auto";
+      Unattended-Upgrade::AutoFixInterruptedDpkg "true";
+      Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";
+      Unattended-Upgrade::Remove-New-Unused-Dependencies "true";
+      Unattended-Upgrade::Remove-Unused-Dependencies "true";
+      Unattended-Upgrade::Automatic-Reboot "true";
+      Unattended-Upgrade::Automatic-Reboot-Time "04:00";
+    owner: root:root
+    permissions: '0644'
+ssh_keys:
+  ed25519_public: |
+    ${indent(4, host-ssh-key-ed25519.public_key_openssh)}
+  ed25519_private: |
+    ${indent(4, host-ssh-key-ed25519.private_key_openssh)}
+users:
+  - default
+  - name: tkjode
+    groups:
+      - sudo
+    shell: /bin/bash
+    ssh_import_id: ['gh:tkjode']
+    sudo: ALL=(ALL) NOPASSWD:ALL
+package_update: true
+packages:
+  - qemu-guest-agent
+  - net-tools
+  - curl
+runcmd:
+  - systemctl enable --now qemu-guest-agent
+  - systemctl enable --now unattended-upgrades
+  - echo "done" > /tmp/cloud-config.done
