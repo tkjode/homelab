@@ -14,7 +14,7 @@ spec:
     path: base/builds/regulus/argocd/projects/hometheatre/manifests/plex/httproute
   - chart: plex-media-server
     repoURL: https://raw.githubusercontent.com/plexinc/pms-docker/gh-pages
-    targetRevision: 1.5.0
+    targetRevision: 1.6.0
     helm:
       valueFiles:
       - $values/base/builds/regulus/argocd/projects/hometheatre/manifests/plex/values.yaml
