@@ -40,6 +40,6 @@ spec:
         - mountPath: /usr/share/nginx/html
           name: web-content
       volumes:
-      - name: web-contnet
+      - name: web-content
         persistentVolumeClaim:
           claimName: ubuntu-mirror-root
