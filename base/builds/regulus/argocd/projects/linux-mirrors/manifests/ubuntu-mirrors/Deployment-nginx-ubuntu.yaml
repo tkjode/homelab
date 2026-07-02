@@ -14,7 +14,7 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/instance: nginx-ubuntu
-        app.kubernetes.name: nginx-ubuntu
+        app.kubernetes.io/name: nginx-ubuntu
     spec:
       containers:
       - name: nginx
