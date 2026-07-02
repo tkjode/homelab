@@ -24,4 +24,5 @@ This project is mainly for testing cloud-init router configurations in a quickly
 
 | Date | Log |
 | --- | --- |
+| 2026-06-02 | Testing recreating assets using reusable workflows |
 | 2026-06-02 | Decommissioning resources for now using a `decom/homelab-router` branch |
