@@ -16,5 +16,12 @@ This project is mainly for testing cloud-init router configurations in a quickly
 ## Things to test
 
 - Cloud-Init `optional: true` on interfaces that have no DHCP
-- Early Hacking of `network-wait-online.service` - is it possible?
-- Start system up with the interface in a `disconnected` state, then bring online post-boot.
+  - [x] This worked when adding optional:true on EVERY interface on the router.
+- ~~Early Hacking of `network-wait-online.service` - is it possible?~~ Not Required
+- ~~Start system up with the interface in a `disconnected` state, then bring online post-boot.~~ Not Required
+
+## Log
+
+| Date | Log |
+| --- | --- |
+| 2026-06-02 | Decommissioning resources for now using a `decom/homelab-router` branch |
