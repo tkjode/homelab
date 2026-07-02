@@ -9,6 +9,6 @@ spec:
     protocol: TCP
     targetPort: 80
   selector:
-    app.kubernetes.io/instance: nginx
-    app.kubernetes.io/name: nginx
+    app.kubernetes.io/instance: nginx-ubuntu
+    app.kubernetes.io/name: nginx-ubuntu
   type: ClusterIP
