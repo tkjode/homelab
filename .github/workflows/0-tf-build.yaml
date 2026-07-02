@@ -1,0 +1,36 @@
+## 0-tf-build.yaml
+## A re-usable Terraform Plan & Auto-Apply that saves state to a common S3 bucket
+## Requires "folder" variable which it'll find a do a sparse checkout and tf build under /base/builds/$folder
+## keeps plans and state separated in S3 bucket paths /w unique filenames
+
+on:
+  workflow_call:
+    inputs:
+      folder:
+        required: true
+        type: string
+jobs:
+  terraform-plan-and-apply:
+    name: "Build Environment: ${{ inputs.folder }}"
+    if: contains(github.ref, 'build/{ inputs.folder }' )
+    runs-on: self-hosted
+    container:
+      image: hashicorp/terraform:latest
+      volumes:
+        - ${{ inputs.folder }}:/tf
+    steps:
+      - name: "Checkout Project"
+        uses: actions/checkout@v6
+        with:
+          sparse-checkout: |
+            ./.github
+            base/builds/${{ inputs.folder }}
+      - run: terraform init
+        shell: sh
+        working-directory: base/builds/${{ inputs.folder }}
+      - run: terraform plan -out=/tf/${{ inputs.folder }}.tfplan
+        shell: sh
+        working-directory: base/builds/${{ inputs.folder }}
+      - run: terraform apply -auto-approve --parallelism=1 /tf/${{ inputs.folder }}.tfplan
+        shell: sh
+        working-directory: base/builds/${{ inputs.folder }}

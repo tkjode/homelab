@@ -1,0 +1,37 @@
+## 0-tf-decom.yaml
+## A re-usable Speculative Destruction Plan and Auto-Destruct
+## Requires "folder" variable, sparse checkouts it from /base/builds/ and points TF at it
+## S3 State may be verified for accuracy, and will evaluate the data in /build as well to determine removals.
+
+on:
+  workflow_call:
+    inputs:
+      folder:
+        required: true
+        type: string
+
+jobs:
+  terraform-plan-and-destroy:
+    name: "Destroy Environment: ${{ inputs.folder }}"
+    if: contains(github.ref, 'decom/{ inputs.folder }')
+    runs-on: self-hosted
+    container:
+      image: hashicorp/terraform:latest
+      volumes:
+        - ${{ inputs.folder }}:/tf
+    steps:
+      - name: "Checkout Project"
+        uses: actions/checkout@v6
+        with:
+          sparse-checkout: |
+            ./.github
+            base/builds/${{ inputs.folder }}
+      - run: terraform init
+        shell: sh
+        working-directory: base/builds/${{ inputs.folder }}
+      - run: terraform plan -destroy -out=/tf/homelab-router.tfplan
+        shell: sh
+        working-directory: base/builds/${{ inputs.folder }}
+      - run: terraform apply -destroy -auto-approve --parallelism=1
+        shell: sh
+        working-directory: base/builds/${{ inputs.folder }}

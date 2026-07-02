@@ -27,51 +27,11 @@ on:
       - 'base/builds/homelab-router/**'
       - '.github/workflows/homelab-router.yaml'
 jobs:
-  router-build:
-    name: "Build: HomeLab Router"
-    if: contains(github.ref, 'build/homelab-router')
-    runs-on: self-hosted
-    container:
-      image: hashicorp/terraform:latest
-      volumes:
-        - homelab-router:/tf
-    steps:
-      - name: "Checkout Project"
-        uses: actions/checkout@v6
-        with:
-          sparse-checkout: |
-            ./.github
-            base/builds/homelab-router
-      - run: terraform init
-        shell: sh
-        working-directory: base/builds/homelab-router
-      - run: terraform plan -out=/tf/homelab-router.tfplan
-        shell: sh
-        working-directory: base/builds/homelab-router
-      - run: terraform apply -auto-approve --parallelism=1 /tf/homelab-router.tfplan
-        shell: sh
-        working-directory: base/builds/homelab-router
-  router-decommisison:
-    name: "Decom: HomeLab Router"
-    if: contains(github.ref, 'decom/homelab-router')
-    runs-on: self-hosted
-    container:
-      image: hashicorp/terraform:latest
-      volumes:
-        - homelab-router:/tf
-    steps:
-      - name: "Checkout Project"
-        uses: actions/checkout@v6
-        with:
-          sparse-checkout: |
-            ./.github
-            base/builds/homelab-router
-      - run: terraform init
-        shell: sh
-        working-directory: base/builds/homelab-router
-      - run: terraform plan -destroy -out=/tf/homelab-router.tfplan
-        shell: sh
-        working-directory: base/builds/homelab-router
-      - run: terraform apply -destroy -auto-approve --parallelism=1
-        shell: sh
-        working-directory: base/builds/homelab-router
+  router-test-build:
+    uses: ./.github/workflows/0-tf-build.yaml
+    with:
+      folder: homelab-router
+  router-test-decommission:
+    uses: ./.github/workflows/0-tf-decom.yaml
+    with:
+      folder: homelab-router
