@@ -11,7 +11,7 @@ on:
         type: string
 jobs:
   terraform-plan-and-apply:
-    name: "Build Environment: { inputs.folder }"
+    name: "Build Environment: ${inputs.folder}"
     if: contains(github.ref, 'build/{ inputs.folder }' )
     runs-on: self-hosted
     container:
