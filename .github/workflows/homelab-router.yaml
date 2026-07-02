@@ -25,7 +25,7 @@ on:
     branches: [ "main", "build/homelab-router/**", "decom/homelab-router/**" ]
     paths:
       - 'base/builds/homelab-router/**'
-      - '.github/workflows/homelab-router.yml'
+      - '.github/workflows/homelab-router.yaml'
 jobs:
   router-build:
     name: "Build: HomeLab Router"
