@@ -12,7 +12,7 @@ on:
 
 jobs:
   terraform-plan-and-destroy:
-    name: "Destroy Environment: ${{ inputs.folder }}"
+    name: Speculative Plan and Destroy
     if: contains(github.ref, 'decom/{ inputs.folder }')
     runs-on: self-hosted
     container:
