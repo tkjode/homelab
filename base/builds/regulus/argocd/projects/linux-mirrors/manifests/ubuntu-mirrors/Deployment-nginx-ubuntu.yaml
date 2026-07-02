@@ -39,7 +39,14 @@ spec:
         volumeMounts:
         - mountPath: /usr/share/nginx/html
           name: web-content
+        - mountPath: /etc/nginx/nginx.conf.template
+          name: nginx-config
+          subPath: nginx.conf
       volumes:
+      - name: nginx-config
+        configMap:
+          name: nginx-conf
+          optional: false
       - name: web-content
         persistentVolumeClaim:
           claimName: ubuntu-mirror-root
