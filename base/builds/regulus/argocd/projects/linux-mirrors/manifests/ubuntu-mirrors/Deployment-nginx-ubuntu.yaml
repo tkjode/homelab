@@ -5,7 +5,7 @@ metadata:
 spec:
   replicas: 3
   strategy:
-    type: Rolling
+    type: RollingUpdate
   selector:
     matchLabels:
       app.kubernetes.io/instance: nginx-ubuntu
