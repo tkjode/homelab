@@ -10,4 +10,4 @@ spec:
     requests:
       storage: 128Gi
   volumeMode: Filesystem
-  volumeName: ubuntu-mirror-root
+  volumeName: ubuntu-mirror
