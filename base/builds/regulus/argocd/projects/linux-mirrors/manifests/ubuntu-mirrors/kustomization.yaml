@@ -1,0 +1,9 @@
+metadata:
+  name: ubuntu-mirror
+resources:
+  - ConfigMap-aptmirror-conf.yaml
+  - Deployment-nginx-ubuntu.yaml
+  - HTTPRoute-ubuntu-mirror.yaml
+  - PersistentVolume-ubuntu-mirror.yaml
+  - PersistentVolumeClaim-ubuntu-mirror-root.yaml
+  - Service-mirror-http.yaml

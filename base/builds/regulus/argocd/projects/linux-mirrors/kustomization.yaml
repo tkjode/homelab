@@ -1,0 +1,5 @@
+metadata:
+  name: project-linux-mirrors
+resources:
+  - AppProject.linux-mirrors.yaml
+  - manifests/ubuntu-mirrors/Application.ubuntu-mirror.yaml  # Build Started
