@@ -18,6 +18,5 @@ spec:
     - CreateNamespace=true
     - ServerSideApply=true
     automated:
-      print: false
       selfHeal: false
 

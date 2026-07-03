@@ -1,5 +1,19 @@
 # Journal / Changelog
 
+## 2026-07-02
+
+- Fired up again after a short break.  Had another crack at fixing the cloud-init network-wait-online problem with multiple nics.
+  - Turns out, adding `optional: true` to both NICs fixes the problem.
+  - As a side-benefit, there is now a new `homelab-router` project that is very useful for quickly spinning up a private net and a couple VMs to test instead of debugging with a larger project like Regulus.
+- Turns out these old 2.4Ghz Xeons don't host modern dedicated servers very well - the single core speed just isn't there.  Gamededi is kinda stalled for a bit.
+- I've switched from multiple YAML files with specific branch matchers to a branch-to-buildFolder matrix pattern.
+  - Can't just create a folder and drop terraform into it, it has to be added to the build folder matrix in the .github/workflows build+decom strategy blocks.
+  - Everything is still auto-approved/auto-apply/auto-destroy for rapid CI/CD in the lab.
+- Got the hosting setup for Ubuntu Mirrors mostly working - just need to figure out how to add index browsing (optional but handy)
+  - Next up, CronJobs in the cluster to regularly kick off mirror jobs to the NAS, as well as testing local repo pulls with some cloud-init VMs.
+- Added Open-WebUI to the cluster and configured it to connect to ollama running on my old i7-7700k and 2080Ti running gemma4:12b and other models if neccessary.  GPU TTS as well.
+- Updated SkyHook Radar at least 209,385 times.
+
 ## 2026-04-28
 
 - Lots of work behind the scenes throwing stuff into ArgoCD, getting the home theatre stack going, added falco as some container behaviour tuning, and updated the Cluster CNI to Cilium which is pretty dope.
@@ -10,7 +24,7 @@
 - __LetsEncrypt__
   - LetsEncrypt rate limits after 5 certificate requests in a 24 hour period, forcing a 24 hour wait time to cool down, I guess I'm borked for now.
   - This neccessitates externalizing the certificate store so that the gateway can be rebuilt but retain the certificates.
-    - S3 plugins suck, going to create an NFS bind to a letsencrypt folder for the gateway to use as persistent storage. 
+    - S3 plugins suck, going to create an NFS bind to a letsencrypt folder for the gateway to use as persistent storage.
   - __Update:__ The NAS build has been sorted after some drama around `no_root_squash`, but there was trouble caused by certbot using a new folder when changing the order the certificates were raised in.
     - Updated the path but now haproxy still refuses to start up a boot time.
     - Attempts to crush network-wait-online do not appear to work, the command when run manually still hangs even though all networks are online and even with -i and --ignore options.
@@ -43,12 +57,12 @@
 ## 2025-12-18
 
 - Cluster build remains quite reliable and have sped it up a bit by removing the apt upgrade cycle at boot time, and just rely on `unattended-upgrades` to create chaos at 4:00am
-- Used terraform to initialize a separate Certificate Authority - this is currently used to explicitly trust pods that serve HTTPS.  
+- Used terraform to initialize a separate Certificate Authority - this is currently used to explicitly trust pods that serve HTTPS.
   - [x] TODO: Noted that ArgoCD "hot reload" doesn't work if the `Secret` doesn't exist at startup - will need to do kustomization/helm hacks to ensure it's created early to allow hot-reload to recycle the pod.
     - Apparently not required, the last rebuild works through the envoy ingress using just the updated `TLSBackendPolicy` and cert trusts configured.
 - Certificate popualtion with `cert-manager` is working well.  A `ClusterIssuer` is now deployed by ArgoCD, leveraging the kube-injected CA.
 - Moved some ArgoCD projects around and gave the ApplicationSet the ability to define a project for each component.  They must be explicitly defined alongside the ApplicationSet creation otherwise the projects will not kick off.  Also removed the concept of a 'bios' namespace and cleaned up auto-creation of unneccessary namespaces.  The cluster bootstrap is now very low-cruft.
-- Settled on Envoy Gateway Proxy, while a little complicated, it does grant a lot of power to configure things just right. 
+- Settled on Envoy Gateway Proxy, while a little complicated, it does grant a lot of power to configure things just right.
 - Retired the `Talos` projects and archived the `cloud-init-testing` projects for reference.
 - Going to start working on post-boot k8s charts & features to deploy into the cluster, in no particular order:
   - HTPC Stack
