@@ -4,6 +4,9 @@ on:
   push:
     branches: [ 'main', 'develop/**' ]
 
+permissions:
+  contents: read
+
 jobs:
   argocd-bootstrap-application:
     runs-on: self-hosted
