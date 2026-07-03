@@ -12,7 +12,7 @@ on:
 jobs:
   terraform-plan-and-apply:
     name: Plan and Apply
-    if: contains(github.ref, 'build/{ inputs.folder }' )
+    if: contains(github.ref, format('build/{0}', inputs.folder) )
     runs-on: self-hosted
     container:
       image: hashicorp/terraform:latest
