@@ -4,6 +4,10 @@ on:
       basefolder:
         required: true
         type: string
+
+permissions:
+  contents: read
+
 jobs:
   validate-yaml:
     name: YAML Validation
@@ -12,6 +16,7 @@ jobs:
       - name: "Checkout Project"
         uses: actions/checkout@v6
       - name: json-yaml-validate
+        id: json-yaml-validate
         uses: GrantBirki/json-yaml-validate@v5
         with:
           base_dir: ${{ inputs.basefolder }}
