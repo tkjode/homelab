@@ -1,0 +1,17 @@
+on:
+  workflow_call:
+    inputs:
+      basefolder:
+        required: true
+        type: string
+jobs:
+  validate-yaml:
+    name: YAML Validation
+    runs-on: self-hosted
+    steps:
+      - name: "Checkout Project"
+        uses: actions/checkout@v6
+      - name: json-yaml-validate
+        uses: GrantBirki/json-yaml-validate@v5
+        with:
+          base_dir: ${{ inputs.basefolder }}

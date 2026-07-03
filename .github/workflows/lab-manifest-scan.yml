@@ -1,0 +1,33 @@
+name: YAML Manifest Scan
+
+on:
+  push:
+    branches: [ 'main', 'develop/**' ]
+
+jobs:
+  argocd-bootstrap-application:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v6
+      - name: json-yaml-validate
+        uses: GrantBirki/json-yaml-validate@v5
+        with:
+          files: base/builds/regulus/argocd/Application.bootstrap.yaml
+  argo-managed-k8s-manifests:
+    strategy:
+      matrix:
+        basefolder:
+          - base/builds/regulus/argocd/bios
+          - base/builds/regulus/argocd/bootstrap
+          - base/builds/regulus/argocd/projects
+    uses: ./.github/workflows/0-yaml-valid.yaml
+    with:
+      basefolder: ${{ matrix.basefolder }}
+  homelab-router-cloud-init:
+    strategy:
+      matrix:
+        basefolder:
+          - base/builds/homelab-router/cloud-init
+    uses: ./.github/workflows/0-yaml-valid.yaml
+    with:
+      basefolder: ${{ matrix.basefolder }}
