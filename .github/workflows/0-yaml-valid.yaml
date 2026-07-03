@@ -12,6 +12,8 @@ jobs:
   validate-yaml:
     name: YAML Validation
     runs-on: self-hosted
+    container:
+      image: hashicorp/terraform:latest
     steps:
       - name: "Checkout Project"
         uses: actions/checkout@v6
