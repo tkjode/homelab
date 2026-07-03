@@ -3,7 +3,7 @@ name: build-with-terraform
 on:
   workflow_dispatch:
   push:
-    branches: [ "main", "build/**" ]
+    branches: [ "build/**" ]
     paths:
       - 'base/builds/**'
       - '.github/workflows/lab-build.yaml'

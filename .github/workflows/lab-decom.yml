@@ -3,7 +3,7 @@ name: decom-with-terraform
 on:
   workflow_dispatch:
   push:
-    branches: [ "main", "decom/**" ]
+    branches: [ "decom/**" ]
     paths:
       - 'base/builds/**'
       - '.github/workflows/lab-decom.yaml'
