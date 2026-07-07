@@ -5,7 +5,7 @@ apt:
   preserve_sources_list: false
   primary:
     - arches: [default]
-      uri: https://mirror.csclub.uwaterloo.ca/ubuntu/
+      uri: https://ubuntu.apps.phalnet.com/ubuntu/
 write_files:
   - path: /etc/apt/apt.conf.d/10periodic
     content: |
