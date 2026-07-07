@@ -4,6 +4,12 @@ metadata:
   name: default-location-conf
 data:
   default-location.conf: |-
-    location / {
-      autoindex on
+    server {
+      listen 8080;
+      server_name ubuntu-mirror.local;
+    
+      location / {
+        root /usr/share/nginx/html;
+        autoindex on
+      }
     }
