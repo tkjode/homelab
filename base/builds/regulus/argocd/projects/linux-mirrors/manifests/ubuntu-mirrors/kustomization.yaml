@@ -2,7 +2,7 @@ metadata:
   name: ubuntu-mirror
 resources:
   - ConfigMap-aptmirror-conf.yaml
-  - ConfigMap-nginx-conf.yaml
+  - ConfigMap-default-location-conf.yaml
   - Deployment-nginx-ubuntu.yaml
   - HTTPRoute-ubuntu-mirror.yaml
   - PersistentVolume-ubuntu-mirror.yaml
