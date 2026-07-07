@@ -10,6 +10,6 @@ data:
     
       location / {
         root /usr/share/nginx/html;
-        autoindex on
+        autoindex on;
       }
     }
