@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: apt-mirror-config
 data:
-  ubuntu-repos.conf: |-
+  mirror.list: |-
     set base_path /out
     set mirror_path $base_path/mirror
     set skel_path $base_path/skel
