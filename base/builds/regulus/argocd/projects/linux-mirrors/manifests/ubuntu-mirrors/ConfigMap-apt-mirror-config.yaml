@@ -10,7 +10,7 @@ data:
     set var_path $base_path/var
     set _tilde 0
     set nthreads 4
-    set limit_rate 4096k
+    set limit_rate 51200k
 
 
     deb https://mirror.csclub.uwaterloo.ca/ubuntu devel main restricted universe multiverse
