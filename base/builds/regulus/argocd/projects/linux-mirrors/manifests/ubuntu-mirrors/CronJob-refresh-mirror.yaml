@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: refresh-mirror
+spec:
+  schedule: "0 * * * *"
+  parallelism: 1
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 5
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: ubuntu-mirrors
+          containers:
+          - name: apt-mirror2
+            image: aptmirror/apt-mirror2:latest
+            volumeMounts:
+            - name: ubuntu-mirror-root
+              mountPath: /out
+            - name: mirror-config
+              mountPath: /etc/apt/mirror.list
+              subPath: mirror.list
+          volumes:
+          - name: ubuntu-mirror-root
+            persistentVolumeClaim:
+              claimName: ubuntu-mirror-root
+          - name: mirror-config
+            configMap:
+              name: apt-mirror-config
+          restartPolicy: Never
