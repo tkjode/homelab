@@ -10,7 +10,6 @@ spec:
     spec:
       template:
         spec:
-          serviceAccountName: ubuntu-mirrors
           containers:
           - name: apt-mirror2
             image: aptmirror/apt-mirror2:latest
