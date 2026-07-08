@@ -4,7 +4,6 @@ metadata:
   name: refresh-mirror
 spec:
   schedule: "0 * * * *"
-  parallelism: 1
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 5
   jobTemplate:
