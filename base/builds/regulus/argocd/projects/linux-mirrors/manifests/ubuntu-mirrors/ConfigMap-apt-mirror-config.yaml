@@ -9,8 +9,8 @@ data:
     set skel_path $base_path/skel
     set var_path $base_path/var
     set _tilde 0
-    set nthreads 4
-    set limit_rate 51200k
+    set nthreads 16
+    set limit_rate 3200k
 
 
     deb https://mirror.csclub.uwaterloo.ca/ubuntu devel main restricted universe multiverse
