@@ -3,9 +3,10 @@ kind: CronJob
 metadata:
   name: refresh-mirror
 spec:
-  schedule: "0 * * * *"
+  schedule: "0 */6 * * *"
   concurrencyPolicy: Forbid
-  successfulJobsHistoryLimit: 5
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 2
   jobTemplate:
     spec:
       template:
