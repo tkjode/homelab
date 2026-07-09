@@ -15,7 +15,7 @@ data:
 
     set prometheus_enable on
     set prometheus_port 8000
-    set prometheus_host localhost
+    set prometheus_host 0.0.0.0
 
     deb https://mirror.csclub.uwaterloo.ca/ubuntu devel main restricted universe multiverse
     deb https://mirror.csclub.uwaterloo.ca/ubuntu devel-updates main restricted universe multiverse
