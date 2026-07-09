@@ -17,7 +17,7 @@ data:
     set prometheus_port 8000
     set prometheus_host localhost
    
-    mirror_dist_upgrader https://mirror.csclub.uwaterloo.ca/ubuntu
+    mirror_dist_upgrader http://archive.ubuntu.com/ubuntu
 
     deb https://mirror.csclub.uwaterloo.ca/ubuntu devel main restricted universe multiverse
     deb https://mirror.csclub.uwaterloo.ca/ubuntu devel-updates main restricted universe multiverse
