@@ -10,6 +10,13 @@ spec:
   jobTemplate:
     spec:
       template:
+        metadata:
+          labels:
+            app.kubernetes.io/name: refresh-mirror
+            app.kubernetes.io/instance: ubuntu-cswaterloo-mirror
+            prometheus.io/scrape: "true"
+            prometheus.io/port: "8000"
+            prometheus.io/path: "/metrics"
         spec:
           containers:
           - name: apt-mirror2
@@ -20,6 +27,10 @@ spec:
             - name: mirror-config
               mountPath: /etc/apt/mirror.list
               subPath: mirror.list
+            ports:
+            - containerPort: 8000
+              name: prometheus
+              protocol: TCP
           volumes:
           - name: ubuntu-mirror-root
             persistentVolumeClaim:
