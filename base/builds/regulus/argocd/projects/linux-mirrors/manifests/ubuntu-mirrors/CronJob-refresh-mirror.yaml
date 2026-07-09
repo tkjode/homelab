@@ -14,6 +14,7 @@ spec:
           labels:
             app.kubernetes.io/name: refresh-mirror
             app.kubernetes.io/instance: ubuntu-cswaterloo-mirror
+          annotations:
             prometheus.io/scrape: "true"
             prometheus.io/port: "8000"
             prometheus.io/path: "/metrics"
