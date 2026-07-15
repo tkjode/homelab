@@ -11,7 +11,7 @@ data:
     set _tilde 0
     set nthreads 8
     set slow_rate_protection off
-    set weak_size_check 1
+    set weak_size_check 0
 
     set prometheus_enable on
     set prometheus_port 8000
