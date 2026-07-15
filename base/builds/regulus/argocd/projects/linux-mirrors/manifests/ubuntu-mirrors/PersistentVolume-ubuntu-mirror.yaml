@@ -11,7 +11,7 @@ spec:
   accessModes:
   - ReadWriteMany
   nfs:
-    path: /srv/nas/Mirrors/ubuntu/mirror/mirror.csclub.uwaterloo.ca
+    path: /srv/nas/Mirrors/ubuntu/
     server: 10.0.0.5
 
 
