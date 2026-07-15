@@ -17,19 +17,6 @@ data:
     set prometheus_port 8000
     set prometheus_host 0.0.0.0
 
-    deb https://mirror.csclub.uwaterloo.ca/ubuntu devel main restricted universe multiverse
-    deb https://mirror.csclub.uwaterloo.ca/ubuntu devel-updates main restricted universe multiverse
-    deb https://mirror.csclub.uwaterloo.ca/ubuntu devel-backports main restricted universe multiverse
-    deb https://mirror.csclub.uwaterloo.ca/ubuntu devel-security main restricted universe multiverse
-    deb https://mirror.csclub.uwaterloo.ca/ubuntu devel-proposed main restricted universe multiverse
-    deb https://mirror.csclub.uwaterloo.ca/ubuntu resolute main restricted universe multiverse
-    deb https://mirror.csclub.uwaterloo.ca/ubuntu resolute-updates main restricted universe multiverse
-    deb https://mirror.csclub.uwaterloo.ca/ubuntu resolute-backports main restricted universe multiverse
-    deb https://mirror.csclub.uwaterloo.ca/ubuntu resolute-security main restricted universe multiverse
-    deb https://mirror.csclub.uwaterloo.ca/ubuntu questing main restricted universe multiverse
-    deb https://mirror.csclub.uwaterloo.ca/ubuntu questing-updates main restricted universe multiverse
-    deb https://mirror.csclub.uwaterloo.ca/ubuntu questing-backports main restricted universe multiverse
-    deb https://mirror.csclub.uwaterloo.ca/ubuntu questing-security main restricted universe multiverse
     deb https://mirror.csclub.uwaterloo.ca/ubuntu stonking main restricted universe multiverse
     deb https://mirror.csclub.uwaterloo.ca/ubuntu stonking-updates main restricted universe multiverse
     deb https://mirror.csclub.uwaterloo.ca/ubuntu stonking-backports main restricted universe multiverse
