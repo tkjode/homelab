@@ -1,6 +1,7 @@
 name: tethys-docker
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "build/tethys/**" ]
     paths:
