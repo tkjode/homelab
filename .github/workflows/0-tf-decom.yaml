@@ -36,7 +36,7 @@ jobs:
   terraform-plan-and-destroy:
     name: Speculative Plan and Destroy
     if: contains(github.ref, format('decom/{0}', inputs.folder) )
-    runs-on: self-hosted
+    runs-on: ['self-hosted', 'proxmox']
     container:
       image: hashicorp/terraform:latest
       volumes:

@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   argocd-bootstrap-application:
-    runs-on: self-hosted
+    runs-on: ['self-hosted', 'proxmox']
     container:
       image: hashicorp/terraform:latest
     steps:
