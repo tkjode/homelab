@@ -27,7 +27,7 @@ jobs:
         run: |
           cd "${GITHUB_WORKSPACE}"
           mkdir -p /app/docker
-          git archive --format=zip --output /tmp/tethys-docker.zip HEAD /base/builds/tethys/docker
+          git archive --format=zip --output /tmp/tethys-docker.zip HEAD base/builds/tethys/docker
           unzip -o /tmp/tethys-docker.zip -d /app/docker
 
       - name: Deploy docker compose services
