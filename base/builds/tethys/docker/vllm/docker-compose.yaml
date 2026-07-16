@@ -2,7 +2,6 @@ services:
   vllm:
     image: vllm/vllm-openai:latest
     container_name: vllm-qwen
-    runtime: nvidia
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
       - CUDA_VISIBLE_DEVICES=0

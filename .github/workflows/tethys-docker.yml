@@ -37,11 +37,11 @@ jobs:
           git archive --format=tar --output /tmp/tethys-docker.tar HEAD base/builds/tethys/docker
           tar -xf /tmp/tethys-docker.tar --strip-components=4 -C /app/docker
 
-      - name: Deploy docker compose services
-        run: |
-          find /app/docker -type f -name 'docker-compose.yaml' -print0 | while IFS= read -r -d '' file; do
-            dir="$(dirname "$file")"
-            echo "Deploying $dir"
-            cd "$dir"
-            docker compose up -d
-          done
+#      - name: Deploy docker compose services
+#        run: |
+#          find /app/docker -type f -name 'docker-compose.yaml' -print0 | while IFS= read -r -d '' file; do
+#            dir="$(dirname "$file")"
+#            echo "Deploying $dir"
+#            cd "$dir"
+#            docker compose up -d
+#          done
