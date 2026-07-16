@@ -14,7 +14,7 @@ services:
     ports:
       - "8000:8000"
     command: |
-      unsloth/Qwen3.5-4B-GGUF
+      --model unsloth/Qwen3.5-4B-GGUF
       --dtype auto
       --quantization UD-Q4_K-XL
       --gpu-memory-utilization 0.9
