@@ -8,15 +8,14 @@ services:
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
       - CUDA_VISIBLE_DEVICES=0
-      - MODEL_NAME=Qwen3.5-4B-GGUF
+      - MODEL_NAME=Qwen3.5-4B
     volumes:
       - vllm-models:/root/.cache/huggingface
     ports:
       - "8000:8000"
     command: |
-      --model unsloth/Qwen3.5-4B-GGUF
+      --model Qwen/Qwen3.5-4B
       --dtype auto
-      --quantization UD-Q4_K-XL
       --gpu-memory-utilization 0.9
       --max-model-len 65536
     restart: unless-stopped
