@@ -5,14 +5,15 @@ services:
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
       - CUDA_VISIBLE_DEVICES=0
-      - MODEL_NAME=Qwen/Qwen3.5-4B
+      - MODEL_NAME=Qwen3.5-4B-GGUF
     volumes:
       - vllm-models:/root/.cache/huggingface
     ports:
       - "8000:8000"
     command: |
-      --model Qwen/Qwen3.5-4B
-      --dtype float16
+      --model unsloth/Qwen-3.5-4B-GGUF
+      --dtype auto
+      --quantization UD-Q4_K-XL
       --gpu-memory-utilization 0.9
       --max-model-len 4096
     deploy:
