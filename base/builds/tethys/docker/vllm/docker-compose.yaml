@@ -15,7 +15,8 @@ services:
       --dtype auto
       --quantization UD-Q4_K-XL
       --gpu-memory-utilization 0.9
-      --max-model-len 4096
+      --max-model-len 65536
+    restart: unless-stopped
     deploy:
       resources:
         reservations:
