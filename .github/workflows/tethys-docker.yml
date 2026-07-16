@@ -23,11 +23,11 @@ jobs:
             docker compose -f "$file" config > /dev/null
           done
 
-      - name: Create sparse archive for build/base/tethys/docker
+      - name: Create sparse archive for base/builds/tethys/docker
         run: |
           cd "${GITHUB_WORKSPACE}"
           mkdir -p /app/docker
-          git archive --format=zip --output /tmp/tethys-docker.zip HEAD build/base/tethys/docker
+          git archive --format=zip --output /tmp/tethys-docker.zip HEAD /base/builds/tethys/docker
           unzip -o /tmp/tethys-docker.zip -d /app/docker
 
       - name: Deploy docker compose services
