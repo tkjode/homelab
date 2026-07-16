@@ -1,17 +1,19 @@
 name: tethys-docker
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "build/tethys/**" ]
     paths:
       - 'base/builds/tethys/docker/**'
+      - '.github/workflows/tethys-docker.yml'
 
 jobs:
   deploy:
     runs-on: ['self-hosted','gpu']
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -23,18 +25,23 @@ jobs:
             docker compose -f "$file" config > /dev/null
           done
 
-      - name: Create sparse archive for build/base/tethys/docker
+      - name: Debug dump ownership of everything under /app
+        run: |
+          id
+          ls -alR /app
+
+      - name: Create sparse archive for base/builds/tethys/docker
         run: |
           cd "${GITHUB_WORKSPACE}"
           mkdir -p /app/docker
-          git archive --format=zip --output /tmp/tethys-docker.zip HEAD build/base/tethys/docker
-          unzip -o /tmp/tethys-docker.zip -d /app/docker
+          git archive --format=tar --output /tmp/tethys-docker.tar HEAD base/builds/tethys/docker
+          tar -xf /tmp/tethys-docker.tar --strip-components=4 -C /app/docker
 
-      - name: Deploy docker compose services
-        run: |
-          find /app/docker -type f -name 'docker-compose.yaml' -print0 | while IFS= read -r -d '' file; do
-            dir="$(dirname "$file")"
-            echo "Deploying $dir"
-            cd "$dir"
-            docker compose up -d
-          done
+#      - name: Deploy docker compose services
+#        run: |
+#          find /app/docker -type f -name 'docker-compose.yaml' -print0 | while IFS= read -r -d '' file; do
+#            dir="$(dirname "$file")"
+#            echo "Deploying $dir"
+#            cd "$dir"
+#            docker compose up -d
+#          done

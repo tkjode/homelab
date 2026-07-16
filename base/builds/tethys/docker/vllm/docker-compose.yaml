@@ -2,20 +2,25 @@ services:
   vllm:
     image: vllm/vllm-openai:latest
     container_name: vllm-qwen
-    runtime: nvidia
+    env_file:
+      - path: .env
+        required: false
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
       - CUDA_VISIBLE_DEVICES=0
-      - MODEL_NAME=Qwen/Qwen3.5-4B
+      - MODEL_NAME=Qwen3.5-2B
     volumes:
       - vllm-models:/root/.cache/huggingface
     ports:
       - "8000:8000"
     command: |
-      --model Qwen/Qwen3.5-4B
-      --dtype float16
-      --gpu-memory-utilization 0.9
-      --max-model-len 65536
+      --model Qwen/Qwen3.5-2B
+      --dtype auto
+      --gpu-memory-utilization 0.98
+      --max-model-len 262144
+      --enable-auto-tool-choice
+      --tool-call-parser qwen3_xml
+    restart: unless-stopped
     deploy:
       resources:
         reservations:
