@@ -35,7 +35,7 @@ jobs:
           cd "${GITHUB_WORKSPACE}"
           mkdir -p /app/docker
           git archive --format=tar --output /tmp/tethys-docker.tar HEAD base/builds/tethys/docker
-          tar -xf /tmp/tethys-docker.tar -C /app/docker
+          tar -xf /tmp/tethys-docker.tar --strip-components=4 -C /app/docker
 
       - name: Deploy docker compose services
         run: |
