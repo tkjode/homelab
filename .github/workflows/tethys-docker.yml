@@ -25,6 +25,11 @@ jobs:
             docker compose -f "$file" config > /dev/null
           done
 
+      - name: Debug dump ownership of everything under /app
+        run: |
+          id
+          ls -alR /app
+
       - name: Create sparse archive for base/builds/tethys/docker
         run: |
           cd "${GITHUB_WORKSPACE}"
