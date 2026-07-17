@@ -36,3 +36,11 @@ jobs:
     uses: ./.github/workflows/0-yaml-valid.yaml
     with:
       basefolder: ${{ matrix.basefolder }}
+  tethys-docker-compose:
+    strategy:
+      matrix:
+        basefolder:
+          - base/builds/tethys/docker
+    uses: ./.github/workflows/0-yaml-valid.yaml
+    with:
+      basefolder: ${{ matrix.basefolder }}
