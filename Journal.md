@@ -1,5 +1,13 @@
 # Journal / Changelog
 
+## 2026-07-17
+
+- Ubuntu Mirroring is refined and working with an every 6 hour CronJob performing incremental updates & repo validity scans.
+- Added `tehtys` to the mix - currently just experimenting with hosting `vLLM` for inference on this machine.  Docker-compose yamls are deployed to the `tethys` machine by way of a new self-hosted github actions runner running in docker on that machine.  Compose manifests are exported via git archive to `/app/docker` and then there are currently manual steps to start/stop these experiments on that system.
+- A few version upgrades performed, mostly SkyHook Radar.
+- Open-WebUI reconfigured to talk to `tethys` with `vLLM`.  Tool calling was a bit of a faff to work out.  Only Qwen3.5-2B is running right now and the unquantized model takes up all of the VRAM, so no Gemma4 for now.
+- Next up should be installing Prometheus and Grafana.  Possibly also start composing Hermes personas in the cluster, not sure if I want to use the helm chart or just hack something together on my own.  
+
 ## 2026-07-02
 
 - Fired up again after a short break.  Had another crack at fixing the cloud-init network-wait-online problem with multiple nics.
