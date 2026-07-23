@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: exporters
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/tkjode/homelab.git
+    path: base/builds/regulus/argocd/projects/monitoring/manifests/exporters
+    targetRevision: HEAD
+    kustomize: {}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kube-observability
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+    automated:
+      prune: true
+      selfHeal: true
