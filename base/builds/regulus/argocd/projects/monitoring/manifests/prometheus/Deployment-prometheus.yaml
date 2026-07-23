@@ -22,6 +22,7 @@ spec:
         - --config.file=/etc/prometheus/prometheus.yml
         - --storage.tsdb.path=/prometheus
         - --web.listen-address="0.0.0.0:9090"
+        - --web.external-url="http://prometheus:9090"
         ports:
         - containerPort: 9090
           name: web
