@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/tkjode/homelab.git
-    path: builds/regulus/argocd/projects/monitoring/manifests/prometheus
+    path: base/builds/regulus/argocd/projects/monitoring/manifests/prometheus
     targetRevision: HEAD
     kustomize: {}
   destination:
