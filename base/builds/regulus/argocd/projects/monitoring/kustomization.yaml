@@ -3,4 +3,5 @@ kind: Kustomization
 metadata:
   name: monitoring-projects
 resources:
-  - manifests/radar/Application-radar.yaml          # Build Started
+  - manifests/radar/Application-radar.yaml            # Build OK
+  - manifests/prometheus/Application.prometheus.yaml  # Build Started

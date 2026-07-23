@@ -2,7 +2,7 @@ name: YAML Manifest Scan
 
 on:
   push:
-    branches: [ 'main', 'develop/**' ]
+    branches: [ 'main', 'develop/**', 'feat/**' ]
 
 permissions:
   contents: read
