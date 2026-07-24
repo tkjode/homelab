@@ -5,3 +5,4 @@ metadata:
 resources:
   - manifests/radar/Application-radar.yaml            # Build OK
   - manifests/prometheus/Application.prometheus.yaml  # Build Started
+  - manifests/exporters/Application.exports.yaml      # Build Started
