@@ -1,0 +1,3 @@
+resources:
+- Deployment-cadvisor.yaml
+- Service-cadvisor.yaml

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cadvisor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cadvisor
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: 'true' 
+        prometheus.io/path: '/metrics'
+        prometheus.io/port: '8081'
+      labels:
+        app.kubernetes.io/name: cadvisor
+    spec:
+      containers:
+        - name: cadvisor
+          image: gcr.io/cadvisor/cadvisor:v0.47.2
+          ports:
+            - name: http-websocket
+              containerPort: 8081
+              protocol: TCP
