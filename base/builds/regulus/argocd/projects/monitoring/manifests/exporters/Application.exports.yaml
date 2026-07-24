@@ -4,12 +4,11 @@ metadata:
   name: exporters
   namespace: argocd
 spec:
-  project: default
+  project: monitoring
   source:
     repoURL: https://github.com/tkjode/homelab.git
     path: base/builds/regulus/argocd/projects/monitoring/manifests/exporters
     targetRevision: HEAD
-    kustomize: {}
   destination:
     server: https://kubernetes.default.svc
     namespace: kube-observability

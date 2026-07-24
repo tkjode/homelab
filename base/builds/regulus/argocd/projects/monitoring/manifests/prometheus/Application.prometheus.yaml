@@ -4,7 +4,7 @@ metadata:
   name: prometheus
   namespace: argocd
 spec:
-  project: default
+  project: monitoring
   source:
     repoURL: https://github.com/tkjode/homelab.git
     path: base/builds/regulus/argocd/projects/monitoring/manifests/prometheus
