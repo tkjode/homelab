@@ -4,7 +4,7 @@ metadata:
   name: radar-dashboard
   namespace: argocd
 spec:
-  project: landingpage
+  project: monitoring
   sources:
   - chart: radar
     name: skyhook-radar

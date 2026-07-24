@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: prometheus
+  name: exporters
   namespace: argocd
 spec:
   project: monitoring
   source:
     repoURL: https://github.com/tkjode/homelab.git
-    path: base/builds/regulus/argocd/projects/monitoring/manifests/prometheus
+    path: base/builds/regulus/argocd/projects/monitoring/manifests/exporters
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
