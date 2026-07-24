@@ -4,6 +4,6 @@ metadata:
   name: cadvisor
 spec:
   ports:
-    - name: http-websocket
-      port: 8081
+    - name: http-metrics
+      port: 9092
       protocol: TCP
