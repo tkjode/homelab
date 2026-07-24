@@ -1,9 +1,9 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: DaemonSet
 metadata:
   name: cadvisor
+  namespace: kube-system
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: cadvisor
@@ -25,3 +25,7 @@ spec:
             - name: http-metrics
               containerPort: 9092
               protocol: TCP
+          securityContext:
+            privileged: true
+      hostNetwork: true
+      hostPID: true 
