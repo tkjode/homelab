@@ -20,7 +20,7 @@ spec:
         - name: cadvisor
           image: gcr.io/cadvisor/cadvisor:v0.47.2
           args:
-          - "-port 9092"
+          - "-port=9092"
           ports:
             - name: http-metrics
               containerPort: 9092
