@@ -49,7 +49,12 @@ spec:
         - mountPath: /run
           name: tmp
           subPath: run
+        - mountPath: /nas
+          name: nas
       volumes:
+      - name: nas
+        persistentVolumeClaim:
+          claimName: pvc-nas-hls
       - name: nginx-config
         configMap:
           name: nginx-conf

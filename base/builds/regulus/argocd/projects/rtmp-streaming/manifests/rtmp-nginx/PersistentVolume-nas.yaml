@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-nas-hls
+spec:
+  storageClassName: nfs-bind
+  volumeMode: Filesystem
+  persistentVolumeReclaimPolicy: Retain
+  capacity:
+    storage: 16Ti
+  accessModes:
+  - ReadWriteMany
+  nfs:
+    path: /srv/nas/media/hls/
+    server: 10.0.0.5
