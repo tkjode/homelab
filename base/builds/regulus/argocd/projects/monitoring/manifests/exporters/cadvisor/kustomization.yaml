@@ -1,2 +1,2 @@
 resources:
-- Deployment-cadvisor.yaml
+- DaemonSet-cadvisor.yaml
