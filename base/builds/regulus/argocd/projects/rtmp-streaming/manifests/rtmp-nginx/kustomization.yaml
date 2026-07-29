@@ -10,7 +10,7 @@ resources:
   - Service-rtmp.yaml               # TCP/1935 Stream Ingestion
   - PersistentVolume-nas.yaml       # Recording Folder
   - PersistentVolumeClaim-nas.yaml  # NGINX-to-NAS
-  - Deployment-converter.yaml       # FLV to Mp4 Conversion Daemon
+#  - Deployment-converter.yaml       # FLV to Mp4 Conversion Daemon
 configMapGenerator:
 - name: nginx-conf
   files:
