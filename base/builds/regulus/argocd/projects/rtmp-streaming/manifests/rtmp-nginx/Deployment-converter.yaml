@@ -37,7 +37,7 @@ spec:
         - name: GLOB_PATTERNS
           value: '*.flv'
         - name: FFMPEG_ARGS
-          value: -y -fflage +genpts -i %s -r 30 %s.mp4
+          value: -y -fflags +genpts -i %s -r 30 %s.mp4
         resources:
           requests:
             cpu: 500m
