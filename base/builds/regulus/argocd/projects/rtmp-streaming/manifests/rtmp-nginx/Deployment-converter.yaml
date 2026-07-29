@@ -57,7 +57,7 @@ spec:
         - name: LOG_FORMAT
           value: text
         - name: FFMPEG_ARGS
-          value: -y -fflags +genpts -i %s -crf 10 -vf "minterpolate=fps=60:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1" %s.mp4
+          value: -y -fflags +genpts -i %s -preset slower -crf 18 -r 30 %s.mp4
         resources:
           requests:
             cpu: 500m
