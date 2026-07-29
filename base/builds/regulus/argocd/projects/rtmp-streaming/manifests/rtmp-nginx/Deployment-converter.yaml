@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: converter
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: converter
+      app.kubernetes.io/name: converter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: converter
+        app.kubernetes.io/name: converter
+    spec:
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      securityContext:
+        fsGroup: 1000
+      containers:
+      - name: converter
+        image: ghcr.io/kennethwussmann/docker-ffmpeg-converter:latest
+        imagePullPolicy: Always
+        env:
+        - name: SERVER_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: SOURCE_DIRECTORY
+          value: /videos
+        - name: DESTINATION_DIRETORY
+          value: /videos/converted
+        - name: GLOB_PATTERNS
+          value: *.flv
+        - name: FFMPEG_ARGS
+          value: -y -fflage +genpts -i %s -r 30 %s.mp4
+        resources:
+          requests:
+            cpu: 500m
+            memory: 1Gi
+          limits:
+            cpu: 1000m
+            memory: 4Gi
+        volumeMounts:
+        - mountPath: /videos
+          name: videos
+      volumes:
+      - name: videos
+        persistentVolumeClaim:
+          claimName: pvc-nas-hls
+
+
