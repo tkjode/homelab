@@ -4,7 +4,7 @@ metadata:
   name: converter
 spec:
   replicas: 4
-  revisionHistoryLimit: 1
+  revisionHistoryLimit: 0
   strategy:
     type: Recreate
   selector:
