@@ -35,7 +35,7 @@ spec:
         - name: DESTINATION_DIRETORY
           value: /videos/converted
         - name: GLOB_PATTERNS
-          value: *.flv
+          value: '*.flv'
         - name: FFMPEG_ARGS
           value: -y -fflage +genpts -i %s -r 30 %s.mp4
         resources:
@@ -52,5 +52,3 @@ spec:
       - name: videos
         persistentVolumeClaim:
           claimName: pvc-nas-hls
-
-
