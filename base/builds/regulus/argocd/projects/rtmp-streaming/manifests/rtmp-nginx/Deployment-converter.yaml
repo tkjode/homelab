@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: converter
 spec:
-  replicas: 4
+  replicas: 1
   revisionHistoryLimit: 0
   strategy:
     type: Recreate
@@ -39,7 +39,7 @@ spec:
             fieldRef:
               fieldPath: metadata.name
         - name: SOURCE_DIRECTORY_PATH
-          value: /videos
+          value: /videos/recordings
         - name: DESTINATION_DIRECTORY_PATH
           value: /videos/converted
         - name: GLOB_PATTERNS
@@ -55,7 +55,7 @@ spec:
         - name: LOG_FORMAT
           value: text
         - name: FFMPEG_ARGS
-          value: -y -fflags +genpts -i %s -preset slower -c:v libx264 -crf 18 -r 30 %s.mp4
+          value: -y -fflags +genpts -i %s -preset slower -c:v libx264 -crf 18 -r 30 -vf "scale=-2:1080" %s.mp4
         resources:
           requests:
             cpu: 500m
