@@ -30,6 +30,8 @@ spec:
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
       securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
         fsGroup: 1000
       containers:
       - name: converter
@@ -49,7 +51,7 @@ spec:
         - name: LOCK_ENABLED
           value: "true"
         - name: LOCK_STALE_AFTER_SECONDS
-          value: 7200
+          value: "86400"
         - name: REMOVE_SOURCE_AFTER_CONVERT
           value: "true"
         - name: LOG_FORMAT
