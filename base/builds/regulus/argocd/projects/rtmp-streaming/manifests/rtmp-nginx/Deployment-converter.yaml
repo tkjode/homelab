@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: converter
 spec:
-  replicas: 1
+  replicas: 4
   revisionHistoryLimit: 1
   strategy:
     type: Recreate
@@ -17,6 +17,16 @@ spec:
         app.kubernetes.io/instance: converter
         app.kubernetes.io/name: converter
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - my-app
+            topologyKey: "kubernetes.io/hostname"
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
       securityContext:
@@ -36,8 +46,16 @@ spec:
           value: /videos/converted
         - name: GLOB_PATTERNS
           value: '*.flv'
+        - name: LOCK_ENABLED
+          value: "true"
+        - name: LOCK_STALE_AFTER_SECONDS
+          value: 7200
+        - name: REMOVE_SOURCE_AFTER_CONVERT
+          value: "true"
+        - name: LOG_FORMAT
+          value: text
         - name: FFMPEG_ARGS
-          value: -y -fflags +genpts -i %s -r 30 %s.mp4
+          value: -y -vf "minterpolate=fps=60:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1" -fflags +genpts -crf 10 -i %s %s.mp4
         resources:
           requests:
             cpu: 500m
