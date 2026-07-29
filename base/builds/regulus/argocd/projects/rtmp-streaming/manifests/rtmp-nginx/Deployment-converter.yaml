@@ -42,6 +42,10 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
+        - name: PUID
+          value: "1000"
+        - name: GUID
+          value: "1000"
         - name: SOURCE_DIRECTORY_PATH
           value: /videos
         - name: DESTINATION_DIRECTORY_PATH
@@ -57,7 +61,7 @@ spec:
         - name: LOG_FORMAT
           value: text
         - name: FFMPEG_ARGS
-          value: -y -fflags +genpts -i %s -preset slower -crf 18 -r 30 %s.mp4
+          value: -y -fflags +genpts -i %s -preset slower -vf "scale=1920:1080" -c:v libx264 -crf 18 -r 30 %s.mp4
         resources:
           requests:
             cpu: 500m
