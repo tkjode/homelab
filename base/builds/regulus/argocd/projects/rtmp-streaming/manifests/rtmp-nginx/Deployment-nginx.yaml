@@ -30,6 +30,14 @@ spec:
           limits:
             cpu: 12000m
             memory: 8Gi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          fsGroup: 1000
+          fsUser: 1000
         ports:
         - containerPort: 1935
           name: rtmp
