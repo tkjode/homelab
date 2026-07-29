@@ -30,9 +30,9 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
-        - name: SOURCE_DIRECTORY
+        - name: SOURCE_DIRECTORY_PATH
           value: /videos
-        - name: DESTINATION_DIRETORY
+        - name: DESTINATION_DIRETORY_PATH
           value: /videos/converted
         - name: GLOB_PATTERNS
           value: '*.flv'
