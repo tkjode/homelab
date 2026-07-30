@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  hermes:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes-agent
+    restart: unless-stopped
+    environment:
+      OLLAMA_ENDPOINT: "http://10.0.0.15/"
+      DEFAULT_MODEL: "Qwen3.5-9B"
+    volumes:
+      - hermes_config:/root/.config/hermes
+      - hermes_data:/root/.local/share/hermes
+      - hermes_cache:/root/.cache/hermes
+      - hermes_logs:/var/log/hermes
+    ports:
+      - "8080:8080"
+      - "5000:5000"
+
+volumes:
+  hermes_config:
+  hermes_data:
+  hermes_cache:
+  hermes_logs:
