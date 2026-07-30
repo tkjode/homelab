@@ -7,6 +7,11 @@ services:
     environment:
       OLLAMA_ENDPOINT: "http://10.0.0.15:11434/"
       DEFAULT_MODEL: "hf.co/unsloth/Qwen3.5-9B-GGUF:Q4_K_M"
+      HERMES_DASHBOARD: "1"
+      HERMES_DASHBOARD_PORT: "9119"
+      API_SERVER_ENABLED: "1"
+      API_SERVER_HOST: "0.0.0.0"
+      API_SERVER_CORS_ORIGINS: "*"
     volumes:
       - hermes_config:/root/.config/hermes
       - hermes_data:/root/.local/share/hermes
