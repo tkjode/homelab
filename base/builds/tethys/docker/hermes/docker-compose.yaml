@@ -6,7 +6,7 @@ services:
     container_name: hermes-agent
     restart: unless-stopped
     environment:
-      OLLAMA_ENDPOINT: "http://10.0.0.15/"
+      OLLAMA_ENDPOINT: "http://10.0.0.15:11434/"
       DEFAULT_MODEL: "Qwen3.5-9B"
     volumes:
       - hermes_config:/root/.config/hermes
