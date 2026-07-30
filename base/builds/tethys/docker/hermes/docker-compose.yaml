@@ -4,6 +4,7 @@ services:
   hermes:
     image: nousresearch/hermes-agent:latest
     container_name: hermes-agent
+    command: gateway run
     restart: unless-stopped
     environment:
       OLLAMA_ENDPOINT: "http://10.0.0.15:11434/"
