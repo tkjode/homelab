@@ -10,6 +10,7 @@ services:
     volumes:
       - hermes_config:/root/.config/hermes
       - hermes_data:/root/.local/share/hermes
+      - opt_data:/opt/data
       - hermes_cache:/root/.cache/hermes
       - hermes_logs:/var/log/hermes
     ports:
@@ -19,6 +20,7 @@ services:
       - "8642:8642"
 
 volumes:
+  opt_data:
   hermes_config:
   hermes_data:
   hermes_cache:
