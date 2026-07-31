@@ -14,6 +14,7 @@ services:
       HERMES_DASHBOARD: "0"
       API_SERVER_ENABLED: "true"
       API_SERVER_HOST: "0.0.0.0"
+      API_SERVER_PORT: "8642"
       API_SERVER_CORS_ORIGINS: "*"
     volumes:
       - hermes_config:/root/.config/hermes
