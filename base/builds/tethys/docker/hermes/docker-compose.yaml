@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
     env_file:
       - path: ./.env
-        optional: true
+        required: false
     environment:
       OLLAMA_ENDPOINT: "http://10.0.0.15:11434/"
       DEFAULT_MODEL: "hf.co/unsloth/Qwen3.5-9B-GGUF:Q4_K_M"
