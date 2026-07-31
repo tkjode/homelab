@@ -11,9 +11,7 @@ services:
       OLLAMA_ENDPOINT: "http://10.0.0.15:11434/"
       DEFAULT_MODEL: "hf.co/unsloth/Qwen3.5-9B-GGUF:Q4_K_M"
       HERMES_GATEWAY_NO_SUPERVISE: "1"
-      HERMES_DASHBOARD: "1"
-      HERMES_DASHBOARD_PORT: "9119"
-      HERMES_DASHBOARD_HOST: "127.0.0.1"
+      HERMES_DASHBOARD: "0"
       API_SERVER_ENABLED: "true"
       API_SERVER_HOST: "0.0.0.0"
       API_SERVER_CORS_ORIGINS: "*"
@@ -24,9 +22,6 @@ services:
       - hermes_cache:/root/.cache/hermes
       - hermes_logs:/var/log/hermes
     ports:
-      - "8080:8080"
-      - "5000:5000"
-      - "9119:9119"
       - "8642:8642"
 
 volumes:
