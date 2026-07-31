@@ -1,9 +1,10 @@
 services:
-  hermes:
+  gateway:
     image: nousresearch/hermes-agent:latest
-    container_name: hermes-agent
+    container_name: hermes-gateway
     command: gateway run
     restart: unless-stopped
+    shm_size: 1g
     env_file:
       - path: ./.env
         required: false
@@ -22,7 +23,42 @@ services:
       - hermes_cache:/root/.cache/hermes
       - hermes_logs:/var/log/hermes
     ports:
-      - "8642:8642"
+      - "${GATEWAY_PORT:-8642}:8642"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:8642/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  dashboard:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes-dashboard
+    command: dashboard --host 0.0.0.0 --insecure
+    restart: unless-stopped
+    depends_on:
+      - gateway
+    ports:
+      - "${DASHBOARD_PORT:-9120}:9119"
+    environment:
+      GATEWAY_HEALTH_URL: http://hermes-gateway:8642
+    networks:
+      - hermes-net
+
+
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: hermes-watchtower
+    restart: unless-stopped
+    command: --label-enable --cleanup
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - hermes-net
+
+networks:
+  hermes-net:
+    driver: bridge
 
 volumes:
   opt_data:
