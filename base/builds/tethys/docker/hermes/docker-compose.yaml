@@ -31,20 +31,6 @@ services:
       retries: 3
       start_period: 30s
 
-  dashboard:
-    image: nousresearch/hermes-agent:latest
-    container_name: hermes-dashboard
-    command: dashboard --host 0.0.0.0 --insecure
-    restart: unless-stopped
-    depends_on:
-      - gateway
-    ports:
-      - "${DASHBOARD_PORT:-9120}:9119"
-    environment:
-      GATEWAY_HEALTH_URL: http://hermes-gateway:8642
-    networks:
-      - hermes-net
-
 networks:
   hermes-net:
     driver: bridge
