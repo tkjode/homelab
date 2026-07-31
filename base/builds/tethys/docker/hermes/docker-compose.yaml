@@ -2,14 +2,17 @@ services:
   gateway:
     image: nousresearch/hermes-agent:latest
     container_name: hermes-gateway
-    command: gateway run
+    command: ["gateway", "run"]
     restart: unless-stopped
-    network_mode: host
     shm_size: 1g
     env_file:
       - path: ./.env
         required: false
     environment:
+      MODEL_PROVIDER: "custom"
+      MODEL_MODEL: "Qwen3.5-9B-GGUF:Q4_K_M"
+      MODEL_BASE_URL: "http://10.0.0.15:11434/"
+      MODEL_API_KEY: "none"
       OLLAMA_ENDPOINT: "http://10.0.0.15:11434/"
       DEFAULT_MODEL: "hf.co/unsloth/Qwen3.5-9B-GGUF:Q4_K_M"
       API_SERVER_ENABLED: "true"
