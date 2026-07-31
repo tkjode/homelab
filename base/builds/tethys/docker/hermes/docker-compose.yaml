@@ -45,17 +45,6 @@ services:
     networks:
       - hermes-net
 
-
-  watchtower:
-    image: containrrr/watchtower:latest
-    container_name: hermes-watchtower
-    restart: unless-stopped
-    command: --label-enable --cleanup
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - hermes-net
-
 networks:
   hermes-net:
     driver: bridge
