@@ -19,6 +19,7 @@ services:
       - hermes_logs:/var/log/hermes
     ports:
       - "${GATEWAY_PORT:-8642}:8642"
+      - "${DASHBOARD_PORT:-9119}:9119"
     healthcheck:
       test: ["CMD-SHELL", "curl -sf http://localhost:8642/health || exit 1"]
       interval: 30s
