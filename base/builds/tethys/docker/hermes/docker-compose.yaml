@@ -18,6 +18,7 @@ services:
         target: /opt/data/config.yaml
       - hermes_data:/opt/data
       - hermes_logs:/var/log/hermes
+      - ./hermes_output:/output
     ports:
       - "${GATEWAY_PORT:-8642}:8642"
       - "${DASHBOARD_PORT:-9119}:9119"
