@@ -8,14 +8,10 @@ services:
     env_file:
       - path: ./.env
         required: false
-    environment:
-      HERMES_MODEL: "custom"
-      TERMINAL_ENV: "local"
-      OLLAMA_ENDPOINT: "http://10.0.0.15:11434/"
-      DEFAULT_MODEL: "hf.co/unsloth/Qwen3.5-9B-GGUF:Q4_K_M"
-      API_SERVER_ENABLED: "true"
     volumes:
-      - ./config.yaml:/opt/data/config.yaml
+      - type: bind
+        source: ./config.yaml
+        target: /opt/data/config.yaml
       - hermes_data:/opt/data
       - hermes_logs:/var/log/hermes
     ports:
