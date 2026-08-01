@@ -12,6 +12,9 @@ session_reset:
 terminal:
   backend: docker
   docker_image: "nikolaik/python-nodejs:python3.11-nodejs20"
+  docker_volumes:
+  - "/output:/workspace/output"
+  - "/opt/data:/data:ro"
   docker_forward_env:
   - "GITHUB_TOKEN"
   container_cpu: 0
