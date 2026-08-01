@@ -9,18 +9,14 @@ services:
       - path: ./.env
         required: false
     environment:
-      MODEL_PROVIDER: "custom"
-      MODEL_MODEL: "Qwen3.5-9B-GGUF:Q4_K_M"
-      MODEL_BASE_URL: "http://10.0.0.15:11434/"
-      MODEL_API_KEY: "none"
+      HERMES_MODEL: "custom"
+      TERMINAL_ENV: "local"
       OLLAMA_ENDPOINT: "http://10.0.0.15:11434/"
       DEFAULT_MODEL: "hf.co/unsloth/Qwen3.5-9B-GGUF:Q4_K_M"
       API_SERVER_ENABLED: "true"
     volumes:
-      - hermes_config:/root/.config/hermes
-      - hermes_data:/root/.local/share/hermes
-      - opt_data:/opt/data
-      - hermes_cache:/root/.cache/hermes
+      - ./config.yaml:/opt/data/config.yaml
+      - hermes_data:/opt/data
       - hermes_logs:/var/log/hermes
     ports:
       - "${GATEWAY_PORT:-8642}:8642"
@@ -32,8 +28,4 @@ services:
       start_period: 30s
 
 volumes:
-  opt_data:
-  hermes_config:
   hermes_data:
-  hermes_cache:
-  hermes_logs:
