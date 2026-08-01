@@ -9,6 +9,18 @@ display:
 _config_version: 33
 session_reset:
   mode: none
+terminal:
+  backend: docker
+  docker_image: "nikolaik/python-nodejs:python3.11-nodejs20"
+  docker_forward_env:
+  - "GITHUB_TOKEN"
+  container_cpu: 0
+  container_memory: 4096
+  container_persistent: true
+  docker_persist_across_processes: true
+  docker_orphan_reaper: true
+  timeout: 360
+  lifetime_seconds: 600
 custom_providers:
   - name: Tethys Qwen
     base_url: http://10.0.0.15:11434/v1
