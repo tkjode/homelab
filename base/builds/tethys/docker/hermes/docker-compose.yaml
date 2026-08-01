@@ -29,3 +29,4 @@ services:
 
 volumes:
   hermes_data:
+  hermes_logs:
