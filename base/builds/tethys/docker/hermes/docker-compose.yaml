@@ -5,13 +5,10 @@ services:
     command: ["gateway", "run"]
     restart: unless-stopped
     shm_size: 1g
-    env_file:
-      - path: ./.env
-        required: false
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - type: bind
-        source: ./.env
+        source: ./hermes.env
         target: /opt/data/.env
       - type: bind
         source: ./config.yaml
