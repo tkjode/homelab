@@ -1,6 +1,7 @@
 model:
   default: hf.co/unsloth/Qwen3.5-9B-GGUF:Q4_K_M
   provider: custom
+  context_length: 65536
   base_url: http://10.0.0.15:11434/v1
 agent:
   max_turns: 150
