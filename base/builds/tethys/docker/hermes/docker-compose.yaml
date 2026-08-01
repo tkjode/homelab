@@ -10,6 +10,9 @@ services:
         required: false
     volumes:
       - type: bind
+        source: ./.env
+        target: /opt/data/.env
+      - type: bind
         source: ./config.yaml
         target: /opt/data/config.yaml
       - hermes_data:/opt/data

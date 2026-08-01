@@ -1,0 +1,15 @@
+model:
+  default: hf.co/unsloth/Qwen3.5-9B-GGUF:Q4_K_M
+  provider: custom
+  base_url: http://10.0.0.15:11434/v1
+agent:
+  max_turns: 150
+display:
+  tool_progress: all
+_config_version: 33
+session_reset:
+  mode: none
+custom_providers:
+  - name: Tethys Qwen
+    base_url: http://10.0.0.15:11434/v1
+    model: hf.co/unsloth/Qwen3.5-9B-GGUF:Q4_K_M
