@@ -1,7 +1,7 @@
 services:
   vllm:
     image: vllm/vllm-openai:latest
-    container_name: vllm-qwen
+    container_name: vllm-qwen-q
     restart: unless-stopped
     env_file:
       - path: .env
