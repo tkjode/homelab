@@ -3,7 +3,7 @@ services:
     image: vllm/vllm-openai:latest
     container_name: vllm-qwen-q
     restart: unless-stopped
-    shm_size: 4Gi
+    shm_size: 4g
     env_file:
       - path: .env
         required: false
