@@ -16,8 +16,8 @@ services:
     ports:
       - "8000:8000"
     pre_start:
-    - image: vllm/vllm-openai:latest
-      command: [ "ls -alR /" ]
+    - image: busybox
+      command: [ "pip install --no-cache-dir vllm-gguf-plugin" ]
     command: |
        unsloth/Qwen3.5-9B-GGUF
 #      --tokenizer Qwen/Qwen3.5
