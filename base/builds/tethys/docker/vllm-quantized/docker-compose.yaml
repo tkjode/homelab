@@ -16,7 +16,7 @@ services:
       - "8000:8000"
     command: |
        --model unsloth/Qwen3.5-9B-GGUF:Q4_K_M
-       --tokenizer Qwen/Qwen3.5
+       --tokenizer Qwen/Qwen3.5-9B
        --gpu-memory-utilization 0.98
        --max-model-len 262144
        --enable-auto-tool-choice
