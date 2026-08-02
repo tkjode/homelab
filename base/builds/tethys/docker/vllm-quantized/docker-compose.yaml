@@ -2,7 +2,7 @@ services:
   vllm:
     image: quantized-vllm-openai:0.1.0
     container_name: vllm-qwen-q
-    restart: unless-stopped
+    restart: never
     shm_size: 4g
     env_file:
       - path: .env
