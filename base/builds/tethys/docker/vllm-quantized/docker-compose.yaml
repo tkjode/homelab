@@ -9,7 +9,6 @@ services:
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
       - CUDA_VISIBLE_DEVICES=0
-      - MODEL_NAME=Qwen3.5
     volumes:
       - hf-model-cache:/root/.cache/huggingface
       - ./models:/models
