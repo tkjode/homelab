@@ -11,12 +11,10 @@ services:
       - CUDA_VISIBLE_DEVICES=0
     volumes:
       - hf-model-cache:/root/.cache/huggingface
-      - ./models:/models
     ports:
       - "8000:8000"
     command: |
-      --model unsloth/Qwen3.5-9B-GGUF
-      --model_tag Q4_K_M
+      --model unsloth/Qwen3.5-9B-GGUF:Q4_K_M
       --dtype auto
       --gpu-memory-utilization 0.98
       --max-model-len 262144
