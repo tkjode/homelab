@@ -15,7 +15,7 @@ services:
     ports:
       - "8000:8000"
     command: |
-      /models/Qwen35.gguf
+      --model unsloth/Qwen3.5-9B-GGUF:Q4_K_M
       --dtype auto
       --gpu-memory-utilization 0.98
       --max-model-len 262144
