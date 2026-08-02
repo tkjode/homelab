@@ -1,6 +1,6 @@
 services:
   vllm:
-    image: vllm/vllm-openai:latest
+    image: quantized-vllm-openai:0.1.0
     container_name: vllm-qwen-q
     restart: unless-stopped
     shm_size: 4g
@@ -15,9 +15,6 @@ services:
       - ./models:/models
     ports:
       - "8000:8000"
-    pre_start:
-    - image: python
-      command: [ "pip install --no-cache-dir vllm-gguf-plugin" ]
     command: |
        unsloth/Qwen3.5-9B-GGUF
 #      --tokenizer Qwen/Qwen3.5
