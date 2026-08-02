@@ -8,7 +8,7 @@ services:
       required: false
     environment:
       OLLAMA_CONTEXT_LENGTH: 65536
-      OLLAMA_KEEP_ALIVE: 60
+      OLLAMA_KEEP_ALIVE: -1
       OLLAMA_NUM_PARALLEL: 1
       CUDA_VISIBLE_DEVICES: GPU-b6e89fb8-c440-63f7-585a-c8c1215be84a
     ports:
