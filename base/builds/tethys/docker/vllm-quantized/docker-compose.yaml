@@ -1,0 +1,31 @@
+services:
+  vllm:
+    image: vllm/vllm-openai:latest
+    container_name: vllm-qwen
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - CUDA_VISIBLE_DEVICES=0
+      - MODEL_NAME=Qwen3.5
+    volumes:
+      - ./models/:/root/.cache/huggingface
+    ports:
+      - "8000:8000"
+    command: |
+      --model Qwen3.5-9B-The-Defiant-Fable-Uncnr-Heretic-NEO-MAX-MTP-Q4_K_M.gguf
+      --dtype auto
+      --gpu-memory-utilization 0.98
+      --max-model-len 262144
+      --enable-auto-tool-choice
+      --tool-call-parser qwen3_xml
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
