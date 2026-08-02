@@ -16,7 +16,7 @@ services:
     ports:
       - "8000:8000"
     command: |
-      --model DavidAU/Qwen3.5-9B-The-Defiant-Fable-Uncensored-Heretic-NEO-IMATRIX-MAX-MTP-GGUF
+      --model /models/Qwen35.gguf
       --dtype auto
       --gpu-memory-utilization 0.98
       --max-model-len 262144
