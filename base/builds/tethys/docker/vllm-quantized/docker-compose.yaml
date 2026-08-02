@@ -3,6 +3,7 @@ services:
     image: vllm/vllm-openai:latest
     container_name: vllm-qwen-q
     restart: unless-stopped
+    shm_size: 4Gi
     env_file:
       - path: .env
         required: false
@@ -15,12 +16,12 @@ services:
     ports:
       - "8000:8000"
     command: |
-      --model /models/Qwen35.gguf
-      --tokenizer Qwen/Qwen3.5
-      --gpu-memory-utilization 0.98
-      --max-model-len 262144
-      --enable-auto-tool-choice
-      --tool-call-parser qwen3_xml
+      --model unsloth/Qwen3.5-9B-GGUF:Q4_K_M
+#      --tokenizer Qwen/Qwen3.5
+#      --gpu-memory-utilization 0.98
+#      --max-model-len 262144
+#      --enable-auto-tool-choice
+#      --tool-call-parser qwen3_xml
     deploy:
       resources:
         reservations:
