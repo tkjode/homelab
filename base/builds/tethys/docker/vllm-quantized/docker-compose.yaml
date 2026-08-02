@@ -16,7 +16,7 @@ services:
     ports:
       - "8000:8000"
     command: |
-      --model /models/Qwen35.gguf
+      /models/Qwen35.gguf
       --dtype auto
       --gpu-memory-utilization 0.98
       --max-model-len 262144
