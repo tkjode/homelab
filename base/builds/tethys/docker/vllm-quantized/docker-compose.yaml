@@ -17,7 +17,7 @@ services:
       - "8000:8000"
     pre_start:
     - image: vllm/vllm-openai:latest
-      command: [ "uv", "pip", "install", "vllm-gguf-plugin" ]
+      command: [ "pip install --no-cache-dir gguf==0.14.0" ]
     command: |
        unsloth/Qwen3.5-9B-GGUF
 #      --tokenizer Qwen/Qwen3.5
