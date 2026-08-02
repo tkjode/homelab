@@ -12,7 +12,6 @@ services:
       - CUDA_VISIBLE_DEVICES=0
     volumes:
       - hf-model-cache:/root/.cache/huggingface
-      - ./models:/models
     ports:
       - "8000:8000"
     command: |
