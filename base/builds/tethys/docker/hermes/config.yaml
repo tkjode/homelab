@@ -5,27 +5,34 @@ model:
   base_url: http://10.0.0.15:11434/v1
 agent:
   max_turns: 150
-display:
-  tool_progress: all
-_config_version: 33
-session_reset:
-  mode: none
 terminal:
   backend: docker
-  docker_image: "nikolaik/python-nodejs:python3.11-nodejs20"
-  docker_volumes:
-  - "/output:/workspace/output"
-  - "/opt/data:/data:ro"
+  timeout: 360
+  docker_image: nikolaik/python-nodejs:python3.11-nodejs20
   docker_forward_env:
-  - "GITHUB_TOKEN"
+    - GITHUB_TOKEN
   container_cpu: 0
   container_memory: 4096
   container_persistent: true
+  docker_volumes:
+    - /output:/workspace/output
+    - /opt/data:/data:ro
   docker_persist_across_processes: true
   docker_orphan_reaper: true
-  timeout: 360
   lifetime_seconds: 600
+display:
+  tool_progress: all
+  skin: ares
+dashboard:
+  theme: rose
+  font: atkinson-hyperlegible
+_config_version: 33
+session_reset:
+  mode: none
 custom_providers:
   - name: Tethys Qwen
     base_url: http://10.0.0.15:11434/v1
     model: hf.co/unsloth/Qwen3.5-9B-GGUF:Q4_K_M
+mcp_servers:
+  Radar K8s:
+    url: https://radar.apps.phalnet.com/mcp
