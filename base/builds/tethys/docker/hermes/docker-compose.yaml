@@ -19,6 +19,9 @@ services:
       - type: bind
         source: ./config.yaml
         target: /opt/data/config.yaml
+      - type: bind
+        source: ./workspace
+        target: /opt/data/workspace
       - hermes_data:/opt/data
       - hermes_logs:/var/log/hermes
       - ./hermes_output:/output
