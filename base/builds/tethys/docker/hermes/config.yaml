@@ -15,7 +15,6 @@ terminal:
   container_memory: 4096
   container_persistent: true
   docker_volumes:
-    - /output:/workspace/output
     - /opt/data:/data:ro
   docker_persist_across_processes: true
   docker_orphan_reaper: true
