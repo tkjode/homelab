@@ -20,11 +20,18 @@ terminal:
   docker_persist_across_processes: true
   docker_orphan_reaper: true
   lifetime_seconds: 600
+web:
+  backend: ddgs
+  use_gateway: false
+browser:
+  cloud_provider: local
+  use_gateway: false
 display:
+  skin: default
   tool_progress: all
-  skin: ares
+  tui_compact: false
 dashboard:
-  theme: rose
+  theme: mono
   font: atkinson-hyperlegible
 _config_version: 33
 session_reset:
@@ -33,6 +40,30 @@ custom_providers:
   - name: Tethys Qwen
     base_url: http://10.0.0.15:11434/v1
     model: hf.co/unsloth/Qwen3.5-9B-GGUF:Q4_K_M
+    models:
+      - hf.co/HauhauCS/Gemma4-12B-QAT-Uncensored-HauhauCS-Balanced:Q4_K_M
+      - hf.co/unsloth/Qwen3.5-9B-GGUF:Q4_K_M
 mcp_servers:
   Radar K8s:
     url: https://radar.apps.phalnet.com/mcp
+platform_toolsets:
+  cli:
+    - browser
+    - clarify
+    - code_execution
+    - computer_use
+    - cronjob
+    - delegation
+    - file
+    - kanban
+    - memory
+    - session_search
+    - skills
+    - terminal
+    - todo
+    - tts
+    - vision
+    - web
+known_plugin_toolsets:
+  cli:
+    - spotify
