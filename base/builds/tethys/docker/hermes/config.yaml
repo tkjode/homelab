@@ -6,7 +6,7 @@ model:
 agent:
   max_turns: 150
 terminal:
-  backend: docker
+  backend: local
   timeout: 360
   docker_image: nikolaik/python-nodejs:python3.11-nodejs20
   docker_forward_env:
