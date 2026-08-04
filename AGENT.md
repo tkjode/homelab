@@ -16,7 +16,7 @@ cd ~/Dev/homelab
 Following the existing pattern in use, branch names follow this structure:
 - `feat/<component>/<topic>` - New features for a subsystem  
 - `fix/<component>/<issue>` - Bug fixes 
-- `chore/agentic/first-run` - Agent setup tasks (this is where you are now)
+- `chore/<type>/<reason>` - Repository maintenance and git activities (types can be `agentic`, `migration`, or `release`). Example: `chore/agentic/first-run` (where you are now)
 
 ### Active Workload Areas (as of creation)
 Based on current branches:
@@ -72,7 +72,7 @@ Before modifying any workflow, review:
 
 ### 3. Testing Before Integration  
 Given the complexity of Proxmox API integrations and Argo CD orchestration:
-- Local testing on Docker Desktop when possible before baremetal deployment
+- Not all commits require local Docker testing - ensure all changes pass basic validation in `.github/workflows` 
 - Start with non-critical subsystems (separate from core regulus cluster)  
 - Verify API key/secrets integration doesn't break existing pipelines
 
@@ -120,8 +120,7 @@ Each workload has corresponding App-of-Apps templates under:
 
 - **DO NOT commit secrets** to repository
 - API keys, Proxmox tokens, and auth credentials must be managed separately via:  
-  - GitHub Secrets in `.github/workflows` files
-  - External vaults (Keycloak integration TODO from README)
+  - GitHub Secrets in `.github/workflows` files only (no external vaults configured at this time; all sensitive data captured as GitHub Secrets)
 
 ### External Secret Storage Pattern
 ```bash
@@ -134,7 +133,7 @@ git add terraform.env
 
 # Instead, use these patterns:
 - GitHub Actions secrets for CI/CD
-- External Secrets Operator (DEPLOYED) in Argo CD  
+- External Secrets Operator (NOT deployed) in Argo CD  
   - Referenced as $external_secret.value in Terraform
 - Locally: tfenv with separate non-git keyring storage
 ```
