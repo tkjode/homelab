@@ -17,73 +17,70 @@ jobs:
   terraform-fmt:
     runs-on: ubuntu-latest
     steps:
-      # 1. Checkout code on the PR branch
       - name: Checkout Repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      
-      # 2. Set up Python for Terraform CLI access  
+        
       - name: Set up Python & pip
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
-      
-      - name: Install pip dependencies
+
+      - name: Install terraform-cli
         run: |
           python -m pip install --upgrade pip
           pip install terraform-cli
-      
-      # 3. Initialize Terraform (needed to load state)
+
       - name: Terraform Init
-        uses: hashicorp/setup-terraform@v4
+        # Only init if a main.tf exists in any of the target directories
+        run: |
+          for dir in base/builds/gamededi base/builds/homelab-router \
+                     base/builds/nas base/builds/regulus; do
+            if [ -f "$dir/main.tf" ]; then
+              echo "Initializing Terraform in $dir..."
+              cd "$dir" || exit 1
+              terraform init -backend=false >/dev/null 2>&1 || true
+              cd /home/tkjode/Dev/homelab
+            fi
+          done
+
+      - name: Run terraform fmt check & fix
+        id: fmt
+        run: |
+          echo "Running terraformat..."
+          
+          for dir in base/builds/gamededi base/builds/homelab-router \
+                     base/builds/nas base/builds/regulus; do
+            if [ -f "$dir/main.tf" ]; then
+              echo "Formatting $dir/..."
+              
+              # Check first, show what would change
+              terraform fmt --check --recursive "$dir/" || true
+              
+              # Apply formatting (in-place)  
+              terraform fmt --recursive "$dir/" >/dev/null 2>&1 || printf "::warning::%s\n" "$dir"
+            fi
+          done
+
+      - name: Commit & push formatted files to PR branch
+        id: commit
+        run: |
+          if ! git diff --quiet; then
+            echo "Changes detected:\n$(git diff)" >> $GITHUB_STEP_SUMMARY
+          else
+            # If no changes, verify all dirs are clean for output visibility  
+            terraform fmt --recursive base/builds/ >/dev/null 2>&1 || true
+            git diff 0-base/builds/ >/dev/null 2>&1 || true
+            echo "No formatting issues detected in TerraForm files." >> $GITHUB_STEP_SUMMARY
+            echo "fmt_applied=false" >> $GITHUB_OUTPUT  
+          fi
+          
+      - name: Push commit to PR branch if changes were made
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          terraform_version: v1.x.x
-      
-      # 4. Run terraform fmt check
-      - name: Run terraform fmt check
-        id: fmt-check
-        run: |
-          echo "Checking formatting..."
-          # Check recursively for nesting modules and flag errors if needed  
-          terraform fmt --recursive base/builds/ || true
-
-          # Flag as passing if no issues, we'll auto-fix below anyway  
-          if [ $? -eq 0 ]; then
-            echo "fmt_needed=false" >> $GITHUB_OUTPUT
-            echo "All Terraform files are properly formatted."
-          else
-            echo "fmt_needed=true" >> $GITHUB_OUTPUT
-          fi
-
-      # 5. Auto-fix the formatting issues (only if they exist)
-      - name: Fix terraform fmt issues
-        id: fix-fmt
-        run: |
-          echo "Fixing formatting automatically..."
-          
-          # Show diff to PR commenter
-          terraform fmt --recursive base/builds/ || true
-          
-          if [ $? -ne 0 ]; then
-            echo "::error::Some files needed formatting" >> $GITHUB_STEP_SUMMARY
-            echo "::info::Auto-fix applied in next step" >> $GITHUB_ENV
-          else
-            echo "All files are freshly formatted." >> $GITHUB_STEP_SUMMARY  
-          fi
-
-      # 6. Verify the fix was successful and commit it back (if needed)
-      - name: Commit fixed files to PR branch
-        if: steps.fmt-check.outcome != 'success'
-        run: |
-          git config user.name github-actions
-          git config user.email "actions@users.noreply.github.com"
-          
-          # Add all bases/builds .tf files to commit  
-          find base/builds -name "*.tf" -type f | xargs git add || true
-
-          # Create meaningful commit message with timestamp reference for tracing  
-          COMMIT_TIME=$(date +%Y-%m-%dT%H:%M:%SZ)
-          
-          # Attempt the fix if it ran and failed (it would have applied changes inline to files), need to detect what changed
-          git diff --cached --relative base/builds/
+          branch: 'github-actions'
+          file_pattern: |
+            base/builds/gamededi/*.tf
+            base/builds/homelab-router/*.tf
+            base/builds/nas/*.tf
+            base/builds/regulus/*.tf
+          commit_message: 'chore: terraform fmt auto-fix ($GITHUB_SHA)'
