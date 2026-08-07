@@ -1,0 +1,40 @@
+services:
+  gateway:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes-gateway
+    command: ["gateway", "run"]
+    restart: unless-stopped
+    shm_size: 1g
+    env_file:
+    - path: ./hermes.env
+      required: false
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - type: bind
+        source: ./hermes.env
+        target: /opt/data/.env
+      - type: bind
+        source: ./.ssh/hermes.priv
+        target: /opt/data/.ssh/id_ed25519
+      - type: bind
+        source: ./config.yaml
+        target: /opt/data/config.yaml
+      - type: bind
+        source: ./workspace
+        target: /opt/data/workspace
+      - hermes_data:/opt/data
+      - hermes_logs:/var/log/hermes
+      - ./hermes_output:/output
+    ports:
+      - "${GATEWAY_PORT:-8642}:8642"
+      - "${DASHBOARD_PORT:-9119}:9119"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:8642/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+volumes:
+  hermes_data:
+  hermes_logs:

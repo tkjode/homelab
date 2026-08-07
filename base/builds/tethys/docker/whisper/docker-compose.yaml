@@ -1,0 +1,26 @@
+services:
+  whisper:
+    image: hwdsl2/whisper-server:cuda
+    restart: unless-stopped
+    container_name: whisper
+    environment:
+      WHISPER_MODEL: base
+      WHISPER_LANGUAGE: en
+      WHISPER_DEVICE: cuda
+      WHISPER_COMPUTE_TYPE: float16
+      WHISPER_API_KEY: chatty
+    ports:
+      - "9000:9000"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    volumes:
+      - whisper-data:/var/lib/whisper
+
+volumes:
+  whisper-data:
+    name: whisper-data

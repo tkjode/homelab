@@ -1,0 +1,34 @@
+services:
+  vllm:
+    image: quantized-vllm-openai:0.1.0
+    container_name: vllm-qwen-q
+    restart: no
+    shm_size: 4g
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - CUDA_VISIBLE_DEVICES=0
+    volumes:
+      - hf-model-cache:/root/.cache/huggingface
+    ports:
+      - "8000:8000"
+    command: |
+       --model unsloth/Qwen3.5-9B-GGUF:Q4_K_M
+       --tokenizer Qwen/Qwen3.5-9B
+       --gpu-memory-utilization 0.98
+       --max-model-len 262144
+       --enable-auto-tool-choice
+       --tool-call-parser qwen3_xml
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+volumes:
+  hf-model-cache:
+    driver: local
