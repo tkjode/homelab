@@ -4,3 +4,4 @@ metadata:
   name: security-projects
 resources:
   - HTTPRoute.falco.yaml
+  - Certificate.falco-sidekick.yaml

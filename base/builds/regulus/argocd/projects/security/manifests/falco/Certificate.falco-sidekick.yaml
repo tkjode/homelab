@@ -1,0 +1,24 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: falco-sidekick
+spec:
+  secretName: falco-sidekick-tls
+  privateKey:
+    algorithm: RSA
+    size: 4096
+  duration: 87600h
+  renewBefore: 32700h
+  usages:
+    - server auth
+    - client auth
+    - key encipherment
+    - digital signature
+  subject:
+    organizations: ["Falco"]
+  commonName: falco-sidekick
+  dnsNames: ["localhost", "falco-sidekick"]
+  issuerRef:
+    name: labs-ca
+    kind: ClusterIssuer
+    group: cert-manager.io

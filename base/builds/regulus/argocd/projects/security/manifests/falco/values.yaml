@@ -4,6 +4,8 @@ falcosidekick:
   config:
     tlsserver:
       deploy: true
+      mutualtls: true
+      existingSecret: falco-sidekick-tls
   webui:
     enabled: true
     redis:
