@@ -4,7 +4,7 @@ falcosidekick:
   config:
     tlsserver:
       deploy: false
-      notlsport: ""
+      notlsport: null
   webui:
     enabled: true
     redis:
