@@ -5,4 +5,4 @@ metadata:
 resources:
   - Application.argocd.yaml
   - Certificate.argocd-tls.yaml
-  - Service.argocd-application-server.yaml   # Headless Service b/c chart specifies serviceName
+  - Service.argocd-application-controller.yaml   # Headless Service b/c chart specifies serviceName
