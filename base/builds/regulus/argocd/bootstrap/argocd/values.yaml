@@ -16,6 +16,11 @@ redis-ha:
   enabled: true
 controller:
   replicas: 2
+  metrics:
+    enabled: true
+dex:
+  metrics:
+    enabled: true
 redisSecretInit:
   enabled: false
 server:
@@ -23,6 +28,8 @@ server:
   autoscaling:
     enabled: false
     minReplicas: 2
+  metrics:
+    enabled: true
   resources:
     limits:
       cpu: 1000m
@@ -56,6 +63,8 @@ repoServer:
   autoscaling:
     enabled: false
     minReplicas: 2
+  metrics:
+    enabled: true
   resources:
     limits:
       cpu: 1000m
@@ -65,3 +74,5 @@ repoServer:
       memory: 128Mi
 applicationSet:
   replicas: 2
+  metrics:
+    enabled: true
