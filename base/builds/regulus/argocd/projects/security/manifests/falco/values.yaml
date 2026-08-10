@@ -6,6 +6,9 @@ falcosidekick:
       deploy: true
       mutualtls: true
       existingSecret: falco-sidekick-tls
+      certfile: /etc/certs/server/tls.crt
+      keyfile: /etc/certs/server/tls.key
+      cacertfile: /etc/serts/server/ca.crt
   webui:
     enabled: true
     redis:
