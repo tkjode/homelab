@@ -3,8 +3,7 @@ falcosidekick:
   listenPort: 2801
   config:
     tlsserver:
-      deploy: false
-      notlsport: null
+      deploy: true
   webui:
     enabled: true
     redis:
