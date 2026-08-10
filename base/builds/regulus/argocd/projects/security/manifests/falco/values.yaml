@@ -1,5 +1,10 @@
 falcosidekick:
   enabled: true
+  listenPort: 2801
+  config:
+    tlsserver:
+      deploy: false
+      notlsport: ""
   webui:
     enabled: true
     redis:
