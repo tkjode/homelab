@@ -5,10 +5,3 @@ services:
     container_name: kokoro
     ports:
       - "8880:8880"
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
