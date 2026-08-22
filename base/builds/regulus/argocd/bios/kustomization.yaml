@@ -8,6 +8,7 @@ resources:
   - AppProject.storage.yaml
   - AppProject.telemetry.yaml
   - AppProject.userland.yaml
+  - AppProject.maintenance.yaml
   - AppProject.monitoring.yaml
   - AppProject.security.yaml
   - ApplicationSet.bootstrap.yaml

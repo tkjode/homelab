@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kured
+  namespace: argocd
+spec:
+  project: maintenance
+  sources:
+  - chart: kubereboot/kured
+    repoURL: https://kubereboot.github.io/charts
+    targetRevision: 6.1.0
+    helm:
+      valueFiles:
+      - $values/base/builds/regulus/argocd/bootstrap/kured/values.yaml
+  - repoURL: ssh://git@github.com/tkjode/homelab
+    targetRevision: HEAD
+    ref: values
+  destination:
+    namespace: kube-system
+    server: https://kubernetes.default.svc
+  revisionHistoryLimit: 0
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+    automated:
+      prune: false
+      selfHeal: false

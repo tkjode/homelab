@@ -9,14 +9,12 @@ spec:
   generators:
   - list:
       elements:
-      - folder: envoy-gateway
-        project: networking
-      - folder: cluster-access-gw
-        project: networking
-      - folder: metal-lb
-        project: networking
       - folder: argocd
         project: trusted-platform
+      - folder: cluster-access-gw
+        project: networking
+      - folder: envoy-gateway
+        project: networking
       - folder: cert-manager
         project: trusted-platform
       - folder: csi-nfs-driver
@@ -25,6 +23,10 @@ spec:
         project: storage
       - folder: csi-iscsi-driver
         project: storage
+      - folder: kured
+        project: maintenance
+      - folder: metal-lb
+        project: networking
       - folder: metrics-server
         project: telemetry
   template:
