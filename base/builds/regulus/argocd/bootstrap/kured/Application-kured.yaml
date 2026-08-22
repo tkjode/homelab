@@ -8,7 +8,7 @@ spec:
   sources:
   - chart: kubereboot/kured
     repoURL: https://kubereboot.github.io/charts
-    targetRevision: 1.23.0
+    targetRevision: v6.1.0
     helm:
       valueFiles:
       - $values/base/builds/regulus/argocd/bootstrap/kured/values.yaml
