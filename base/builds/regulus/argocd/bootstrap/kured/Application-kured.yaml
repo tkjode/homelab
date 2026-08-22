@@ -6,9 +6,9 @@ metadata:
 spec:
   project: maintenance
   sources:
-  - chart: kubereboot/kured
+  - chart: kured
     repoURL: https://kubereboot.github.io/charts
-    targetRevision: v6.1.0
+    targetRevision: 6.1.0
     helm:
       valueFiles:
       - $values/base/builds/regulus/argocd/bootstrap/kured/values.yaml
