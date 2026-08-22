@@ -1,0 +1,2 @@
+resources:
+- CronJob.node-patcher.yaml

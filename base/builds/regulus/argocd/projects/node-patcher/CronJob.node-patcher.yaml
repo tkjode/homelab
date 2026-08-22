@@ -1,0 +1,63 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: apt-upgrade-patcher
+  labels:
+    jobgroup: parallel
+spec:
+  schedule: "00 01 * * *"
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 2
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          name: apt-upgrade
+          labels:
+            jobgroup: parallel
+        spec:
+          containers:
+          - name: apt
+            image: ubuntu:24.04
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/bash
+            - -c
+            - |
+              set -e
+
+              mount --rbind / /host
+              mount --make-rslave /host
+
+              chroot /host /bin/bash -c '
+                export DEBIAN_FRONTEND=noninteractive
+
+                apt-get update
+                apt-get -y upgrade
+              '
+
+              echo "APT upgrade complete"
+            securityContext:
+              privileged: true
+            volumeMounts:
+            - name: host
+              mountPath: /host
+          hostPID: true
+          restartPolicy: OnFailure
+          tolerations:
+          - operator: Exists
+          topologySpreadConstraints:
+            - maxSkew: 2
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: DoNotSchedule
+              labelSelector:
+                matchLabels:
+                  jobgroup: parallel
+          terminationGracePeriodSeconds: 0
+          volumes:
+          - name: host
+            hostPath:
+              path: /
+              type: Directory
+      parallelism: 16
+  concurrencyPolicy: Allow
