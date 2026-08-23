@@ -1,0 +1,1 @@
+sudo apt update && sudo apt install -y --allow-change-held-packages kubeadm && sudo kubeadm upgrade node && sudo apt install -y --allow-change-held-packages kubelet kubectl && sudo systemctl daemon-reload && sudo reboot now
