@@ -18,31 +18,18 @@ spec:
         spec:
           containers:
           - name: apt
-            image: ubuntu:26.10
+            image: busybox
             imagePullPolicy: IfNotPresent
-            command:
-            - /bin/bash
-            - -c
-            - |
-              set -e
-
-              mount --rbind / /host
-              mount --make-rslave /host
-
-              chroot /host /bin/bash -c '
-                export DEBIAN_FRONTEND=noninteractive
-
-                apt-get update
-                apt-get -y upgrade
-              '
-
-              echo "APT upgrade complete"
+            command: [ 'chroot', '/host', '/bin/bash', '-c' ]
+            args: [ 'apt-get update && apt-get -y dist-upgrade && apt-get -y autoremove && apt-get clean' ]
             securityContext:
               privileged: true
             volumeMounts:
             - name: host
               mountPath: /host
           hostPID: true
+          hostIPC: true
+          hostNetwork: true
           restartPolicy: OnFailure
           tolerations:
           - operator: Exists
