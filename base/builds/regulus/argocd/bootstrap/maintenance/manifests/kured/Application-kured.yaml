@@ -11,7 +11,7 @@ spec:
     targetRevision: 6.1.0
     helm:
       valueFiles:
-      - $values/base/builds/regulus/argocd/bootstrap/kured/values.yaml
+      - $values/base/builds/regulus/argocd/bootstrap/maintenance/manifests/kured/values.yaml
   - repoURL: ssh://git@github.com/tkjode/homelab
     targetRevision: HEAD
     ref: values

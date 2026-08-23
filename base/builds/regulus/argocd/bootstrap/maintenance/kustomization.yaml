@@ -1,0 +1,3 @@
+resources:
+- manifests/kured/Application.kured.yaml
+- manifests/node-patcher/Application.node-patcher.yaml
