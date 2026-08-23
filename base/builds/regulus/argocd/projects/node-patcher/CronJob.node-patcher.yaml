@@ -22,6 +22,9 @@ spec:
             imagePullPolicy: IfNotPresent
             command: [ 'chroot', '/host', '/bin/bash', '-c' ]
             args: [ 'apt-get update && apt-get -y dist-upgrade && apt-get -y autoremove && apt-get clean' ]
+            env:
+            - name: DEBIAN_FRONTEND
+              value: noninteractive
             securityContext:
               privileged: true
             volumeMounts:
