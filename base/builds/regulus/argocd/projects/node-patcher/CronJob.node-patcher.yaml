@@ -21,7 +21,7 @@ spec:
             image: busybox
             imagePullPolicy: IfNotPresent
             command: [ 'chroot', '/host', '/bin/bash', '-c' ]
-            args: [ 'apt-get update && apt-get -y dist-upgrade && apt-get -y autoremove && apt-get clean && if [ -f "/var/run/reboot-required"]; then echo "DONE: Reboot required"; else echo "DONE: No reboot required"; fi' ]
+            args: [ 'apt-get update && apt-get -y dist-upgrade && apt-get -y autoremove && apt-get clean && if [ -f "/var/run/reboot-required" ]; then echo "DONE: Reboot required"; else echo "DONE: No reboot required"; fi' ]
             env:
             - name: DEBIAN_FRONTEND
               value: noninteractive
