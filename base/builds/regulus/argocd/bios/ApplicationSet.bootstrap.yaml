@@ -23,7 +23,7 @@ spec:
         project: storage
       - folder: csi-iscsi-driver
         project: storage
-      - folder: kured
+      - folder: maintenance
         project: maintenance
       - folder: metal-lb
         project: networking
