@@ -1,0 +1,7 @@
+resources:
+- CronJob.cluster-upgrade-master.yaml
+- CronJob.kube-apt-upgrade.yaml
+configMapGenerator:
+  - name: kube-target-version
+    files:
+    - config/kube-target-version.yaml
