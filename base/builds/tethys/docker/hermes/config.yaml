@@ -12,10 +12,11 @@ terminal:
 custom_providers:
   - name: Tethys Qwen
     base_url: http://10.0.0.15:11434/v1
-    model: hf.co/unsloth/Qwen3.5-9B-GGUF:Q4_K_M
+    model: hf.co/empero-ai/Qwen3.8-9B-Distill-GGUF:Q4_K_M
     models:
       - hf.co/HauhauCS/Gemma4-12B-QAT-Uncensored-HauhauCS-Balanced:Q4_K_M
       - hf.co/unsloth/Qwen3.5-9B-GGUF:Q4_K_M
+      - hf.co/empero-ai/Qwen3.8-9B-Distill-GGUF:Q4_K_M
 mcp_servers:
   Radar K8s:
     url: https://radar.apps.phalnet.com/mcp
