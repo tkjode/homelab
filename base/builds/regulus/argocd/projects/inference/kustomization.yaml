@@ -4,4 +4,5 @@ metadata:
   name: inference-projects
 resources:
   - AppProject.inference.yaml                       # Creates the `inference` ArgoCD Project
-  - manifests/open-webui/Application-open-webui.yaml    # Build started - Open-WebUI Project
+  - manifests/open-webui/Application-open-webui.yaml    # Build completed
+  - manifests/kube-mcp-server/Application.kube-mcp-server.yaml  # Build Started
