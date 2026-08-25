@@ -1,16 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: open-webui
+  name: kube-mcp-server
   namespace: argocd
 spec:
   project: inference
   sources:
   - repoURL: ssh://git@github.com/tkjode/homelab
     targetRevision: HEAD
-    path: base/builds/regulus/argocd/projects/inference/manifests/open-webui
+    path: base/builds/regulus/argocd/projects/inference/manifests/kube-mcp-server
   destination:
-    namespace: open-webui
+    namespace: kube-mcp-server
     server: https://kubernetes.default.svc
   revisionHistoryLimit: 0
   syncPolicy:
