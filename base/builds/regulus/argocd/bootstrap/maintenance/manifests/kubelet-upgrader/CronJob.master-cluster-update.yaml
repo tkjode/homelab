@@ -1,0 +1,53 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: kubeadm-node-upgrader
+  labels:
+    jobgroup: parallel
+spec:
+  schedule: "00 01 * * *"
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 2
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          name: kubeadm-node-upgrade
+          labels:
+            jobgroup: sequential-upgrade
+        spec:
+          nodeSelector:
+            name: master-0
+          containers:
+          - name: kubeadm-apt-update
+            image: busybox
+            imagePullPolicy: IfNotPresent
+            command: [ 'chroot', '/host', '/bin/bash', '-c' ]
+            args: [ 'apt-get update && apt-get -y upgrade --allow-change-held-packages kubeadm && kubeadm upgrade plan && kubeadm upgrade apply ${KUBE_VERSION} && apt-get install -y --allow-change-held-packages kubectl kubelet && systemctl daemon-reload && systemctl restart kubelet && touch /var/run/reboot-required' ]
+            env:
+            - name: DEBIAN_FRONTEND
+              value: noninteractive
+            - name: KUBE_VERSION
+              valueFrom:
+                configMapRef:
+                - name: kube-target-version
+                  key: kubeadm-upgrade-version
+            securityContext:
+              privileged: true
+            volumeMounts:
+            - name: host
+              mountPath: /host
+          hostPID: true
+          hostIPC: true
+          hostNetwork: true
+          restartPolicy: OnFailure
+          tolerations:
+          - operator: Exists
+          terminationGracePeriodSeconds: 0
+          volumes:
+          - name: host
+            hostPath:
+              path: /
+              type: Directory
+      parallelism: 1
+  concurrencyPolicy: Allow

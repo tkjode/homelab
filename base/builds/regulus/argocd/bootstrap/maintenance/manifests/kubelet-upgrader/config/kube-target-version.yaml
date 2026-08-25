@@ -1,0 +1,3 @@
+# Use as Envvars to fill in file templates
+kubeadm-upgrade-version: v1.36.4
+kubernetes-apt-version: 1.36

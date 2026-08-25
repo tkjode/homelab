@@ -1,0 +1,14 @@
+resources:
+- Deployment.yaml
+- HTTPRoute.kube-mcp-server.yaml
+- RBAC.yaml
+- service.yaml
+
+labels:
+  - pairs:
+      app.kubernetes.io/name: kubectl-mcp-server
+      app.kubernetes.io/part-of: kubernetes-ai-tools
+
+images:
+  - name: rohitghumare64/kubectl-mcp-server
+    newTag: latest
