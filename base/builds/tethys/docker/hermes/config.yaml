@@ -287,8 +287,8 @@ known_builtin_toolsets:
     - x_search
     - yuanbao
 mcp_servers:
-  Kubernetes MCP:
-    url: https://kube-mcp-server.apps.phalnet.com
+  Kubernetes MCP server:
+    url: https://kubernetes-mcp-server.apps.phalnet.com/mcp
 
 # ── Security ──────────────────────────────────────────────────────────
 # Secret redaction is ON by default — strings that look like API keys,
