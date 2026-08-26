@@ -220,6 +220,8 @@ custom_providers:
     models:
       hf.co/unsloth/Qwen3.5-9B-GGUF:Q4_K_M:
         context_length: 90112
+      hf.co/empero-ai/Qwen3.8-9B-Distill-GGUF:Q4_K_M:
+        context_length: 262144
 known_plugin_toolsets:
   cli:
     - a2a
@@ -285,8 +287,8 @@ known_builtin_toolsets:
     - x_search
     - yuanbao
 mcp_servers:
-  Radar Kubernetes:
-    url: https://radar.apps.phalnet.com/mcp
+  Kubernetes MCP:
+    url: https://kube-mcp-server.apps.phalnet.com
 
 # ── Security ──────────────────────────────────────────────────────────
 # Secret redaction is ON by default — strings that look like API keys,
