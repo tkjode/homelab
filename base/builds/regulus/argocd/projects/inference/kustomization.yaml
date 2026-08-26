@@ -5,4 +5,5 @@ metadata:
 resources:
   - AppProject.inference.yaml                       # Creates the `inference` ArgoCD Project
   - manifests/open-webui/Application-open-webui.yaml    # Build completed
-  - manifests/kube-mcp-server/Application.kube-mcp-server.yaml  # Build Started
+# - manifests/kube-mcp-server/Application.kube-mcp-server.yaml  # This sucks
+  - manifests/kubernetes-mcp-server/Application.kubernetes-mcp-server.yaml  # Build Started (Helm)
