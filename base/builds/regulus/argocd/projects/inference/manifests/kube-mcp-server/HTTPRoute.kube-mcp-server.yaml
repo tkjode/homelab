@@ -14,7 +14,7 @@ spec:
   - backendRefs:
     - group: ""
       kind: Service
-      name: kube-mcp-server
+      name: kubectl-mcp-server
       port: 8000
       weight: 1
     matches:
