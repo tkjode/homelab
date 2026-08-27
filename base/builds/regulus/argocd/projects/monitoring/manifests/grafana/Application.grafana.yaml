@@ -7,7 +7,7 @@ spec:
   project: monitoring
   sources:
   - chart: grafana
-    repoURL: oci://ghcr.io/grafana-community/helm-charts
+    repoURL: oci://ghcr.io/grafana-community/helm-charts/grafana
     targetRevision: 13.0.0
     helm:
       valueFiles:
