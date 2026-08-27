@@ -11,7 +11,7 @@ spec:
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
-    namespace: kube-observability
+    namespace: prometheus
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
