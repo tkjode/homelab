@@ -1,0 +1,15 @@
+services:
+  open-terminal:
+    image: ghcr.io/open-webui/open-terminal:latest
+    container_name: open-terminal
+    env_file:
+    - path: apikey.env
+      required: false
+    ports:
+      - "9500:8000"
+    volumes:
+    - open-terminal:/home
+    restart: unless-stopped
+
+volumes:
+  open-terminal:
