@@ -6,6 +6,7 @@ resources:
   - Deployment-prometheus.yaml
   - ServiceAccount-prometheus.yaml
   - Service-prometheus.yaml
+  - HTTPRoute.prometheus.yaml
 configMapGenerator:
   - name: prometheus-config
     files:
