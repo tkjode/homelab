@@ -2,7 +2,7 @@ terraform {
   required_providers {
     proxmox = {
       source    = "bpg/proxmox"
-      version   = "0.104.0"
+      version   = "0.113.1"
     }
   }
 
@@ -117,7 +117,7 @@ variable "iscsi-ip-offset" {
 
 variable "proxmox-ceph-offset" {
   description = "IP address of Proxmox Native to extend Ceph Storage into this cluster"
-  type        = number  
+  type        = number
   default     = 7
 }
 
@@ -201,7 +201,7 @@ variable "proxmox-vmid-offset" {
 variable "kubernetes-version" {
   description = "Value from https://dl.k8s.io/release/stable.txt without the build! (eg. v1.35)"
   type        = string
-  default     = "v1.36"
+  default     = "v1.37"
 }
 
 variable "helm-binary-url" {
@@ -213,13 +213,13 @@ variable "helm-binary-url" {
 variable "argocd-chart-version" {
   description = "The helm chart semantic version number that installs ArgoCD on the cluster at init time."
   type        = string
-  default     = "9.5.17"
+  default     = "10.2.2"
 }
 
 variable "cilium-chart-version" {
   description = "The helm chart semantic version number that installs Cilium CNI on the cluster at init time"
   type        = string
-  default     = "1.19.4"
+  default     = "1.20.2"
 }
 
 variable "letsencrypt-storage" {
