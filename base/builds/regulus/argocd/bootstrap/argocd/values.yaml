@@ -25,9 +25,6 @@ redisSecretInit:
   enabled: false
 server:
   replicas: 2
-  autoscaling:
-    enabled: false
-    minReplicas: 2
   metrics:
     enabled: true
   resources:
@@ -59,10 +56,7 @@ server:
           group: ''
           kind: Secret
 repoServer:
-  replicas: 2
-  autoscaling:
-    enabled: false
-    minReplicas: 2
+  replicas: 3
   metrics:
     enabled: true
   resources:
