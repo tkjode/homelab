@@ -27,9 +27,11 @@ Most of this project is concerned with build & basic day 2 configuration.  There
 
 ## Applicable Pipelines
 
-- A new `workflow` containing all `Regulus` tasks: [Regulus Workflow](.github/workflows/regulus.yaml)
+- ~~A new `workflow` containing all `Regulus` tasks: [Regulus Workflow](.github/workflows/regulus.yaml)~~
+  - A homelab common terraform runner workflow that happens to hit the `regulus` build.
 - This will not be using the old talos actions.yml module system, that was fun but not neccessary for this build.
 
 ## Outputs
 
-- __Secret:__ kubeadmin credentials / kubeconfig.json
+- ~~__Secret:__ kubeadmin credentials / kubeconfig.json~~
+- Nothing, just build it.
