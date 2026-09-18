@@ -192,7 +192,7 @@ write_files:
         default_backend backend_cluster_api
       frontend plex_direct
         bind :32400
-        mode http
+        mode tcp
         default_backend backend_plex_direct_gw
       frontend rtmp_relay
         bind :1935
@@ -206,7 +206,7 @@ write_files:
         mode http
         server global-envoy ${cidrhost(join("/", [ gw-net-cluster.network, gw-net-cluster.mask ]), 248)}:9080 check
       backend backend_plex_direct_gw
-        mode http
+        mode tcp
         server plex-direct-l2-vip 192.168.64.249:32400 check
       backend backend_rtmp_relay
         mode tcp
