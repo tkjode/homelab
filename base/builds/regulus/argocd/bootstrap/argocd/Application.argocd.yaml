@@ -10,12 +10,12 @@ spec:
       name: argocd-secret
       namespace: argocd
       jsonPointers:
-        - /data 
+        - /data
   project: trusted-platform
   sources:
   - chart: argo-cd
     repoURL: https://argoproj.github.io/argo-helm
-    targetRevision: 9.5.20
+    targetRevision: 10.2.2
     helm:
       valueFiles:
       - $values/base/builds/regulus/argocd/bootstrap/argocd/values.yaml
