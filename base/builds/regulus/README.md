@@ -27,9 +27,16 @@ Most of this project is concerned with build & basic day 2 configuration.  There
 
 ## Applicable Pipelines
 
-- A new `workflow` containing all `Regulus` tasks: [Regulus Workflow](.github/workflows/regulus.yaml)
+- ~~A new `workflow` containing all `Regulus` tasks: [Regulus Workflow](.github/workflows/regulus.yaml)~~
+  - A homelab common terraform runner workflow that happens to hit the `regulus` build.
 - This will not be using the old talos actions.yml module system, that was fun but not neccessary for this build.
 
 ## Outputs
 
-- __Secret:__ kubeadmin credentials / kubeconfig.json
+- ~~__Secret:__ kubeadmin credentials / kubeconfig.json~~
+- Nothing, just build it.
+
+## Changelog
+
+- 2026-09-18: Trying to get to Kubernetes 1.37 but the switch to a common tf workflow has broken a lot of variables.
+  - Would be nice to switch to Environments and just hard-set the TF_VAR_xxx_xxx values right into GitHub :thinking:
