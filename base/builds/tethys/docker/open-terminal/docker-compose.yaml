@@ -1,6 +1,6 @@
 services:
   open-terminal:
-    image: ghcr.io/open-webui/open-terminal:latest
+    image: ghcr.io/open-webui/open-terminal:v0.13.0
     container_name: open-terminal
     env_file:
     - path: apikey.env

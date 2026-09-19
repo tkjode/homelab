@@ -1,6 +1,6 @@
 services:
   ollama:
-    image: ollama/ollama:latest
+    image: ollama/ollama:0.34.2
     restart: unless-stopped
     container_name: ollama
     env_file:
