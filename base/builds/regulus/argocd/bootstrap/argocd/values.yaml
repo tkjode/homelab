@@ -4,11 +4,13 @@ global:
     level: debug
     format: json
   nodeSelector:
-    - key: kubernetes.io/os
-      operator: "Equals"
-      value: linux
-    - key: node-role.kubernetes.io/control-plane
-      operator: "Exists"
+    kubernetes.io/os: linux
+  affinity:
+    nodeAffinity:
+      type: hard
+      matchExpressions:
+      - key: node-role.kubernetes.io/control-plane
+        operator: "Exists"
   tolerations:
     - key: "node-role.kubernetes.io/control-plane"
       operator: "Exists"
