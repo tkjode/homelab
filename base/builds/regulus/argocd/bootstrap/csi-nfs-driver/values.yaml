@@ -2,7 +2,7 @@ csi-driver-nfs:
   driver:
     mountPermissions: "0755"
 
-storageClasses:   
+storageClasses:
   - name: nfs-bind
     mountOptions:
       - nosuid
@@ -10,4 +10,3 @@ storageClasses:
       - nfsvers=4.1
     reclaimPolicy: Retain
     volumeBindingMode: Immediate
-  
