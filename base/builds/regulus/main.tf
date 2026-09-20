@@ -213,7 +213,7 @@ variable "helm-binary-url" {
 variable "argocd-chart-version" {
   description = "The helm chart semantic version number that installs ArgoCD on the cluster at init time."
   type        = string
-  default     = "10.2.2"
+  default     = "10.9.2"
 }
 
 variable "cilium-chart-version" {
