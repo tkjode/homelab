@@ -13,3 +13,9 @@ falcosidekick:
     enabled: true
     redis:
       storageClass: nfs-dynamic
+driver:
+  modernEbpf:
+    leastPrivileged: true
+controller:
+  deployment:
+    revisionHistoryLimit: 1
