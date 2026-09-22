@@ -143,8 +143,6 @@ skills:
   creation_nudge_interval: 15
 approvals:
   destructive_slash_confirm: false
-kanban:
-  auto_decompose: true
 code_execution:
   timeout: 300
   max_tool_calls: 50
