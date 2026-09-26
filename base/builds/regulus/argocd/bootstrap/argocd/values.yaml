@@ -1,7 +1,7 @@
 global:
   domain: argocd.apps.phalnet.com
   logging:
-    level: debug
+    level: warn
     format: json
   nodeSelector:
     kubernetes.io/os: linux
@@ -32,6 +32,8 @@ dex:
 redisSecretInit:
   enabled: false
 server:
+  autoscaling:
+    enabled: false
   replicas: 2
   metrics:
     enabled: true
@@ -64,6 +66,8 @@ server:
           group: ''
           kind: Secret
 repoServer:
+  autoscaling:
+    enabled: false
   replicas: 3
   metrics:
     enabled: true
