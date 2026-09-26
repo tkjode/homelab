@@ -127,7 +127,7 @@ write_files:
       global:
         domain: argocd.${cluster-public-domain}
         logging:
-          level: debug
+          level: warn
           format: json
         tolerations:
           - key: "node-role.kubernetes.io/control-plane"
@@ -143,9 +143,9 @@ write_files:
       controller:
         replicas: 1
       server:
+        replicas: 2
         autoscaling:
-          enabled: true
-          minReplicas: 2
+          enabled: false
         httproute:
           enabled: true
           hostnames: ["argocd.${cluster-public-domain}"]
@@ -168,9 +168,9 @@ write_files:
                 group: ''
                 kind: Secret
       repoServer:
+        replicas: 3
         autoscaling:
-          enabled: true
-          minReplicas: 2
+          enabled: false
       applicationSet:
         replicas: 2
   - path: /etc/k8s-bootstrap/labs-ca.crt
