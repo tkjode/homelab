@@ -1,35 +1,38 @@
+# Fix: add get/list access (not just /status) and list all required groups
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: homepage
 rules:
   - apiGroups:
-      - ""
+    - ""
     resources:
       - namespaces
       - pods
       - nodes
+      - events
     verbs:
       - get
       - list
   - apiGroups:
-      - extensions
-      - networking.k8s.io
+    - extensions
+    - networking.k8s.io
     resources:
       - ingresses
     verbs:
       - get
       - list
+      - watch
   - apiGroups:
-      - traefik.containo.us
-      - traefik.io
+    - traefik.containo.us
+    - traefik.io
     resources:
       - ingressroutes
     verbs:
       - get
       - list
   - apiGroups:
-      - gateway.networking.k8s.io
+    - gateway.networking.k8s.io
     resources:
       - httproutes
       - gateways
@@ -37,7 +40,7 @@ rules:
       - get
       - list
   - apiGroups:
-      - metrics.k8s.io
+    - metrics.k8s.io
     resources:
       - nodes
       - pods
@@ -45,8 +48,16 @@ rules:
       - get
       - list
   - apiGroups:
-      - apiextensions.k8s.io
+    - apiextensions.k8s.io
     resources:
-      - customresourcedefinitions/status
+      - customresourcedefinitions
     verbs:
       - get
+      - update
+  - apiGroups:
+    - ""
+    resources:
+      - cronjobs
+    verbs:
+      - get
+      - list
