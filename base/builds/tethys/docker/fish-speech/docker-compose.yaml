@@ -3,7 +3,7 @@ services:
     environment:
       BACKEND: cuda
       COMPILE: "1"
-    name: fish-speech
+    container_name: fish-speech
     image: fishaudio/fish-speech:server-cpu
     ports:
       - "8080:8080"
