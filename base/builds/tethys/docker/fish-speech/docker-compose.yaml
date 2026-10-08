@@ -9,9 +9,6 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - checkpoints:/app/checkpoints
-      - references:/app/references
+      - ./checkpoints:/app/checkpoints
+      - ./references:/app/references
     restart: unless-stopped
-volumes:
-  checkpoints:
-  references:
