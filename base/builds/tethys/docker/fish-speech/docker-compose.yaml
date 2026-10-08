@@ -1,0 +1,11 @@
+services:
+	fish-speech:
+		image: fishaudio/fish-speech:server-cpu
+		ports:
+			- "8080:8080"
+		volumes:
+			- fish-speech-data:/data
+		restart: unless-stopped
+
+volumes:
+	fish-speech-data:
