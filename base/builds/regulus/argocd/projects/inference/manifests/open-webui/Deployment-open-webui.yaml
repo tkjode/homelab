@@ -19,11 +19,7 @@ spec:
     spec:
       containers:
       - name: open-webui
-<<<<<<< Updated upstream
-        image: ghcr.io/open-webui/open-webui:0.11.4-slim
-=======
-        image: ghcr.io/open-webui/open-webui:0.11.4-slim-slim
->>>>>>> Stashed changes
+        image: ghcr.io/open-webui/open-webui:0.12.0-slim
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
