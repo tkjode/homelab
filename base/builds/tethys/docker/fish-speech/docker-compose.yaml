@@ -1,0 +1,14 @@
+services:
+  fish-speech:
+    environment:
+      BACKEND: cuda
+      COMPILE: "1"
+    container_name: fish-speech
+    image: fishaudio/fish-speech:server-cpu
+    user: "1000:1000"
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./checkpoints:/app/checkpoints
+      - ./references:/app/references
+    restart: unless-stopped
