@@ -4,6 +4,13 @@ metadata:
   name: grafana
   namespace: argocd
 spec:
+  ignoreDifferences:
+    - group: ""
+      kind: Secret
+      name: grafana-admin-credentials
+      namespace: grafana
+      jsonPointers:
+        - /data
   project: monitoring
   sources:
   - chart: grafana
