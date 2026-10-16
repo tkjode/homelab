@@ -1,0 +1,21 @@
+services:
+  enshrouded:
+    container_name: enshrouded
+    image: sknnr/enshrouded-dedicated-server:latest
+    ports:
+      - "15637:15637/udp"
+      - "27015:27015/udp"
+    environment:
+      #- SERVER_NAME=PhalNet HomeLab Shroud
+      #- SERVER_PASSWORD=letmein
+      - EXTERNAL_CONFIG=1
+      #- PORT=15637
+      #- SERVER_SLOTS=6
+      #- SERVER_IP=0.0.0.0
+    volumes:
+      - enshrouded-persistent-data:/home/steam/enshrouded/savegame
+      - ./enshrouded_server_external.json:/home/steam/enshrouded/enshrouded_server.json
+    restart: unless-stopped
+
+volumes:
+  enshrouded-persistent-data:
