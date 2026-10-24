@@ -6,13 +6,13 @@ resources:
   - Deployment-nzbfast.yaml
   - HTTPRoute-nzbfast.yaml
   - Service-nzbfast.yaml
-  - ./volumes/pv-config.yaml
-  - ./volumes/pvc-config.yaml
-  - ./volumes/pv-exports-radarr.yaml
-  - ./volumes/pvc-exports-radarr.yaml
-  - ./volumes/pv-exports-sonarr.yaml
-  - ./volumes/pvc-exports-sonarr.yaml
-  - ./volumes/pv-exports-sonarranime.yaml
-  - ./volumes/pvc-exports-sonarranime.yaml
-  - ./volumes/pv-downloads.yaml
-  - ./volumes/pvc-downloads.yaml
+  - ./volumes/pv-nzbfast-config.yaml
+  - ./volumes/pvc-nzbfast-config.yaml
+  - ./volumes/pv-nzbfast-exports-radarr.yaml
+  - ./volumes/pvc-nzbfast-exports-radarr.yaml
+  - ./volumes/pv-nzbfast-exports-sonarr.yaml
+  - ./volumes/pvc-nzbfast-exports-sonarr.yaml
+  - ./volumes/pv-nzbfast-exports-sonarranime.yaml
+  - ./volumes/pvc-nzbfast-exports-sonarranime.yaml
+  - ./volumes/pv-nzbfast-downloads.yaml
+  - ./volumes/pvc-nzbfast-downloads.yaml
