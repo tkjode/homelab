@@ -43,8 +43,6 @@ spec:
           name: http
           protocol: TCP
         volumeMounts:
-        - mountPath: /downloads
-          name: nzbfast-downloads
         - mountPath: /config
           name: nzbfast-config
         - mountPath: /exports/radarr
@@ -54,9 +52,6 @@ spec:
         - mountPath: /exports/sonarr_anime
           name: nzbfast-exports-sonarranime
       volumes:
-      - name: nzbfast-downloads
-        persistentVolumeClaim: 
-          claimName: nzbfast-downloads
       - name: nzbfast-config
         persistentVolumeClaim:
           claimName: nzbfast-config

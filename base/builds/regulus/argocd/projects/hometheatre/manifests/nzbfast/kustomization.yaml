@@ -14,5 +14,3 @@ resources:
   - ./volumes/pvc-nzbfast-exports-sonarr.yaml
   - ./volumes/pv-nzbfast-exports-sonarranime.yaml
   - ./volumes/pvc-nzbfast-exports-sonarranime.yaml
-  - ./volumes/pv-nzbfast-downloads.yaml
-  - ./volumes/pvc-nzbfast-downloads.yaml
