@@ -19,6 +19,8 @@ spec:
       containers:
       - name: nzbfast
         image: nzbfast/nzbfast:latest
+        command: ["nzbfast"]
+        args: ["serve", "--port=6789", "--bind=0.0.0.0"]
         imagePullPolicy: Always
         env:
         - name: NZBFAST_OPEN
