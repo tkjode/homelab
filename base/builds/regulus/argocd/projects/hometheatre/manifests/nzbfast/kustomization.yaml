@@ -8,7 +8,7 @@ resources:
   - Service-nzbfast.yaml
   - volumes/pv-config.yaml
   - volumes/pvc-config.yaml
-  - volumes/pv-export-radarr.yaml
+  - volumes/pv-exports-radarr.yaml
   - volumes/pvc-exports-radarr.yaml
   - volumes/pv-exports-sonarr.yaml
   - volumes/pvc-exports-sonarr.yaml
