@@ -20,6 +20,7 @@ spec:
       - name: nzbfast
         image: nzbfast/nzbfast:latest
         command: ["nzbfast"]
+        user: "1000:1000"
         args: ["serve", "--port=6789", "--bind=0.0.0.0"]
         imagePullPolicy: Always
         env:
