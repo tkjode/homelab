@@ -20,7 +20,7 @@ spec:
         runAsNonRoot: true
         runAsUser: 1000
         runAsGroup: 1000
-        fsGroup: 1000    
+        fsGroup: 1000
       containers:
       - name: nzbfast
         image: nzbfast/nzbfast:latest
@@ -56,7 +56,11 @@ spec:
           name: nzbfast-exports-sonarr
         - mountPath: /exports/sonarr_anime
           name: nzbfast-exports-sonarranime
+        - mountPath: /exports
+          name: scratchvolume
       volumes:
+      - name: scratchvolume
+        emptyDir: {}
       - name: nzbfast-config
         persistentVolumeClaim:
           claimName: nzbfast-config
@@ -69,7 +73,7 @@ spec:
       - name: nzbfast-exports-sonarranime
         persistentVolumeClaim:
           claimName: nzbfast-exports-sonarranime
-        
+
 
 
 
