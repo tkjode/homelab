@@ -4,7 +4,7 @@ metadata:
   name: nzbfast-exports-sonarr
 spec:
   accessModes:
-  - ReadWriteOnce
+  - ReadWriteMany
   resources:
     requests:
       storage: 256Mi
