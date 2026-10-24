@@ -10,3 +10,4 @@ resources:
   - manifests/sonarr/Application-sonarr.yaml        # Build Complete
   - manifests/sonarranime/Application-sonarranime.yaml # Build Complete
   - manifests/radarr/Application-radarr.yaml        # Build Complete
+  - manifests/nzbfast/Application-nzbfast.yaml      # Build Started

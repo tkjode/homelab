@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nzbfast
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: nzbfast
+      app.kubernetes.io/name: nzbfast
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: nzbfast
+        app.kubernetes.io/name: nzbfast
+    spec:
+      containers:
+      - name: nzbfast
+        image: nzbfast/nzbfast:latest
+        imagePullPolicy: Always
+        env:
+        - name: NZBFAST_OPEN
+          value: "1"
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: "TZ"
+          value: "America/New_York"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 4Gi
+          limits:
+            cpu: 4000m
+            memory: 6Gi
+        ports:
+        - containerPort: 6789
+          name: http
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /downloads
+          name: downloads
+        - mountPath: /config
+          name: config
+        - mountPath: /exports/radarr
+          name: exports-radarr
+        - mountPath: /exports/sonarr
+          name: exports-sonarr
+        - mountPath: /exports/sonarr_anime
+          name: exports-sonarranime
+      volumes:
+      - name: downloads
+        persistentVolumeClaim: 
+          claimName: downloads
+      - name: config
+        persistentVolumeClaim:
+          claimName: config
+      - name: exports-sonarr
+        persistentVolumeClaim:
+          claimName: exports-sonarr
+      - name: exports-radarr
+        persistentVolumeClaim:
+          claimName: exports-radarr
+      - name: exports-sonarranime
+        persistentVolumeClaim:
+          claimName: exports-sonarranime
+        
+
+
+
+
+
