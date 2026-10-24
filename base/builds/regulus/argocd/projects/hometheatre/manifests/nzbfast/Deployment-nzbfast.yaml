@@ -16,11 +16,16 @@ spec:
         app.kubernetes.io/instance: nzbfast
         app.kubernetes.io/name: nzbfast
     spec:
+      securityContext:
+        allowPrivilegeEscalation: false
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000    
       containers:
       - name: nzbfast
         image: nzbfast/nzbfast:latest
         command: ["nzbfast"]
-        user: "1000:1000"
         args: ["serve", "--port=6789", "--bind=0.0.0.0"]
         imagePullPolicy: Always
         env:
