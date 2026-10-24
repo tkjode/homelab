@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: exports-sonarr
+  name: nzbfast-downloads
 spec:
   storageClassName: nfs-bind
   volumeMode: Filesystem
@@ -11,5 +11,5 @@ spec:
   accessModes:
   - ReadWriteMany
   nfs:
-    path: /srv/nas/kubepv/regulus/stateful/sonarr#exports
+    path: /srv/nas/kubepv/regulus/stateful/nzbfast#downloads
     server: 10.0.0.5
