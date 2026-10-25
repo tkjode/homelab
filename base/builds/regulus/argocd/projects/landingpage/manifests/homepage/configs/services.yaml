@@ -23,17 +23,24 @@
         icon: si-tailscale.svg
         href: https://login.tailscale.com/admin
         description: WireGuard VPN for Remote HomeLab and HomeNet Direct Access
+    - Open-WebUI:
+        icon: si-open-webui.svg
+        href: https://ai.apps.phalnet.com/
+        description: Locally hosted Gemma4 and Qwen3.8 LLM models
+    - Hermes:
+        icon: si-hermes-agent-alt.svg
+        href: http://10.0.0.15:9119/
+        description: Hermes Agent Dashboard on Tethys
 - Downloaders:
-  - NZBGet:
+  - NZBFast:
       icon: si-qbittorrent.svg
-      href: https://nzbget.apps.phalnet.com
-      description: nzbget
-      container: nzbget
+      href: https://nzbfast.apps.phalnet.com
+      description: nzbfast
+      container: nzbfast
       widget:
-        type: nzbget
-        url: https://nzbget.apps.phalnet.com
-        username: tkjode
-        password: phalnet
+        type: sabnzbd
+        url: https://nzbfast.apps.phalnet.com
+        key: 1234567890
   - Upcoming:
     - Upcoming:
         widget:
