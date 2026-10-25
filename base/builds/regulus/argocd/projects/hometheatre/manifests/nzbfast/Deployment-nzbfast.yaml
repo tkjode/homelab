@@ -23,7 +23,7 @@ spec:
         fsGroup: 1000
       containers:
       - name: nzbfast
-        image: nzbfast/nzbfast:latest
+        image: nzbfast/nzbfast:1.9.0
         command: ["nzbfast"]
         args: ["serve", "--port=6789", "--bind=0.0.0.0"]
         imagePullPolicy: Always
