@@ -31,6 +31,10 @@
         icon: hermes-agent-alt.svg
         href: http://10.0.0.15:9119/
         description: Hermes Agent Dashboard on Tethys
+    - Grafana:
+        icon: grafana.svg
+        href: http://grafana.apps.phalnet.com/
+        description: Grafana Metrics Visualization
 - Downloaders:
   - NZBFast:
       icon: si-qbittorrent.svg
