@@ -11,5 +11,5 @@ spec:
   accessModes:
   - ReadWriteMany
   nfs:
-    path: /srv/nas/kubepv/regulus/jellyfin#config
+    path: /srv/nas/kubepv/regulus/stateful/jellyfin#config
     server: 10.0.0.5
