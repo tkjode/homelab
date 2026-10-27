@@ -9,6 +9,9 @@ spec:
   - repoURL: ssh://git@github.com/tkjode/homelab
     targetRevision: HEAD
     path: base/builds/regulus/argocd/projects/hometheatre/manifests/jellyfin/volumes
+  - repoURL: ssh://git@github.com/tkjode/homelab
+    targetRevision: HEAD
+    path: base/builds/regulus/argocd/projects/hometheatre/manifests/jellyfin/httproute
   - chart: jellyfin
     repoURL: https://jellyfin.github.io/jellyfin-helm
     targetRevision: 3.7.0
