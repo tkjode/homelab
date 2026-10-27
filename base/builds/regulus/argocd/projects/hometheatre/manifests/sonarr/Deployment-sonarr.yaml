@@ -44,6 +44,8 @@ spec:
           name: tvshows-dropzone
         - mountPath: /imports/tvshows
           name: tvshows-from-nzbget
+        - mountPath: /exports/jellyfin
+          name: jellyfin-media
       volumes:
       - name: config
         persistentVolumeClaim:
@@ -54,6 +56,9 @@ spec:
       - name: tvshows-from-nzbget
         persistentVolumeClaim:
           claimName: sonarr-nzbget-tvshows
+      - name: jellyfin-media
+        persistentVolumeClaim:
+          claimName: sonarr-jellyfin
 
 
 
