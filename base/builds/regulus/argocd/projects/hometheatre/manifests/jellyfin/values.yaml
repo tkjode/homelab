@@ -145,7 +145,7 @@ ingress:
 
 # -- HTTPRoute configuration for Gateway API. See: https://gateway-api.sigs.k8s.io/
 httpRoute:
-  enabled: true
+  enabled: false
   annotations: {}
   # -- Gateway references to attach this HTTPRoute to
   parentRefs:
