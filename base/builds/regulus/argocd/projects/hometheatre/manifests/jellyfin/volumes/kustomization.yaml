@@ -1,0 +1,5 @@
+resources:
+- pv-jellyfin-config.yaml
+- pv-jellyfin-media.yaml
+- pvc-jellyfin-config.yaml
+- pvc-jellyfin-media.yaml

@@ -11,3 +11,4 @@ resources:
   - manifests/sonarranime/Application-sonarranime.yaml # Build Complete
   - manifests/radarr/Application-radarr.yaml        # Build Complete
   - manifests/nzbfast/Application-nzbfast.yaml      # Build Complete
+  - manifests/jellyfin/Application-jellyfin.yaml    # Build Started
