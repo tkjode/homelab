@@ -1,0 +1,9 @@
+httproute:
+  enabled: true
+  hostnames:
+  - longhorn.apps.phalnet.com
+  parentRefs:
+  - group: gateway.networking.k8s.io
+    kind: Gateway
+    name: cluster-gateway
+    namespace: default
