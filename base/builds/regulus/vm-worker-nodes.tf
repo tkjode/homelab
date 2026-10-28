@@ -34,6 +34,13 @@ resource "proxmox_virtual_environment_vm" "workers" {
     interface               = "scsi0"
   }
 
+  disk {
+    datastore_id            = "SSD"
+    size                    = 256
+    interface               = "scsi1"
+  }
+
+
   serial_device { }
 
   network_device {
