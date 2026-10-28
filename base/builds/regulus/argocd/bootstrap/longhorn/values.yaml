@@ -7,3 +7,5 @@ httproute:
     kind: Gateway
     name: cluster-gateway
     namespace: default
+preUpgradeChecker:
+  jobEnabled: false
