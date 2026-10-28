@@ -9,3 +9,7 @@ httproute:
     namespace: default
 preUpgradeChecker:
   jobEnabled: false
+
+defaultSettings:
+  defaultDataPath: "/srv/"
+  csiStorageCapacityTracking: true
