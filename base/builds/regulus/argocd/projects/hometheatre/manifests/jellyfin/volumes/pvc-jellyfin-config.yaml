@@ -4,10 +4,8 @@ metadata:
   name: jellyfin-config
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 8G
-  storageClassName: nfs-bind
-  volumeMode: Filesystem
-  volumeName: jellyfin-config
+  storageClassName: longhorn
