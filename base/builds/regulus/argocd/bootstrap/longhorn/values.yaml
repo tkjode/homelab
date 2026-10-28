@@ -5,7 +5,7 @@ httproute:
   parentRefs:
   - group: gateway.networking.k8s.io
     kind: Gateway
-    name: cluster-gateway
+    name: cluster-ingress
     namespace: default
 preUpgradeChecker:
   jobEnabled: false
