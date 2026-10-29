@@ -10,7 +10,13 @@ spec:
       name: grafana-admin-credentials
       namespace: grafana
       jsonPointers:
-        - /data
+        - /data/admin-password
+    - group: apps/v1
+      kind: Deployment
+      name: grafana
+      namespace: grafana
+      jsonPointers:
+        - /spec/template/metadata/annotations/*
   project: monitoring
   sources:
   - chart: grafana

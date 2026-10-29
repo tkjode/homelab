@@ -5,8 +5,10 @@ metadata:
 resources:
   - AppProject.hometheatre.yaml                     # Creates the `hometheatre` argocd project
   - manifests/plex/Application-plex.yaml            # Build Complete
-  - manifests/nzbget/Application-nzbget.yaml        # Build Complete
+#  - manifests/nzbget/Application-nzbget.yaml        # Retiring, succeeded by NZBFast
   - manifests/nzbhydra2/Application-nzbhydra2.yaml  # Build Complete
   - manifests/sonarr/Application-sonarr.yaml        # Build Complete
   - manifests/sonarranime/Application-sonarranime.yaml # Build Complete
   - manifests/radarr/Application-radarr.yaml        # Build Complete
+  - manifests/nzbfast/Application-nzbfast.yaml      # Build Complete
+  - manifests/jellyfin/Application-jellyfin.yaml    # Build Started

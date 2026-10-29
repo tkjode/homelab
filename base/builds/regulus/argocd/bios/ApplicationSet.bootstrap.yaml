@@ -23,6 +23,8 @@ spec:
         project: storage
       - folder: csi-iscsi-driver
         project: storage
+      - folder: longhorn
+        project: storage
       - folder: maintenance
         project: maintenance
       - folder: metal-lb

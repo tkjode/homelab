@@ -1,2 +1,3 @@
 resources:
 - Application.grafana.yaml
+- pv-grafana-data.yaml
