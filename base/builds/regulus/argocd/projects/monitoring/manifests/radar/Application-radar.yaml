@@ -9,7 +9,7 @@ spec:
   - chart: radar
     name: skyhook-radar
     repoURL: https://skyhook-io.github.io/helm-charts
-    targetRevision: 1.7.6
+    targetRevision: 0.0.0-dev
     helm:
       valueFiles:
       - $values/base/builds/regulus/argocd/projects/monitoring/manifests/radar/values.yaml
