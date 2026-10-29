@@ -1,5 +1,5 @@
 image:
-  tag: 1.16.0
+  tag: 1.19.0
 ingress:
   enabled: false
 rbac:
