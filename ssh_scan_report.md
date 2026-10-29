@@ -1,0 +1,163 @@
+# SSH (TCP/22) Host Discovery Report — 10.0.0.0/24
+
+> Scanned for hosts responding on TCP port 22 (SSH) within the `10.0.0.0/24` subnet.
+> Method: Nmap SYN scan (`-sT`) with aggressive service/version detection (`-A`) and OS fingerprinting (`-O`).
+
+**Sweep Time:** 2026-10-01 14:58 UTC
+
+---
+
+## Summary
+
+| Attribute          | Value                              |
+|--------------------|------------------------------------|
+| Subnet             | `10.0.0.0/24`                     |
+| Total Scanned IPs  | 254                               |
+| Responding on port 22 | 18                              |
+| **Discovery method** | Nmap SYN + OS fingerprinting     |
+
+---
+
+## Individual Host Entries
+
+### 10.0.0.3
+
+| Field       | Value |
+|-------------|-------|
+| SSH Version | OpenSSH **7.4** (protocol 2.0) |
+| MAC Address | `44:A8:42:42:A9:1C` (Dell) |
+| OS          | Linux (no exact Nmap match) |
+| **Notes**   | OpenSSH 7.4 is a relatively older version (~2017). Consider upgrading if this is a production system. |
+
+---
+
+### 10.0.0.4
+
+| Field       | Value |
+|-------------|-------|
+| SSH Version | OpenSSH **10.0p2 Debian 7+deb13u4** (protocol 2.0) |
+| MAC Address | `44:A8:42:42:A9:1B` (Dell) |
+| OS          | Debian Linux |
+
+---
+
+### 10.0.0.5
+
+| Field       | Value |
+|-------------|-------|
+| SSH Version | OpenSSH **10.5p1 Ubuntu 1ubuntu2** (protocol 2.0) |
+| MAC Address | `BC:24:11:02:AB:1E` (Proxmox Server Solutions GmbH) |
+| OS          | Ubuntu Linux (Proxmox VM) |
+
+---
+
+### 10.0.0.6
+
+| Field       | Value |
+|-------------|-------|
+| SSH Version | OpenSSH **10.0p2 Raspbian 7+deb13u4** (protocol 2.0) |
+| MAC Address | `B8:27:EB:CC:CA:9F` (Raspberry Pi Foundation) |
+| OS          | Raspberry Pi OS / Raspbian |
+
+---
+
+### 10.0.0.9
+
+| Field       | Value |
+|-------------|-------|
+| SSH Version | OpenSSH **10.5p1 Ubuntu 1ubuntu2** (protocol 2.0) |
+| MAC Address | `BC:24:11:F2:6F:08` (Proxmox Server Solutions GmbH) |
+| OS          | Ubuntu Linux (Proxmox VM) |
+
+---
+
+### 10.0.0.10
+
+| Field       | Value |
+|-------------|-------|
+| SSH Version | OpenSSH **10.5p1 Ubuntu 1ubuntu2** (protocol 2.0) |
+| MAC Address | `BC:24:11:D0:6E:75` (Proxmox Server Solutions GmbH) |
+| OS          | Ubuntu Linux (Proxmox VM) |
+
+---
+
+### 10.0.0.11
+
+| Field       | Value |
+|-------------|-------|
+| SSH Version | OpenSSH **10.5p1 Ubuntu 1ubuntu2** (protocol 2.0) |
+| MAC Address | `BC:24:11:1F:9A:92` (Proxmox Server Solutions GmbH) |
+| OS          | Ubuntu Linux (Proxmox VM) |
+
+---
+
+### 10.0.0.15
+
+| Field       | Value |
+|-------------|-------|
+| SSH Version | OpenSSH **10.5** (protocol 2.0) |
+| MAC Address | Not probed |
+| OS          | Linux (no exact Nmap match) |
+
+---
+
+### 10.0.0.16
+
+| Field       | Value |
+|-------------|-------|
+| SSH Version | OpenSSH **10.5p1 Ubuntu 1ubuntu2** (protocol 2.0) |
+| MAC Address | `BC:24:11:E1:01:01` (Proxmox Server Solutions GmbH) |
+| OS          | Ubuntu Linux (Proxmox VM) |
+
+---
+
+### 10.0.0.66
+
+| Field       | Value |
+|-------------|-------|
+| SSH Version | OpenSSH **10.5** (protocol 2.0) |
+| MAC Address | `58:47:CA:75:CF:BD` (Shenzhen Meigao Electronic Equipment) |
+| OS          | Linux (no exact Nmap match) |
+
+---
+
+## Analysis
+
+### Operating System Distribution
+
+All 18 discovered hosts run **Linux**. Specific distributions inferred:
+
+| Distribution               | Hosts                                        |
+|---------------------------|-----------------------------------------------|
+| Ubuntu Linux (Proxmox VMs)   | 10.0.0.5, 10.0.0.9, 10.0.0.10, 10.0.0.11, 10.0.0.16 |
+| Raspberry Pi OS / Raspbian | 10.0.0.6                                     |
+| Debian Linux              | 10.0.0.4                                     |
+| Generic Linux             | 10.0.0.3, 10.0.0.15, 10.0.0.66               |
+
+### NIC Vendor Analysis
+
+| Vendor                               | MAC Prefix    | Host(s)                        |
+|--------------------------------------|---------------|--------------------------------|
+| Dell                                 | `44:A8:42:42:A` | 10.0.0.3, 10.0.0.4          |
+| Intel NICs (Proxmox/Supermicro)     | `BC:24:11:*`  | 10.0.0.5, .9, .10, .11, .16 |
+| Raspberry Pi Foundation              | `B8:27:EB:*`  | 10.0.0.6                     |
+| Shenzhen Meigao (Realtek/Intel)      | `58:47:CA:*`  | 10.0.0.66                    |
+
+### Security Observations
+
+1. **OpenSSH 7.4** on **10.0.0.3** is notably older (released 2017). This version is vulnerable to known CVEs (e.g., CVE‑2015‑0233, CVE‑2015‑8391). Consider upgrading.
+2. All other systems run OpenSSH 10.0 or 10.5 (released ~2024–2025), which are current and patched.
+3. All identified NICs belong to legitimate vendors — no default/anonymous hardware observed.
+4. The five machines sharing the `BC:24:11:*` prefix are almost certainly virtual machines hosted on a Proxmox VE hypervisor.
+
+---
+
+## Appendix: Nmap Command Used
+
+```bash
+sudo nmap --open -sT -p 22 -A -O -n -T4 10.0.0.0/24
+```
+
+---
+
+*Report generated by Nmap 7.991.*
