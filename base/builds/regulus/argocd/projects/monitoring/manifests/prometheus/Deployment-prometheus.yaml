@@ -14,6 +14,10 @@ spec:
       labels:
         app: prometheus
     spec:
+      securityContext:
+        fsGroup: 65534
+        runAsNonRoot: true
+        runAsUser: 65534
       serviceAccountName: prometheus
       containers:
       - name: prometheus
@@ -33,9 +37,6 @@ spec:
           limits:
             cpu: 2000m
             memory: 2Gi
-        securityContext:
-          runAsUser: 1000
-          runAsGroup: 1000
         volumeMounts:
         - name: config
           mountPath: /etc/prometheus/
