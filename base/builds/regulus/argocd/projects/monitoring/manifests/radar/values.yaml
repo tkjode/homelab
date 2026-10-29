@@ -2,6 +2,8 @@ image:
   tag: 1.19.0
 ingress:
   enabled: false
+allowedHosts:
+  - radar.apps.phalnet.com
 rbac:
   portForward: true
   traffic: true
