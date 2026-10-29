@@ -9,6 +9,20 @@ apt:
   primary:
     - arches: [default]
       uri: https://mirror.csclub.uwaterloo.ca/ubuntu/
+disk_setup:
+  /dev/sdb:
+    table_type: 'mbr'
+    layout:
+    - 100
+    overwrite: false
+fs_setup:
+  - label: longhorn0
+    filesystem: 'ext4'
+    device: '/dev/sdb1'
+    partition: auto
+    overwrite: false
+mounts:
+- ["LABEL=longhorn0", /srv]
 write_files:
   - path: /etc/iscsi/initiatorname.iscsi
     content: |

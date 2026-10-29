@@ -504,12 +504,12 @@ extraContainerVolumes: []
 ##
 persistence:
   type: pvc
-  enabled: false
-  # storageClassName: default
+  enabled: true
+  storageClassName: nfs-bind
   ## (Optional) Use this to bind the claim to an existing PersistentVolume (PV) by name.
-  volumeName: ""
+  volumeName: "grafana-data"
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   size: 10Gi
   # annotations: {}
   finalizers:

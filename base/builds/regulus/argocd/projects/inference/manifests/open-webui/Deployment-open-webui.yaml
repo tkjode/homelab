@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: open-webui
-        image: ghcr.io/open-webui/open-webui:0.11.4-slim
+        image: ghcr.io/open-webui/open-webui:0.12.5-slim
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -53,4 +53,3 @@ spec:
       - name: webui-storage
         persistentVolumeClaim:
           claimName: open-webui
-

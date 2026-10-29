@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nzbfast
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: nzbfast
+      app.kubernetes.io/name: nzbfast
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: nzbfast
+        app.kubernetes.io/name: nzbfast
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+      - name: nzbfast
+        image: nzbfast/nzbfast:1.9.0
+        command: ["nzbfast"]
+        args: ["serve", "--port=6789", "--bind=0.0.0.0"]
+        imagePullPolicy: Always
+        env:
+        - name: NZBFAST_OPEN
+          value: "1"
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: "TZ"
+          value: "America/New_York"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 4Gi
+          limits:
+            cpu: 4000m
+            memory: 6Gi
+        ports:
+        - containerPort: 6789
+          name: http
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /config
+          name: nzbfast-config
+        - mountPath: /exports/radarr
+          name: nzbfast-exports-radarr
+        - mountPath: /exports/sonarr
+          name: nzbfast-exports-sonarr
+        - mountPath: /exports/sonarr_anime
+          name: nzbfast-exports-sonarranime
+        - mountPath: /exports
+          name: scratchvolume
+      volumes:
+      - name: scratchvolume
+        emptyDir: {}
+      - name: nzbfast-config
+        persistentVolumeClaim:
+          claimName: nzbfast-config
+      - name: nzbfast-exports-sonarr
+        persistentVolumeClaim:
+          claimName: nzbfast-exports-sonarr
+      - name: nzbfast-exports-radarr
+        persistentVolumeClaim:
+          claimName: nzbfast-exports-radarr
+      - name: nzbfast-exports-sonarranime
+        persistentVolumeClaim:
+          claimName: nzbfast-exports-sonarranime
+
+
+
+
+
+

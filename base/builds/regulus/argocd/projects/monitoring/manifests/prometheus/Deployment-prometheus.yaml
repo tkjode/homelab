@@ -14,10 +14,14 @@ spec:
       labels:
         app: prometheus
     spec:
+      securityContext:
+        fsGroup: 65534
+        runAsNonRoot: true
+        runAsUser: 65534
       serviceAccountName: prometheus
       containers:
       - name: prometheus
-        image: prom/prometheus:v2.49.0
+        image: prom/prometheus:v3.15.1
         args:
         - --config.file=/etc/prometheus/prometheus.yml
         - --storage.tsdb.path=/prometheus
@@ -26,6 +30,13 @@ spec:
         ports:
         - containerPort: 9090
           name: web
+        resources:
+          requests:
+            cpu: 200m
+            memory: 256Mi
+          limits:
+            cpu: 2000m
+            memory: 2Gi
         volumeMounts:
         - name: config
           mountPath: /etc/prometheus/
@@ -36,4 +47,6 @@ spec:
         configMap:
           name: prometheus-config
       - name: storage
-        emptyDir: {}
+        persistentVolumeClaim:
+          claimName: promdata
+
