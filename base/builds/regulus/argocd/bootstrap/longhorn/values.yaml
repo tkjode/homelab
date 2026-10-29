@@ -15,4 +15,4 @@ defaultSettings:
   csiStorageCapacityTracking: true
 
 defaultBackupStore:
-  backupTarget: 10.0.0.5:/srv/nas/Backups/regulus/longhorn
+  backupTarget: nfs://10.0.0.5:/srv/nas/Backups/regulus/longhorn?nfsOptions=soft,timeo=330,retrans=3
