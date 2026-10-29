@@ -26,6 +26,13 @@ spec:
         ports:
         - containerPort: 9090
           name: web
+        resources:
+          requests:
+            cpu: 200m
+            memory: 256Mi
+          limits:
+            cpu: 2000m
+            memory: 2Gi
         volumeMounts:
         - name: config
           mountPath: /etc/prometheus/
@@ -36,4 +43,6 @@ spec:
         configMap:
           name: prometheus-config
       - name: storage
-        emptyDir: {}
+        persistentVolumeClaim:
+          claimName: promdata
+
