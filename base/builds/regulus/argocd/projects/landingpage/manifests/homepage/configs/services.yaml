@@ -18,6 +18,9 @@
         icon: si-argo.svg
         href: https://argocd.apps.phalnet.com
         description: Kubernetes Deployer and Orchestration
+    - Radar:
+        href: https://radarr.apps.phalnet.com
+        description: A cool Kubernetes Dashboard
   - Services:
     - TailScale:
         icon: si-tailscale.svg
