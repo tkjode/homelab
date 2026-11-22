@@ -4,6 +4,7 @@ metadata:
   name: monitoring-projects
 resources:
   - manifests/radar/Application-radar.yaml            # Build OK
-  - manifests/prometheus/Application.prometheus.yaml  # Build Started
-  - manifests/exporters/Application.exports.yaml      # Build Started
-  - manifests/grafana                                 # Switch to Kustomization
+  - manifests/prometheus/Application.prometheus.yaml  # Build OK - Data Volume on Longhorn, reconsider CephFS.
+  - manifests/exporters/Application.exports.yaml      # Build OK
+  - manifests/grafana                                 # Build Started - has sync problems with ArgoCD
+  - manifests/open-telemetry                          # Build Started

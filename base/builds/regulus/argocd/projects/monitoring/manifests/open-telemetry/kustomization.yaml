@@ -1,0 +1,2 @@
+resources:
+  - Application.opentelemetry-collector.yaml    # Deploys ArgoCD Application pulling the Helm Chart for otel-collector
