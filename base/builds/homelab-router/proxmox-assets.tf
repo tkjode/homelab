@@ -16,7 +16,7 @@ resource "proxmox_download_file" "linux-cloud-init-iso" {
   datastore_id          = "local"
   overwrite_unmanaged   = true
   overwrite             = false
-  file_name             = "ubuntu-cloud-server-amd64.iso"
+  file_name             = "tenacious-minimal-cloud-server-amd64.iso"
   node_name             = var.proxmox_node
   url                   = var.vm_boot_image
 }
