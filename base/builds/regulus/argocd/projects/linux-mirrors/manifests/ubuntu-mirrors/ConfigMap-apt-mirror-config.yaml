@@ -21,3 +21,8 @@ data:
     deb https://mirror.csclub.uwaterloo.ca/ubuntu stonking-updates main restricted universe multiverse
     deb https://mirror.csclub.uwaterloo.ca/ubuntu stonking-backports main restricted universe multiverse
     deb https://mirror.csclub.uwaterloo.ca/ubuntu stonking-security main restricted universe multiverse
+
+    deb https://mirror.csclub.uwaterloo.ca/ubuntu tenacious main restricted universe multiverse
+    deb https://mirror.csclub.uwaterloo.ca/ubuntu tenacious-updates main restricted universe multiverse
+    deb https://mirror.csclub.uwaterloo.ca/ubuntu tenacious-backports main restricted universe multiverse
+    deb https://mirror.csclub.uwaterloo.ca/ubuntu tenacious-security main restricted universe multiverse
