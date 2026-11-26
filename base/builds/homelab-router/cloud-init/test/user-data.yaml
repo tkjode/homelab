@@ -5,10 +5,10 @@ apt:
   preserve_sources_list: false
   primary:
     - arches: [default]
-      search: 
-        - https://ubuntu.apps.phalnet.com/ubuntu/
-        - https://csclub.uwaterloo.ca/ubuntu/
+      search:
         - http://archive.ubuntu.com/ubuntu/
+        - https://csclub.uwaterloo.ca/ubuntu/
+        - https://ubuntu.apps.phalnet.com/ubuntu/
 write_files:
   - path: /etc/apt/apt.conf.d/10periodic
     content: |
