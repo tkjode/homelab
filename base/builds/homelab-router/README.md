@@ -24,6 +24,7 @@ This project is mainly for testing cloud-init router configurations in a quickly
 
 | Date | Log |
 | --- | --- |
+| 2026-11-25 | Successfully tested Tenacious T-Rex Ubuntu Cloud Server Minimal image and decommissioned |
 | 2026-06-02 | Ok decomming with the envvars and
 | 2026-06-02 | Testing recreating assets using reusable workflows - Assessment 11 |
 | 2026-06-02 | Decommissioning resources for now using a `decom/homelab-router` branch |

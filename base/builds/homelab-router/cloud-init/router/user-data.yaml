@@ -5,10 +5,10 @@ apt:
   preserve_sources_list: false
   primary:
     - arches: [default]
-      search: 
-        - https://ubuntu.apps.phalnet.com/ubuntu/
-        - https://csclub.uwaterloo.ca/ubuntu/
+      search:
         - http://archive.ubuntu.com/ubuntu/
+        - https://csclub.uwaterloo.ca/ubuntu/
+        - https://ubuntu.apps.phalnet.com/ubuntu/
 bootcmd:
   - sysctl -w net.ipv4.ip_forward=1
   - echo f > /sys/class/net/ens18/queues/rx-0/rps_cpus
