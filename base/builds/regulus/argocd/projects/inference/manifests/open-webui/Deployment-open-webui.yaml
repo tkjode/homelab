@@ -29,6 +29,13 @@ spec:
           - configMapRef:
               name: open-webui-envvars
         env:
+        - name: VECTOR_DB
+          value: pgvector
+        - name: PGVECTOR_DB_URL
+          valueFrom:
+            secretKeyRef:
+              name: webui-secret
+              key: pgvector-db-url
         - name: WEBUI_SECRET_KEY
           valueFrom:
             secretKeyRef:
